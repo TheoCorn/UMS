@@ -3,6 +3,7 @@
 //
 
 #include "JsonParserFunctions.hpp"
+void parseJson(const char * buffer, void(*mDo)(JsonObject*, void(JsonPair*)), void(*actualDo)(JsonPair*));
 
 
 void cycleThruObj (JsonObject * obj, void (*actaulDo)(JsonPair*)) {
@@ -27,8 +28,9 @@ void parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actaulDo)(Json
 //        data[i] = btBuffer->at(i);
 //    }
 
-    btBuffer.emplace_back('\0');
-    parseJson(&btBuffer.front(), &cycleThruObj, actaulDo);
+    btBuffer->emplace_back('\0');
+    char * toPass = &(btBuffer->front());
+    parseJson(toPass, &cycleThruObj, actaulDo);
 
 }
 

@@ -10,11 +10,13 @@
 
 namespace jp {
 
+    void parseJson(const char * buffer, void(*mDo)(JsonObject*, void(JsonPair*)), void(*actualDo)(JsonPair*));
+
     void cycleThruObj(JsonObject * obj, void (*actaulDo)(JsonPair*));
 
     void parseJsonWithCycleThru(std::vector<char> * btBuffer, void (*actaulDo)(JsonPair*));
 
-    void parseJson(const char * buffer, void(*mDo)(JsonObject*, void(JsonPair*)), void(*actualDo)(JsonPair*));
+
 
 }
 
