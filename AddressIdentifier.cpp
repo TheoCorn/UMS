@@ -6,6 +6,8 @@
 #include "ConflictingSensors.hpp"
 #include "JsonParserFunctions.hpp"
 #include "spiffs.hpp"
+#include "sensorEnum.h"
+#include "M9axisGiro.hpp"
 
 
 
@@ -15,13 +17,18 @@ adds the the correct sensor type to the specified vector
 @param address the address of the i2c device
 @param vector std::vector<Sensor> pointer with the sensor will be added to
 */
-void SensorsIdentifierManager::addSensor(byte address, std::vector<Sensor> * vector, std::vector<csa::ConflictingAddressStruct> * conflict) {
+void SensorsIdentifierManager::addSensor(byte address, std::map<uint8_t, Sensor*> * sensors, std::vector<csa::ConflictingAddressStruct> * conflict) {
 
-    for(int i = 0; i < ENUM_SIZE; i++){
+    if (numEnumSensorInVectorArray[address].size() == 1) sensors[address] =
 
+
+}
+
+void SensorsIdentifierManager::addSensor(unsigned int enumPos, byte address, std::map<uint8_t, Sensor*> * sensors){
+    Sensor * sensor;
+    switch (enumPos){
+        case sensorEnum::MPU9250: sensor = new M9axisGiro(address)
     }
-
-
 }
 
 
@@ -32,7 +39,7 @@ void SensorsIdentifierManager::init(){
 
 void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonObject* obj, void (*actaulDo)(JsonPair*)){
     //array 0-127 ie. all i2c addresses the vector contains all sensors that can be on the address
-    std::vector<unsigned int> *SensorTypeVectors = new vector<unsigned int>[128];
+    std::vector<unsigned int> *SensorTypeVectors = new std::vector<unsigned int>[128];
     JsonArray arr = obj->as<JsonArray>();
 
     int i = 0;

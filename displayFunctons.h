@@ -20,6 +20,10 @@ public:
         init();
     }
 
+    ~DisplayFunctons(){
+        delete display;
+    }
+
     void displayWhenNotReading();
 
     void showReading(bool reading);
@@ -33,7 +37,7 @@ public:
     void init();
 
 private:
-    Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+    Adafruit_SSD1306 * display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 
 };

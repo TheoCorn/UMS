@@ -29,23 +29,23 @@ class M9axisGiro : public Sensor{
     bool mpuFeaturesBool[10] = { true, true, true, true, true, true, true, true, true, false };
 
     //available i2c addresses for the sensor
-    std::vector<uint8_t> i2cAddresses{0x68};
+//    std::vector<uint8_t> i2cAddresses{0x68};
 
     byte address;
 
 
    public:
 
-    M9axisGiro(int vIndex) : Sensor(){
-      MPU9250 temp = MPU9250(Sensor::wire, i2cAddresses.at(vIndex));
-      IMU = &temp;
-
-      address = i2cAddresses.at(vIndex);
+    M9axisGiro(byte vIndex) : Sensor(){
+        address = vIndex;
+        IMU = new MPU9250(Wire, address);
     }
-
+    ~M9axisGiro(){
+        delete IMU;
+    }
         
     String name() override { return "MPU9250"; }
-    std::vector<uint8_t> getAddresses() override{ return i2cAddresses; }
+//    std::vector<uint8_t> c() override{ return i2cAddresses; }
     byte currentAddress() override { return address; }
     
     void getJson(JsonDocument * ptrDoc, uint8_t uuid) override;

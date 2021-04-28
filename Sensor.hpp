@@ -15,21 +15,13 @@ class Sensor{
   public:
       Sensor(){}
 
-      // todo: make Static
-      //I wanted to use static but couldt make it work
-      TwoWire &wire = Wire;
-      // todo: make Static
-      //I wanted to use static but couldt make it work
-      static SPIClass &spiBus;
-
-      //returns a std::vector of i2c addresses the sensor could possibly be
-      virtual std::vector<uint8_t> getAddresses() = 0;
-
 
       /**
         the uuid identifies individual sensor even of the same type thus can be used for set up
         every sensor gets its uuid at runtime
         the uuid ims for internal use only, do not use uuid to change behavior of the sensor
+
+        kinda wired but OK me
       */
 
       //get the name of the Sensor
