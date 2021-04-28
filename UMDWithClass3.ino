@@ -47,7 +47,7 @@ uint32_t closingBrackets = 0;
 bool reading = false;
 
 
-DisplayFunctions * mDisplay = new DisplayFunctions();
+DisplayFunctions * mDisplay;
 
 
 
@@ -58,6 +58,7 @@ void setup() {
 
   pinMode(batteryReadPin, INPUT);
 
+  mDisplay = new DisplayFunctions(&sensors);
 
   //sets up all protocols
   Serial.begin(115200);
