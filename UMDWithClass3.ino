@@ -109,11 +109,11 @@ void loop() {
 void doProcess4JsonObj(JsonPair * p){
   JsonVariant v = p->value();
 
-  switch(hash(p->key().as<char*>)){
+  switch(p->key().c_str()[0]){
 
-    case hash("sensors"): onSensorsElementRecived(&v); break;
+    case 's': onSensorsElementRecived(&v); break;
 
-    case hash("read"): onReadElementRecived(&v); break;
+    case 'r': onReadElementRecived(&v); break;
   }  
 
 }
@@ -123,21 +123,22 @@ void doProcess4JsonObj(JsonPair * p){
 
   @param data
 **/
-constexpr uint32_t hash(const char* data) noexcept{
-    uint32_t hash = 5381;
-
-    for(const char *c = data; c < data + strlen(data); ++c)
-        hash = ((hash << 5) + hash) + (unsigned char) *c;
-
-    return hash;
-}
+//constexpr uint32_t hash(const char* data) noexcept{
+//    uint32_t hash = 5381;
+//
+//    for(const char *c = data; c < data + strlen(data); ++c)
+//        hash = ((hash << 5) + hash) + (unsigned char) *c;
+//
+//    return hash;
+//}
 
 void onSensorsElementRecived(JsonVariant * v){
   JsonObject obj = v->as<JsonObject>();
 
    for(JsonPair p : obj){
     try{
-      sensors.at(p.key()).setJson(v);
+      uint8_t key = atoi(p.key().c_str());
+      sensors.at(key).setJson(v);
     }catch(){
       //todo: inform pair device update of sensor has failed (create function exeptionOfKeyBuilder taht build json to be send)
     }

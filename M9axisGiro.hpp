@@ -15,7 +15,7 @@ using namespace std;
 
 class M9axisGiro : public Sensor{
   private:
-    MPU9250 *IMU = nullptr;
+    MPU9250 *IMU;
 
     String accelRangeString[4] = { "2g", "4G", "8G", "16G" };
     MPU9250::AccelRange accelRangeEnum[4] = { MPU9250::ACCEL_RANGE_2G, MPU9250::ACCEL_RANGE_4G, MPU9250::ACCEL_RANGE_8G, MPU9250::ACCEL_RANGE_16G };
