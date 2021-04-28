@@ -12,6 +12,7 @@
 #include "M9axisGiro.hpp"
 #include <map>
 #include <vector>
+#include "displayFunctons.h"
 
 //for display
 #include <Adafruit_GFX.h>
@@ -46,7 +47,7 @@ uint32_t closingBrackets = 0;
 bool reading = false;
 
 
-DisplayFunctons * mDisplay = new DisplayFunctons();
+DisplayFunctions * mDisplay = new DisplayFunctions();
 
 
 

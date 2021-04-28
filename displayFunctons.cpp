@@ -11,7 +11,7 @@
 
 #define showAddressPin 26
 
-void DisplayFunctons::init() {
+void DisplayFunctions::init() {
     //Adress 0x3C can not be a sensor
     if (!this->display->begin(SSD1306_SWITCHCAPVCC, SCREEN_I2C_ADDRESS)) { // Address 0x3C for 128x32
         for (;;); // Don't proceed, loop forever
@@ -22,13 +22,13 @@ void DisplayFunctons::init() {
     display->clearDisplay();
 }
 
-void DisplayFunctons::displayWhenReading(){
+void DisplayFunctions::displayWhenReading(){
     showReading(true);
 
     display->display();
 }
 
-void DisplayFunctons::displayWhenNotReading(){
+void DisplayFunctions::displayWhenNotReading(){
     showReading(false);
     showSensors();
     digitalRead(showAddressPin) ? showbtAddress() : showBattery();
@@ -36,7 +36,7 @@ void DisplayFunctons::displayWhenNotReading(){
     display->display();
 }
 
-void DisplayFunctons::showReading(bool reading){
+void DisplayFunctions::showReading(bool reading){
     display->setTextSize(1);             // Normal 1:1 pixel scale
     display->setTextColor(SSD1306_WHITE);        // Draw white text
     display->setCursor(120, 2);
@@ -44,7 +44,7 @@ void DisplayFunctons::showReading(bool reading){
 }
 
 
-void DisplayFunctons::showBattery() {
+void DisplayFunctions::showBattery() {
 
     display->drawRect(0, 2, 10, 10, SSD1306_WHITE);
     display->drawRect(3, 0, 4, 2, SSD1306_WHITE);
@@ -88,7 +88,7 @@ void DisplayFunctons::showBattery() {
 
 }
 
-void DisplayFunctons::showSensors() {
+void DisplayFunctions::showSensors() {
     display->setTextSize(1);             // Normal 1:1 pixel scale
     display->setTextColor(SSD1306_WHITE);        // Draw white text
     display->setCursor(0, 17);
@@ -99,11 +99,11 @@ void DisplayFunctons::showSensors() {
 
 }
 
-void DisplayFunctons::showbtAddress() {
+void DisplayFunctions::showbtAddress() {
     display->setTextSize(1);             // Normal 1:1 pixel scale
     display->setTextColor(SSD1306_WHITE);        // Draw white text
     display->setCursor(0, 0);
-    uint8_t* point = esp_bt_dev_get_address();
+    const uint8_t* point = esp_bt_dev_get_address();
 
     for (int i = 0; i < 6; i++) {
 

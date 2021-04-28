@@ -16,14 +16,14 @@
 #include "Sensor.hpp"
 
 
-class DisplayFunctons {
+class DisplayFunctions {
 public:
-    explicit DisplayFunctons(std::map<uint8_t, Sensor*> * sensors){
+    explicit DisplayFunctions(std::map<uint8_t, Sensor*> * sensors){
         this->sensors = sensors;
         init();
     }
 
-    ~DisplayFunctons(){
+    ~DisplayFunctions(){
         delete display;
     }
 
