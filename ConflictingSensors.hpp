@@ -8,7 +8,8 @@
 namespace csa{
 
 typedef struct {
-  std::vector<Sensor> confSensors;
+  std::vector<String> nameOfSensors;
+  std::vector<unsigned int> EnumPosOfSensors;
   byte address;
   
 } ConflictingAddressStruct;

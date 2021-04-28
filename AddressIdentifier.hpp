@@ -23,8 +23,8 @@ class SensorsIdentifierManager {
         delete numEnumSensorInVectorArray;
     }
 
-    void addSensor(byte address, std::vector<Sensor> * vector, std::vector<csa::ConflictingAddressStruct> * conflict);
-
+    void addSensor(byte address, std::map<uint8_t, Sensor*> * sensors, std::vector<csa::ConflictingAddressStruct> * conflict);
+    void addSensor(unsigned int enumPos, byte address, std::map<uint8_t, Sensor*> * sensors);
 
   private:
     std::vector<unsigned int> * numEnumSensorInVectorArray;

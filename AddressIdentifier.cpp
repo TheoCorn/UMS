@@ -19,7 +19,11 @@ adds the the correct sensor type to the specified vector
 */
 void SensorsIdentifierManager::addSensor(byte address, std::map<uint8_t, Sensor*> * sensors, std::vector<csa::ConflictingAddressStruct> * conflict) {
 
-    if (numEnumSensorInVectorArray[address].size() == 1) sensors[address] =
+    if (numEnumSensorInVectorArray[address].size() == 1){
+        addSensor(numEnumSensorInVectorArray[address][0], address, sensors);
+    }else{
+
+    }
 
 
 }
@@ -27,7 +31,7 @@ void SensorsIdentifierManager::addSensor(byte address, std::map<uint8_t, Sensor*
 void SensorsIdentifierManager::addSensor(unsigned int enumPos, byte address, std::map<uint8_t, Sensor*> * sensors){
     Sensor * sensor;
     switch (enumPos){
-        case sensorEnum::MPU9250: sensor = new M9axisGiro(address)
+        case sensorEnum::MPU9250: sensor = new M9axisGiro(address);
     }
 }
 
