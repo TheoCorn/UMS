@@ -2,8 +2,8 @@
 // Created by theo on 4/23/2021.
 //
 
-#include "AddressIdentifier.hpp"
-#include "ConflictingSensors.hpp"
+#include "AllAboutSensors/AddressIdentifier.hpp"
+#include "AllAboutSensors/ConflictingSensors.hpp"
 #include "JsonParserFunctions.hpp"
 
 

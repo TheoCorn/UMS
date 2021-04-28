@@ -9,8 +9,8 @@
 #include <stdio.h>
 #include <iostream>
 #include "AllAboutSensors/ConflictingSensors.hpp"
-#include "jsonParsing/JsonParserFunctions.hpp"
-#include "ActualSensors/mpu9250/M9axisGiro.hpp"
+#include "JsonParserFunctions.hpp"
+#include "M9axisGiro.hpp"
 #include <map>
 #include <vector>
 
