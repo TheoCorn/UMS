@@ -89,9 +89,9 @@ void DisplayFunctons::showSensors() {
     display->setTextSize(1);             // Normal 1:1 pixel scale
     display->setTextColor(SSD1306_WHITE);        // Draw white text
     display->setCursor(0, 17);
-    int i = 0;
-    for (i; i < sensors.size(); i++) {
-        display->println(sensors.at(i).name());
+
+    for (auto const& x : *sensors) {
+        display->println(x.second->name());
     }
 
 }
