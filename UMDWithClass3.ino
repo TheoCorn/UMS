@@ -28,7 +28,7 @@
 #define sleepPin 33
 
 
-#define batteryReadPin 13
+
 
 #define showAddressPin 18
 

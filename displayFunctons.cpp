@@ -10,7 +10,7 @@
 #include "esp_bt_device.h"
 
 #define showAddressPin 26
-
+#define batteryReadPin 13
 #define traScreen 32
 
 void DisplayFunctions::init() {
