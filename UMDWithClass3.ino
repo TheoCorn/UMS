@@ -1,7 +1,7 @@
 #include <ArduinoJson.h>
 #include "AllAboutSensors/Sensor.hpp"
 #include <Adafruit_BMP280.h>
-#include "bluetooth/BluetoothSerial.h"
+#include "BluetoothSerial.h"
 #include "esp_bt_main.h"
 #include "esp_bt_device.h"
 #include <SPI.h>
