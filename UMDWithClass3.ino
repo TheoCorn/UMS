@@ -1,5 +1,5 @@
 #include <ArduinoJson.h>
-#include "AllAboutSensors/Sensor.hpp"
+#include "Sensor.hpp"
 #include <Adafruit_BMP280.h>
 #include "BluetoothSerial.h"
 #include "esp_bt_main.h"
@@ -8,7 +8,7 @@
 #include <Wire.h>
 #include <stdio.h>
 #include <iostream>
-#include "AllAboutSensors/ConflictingSensors.hpp"
+#include "ConflictingSensors.hpp"
 #include "JsonParserFunctions.hpp"
 #include "M9axisGiro.hpp"
 #include <map>

@@ -6,7 +6,7 @@
 //library for MPU9250 9axis gyro
 #include "MPU9250.h"
 #include "ArduinoJson.h"
-#include "../../AllAboutSensors/Sensor.hpp"
+#include "Sensor.hpp"
 #include <Wire.h>
 #include <SPI.h>
 #include <vector>

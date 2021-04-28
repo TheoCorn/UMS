@@ -10,6 +10,9 @@
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
 #define SCREEN_I2C_ADDRESS 0x3C
 
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
 
 class DisplayFunctons {
 public:

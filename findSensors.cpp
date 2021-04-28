@@ -2,7 +2,7 @@
 // Created by theo on 4/24/2021.
 //
 
-#include "AllAboutSensors/findSensors.h"
+#include "findSensors.h"
 #include <map>
 #include <vector>
 

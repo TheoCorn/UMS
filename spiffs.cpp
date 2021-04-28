@@ -2,7 +2,7 @@
 // Created by theo on 4/24/2021.
 //
 
-#include "spiffs/spiffs.hpp"
+#include "spiffs.hpp"
 
 
 using namespace spiffs;
