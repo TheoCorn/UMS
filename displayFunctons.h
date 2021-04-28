@@ -16,6 +16,10 @@
 
 class DisplayFunctons {
 public:
+    DisplayFunctons(){
+        init();
+    }
+
     void displayWhenNotReading();
 
     void showReading(bool reading);
