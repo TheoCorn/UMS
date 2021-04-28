@@ -181,27 +181,6 @@ int getBateryProcentige(){
   return 10;
 }
 
-void showbtAddress(void) {
-  display.setTextSize(1);             // Normal 1:1 pixel scale
-  display.setTextColor(SSD1306_WHITE);        // Draw white text
-  display.setCursor(0, 0);
-  const uint8_t* point = esp_bt_dev_get_address();
-
-  for (int i = 0; i < 6; i++) {
-
-    char str[3];
-
-    sprintf(str, "%02X", (int)point[i]);
-    display.print(str);
-
-    if (i < 5) {
-      display.print(":");
-    }
-
-  }
-}
-
-
 
 /*
   prepares and deepsleeps the esp32

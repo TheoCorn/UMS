@@ -5,6 +5,7 @@
 #include "AddressIdentifier.hpp"
 #include "ConflictingSensors.hpp"
 #include "JsonParserFunctions.hpp"
+#include "spiffs.hpp"
 
 
 
@@ -45,6 +46,3 @@ void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonObject* obj, void (*
     numEnumSensorInVectorArray = SensorTypeVectors;
 
 }
-
-
-

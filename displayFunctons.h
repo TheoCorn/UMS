@@ -12,6 +12,7 @@
 
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include "UMDWithClass3.ino"
 
 
 class DisplayFunctons {
@@ -24,10 +25,13 @@ public:
 
     void showSensors();
 
+    void showbtAddress();
+
     void init();
 
 private:
     Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
 
 };
 
