@@ -13,6 +13,7 @@
 #include <map>
 #include <vector>
 #include "displayFunctons.h"
+#include "findSensors.h"
 
 //for display
 #include <Adafruit_GFX.h>
