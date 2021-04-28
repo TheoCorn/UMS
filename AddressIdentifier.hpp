@@ -32,7 +32,7 @@ class SensorsIdentifierManager {
     void JsonObjectToArrOfVectors(JsonObject* obj, void (*actaulDo)(JsonPair*));
 
 
-
+    static Sensor *getSensorPointerForEnumPos(unsigned int enumPos, byte address);
 };
 
 

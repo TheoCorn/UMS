@@ -41,7 +41,7 @@ class Sensor{
       // virtual void setJson(JsonDocument * ptrDoc) = 0;
       virtual void setJson(JsonVariant * v) = 0;
 
-      ~Sensor() = default;
+      virtual ~Sensor() = default;
 };
 
 

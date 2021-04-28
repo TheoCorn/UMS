@@ -22,16 +22,29 @@ void SensorsIdentifierManager::addSensor(byte address, std::map<uint8_t, Sensor*
     if (numEnumSensorInVectorArray[address].size() == 1){
         addSensor(numEnumSensorInVectorArray[address][0], address, sensors);
     }else{
+        csa::ConflictingAddressStruct con;
+        con.address = address;
+        con.EnumPosOfSensors = numEnumSensorInVectorArray[address];
 
+        for(unsigned int pos: con.EnumPosOfSensors){
+            Sensor * s = getSensorPointerForEnumPos(pos, address);
+            con.nameOfSensors.emplace_back(s->name());
+            delete s;
+        }
+        conflict->emplace_back(con);
     }
 
 
 }
 
 void SensorsIdentifierManager::addSensor(unsigned int enumPos, byte address, std::map<uint8_t, Sensor*> * sensors){
-    Sensor * sensor;
+
+    sensors[address] = getSensorPointerForEnumPos(enumPos, address);
+}
+
+ Sensor* SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPos, byte address){
     switch (enumPos){
-        case sensorEnum::MPU9250: sensor = new M9axisGiro(address);
+        case sensorEnum::MPU9250: return new M9axisGiro(address);
     }
 }
 

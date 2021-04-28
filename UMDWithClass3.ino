@@ -46,7 +46,7 @@ uint32_t closingBrackets = 0;
 bool reading = false;
 float batCharge = 100.0f;
 
-
+DisplayFunctons * mDisplay = new DisplayFunctons();
 
 
 
@@ -86,12 +86,12 @@ void loop() {
   }
   
   if(reading){
-    displayWhenReading();
+      mDisplay->displayWhenReading();
   }else{
       std::vector<csa::ConflictingAddressStruct> conflicts;
       ss::checkI2C(&conflicts);
-      displayWhenNotReading();
-
+      mDisplay->displayWhenNotReading();
+      
       
   }
   
@@ -162,22 +162,6 @@ void onReadElementRecived(JsonVariant * v){
 void onStartReading(){
   detachInterrupt(sleepPin);
 }
-
-
-
-
-
-void displayWhenReading(){
-  showReading(true);
-  
-  display.display();
-}
-
-
-int getBateryProcentige(){
-  return 10;
-}
-
 
 /*
   prepares and deepsleeps the esp32

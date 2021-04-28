@@ -24,6 +24,8 @@ public:
         delete display;
     }
 
+    void displayWhenReading();
+
     void displayWhenNotReading();
 
     void showReading(bool reading);
@@ -33,6 +35,11 @@ public:
     void showSensors();
 
     void showbtAddress();
+
+    //todo: implement battery percentage
+    static int getBateryProcentige(){
+        return 10;
+    }
 
     void init();
 

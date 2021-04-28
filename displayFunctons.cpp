@@ -19,6 +19,12 @@ void DisplayFunctons::init() {
     display->clearDisplay();
 }
 
+void DisplayFunctons::displayWhenReading(){
+    showReading(true);
+
+    display->display();
+}
+
 void DisplayFunctons::displayWhenNotReading(){
     showReading(false);
     showSensors();
