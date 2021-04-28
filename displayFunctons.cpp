@@ -127,6 +127,6 @@ void DisplayFunctions::showbtAddress() {
 }
 
 void DisplayFunctions::sleep() {
-    display.clearDisplay();
+    display->clearDisplay();
     digitalWrite(traScreen, LOW);
 }
