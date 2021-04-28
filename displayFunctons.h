@@ -12,11 +12,14 @@
 
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <map>
+#include "Sensor.hpp"
 
 
 class DisplayFunctons {
 public:
-    DisplayFunctons(){
+    explicit DisplayFunctons(std::map<uint8_t, Sensor*> * sensors){
+        this->sensors = sensors;
         init();
     }
 
@@ -47,6 +50,7 @@ public:
 private:
     Adafruit_SSD1306 * display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
     float batCharge = 100.0f;
+    std::map<uint8_t, Sensor*> * sensors
 
 };
 
