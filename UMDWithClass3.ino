@@ -44,7 +44,7 @@ uint32_t openingBrackets = 0;
 uint32_t closingBrackets = 0;
 
 bool reading = false;
-float batCharge = 100.0f;
+
 
 DisplayFunctons * mDisplay = new DisplayFunctons();
 
@@ -91,7 +91,8 @@ void loop() {
       std::vector<csa::ConflictingAddressStruct> conflicts;
       ss::checkI2C(&conflicts);
       mDisplay->displayWhenNotReading();
-      
+
+
       
   }
   

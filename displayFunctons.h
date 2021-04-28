@@ -36,6 +36,7 @@ public:
 
     void showbtAddress();
 
+
     //todo: implement battery percentage
     static int getBateryProcentige(){
         return 10;
@@ -45,7 +46,7 @@ public:
 
 private:
     Adafruit_SSD1306 * display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-
+    float batCharge = 100.0f;
 
 };
 
