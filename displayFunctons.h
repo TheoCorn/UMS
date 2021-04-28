@@ -12,7 +12,6 @@
 
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include "UMDWithClass3.ino"
 
 
 class DisplayFunctons {

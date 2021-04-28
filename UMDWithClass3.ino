@@ -6,7 +6,6 @@
 #include "esp_bt_device.h"
 #include <SPI.h>
 #include <Wire.h>
-#include <stdio.h>
 #include <iostream>
 #include "ConflictingSensors.hpp"
 #include "JsonParserFunctions.hpp"
@@ -22,7 +21,7 @@
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 #endif
 
-#define DEF_SENSOR_ARRY_SIZE 5
+
 
 #define sleepPin 33
 #define traScreen 32
@@ -31,7 +30,6 @@
 
 #define showAddressPin 18
 
-#define SIZE_OF_SENSOR_CLASS_ARRAY 1 
 
 
 
@@ -48,7 +46,6 @@ uint32_t closingBrackets = 0;
 bool reading = false;
 float batCharge = 100.0f;
 
-uint8_t nextUUID = 0;
 
 
 

@@ -5,6 +5,9 @@
 #ifndef UMDWITHCLASS3_FINDSENSORS_H
 #define UMDWITHCLASS3_FINDSENSORS_H
 
+#include <vector>
+#include "ConflictingSensors.hpp"
+
 namespace ss{
     void checkI2C(std::vector<csa::ConflictingAddressStruct> * conflict);
 }
