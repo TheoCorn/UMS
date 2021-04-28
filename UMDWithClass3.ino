@@ -138,7 +138,7 @@ void onSensorsElementRecived(JsonVariant * v){
    for(JsonPair p : obj){
     try{
       uint8_t key = atoi(p.key().c_str());
-      sensors.at(key).setJson(v);
+      sensors.at(key)->setJson(v);
     }catch(){
       //todo: inform pair device update of sensor has failed (create function exeptionOfKeyBuilder taht build json to be send)
     }
