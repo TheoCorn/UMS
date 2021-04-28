@@ -5,6 +5,9 @@
 #include "displayFunctons.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include "BluetoothSerial.h"
+#include "esp_bt_main.h"
+#include "esp_bt_device.h"
 
 #define showAddressPin 26
 
