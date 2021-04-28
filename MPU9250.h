@@ -29,6 +29,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #include <SPI.h>     // SPI library
 #include <string>
 
+
 class MPU9250{
   private:
   //myFun

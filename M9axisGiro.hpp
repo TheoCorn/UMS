@@ -15,7 +15,7 @@ using namespace std;
 
 class M9axisGiro : public Sensor{
   private:
-    MPU9250 *IMU{};
+    MPU9250 *IMU;
 
     String accelRangeString[4] = { "2g", "4G", "8G", "16G" };
     MPU9250::AccelRange accelRangeEnum[4] = { MPU9250::ACCEL_RANGE_2G, MPU9250::ACCEL_RANGE_4G, MPU9250::ACCEL_RANGE_8G, MPU9250::ACCEL_RANGE_16G };
@@ -31,15 +31,12 @@ class M9axisGiro : public Sensor{
     //available i2c addresses for the sensor
 //    std::vector<uint8_t> i2cAddresses{0x68};
 
-    byte address{};
+    byte address;
 
 
    public:
 
-    explicit M9axisGiro(byte vIndex) : Sensor(){
-        address = vIndex;
-        IMU = new MPU9250(Wire, address);
-    }
+    M9axisGiro(byte vIndex);
     ~M9axisGiro() override{
         delete IMU;
     }

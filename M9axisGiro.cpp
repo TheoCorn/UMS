@@ -68,4 +68,9 @@ String M9axisGiro::getStringForDisplay(){
 
   return s;
 }
+
+M9axisGiro::M9axisGiro(byte vIndex) : Sensor(){
+    address = vIndex;
+    IMU = new MPU9250(Wire, address);
+}
     
