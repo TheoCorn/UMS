@@ -11,7 +11,14 @@
 
 #define showAddressPin 26
 
+#define traScreen 32
+
 void DisplayFunctions::init() {
+    pinMode(showAddressPin, INPUT);
+    pinMode(traScreen, OUTPUT);
+    digitalWrite(traScreen, HIGH);
+
+    pinMode(batteryReadPin, INPUT);
     //Adress 0x3C can not be a sensor
     if (!this->display->begin(SSD1306_SWITCHCAPVCC, SCREEN_I2C_ADDRESS)) { // Address 0x3C for 128x32
         for (;;); // Don't proceed, loop forever
@@ -117,4 +124,9 @@ void DisplayFunctions::showbtAddress() {
         }
 
     }
+}
+
+void DisplayFunctions::sleep() {
+    display.clearDisplay();
+    digitalWrite(traScreen, LOW);
 }

@@ -39,6 +39,8 @@ public:
 
     void showbtAddress();
 
+    void sleep();
+
 
     //todo: implement battery percentage
     static int getBateryProcentige(){

@@ -26,7 +26,7 @@
 
 
 #define sleepPin 33
-#define traScreen 32
+
 
 #define batteryReadPin 13
 
@@ -53,12 +53,6 @@ DisplayFunctions * mDisplay;
 
 
 void setup() {
-  pinMode(showAddressPin, INPUT);
-  pinMode(traScreen, OUTPUT);
-  digitalWrite(traScreen, HIGH);
-
-  pinMode(batteryReadPin, INPUT);
-
   mDisplay = new DisplayFunctions(&sensors);
 
   //sets up all protocols
@@ -139,7 +133,7 @@ void onSensorsElementRecived(JsonVariant * v){
     try{
       uint8_t key = atoi(p.key().c_str());
       sensors.at(key)->setJson(v);
-    }catch(){
+    }catch(...){
       //todo: inform pair device update of sensor has failed (create function exeptionOfKeyBuilder taht build json to be send)
     }
   }
@@ -152,7 +146,7 @@ void onSensorsElementRecived(JsonVariant * v){
 void onReadElementRecived(JsonVariant * v){
   if(v->is<int>()){
     int locReading = v->as<int>();
-    if(locReadig == 1){
+    if(locReading == 1){
       if(reading) return;
       reading = true;
       onStartReading();
@@ -172,8 +166,6 @@ void onStartReading(){
   prepares and deepsleeps the esp32
 **/
 void sleep(){
-  display.clearDisplay();
-  digitalWrite(traScreen, LOW);
-  delay(1);
+  mDisplay->sleep();
   esp_deep_sleep_start();
 }
