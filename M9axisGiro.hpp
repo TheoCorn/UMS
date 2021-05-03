@@ -36,7 +36,7 @@ class M9axisGiro : public Sensor{
 
    public:
 
-    M9axisGiro(byte vIndex);
+    explicit M9axisGiro(byte vIndex);
     ~M9axisGiro() override{
         delete IMU;
     }
