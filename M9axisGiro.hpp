@@ -4,7 +4,7 @@
 #define _M9axisGyro_h
 
 //library for MPU9250 9axis gyro
-#include "MPU9250.h"
+#include "MPU9250_mlib.h"
 #include "ArduinoJson.h"
 #include "Sensor.hpp"
 #include <Wire.h>
@@ -38,7 +38,7 @@ class M9axisGiro : public Sensor{
 
     explicit M9axisGiro(byte vIndex);
     ~M9axisGiro() override{
-        delete IMU;
+        delete this->IMU;
     }
         
     String name() override { return "MPU9250"; }

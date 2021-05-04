@@ -24,14 +24,8 @@
 #endif
 
 
-
 #define sleepPin 33
-
-
-
-
 #define showAddressPin 18
-
 
 
 
