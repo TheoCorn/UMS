@@ -8,6 +8,7 @@ MPU9250::MPU9250(uint8_t address) : Sensor(){
     _i2c = &Wire; // I2C bus
     _address = address; // I2C address
     _useSPI = false; // set to use I2C
+    begin();
     setUpFeatures();
 
 }
@@ -54,21 +55,21 @@ void MPU9250::setJson(JsonVariant * v){
 
 void MPU9250::readSensor(JsonDocument * ptrDoc)  {
         JsonObject rData = ptrDoc->createNestedObject(name());
-        IMU->readSensor();
+        readSensor();
         for (int i = 0; i < 10; i++) {
           if (mpuFeaturesBool[i]) {
-            rData[mpuFeaturesString[i]] = IMU->callReadingFun(IMU->mpuFeaturesFloat[i]);
+            rData[mpuFeaturesString[i]] = callReadingFun(mpuFeaturesFloat[i]);
            }
         }
 }
 
 String MPU9250::getStringForDisplay(){
-  IMU->readSensor();
+  readSensor();
   String s;
   s = name();
   s += "\t";
   for(int i = 0; i<10; i++){
-    float f = IMU->callReadingFun(IMU->mpuFeaturesFloat[i]);
+    float f = callReadingFun(mpuFeaturesFloat[i]);
 //    ostringstream ss;
 //    ss << f;
 //    s += ss.str();
