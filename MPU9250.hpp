@@ -15,11 +15,11 @@ using namespace std;
 class MPU9250 : public Sensor{
   private:
     String accelRangeString[4] = { "2g", "4G", "8G", "16G" };
-    MPU9250::AccelRange accelRangeEnum[4] = { MPU9250::ACCEL_RANGE_2G, MPU9250::ACCEL_RANGE_4G, MPU9250::ACCEL_RANGE_8G, MPU9250::ACCEL_RANGE_16G };
+    AccelRange accelRangeEnum[4] = { AccelRange::ACCEL_RANGE_2G, AccelRange::ACCEL_RANGE_4G, AccelRange::ACCEL_RANGE_8G, AccelRange::ACCEL_RANGE_16G };
     bool accelRangeBool[4] = { false, false, true, false };
 
     String gyroRangeString[4] = { "250DPS", "500DPS", "1000DPS", "2000DPS", };
-    MPU9250::GyroRange gyroRangeEnum[4] = { MPU9250::GYRO_RANGE_250DPS, MPU9250::GYRO_RANGE_500DPS, MPU9250::GYRO_RANGE_1000DPS, MPU9250::GYRO_RANGE_2000DPS };   
+    GyroRange gyroRangeEnum[4] = { GyroRange::GYRO_RANGE_250DPS, GyroRange::GYRO_RANGE_500DPS, GyroRange::GYRO_RANGE_1000DPS, GyroRange::GYRO_RANGE_2000DPS };
     bool gyroRangeBool[4] = { false, true, false, false };                                                                  
 
     String mpuFeaturesString[10] = { "accelerometerX", "accelerometerY", "accelerometerZ", "gyroX", "gyroY", "gyroZ", "magnetometerX", "magnetometerY", "magnetometerZ", "temperature"};
