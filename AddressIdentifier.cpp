@@ -7,7 +7,7 @@
 #include "JsonParserFunctions.hpp"
 #include "spiffs.hpp"
 #include "sensorEnum.h"
-#include "M9axisGiro.hpp"
+#include "MPU9250.hpp"
 
 
 

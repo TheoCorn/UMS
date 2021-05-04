@@ -1,80 +1,73 @@
-/*
-MPU9250.h
-Brian R Taylor
-brian.taylor@bolderflight.com
-
-Copyright (c) 2017 Bolder Flight Systems
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
-and associated documentation files (the "Software"), to deal in the Software without restriction, 
-including without limitation the rights to use, copy, modify, merge, publish, distribute, 
-sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is 
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or 
-substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING 
-BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
-DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-
-#ifndef MPU9250_h
-#define MPU9250_h
-
-// #include "Arduino.h"
-#include <Wire.h>    // I2C library
-#include <SPI.h>     // SPI library
-#include <string>
 
 
-class MPU9250{
+#ifndef _M9axisGyro_h
+#define _M9axisGyro_h
+
+
+#include "ArduinoJson.h"
+#include "Sensor.hpp"
+#include <Wire.h>
+#include <SPI.h>
+#include <vector>
+
+using namespace std;
+
+class MPU9250 : public Sensor{
   private:
-  //myFun
-    void setUpFeatures();
-  public:
+    String accelRangeString[4] = { "2g", "4G", "8G", "16G" };
+    MPU9250::AccelRange accelRangeEnum[4] = { MPU9250::ACCEL_RANGE_2G, MPU9250::ACCEL_RANGE_4G, MPU9250::ACCEL_RANGE_8G, MPU9250::ACCEL_RANGE_16G };
+    bool accelRangeBool[4] = { false, false, true, false };
+
+    String gyroRangeString[4] = { "250DPS", "500DPS", "1000DPS", "2000DPS", };
+    MPU9250::GyroRange gyroRangeEnum[4] = { MPU9250::GYRO_RANGE_250DPS, MPU9250::GYRO_RANGE_500DPS, MPU9250::GYRO_RANGE_1000DPS, MPU9250::GYRO_RANGE_2000DPS };   
+    bool gyroRangeBool[4] = { false, true, false, false };                                                                  
+
+    String mpuFeaturesString[10] = { "accelerometerX", "accelerometerY", "accelerometerZ", "gyroX", "gyroY", "gyroZ", "magnetometerX", "magnetometerY", "magnetometerZ", "temperature"};
+    bool mpuFeaturesBool[10] = { true, true, true, true, true, true, true, true, true, false };
+
     enum GyroRange
     {
-      GYRO_RANGE_250DPS,
-      GYRO_RANGE_500DPS,
-      GYRO_RANGE_1000DPS,
-      GYRO_RANGE_2000DPS
+        GYRO_RANGE_250DPS,
+        GYRO_RANGE_500DPS,
+        GYRO_RANGE_1000DPS,
+        GYRO_RANGE_2000DPS
     };
     enum AccelRange
     {
-      ACCEL_RANGE_2G,
-      ACCEL_RANGE_4G,
-      ACCEL_RANGE_8G,
-      ACCEL_RANGE_16G    
+        ACCEL_RANGE_2G,
+        ACCEL_RANGE_4G,
+        ACCEL_RANGE_8G,
+        ACCEL_RANGE_16G
     };
     enum DlpfBandwidth
     {
-      DLPF_BANDWIDTH_184HZ,
-      DLPF_BANDWIDTH_92HZ,
-      DLPF_BANDWIDTH_41HZ,
-      DLPF_BANDWIDTH_20HZ,
-      DLPF_BANDWIDTH_10HZ,
-      DLPF_BANDWIDTH_5HZ
+        DLPF_BANDWIDTH_184HZ,
+        DLPF_BANDWIDTH_92HZ,
+        DLPF_BANDWIDTH_41HZ,
+        DLPF_BANDWIDTH_20HZ,
+        DLPF_BANDWIDTH_10HZ,
+        DLPF_BANDWIDTH_5HZ
     };
     enum LpAccelOdr
     {
-      LP_ACCEL_ODR_0_24HZ = 0,
-      LP_ACCEL_ODR_0_49HZ = 1,
-      LP_ACCEL_ODR_0_98HZ = 2,
-      LP_ACCEL_ODR_1_95HZ = 3,
-      LP_ACCEL_ODR_3_91HZ = 4,
-      LP_ACCEL_ODR_7_81HZ = 5,
-      LP_ACCEL_ODR_15_63HZ = 6,
-      LP_ACCEL_ODR_31_25HZ = 7,
-      LP_ACCEL_ODR_62_50HZ = 8,
-      LP_ACCEL_ODR_125HZ = 9,
-      LP_ACCEL_ODR_250HZ = 10,
-      LP_ACCEL_ODR_500HZ = 11
+        LP_ACCEL_ODR_0_24HZ = 0,
+        LP_ACCEL_ODR_0_49HZ = 1,
+        LP_ACCEL_ODR_0_98HZ = 2,
+        LP_ACCEL_ODR_1_95HZ = 3,
+        LP_ACCEL_ODR_3_91HZ = 4,
+        LP_ACCEL_ODR_7_81HZ = 5,
+        LP_ACCEL_ODR_15_63HZ = 6,
+        LP_ACCEL_ODR_31_25HZ = 7,
+        LP_ACCEL_ODR_62_50HZ = 8,
+        LP_ACCEL_ODR_125HZ = 9,
+        LP_ACCEL_ODR_250HZ = 10,
+        LP_ACCEL_ODR_500HZ = 11
     };
-    MPU9250(TwoWire &bus,uint8_t address);
-    // MPU9250(SPIClass &bus,uint8_t csPin);
+
+    uint8_t address;
+
+    //myFun
+    void setUpFeatures();
 
     //my functions
     float callReadingFun(float (MPU9250::*fun)());
@@ -100,7 +93,7 @@ class MPU9250{
     float getMagY_uT();
     float getMagZ_uT();
     float getTemperature_C();
-    
+
     int calibrateGyro();
     float getGyroBiasX_rads();
     float getGyroBiasY_rads();
@@ -128,7 +121,9 @@ class MPU9250{
     void setMagCalX(float bias,float scaleFactor);
     void setMagCalY(float bias,float scaleFactor);
     void setMagCalZ(float bias,float scaleFactor);
-  protected:
+
+
+protected:
     // i2c
     uint8_t _address;
     TwoWire *_i2c;
@@ -197,7 +192,7 @@ class MPU9250{
     float _avgs;
     // transformation matrix
     /* transform the accel and gyro axes to match the magnetometer axes */
-    const int16_t tX[3] = {0,  1,  0}; 
+    const int16_t tX[3] = {0,  1,  0};
     const int16_t tY[3] = {1,  0,  0};
     const int16_t tZ[3] = {0,  0, -1};
     // constants
@@ -271,7 +266,7 @@ class MPU9250{
     const uint8_t FIFO_READ = 0x74;
     // AK8963 registers
     const uint8_t AK8963_I2C_ADDR = 0x0C;
-    const uint8_t AK8963_HXL = 0x03; 
+    const uint8_t AK8963_HXL = 0x03;
     const uint8_t AK8963_CNTL1 = 0x0A;
     const uint8_t AK8963_PWR_DOWN = 0x00;
     const uint8_t AK8963_CNT_MEAS1 = 0x12;
@@ -288,35 +283,28 @@ class MPU9250{
     int readAK8963Registers(uint8_t subAddress, uint8_t count, uint8_t* dest);
     int whoAmI();
     int whoAmIAK8963();
+
+public:
+
+    explicit MPU9250(uint8_t address);
+
+    ~MPU9250() override= default;
+        
+    String name() override { return "MPU9250"; }
+//    std::vector<uint8_t> c() override{ return i2cAddresses; }
+    byte currentAddress() override { return address; }
+    
+    void getJson(JsonDocument * ptrDoc, uint8_t uuid) override;
+    
+    void setJson(JsonVariant * v) override;
+
+    void setUp() override;
+
+    void readSensor(JsonDocument * ptrDoc) override;
+
+    String getStringForDisplay() override;
 };
 
-class MPU9250FIFO: public MPU9250 {
-  public:
-    using MPU9250::MPU9250;
-    int enableFifo(bool accel,bool gyro,bool mag,bool temp);
-    int readFifo();
-    void getFifoAccelX_mss(size_t *size,float* data);
-    void getFifoAccelY_mss(size_t *size,float* data);
-    void getFifoAccelZ_mss(size_t *size,float* data);
-    void getFifoGyroX_rads(size_t *size,float* data);
-    void getFifoGyroY_rads(size_t *size,float* data);
-    void getFifoGyroZ_rads(size_t *size,float* data);
-    void getFifoMagX_uT(size_t *size,float* data);
-    void getFifoMagY_uT(size_t *size,float* data);
-    void getFifoMagZ_uT(size_t *size,float* data);
-    void getFifoTemperature_C(size_t *size,float* data);
-  protected:
-    // fifo
-    bool _enFifoAccel,_enFifoGyro,_enFifoMag,_enFifoTemp;
-    size_t _fifoSize,_fifoFrameSize;
-    float _axFifo[85], _ayFifo[85], _azFifo[85];
-    size_t _aSize;
-    float _gxFifo[85], _gyFifo[85], _gzFifo[85];
-    size_t _gSize;
-    float _hxFifo[73], _hyFifo[73], _hzFifo[73];
-    size_t _hSize;
-    float _tFifo[256];
-    size_t _tSize;
-};
+
 
 #endif

@@ -9,7 +9,7 @@
 #include <iostream>
 #include "ConflictingSensors.hpp"
 #include "JsonParserFunctions.hpp"
-#include "M9axisGiro.hpp"
+#include "MPU9250.hpp"
 #include <map>
 #include <vector>
 #include "displayFunctons.h"

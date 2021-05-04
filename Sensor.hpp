@@ -13,7 +13,7 @@
 
 class Sensor{
   public:
-      Sensor(){}
+      Sensor()= default;
 
 
       /**
