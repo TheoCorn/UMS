@@ -3,6 +3,8 @@
 #include "Arduino.h"
 #include <sstream>
 
+
+
 MPU9250::MPU9250(uint8_t address) : Sensor(){
     this->address = address;
     _i2c = &Wire; // I2C bus
