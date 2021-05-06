@@ -35,7 +35,7 @@ class SensorsIdentifierManager {
   private:
     std::vector<unsigned int> * numEnumSensorInVectorArray;
     void init();
-    void JsonObjectToArrOfVectors(JsonObject* obj, void (*actualDo)(JsonPair*));
+    static void JsonObjectToArrOfVectors(JsonObject* obj, void (*actualDo)(JsonPair*));
 
 
     static Sensor *getSensorPointerForEnumPos(unsigned int enumPos, uint8_t address);

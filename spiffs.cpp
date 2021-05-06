@@ -13,13 +13,13 @@ using namespace spiffs;
  * @param path
  * @return char*
  */
-char *readFile(fs::FS &fs, const char *path) {
+unsigned char *readFile(fs::FS &fs, const char *path) {
 
     File file = fs.open(path);
     if (!file || file.isDirectory()) return nullptr;
 
     size_t fileSize = file.size();
-    char *s = (char*) malloc(fileSize);
+    uint8_t *s = new uint8_t[fileSize];
 
 //        while (fileSize) {
 //            size_t toRead = fileSize;
