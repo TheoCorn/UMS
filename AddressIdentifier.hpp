@@ -11,7 +11,13 @@
 
 
 
-
+/*
+ * this class identifies Sensors based on the i2c address it creates
+ *
+ *
+ * @param
+ * @return
+ */
 class SensorsIdentifierManager {
   public:
 
@@ -23,16 +29,16 @@ class SensorsIdentifierManager {
         delete numEnumSensorInVectorArray;
     }
 
-    void addSensor(byte address, std::map<uint8_t, Sensor*> * sensors, std::vector<csa::ConflictingAddressStruct> * conflict);
-    void addSensor(unsigned int enumPos, byte address, std::map<uint8_t, Sensor*> * sensors);
+    void addSensor(uint8_t address, std::map<uint8_t, Sensor*> * sensors, std::vector<csa::ConflictingAddressStruct> * conflict);
+    void addSensor(unsigned int enumPos, uint8_t address, std::map<uint8_t, Sensor*> * sensors);
 
   private:
     std::vector<unsigned int> * numEnumSensorInVectorArray;
     void init();
-    void JsonObjectToArrOfVectors(JsonObject* obj, void (*actaulDo)(JsonPair*));
+    void JsonObjectToArrOfVectors(JsonObject* obj, void (*actualDo)(JsonPair*));
 
 
-    static Sensor *getSensorPointerForEnumPos(unsigned int enumPos, byte address);
+    static Sensor *getSensorPointerForEnumPos(unsigned int enumPos, uint8_t address);
 };
 
 

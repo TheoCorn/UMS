@@ -3,6 +3,8 @@
 //
 
 #include "spiffs.hpp"
+#include "FS.h"
+#include "SPIFFS.h"
 
 
 using namespace spiffs;
@@ -17,7 +19,7 @@ uint8_t *readFile(fs::FS &fs, const char *path) {
     if (!file || file.isDirectory()) return nullptr;
 
     size_t fileSize = file.size();
-    uint8_t *s = (uint8_t*) malloc(fileSize);
+    char *s = (uint8_t*) malloc(fileSize);
 
 //        while (fileSize) {
 //            size_t toRead = fileSize;

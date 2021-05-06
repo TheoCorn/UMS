@@ -12,7 +12,7 @@
 #include "MPU9250.hpp"
 #include <map>
 #include <vector>
-#include "displayFunctons.h"
+#include "displayFunctions.h"
 #include "findSensors.h"
 
 //for display

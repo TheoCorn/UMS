@@ -2,7 +2,7 @@
 // Created by theo on 4/24/2021.
 //
 
-#include "displayFunctons.h"
+#include "displayFunctions.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include "BluetoothSerial.h"

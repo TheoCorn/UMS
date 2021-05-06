@@ -2,8 +2,8 @@
 // Created by theo on 4/24/2021.
 //
 
-#ifndef UMDWITHCLASS3_DISPLAYFUNCTONS_H
-#define UMDWITHCLASS3_DISPLAYFUNCTONS_H
+#ifndef UMDWITHCLASS3_DISPLAYFUNCTIONS_H
+#define UMDWITHCLASS3_DISPLAYFUNCTIONS_H
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
@@ -57,4 +57,4 @@ private:
 };
 
 
-#endif //UMDWITHCLASS3_DISPLAYFUNCTONS_H
+#endif //UMDWITHCLASS3_DISPLAYFUNCTIONS_H

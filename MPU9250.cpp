@@ -17,13 +17,13 @@ MPU9250::MPU9250(uint8_t address) : Sensor(){
 
     void MPU9250::setUp()  {
       // setting the accelerometer full scale range to +/-8G
-      IMU->setAccelRange(MPU9250::ACCEL_RANGE_8G);
+      setAccelRange(MPU9250::ACCEL_RANGE_8G);
       // setting the gyroscope full scale range to +/-500 deg/s
-      IMU->setGyroRange(MPU9250::GYRO_RANGE_500DPS);
+      setGyroRange(MPU9250::GYRO_RANGE_500DPS);
       // setting DLPF bandwidth to 20 Hz
-      IMU->setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_184HZ);
+      setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_184HZ);
       // setting SRD to 19 for a 50 Hz update rate
-      IMU->setSrd(19);
+      setSrd(19);
     }
 
 void MPU9250::getJson(JsonDocument * ptrDoc, uint8_t uuid)  {

@@ -17,7 +17,7 @@ adds the the correct sensor type to the specified vector
 @param address the address of the i2c device
 @param vector std::vector<Sensor> pointer with the sensor will be added to
 */
-void SensorsIdentifierManager::addSensor(byte address, std::map<uint8_t, Sensor*> * sensors, std::vector<csa::ConflictingAddressStruct> * conflict) {
+void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sensor*> * sensors, std::vector<csa::ConflictingAddressStruct> * conflict) {
 
     if (numEnumSensorInVectorArray[address].size() == 1){
         addSensor(numEnumSensorInVectorArray[address][0], address, sensors);
@@ -37,14 +37,14 @@ void SensorsIdentifierManager::addSensor(byte address, std::map<uint8_t, Sensor*
 
 }
 
-void SensorsIdentifierManager::addSensor(unsigned int enumPos, byte address, std::map<uint8_t, Sensor*> * sensors){
+void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, std::map<uint8_t, Sensor*> * sensors){
 
-    sensors[address] = getSensorPointerForEnumPos(enumPos, address);
+    sensors->insert(std::pair<uint8_t, Sensor*>(address, getSensorPointerForEnumPos(enumPos, address)));
 }
 
- Sensor* SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPos, byte address){
+ Sensor* SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPos, uint8_t address){
     switch (enumPos){
-        case sensorEnum::MPU9250: return new M9axisGiro(address);
+        case sensorEnum::MPU9250: return (Sensor*)(new class MPU9250(address)); break;
     }
 }
 
@@ -54,7 +54,7 @@ void SensorsIdentifierManager::init(){
     jp::parseJson(cArrJson, &JsonObjectToArrOfVectors);
 }
 
-void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonObject* obj, void (*actaulDo)(JsonPair*)){
+void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonObject* obj, void (*actualDo)(JsonPair*)){
     //array 0-127 ie. all i2c addresses the vector contains all sensors that can be on the address
     std::vector<unsigned int> *SensorTypeVectors = new std::vector<unsigned int>[128];
     JsonArray arr = obj->as<JsonArray>();
