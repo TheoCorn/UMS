@@ -7,7 +7,8 @@ void parseJson(const char * buffer, void(*mDo)(JsonObject*, void(JsonPair*)), vo
 
 
 void cycleThruObj (JsonDocument * doc, void (*actaulDo)(JsonPair*)) {
-    JsonObject obj = doc->as<JsonObject>;
+
+    JsonObject obj = doc->to<JsonObject>();
     for (JsonPair p : obj) {
         actaulDo(&p);
     }
