@@ -13,13 +13,13 @@ using namespace spiffs;
  * @param path
  * @return char*
  */
-uint8_t *readFile(fs::FS &fs, const char *path) {
+char *readFile(fs::FS &fs, const char *path) {
 
     File file = fs.open(path);
     if (!file || file.isDirectory()) return nullptr;
 
     size_t fileSize = file.size();
-    char *s = (uint8_t*) malloc(fileSize);
+    char *s = (char*) malloc(fileSize);
 
 //        while (fileSize) {
 //            size_t toRead = fileSize;
@@ -50,7 +50,7 @@ std::vector<fs::File> listDir(fs::FS &fs, char * dirname) {
     std::vector<File> files;
     File root;
 
-    if (dirname = nullptr) {
+    if (dirname == nullptr) {
         root = fs.open("/");
     } else {
         root = fs.open(dirname);
