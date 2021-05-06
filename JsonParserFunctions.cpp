@@ -6,8 +6,9 @@
 void parseJson(const char * buffer, void(*mDo)(JsonObject*, void(JsonPair*)), void(*actualDo)(JsonPair*));
 
 
-void cycleThruObj (JsonObject * obj, void (*actaulDo)(JsonPair*)) {
-    for (JsonPair p : *obj) {
+void cycleThruObj (JsonDocument * doc, void (*actaulDo)(JsonPair*)) {
+    JsonObject obj = doc->as<JsonObject>;
+    for (JsonPair p : obj) {
         actaulDo(&p);
     }
 }
@@ -34,7 +35,7 @@ void parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actaulDo)(Json
 
 }
 
-void parseJson(const char * buffer, void(*mDo)(JsonObject*, void(JsonPair*)), void(*actualDo)(JsonPair*)){
+void parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*)), void(*actualDo)(JsonPair*)){
     DynamicJsonDocument doc(capacity);
     DeserializationError err = deserializeJson(doc, buffer);
 
@@ -43,7 +44,7 @@ void parseJson(const char * buffer, void(*mDo)(JsonObject*, void(JsonPair*)), vo
         return;
     }
 
-    JsonObject obj = doc.to<JsonObject>();
 
-    mDo(&obj, actualDo);
+
+    mDo(&doc, actualDo);
 }
