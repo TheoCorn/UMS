@@ -52,14 +52,16 @@ void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, 
 
 void SensorsIdentifierManager::init(){
     char * cArrJson = (char*) spiffs::readFile(SPIFFS, "/SensorAddresses.txt");
-    jp::parseJson(cArrJson, &JsonObjectToArrOfVectors, nullptr);
+
+    JsonDocument * doc = jp::parseJson(cArrJson);
+    JsonObjectToArrOfVectors(doc);
 }
 
-void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc, void (*actualDo)(JsonPair*)){
+void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
 //    JsonObject obj = doc->to<JsonObject>();
 
     //array 0-127 ie. all i2c addresses the vector contains all sensors that can be on the address
-    std::vector<unsigned int> *SensorTypeVectors = new std::vector<unsigned int>[128];
+    auto *SensorTypeVectors = new std::vector<unsigned int>[128];
     JsonArray arr = doc->as<JsonArray>();
 
     int i = 0;

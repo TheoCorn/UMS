@@ -16,7 +16,7 @@ namespace jp {
 
     void parseJsonWithCycleThru(std::vector<char> * btBuffer, void (*actualDo)(JsonPair*));
 
-
+    JsonDocument * parseJson(const char * buffer);
 
 }
 

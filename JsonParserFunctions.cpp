@@ -2,6 +2,7 @@
 // Created by theo on 4/24/2021.
 //
 
+#include <vector>
 #include "JsonParserFunctions.hpp"
 
 using namespace jp;
@@ -25,10 +26,6 @@ using namespace jp;
    @exception DeserializationError
 */
 void parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actualDo)(JsonPair*)) {
-//    char data [btBuffer->size()];
-//    for (int i = 0; i < btBuffer->size(); i++) {
-//        data[i] = btBuffer->at(i);
-//    }
 
     btBuffer->emplace_back('\0');
     char * toPass = &(btBuffer->front());
@@ -36,17 +33,36 @@ void parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actualDo)(Json
 
 }
 using namespace jp;
-
+/*
+ * deserializes the Json call the function mDo points to that takes as input the actualDo function Pointer
+ * if the second function pointer is not needed pass nullptr
+ *
+ * @param buffer the serialised Json
+ * @param void(*mDo)(JsonDocument*, void(JsonPair*))
+ * @param void(*actualDo)(JsonPair*)
+ */
 void parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*)), void(*actualDo)(JsonPair*)){
-    DynamicJsonDocument doc(capacity);
-    DeserializationError err = deserializeJson(doc, buffer);
+    DynamicJsonDocument *doc = parseJson(buffer);
+    mDo(doc, actualDo);
+    delete doc;
+}
+
+using namespace jp;
+/*
+ * parses json and return JsonDocument* the user of the function must manage the lifecycle of the JsonDocument*
+ *
+ * @param const char* buffer the Serialized Json
+ * @return JsonDocument* can be null pointer if the the deserialization failed
+ */
+JsonDocument * parseJson(const char * buffer){
+    DynamicJsonDocument *doc = new DynamicJsonDocument(capacity);
+    DeserializationError err = deserializeJson(*doc, buffer);
 
     if (err != DeserializationError::Ok) {
         log_e("error in deserialization: " + err.c_str());
-        return;
+        return nullptr;
     }
 
+    return doc;
 
-
-    mDo(&doc, actualDo);
 }
