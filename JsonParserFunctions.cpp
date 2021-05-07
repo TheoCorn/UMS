@@ -3,7 +3,7 @@
 //
 
 #include "JsonParserFunctions.hpp"
-void parseJson(const char * buffer, void(*mDo)(JsonObject*, void(JsonPair*)), void(*actualDo)(JsonPair*));
+
 
 
 void cycleThruObj (JsonDocument * doc, void (*actaulDo)(JsonPair*)) {
