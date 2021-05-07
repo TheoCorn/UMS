@@ -4,17 +4,17 @@
 
 #include "JsonParserFunctions.hpp"
 
+using namespace jp;
 
-
-void cycleThruObj (JsonDocument * doc, void (*actaulDo)(JsonPair*)) {
+void cycleThruObj (JsonDocument * doc, void (*actualDo)(JsonPair*)) {
 
     JsonObject obj = doc->to<JsonObject>();
     for (JsonPair p : obj) {
-        actaulDo(&p);
+        actualDo(&p);
     }
 }
 
-
+using namespace jp;
 /*
    deserializes json and starts the process of unpacking the Json
    earpieces '\0' to the end of the vector
@@ -24,7 +24,7 @@ void cycleThruObj (JsonDocument * doc, void (*actaulDo)(JsonPair*)) {
 
    @exception DeserializationError
 */
-void parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actaulDo)(JsonPair*)) {
+void parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actualDo)(JsonPair*)) {
 //    char data [btBuffer->size()];
 //    for (int i = 0; i < btBuffer->size(); i++) {
 //        data[i] = btBuffer->at(i);
@@ -32,9 +32,10 @@ void parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actaulDo)(Json
 
     btBuffer->emplace_back('\0');
     char * toPass = &(btBuffer->front());
-    parseJson(toPass, &cycleThruObj, actaulDo);
+    parseJson(toPass, &cycleThruObj, actualDo);
 
 }
+using namespace jp;
 
 void parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*)), void(*actualDo)(JsonPair*)){
     DynamicJsonDocument doc(capacity);
