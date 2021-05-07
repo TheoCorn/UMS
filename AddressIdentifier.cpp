@@ -55,6 +55,7 @@ void SensorsIdentifierManager::init(){
 
     JsonDocument * doc = jp::parseJson(cArrJson);
     JsonObjectToArrOfVectors(doc);
+    delete doc;
 }
 
 void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){

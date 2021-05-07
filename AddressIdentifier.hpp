@@ -38,7 +38,7 @@ class SensorsIdentifierManager {
     void JsonObjectToArrOfVectors(JsonDocument* doc);
 
 
-    Sensor *getSensorPointerForEnumPos(unsigned int enumPos, uint8_t address);
+    static Sensor *getSensorPointerForEnumPos(unsigned int enumPos, uint8_t address);
 };
 
 

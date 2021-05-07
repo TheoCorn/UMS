@@ -9,6 +9,7 @@
 #include <iostream>
 #include "ConflictingSensors.hpp"
 #include "JsonParserFunctions.hpp"
+#include "AddressIdentifier.hpp"
 #include "MPU9250.hpp"
 #include <map>
 #include <vector>
@@ -43,7 +44,7 @@ bool reading = false;
 
 
 DisplayFunctions * mDisplay;
-
+SensorsIdentifierManager sensorIdentifier();
 
 
 void setup() {
@@ -80,7 +81,7 @@ void loop() {
       mDisplay->displayWhenReading();
   }else{
       std::vector<csa::ConflictingAddressStruct> conflicts;
-      ss::checkI2C(&conflicts);
+      ss::checkI2C(&conflicts, &sensors, &sensorIdentifier);
       mDisplay->displayWhenNotReading();
 
 
