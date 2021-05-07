@@ -32,7 +32,7 @@ void parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actualDo)(Json
 
     btBuffer->emplace_back('\0');
     char * toPass = &(btBuffer->front());
-    parseJson(toPass, &cycleThruObj, actualDo);
+    parseJson(toPass, &jp::cycleThruObj, actualDo);
 
 }
 using namespace jp;
