@@ -12,7 +12,7 @@
 
 typedef uint8_t byte;
 //looks for all i2c devices
-void checkI2C(std::vector<csa::ConflictingAddressStruct> * conflict, std::map<uint8_t, Sensor*> * sensors, SensorsIdentifierManager * sim) {
+void ss::checkI2C(std::vector<csa::ConflictingAddressStruct> * conflict, std::map<uint8_t, Sensor*> * sensors, SensorsIdentifierManager * sim) {
 
     //addresses used by previusly alocated sensors
     std::vector<byte> usedAddreses;

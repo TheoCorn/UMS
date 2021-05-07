@@ -7,7 +7,7 @@
 
 using namespace jp;
 
-void cycleThruObj (JsonDocument * doc, void (*actualDo)(JsonPair*)) {
+void jp::cycleThruObj (JsonDocument * doc, void (*actualDo)(JsonPair*)) {
 
     JsonObject obj = doc->to<JsonObject>();
     for (JsonPair p : obj) {
@@ -25,7 +25,7 @@ using namespace jp;
 
    @exception DeserializationError
 */
-void parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actualDo)(JsonPair*)) {
+void jp::parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actualDo)(JsonPair*)) {
 
     btBuffer->emplace_back('\0');
     char * toPass = &(btBuffer->front());
@@ -41,8 +41,8 @@ using namespace jp;
  * @param void(*mDo)(JsonDocument*, void(JsonPair*))
  * @param void(*actualDo)(JsonPair*)
  */
-void parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*)), void(*actualDo)(JsonPair*)){
-    DynamicJsonDocument *doc = parseJson(buffer);
+void jp::parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*)), void(*actualDo)(JsonPair*)){
+    JsonDocument *doc = parseJson(buffer);
     mDo(doc, actualDo);
     delete doc;
 }
@@ -54,7 +54,7 @@ using namespace jp;
  * @param const char* buffer the Serialized Json
  * @return JsonDocument* can be null pointer if the the deserialization failed
  */
-JsonDocument * parseJson(const char * buffer){
+JsonDocument * jp::parseJson(const char * buffer){
     DynamicJsonDocument *doc = new DynamicJsonDocument(capacity);
     DeserializationError err = deserializeJson(*doc, buffer);
 
