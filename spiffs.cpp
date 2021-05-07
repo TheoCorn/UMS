@@ -13,7 +13,7 @@ using namespace spiffs;
  * @param path
  * @return char*
  */
-unsigned char *readFile(fs::FS &fs, const char *path) {
+unsigned char *spiffs::readFile(fs::FS &fs, const char *path) {
 
     File file = fs.open(path);
     if (!file || file.isDirectory()) return nullptr;
@@ -46,7 +46,7 @@ using namespace spiffs;
   * @param dirname
   * @return std::vector<Files>
   */
-std::vector<fs::File> listDir(fs::FS &fs, char * dirname) {
+std::vector<fs::File> spiffs::listDir(fs::FS &fs, char * dirname) {
     std::vector<File> files;
     File root;
 

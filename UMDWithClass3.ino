@@ -44,7 +44,7 @@ bool reading = false;
 
 
 DisplayFunctions * mDisplay;
-SensorsIdentifierManager sensorIdentifier();
+SensorsIdentifierManager sensorIdentifier;
 
 
 void setup() {
