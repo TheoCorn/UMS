@@ -57,7 +57,7 @@ void SensorsIdentifierManager::init(){
 
 void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc, void (*actualDo)(JsonPair*)){
     JsonObject obj = doc->to<JsonObject>();
-    
+
     //array 0-127 ie. all i2c addresses the vector contains all sensors that can be on the address
     std::vector<unsigned int> *SensorTypeVectors = new std::vector<unsigned int>[128];
     JsonArray arr = obj->as<JsonArray>();
