@@ -44,11 +44,12 @@ bool reading = false;
 
 
 DisplayFunctions * mDisplay;
-SensorsIdentifierManager sensorIdentifier;
+SensorsIdentifierManager * sensorIdentifier;
 
 
 void setup() {
   mDisplay = new DisplayFunctions(&sensors);
+  sensorIdentifier = new SensorsIdentifierManager();
 
   //sets up all protocols
   Serial.begin(115200);
@@ -81,7 +82,7 @@ void loop() {
       mDisplay->displayWhenReading();
   }else{
       std::vector<csa::ConflictingAddressStruct> conflicts;
-      ss::checkI2C(&conflicts, &sensors, &sensorIdentifier);
+      ss::checkI2C(&conflicts, &sensors, sensorIdentifier);
       mDisplay->displayWhenNotReading();
 
 
@@ -148,6 +149,7 @@ void onReadElementRecived(JsonVariant * v){
     }else{
       if(reading) return;
       reading = false;
+      onStopReading();
     }
   }
 
@@ -155,6 +157,11 @@ void onReadElementRecived(JsonVariant * v){
 
 void onStartReading(){
   detachInterrupt(sleepPin);
+  delete sensorIdentifier;
+}
+
+void onStopReading(){
+    sensorIdentifier = new SensorsIdentifierManager();
 }
 
 /*
