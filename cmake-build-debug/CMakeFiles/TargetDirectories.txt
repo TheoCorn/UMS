@@ -1,0 +1,3 @@
+D:/DATA/OneDrive/Documents/Arduino/UMDWithClass3/cmake-build-debug/CMakeFiles/UMDWithClass3.dir
+D:/DATA/OneDrive/Documents/Arduino/UMDWithClass3/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/DATA/OneDrive/Documents/Arduino/UMDWithClass3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
