@@ -49,6 +49,7 @@ SensorsIdentifierManager * sensorIdentifier;
 
 void setup() {
   mDisplay = new DisplayFunctions(&sensors);
+  mDisplay->init();
   sensorIdentifier = new SensorsIdentifierManager();
 
   //sets up all protocols
