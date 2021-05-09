@@ -28,6 +28,11 @@
 #define sleepPin 33
 #define showAddressPin 18
 
+#define ETB 23
+#define DC1_SLEEP 21
+#define DC2_DISPLAY_TOGGLE 22
+#define ACK 6
+
 
 void doProcess4JsonObj(JsonPair * p);
 void onSensorsElementReceive(JsonVariant * v);
@@ -44,9 +49,6 @@ BluetoothSerial SerialBT;
 std::map<uint8_t, Sensor*> sensors;
 
 std::vector<char> btBuffer;
-
-uint32_t openingBrackets = 0;
-uint32_t closingBrackets = 0;
 
 bool reading = false;
 
@@ -77,14 +79,12 @@ void loop() {
   char sRead;
   int errCode = SerialBT.read(&sRead);
   if (errCode != -1) {
-    btBuffer.emplace_back(sRead);
-    if (sRead == '{') openingBrackets++;
-    if (sRead == '}') closingBrackets++;
-    if (openingBrackets == closingBrackets && openingBrackets != 0) {
-      openingBrackets = 0;
-      closingBrackets = 0;
-      jp::parseJsonWithCycleThru(&btBuffer, &doProcess4JsonObj);
-    }
+      switch(sRead){
+          case ETB: jp::parseJsonWithCycleThru(&btBuffer, &doProcess4JsonObj); break;
+
+          default: btBuffer.emplace_back(sRead); break;
+      }
+
   }
   
   if(reading){
@@ -114,7 +114,7 @@ void doProcess4JsonObj(JsonPair * p){
     case 'r':
         onReadElementReceive(&v); break;
 
-    case 'g': recived(&v); break;
+    case 'g': onGetElementReceive(&v); break;
   }  
 
 }

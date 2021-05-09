@@ -35,7 +35,29 @@ class Sensor{
       //used when reading
       //write JsonObject to the Json document
       virtual void readSensor(JsonDocument * ptrDoc) = 0;
-      //get the current settings in json format
+      /*
+       * get the current settings in json format
+       *
+       * the method has to create a nested object in the JsonDocument which name should reflect the sensor name
+       * (from now known as the sensor object)
+       * remember that multiple sensors of the same function can be present
+       *
+       * the method has to create a variable in the sensor object called uuid witch is the i2c address
+       *
+       * the method has to create a nested object in the sensor object called "features"
+       * each variable in features represents a dataset for the graph (one feature = one line in graph)
+       * "features"{
+       *    "feature0" = isUsed<Bool>,
+       *    "feature1" = isUsed<Bool>,
+       *        ...
+       *   }
+       *
+       * the method can create a nested object in the sensor object called "XSettings" short for exclusive settings
+       * basically forces the user to chose between multiple options
+       * meant to be used for stuff like accuracy / range settings
+       *
+       * @param JsonDocument*
+       */
       virtual void getJson(JsonDocument * ptrDoc) = 0;
       //set setting of the sensor
       // virtual void setJson(JsonDocument * ptrDoc) = 0;
