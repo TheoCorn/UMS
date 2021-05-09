@@ -29,3 +29,8 @@ size_t SerialCom::write(const int *buffer, size_t) {
 size_t SerialCom::write(const JsonDocument * doc){
     return 0;
 }
+
+
+void flush(){
+
+}

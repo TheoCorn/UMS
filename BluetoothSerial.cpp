@@ -690,14 +690,14 @@ size_t write(const JsonDocument * doc){
         return 0;
     }
 
-    int bufLen =  measureJson(*doc);
-    char *buffer = new char[bufLen];
-
-    serializeJson(*doc, buffer, bufLen);
-
-    return write(buffer, bufLen);
+    js::serializeRet* sr = js::serializeDoc(JsonDocument * doc);
+    size_t ret = write(sr->buff, sr->bufLen);
+    delete sr;
+    return ret;
 
 }
+
+
 
 void BluetoothSerial::flush()
 {
