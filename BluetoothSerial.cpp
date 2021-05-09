@@ -19,6 +19,7 @@
 #include <cstring>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include <ArduinoJson>
 
 
 #if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
@@ -681,6 +682,21 @@ size_t BluetoothSerial::write(const uint8_t *buffer, size_t size)
         return 0;
     }
     return (_spp_queue_packet((uint8_t *)buffer, size) == ESP_OK) ? size : 0;
+}
+
+size_t write(const JsonDocument * doc){
+
+    if (!_spp_client){
+        return 0;
+    }
+
+    int bufLen =  measureJson(*doc);
+    char *buffer = new char[bufLen];
+
+    serializeJson(*doc, buffer, bufLen);
+
+    return write(buffer, bufLen);
+
 }
 
 void BluetoothSerial::flush()
