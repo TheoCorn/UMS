@@ -583,7 +583,6 @@ static bool _stop_bt()
     }
     if(_spp_rx_queue){
         vQueueDelete(_spp_rx_queue);
-        //ToDo: clear RX queue when in packet mode
         _spp_rx_queue = NULL;
     }
     if(_spp_tx_queue){

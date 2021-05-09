@@ -128,7 +128,7 @@ void onSensorsElementReceive(JsonVariant * v){
       uint8_t key = atoi(p.key().c_str());
       sensors.at(key)->setJson(v);
     }catch(...){
-      //todo: inform pair device update of sensor has failed (create function exeptionOfKeyBuilder taht build json to be send)
+      //todo: inform pair device update of sensor has failed (create function exceptionOfKeyBuilder that build json to be send)
     }
   }
   
