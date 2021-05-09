@@ -158,11 +158,11 @@ void onReadElementRecived(JsonVariant * v){
 
 void onStartReading(){
   detachInterrupt(sleepPin);
-  delete sensorIdentifier;
+//  delete sensorIdentifier;
 }
 
 void onStopReading(){
-    sensorIdentifier = new SensorsIdentifierManager();
+//    sensorIdentifier = new SensorsIdentifierManager();
 }
 
 /*
