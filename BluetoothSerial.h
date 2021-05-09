@@ -36,12 +36,12 @@ class BluetoothSerial: public Stream, public SerialCom
         BluetoothSerial(void);
         ~BluetoothSerial(void);
 
-        bool begin(String localName=String(), bool isMaster=false);
-        int available(void);
+        bool begin(String localName=String(), bool isMaster=false) override ;
+        int available(void) override;
         int peek(void);
         bool hasClient(void);
         int read(void);
-        int read(char * val);
+        int read(char * c) override;
         size_t write(uint8_t c);
         size_t write(const uint8_t *buffer, size_t size);
         void flush();

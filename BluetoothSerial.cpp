@@ -661,10 +661,10 @@ int BluetoothSerial::read(void)
     return -1;
 }
 
-int BluetoothSerial::read(char * val){
-    uint8_t c = 0;
-    if (_spp_rx_queue && xQueueReceive(_spp_rx_queue, &c, 0)){
-        *val = c;
+int BluetoothSerial::read(char * c){
+    uint8_t val = 0;
+    if (_spp_rx_queue && xQueueReceive(_spp_rx_queue, &val, 0)){
+        *c = val;
         return 0;
     }
     return -1;
