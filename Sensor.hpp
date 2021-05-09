@@ -36,7 +36,7 @@ class Sensor{
       //write JsonObject to the Json document
       virtual void readSensor(JsonDocument * ptrDoc) = 0;
       //get the current settings in json format
-      virtual void getJson(JsonDocument * ptrDoc, uint8_t uuid) = 0;
+      virtual void getJson(JsonDocument * ptrDoc) = 0;
       //set setting of the sensor
       // virtual void setJson(JsonDocument * ptrDoc) = 0;
       virtual void setJson(JsonVariant * v) = 0;

@@ -26,7 +26,7 @@ MPU9250::MPU9250(uint8_t address) : Sensor(){
       setSrd(19);
     }
 
-void MPU9250::getJson(JsonDocument * ptrDoc, uint8_t uuid)  {
+void MPU9250::getJson(JsonDocument *ptrDoc) {
         JsonObject mpuObj = ptrDoc->createNestedObject("MPU9250");
         JsonObject features = mpuObj.createNestedObject("features");
 

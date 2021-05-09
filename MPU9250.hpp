@@ -297,7 +297,7 @@ public:
 //    std::vector<uint8_t> c() override{ return i2cAddresses; }
     byte currentAddress() override { return address; }
     
-    void getJson(JsonDocument * ptrDoc, uint8_t uuid) override;
+    void getJson(JsonDocument *ptrDoc) override;
     
     void setJson(JsonVariant * v) override;
 

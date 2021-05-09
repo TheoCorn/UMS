@@ -29,6 +29,14 @@
 #define showAddressPin 18
 
 
+void doProcess4JsonObj(JsonPair * p);
+void onSensorsElementReceive(JsonVariant * v);
+void onReadElementReceive(JsonVariant * v);
+void onGetElementReceive(&v);
+void onStartReading();
+void onStopReading();
+void sleep();
+
 
 BluetoothSerial SerialBT;
 
@@ -85,8 +93,6 @@ void loop() {
       std::vector<csa::ConflictingAddressStruct> conflicts;
       ss::checkI2C(&conflicts, &sensors, sensorIdentifier);
       mDisplay->displayWhenNotReading();
-
-
       
   }
   
@@ -102,28 +108,19 @@ void doProcess4JsonObj(JsonPair * p){
 
   switch(p->key().c_str()[0]){
 
-    case 's': onSensorsElementRecived(&v); break;
+    case 's':
+        onSensorsElementReceive(&v); break;
 
-    case 'r': onReadElementRecived(&v); break;
+    case 'r':
+        onReadElementReceive(&v); break;
+
+    case 'g': recived(&v); break;
   }  
 
 }
 
-/*
-  used for compering String
 
-  @param data
-**/
-//constexpr uint32_t hash(const char* data) noexcept{
-//    uint32_t hash = 5381;
-//
-//    for(const char *c = data; c < data + strlen(data); ++c)
-//        hash = ((hash << 5) + hash) + (unsigned char) *c;
-//
-//    return hash;
-//}
-
-void onSensorsElementRecived(JsonVariant * v){
+void onSensorsElementReceive(JsonVariant * v){
   JsonObject obj = v->as<JsonObject>();
 
    for(JsonPair p : obj){
@@ -140,7 +137,7 @@ void onSensorsElementRecived(JsonVariant * v){
 
 
 
-void onReadElementRecived(JsonVariant * v){
+void onReadElementReceive(JsonVariant * v){
   if(v->is<int>()){
     int locReading = v->as<int>();
     if(locReading == 1){
@@ -154,6 +151,14 @@ void onReadElementRecived(JsonVariant * v){
     }
   }
 
+}
+
+void onGetElementReceive(JsonVariant * v){
+    DynamicJsonDocument *doc = new DynamicJsonDocument(sensors.size() * 2048);
+
+    for(Sensor* s : sensors){
+        s->getJson()
+    }
 }
 
 void onStartReading(){
