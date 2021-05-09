@@ -30,7 +30,6 @@ size_t SerialCom::write(const JsonDocument * doc){
     return 0;
 }
 
-
 void flush(){
 
 }
