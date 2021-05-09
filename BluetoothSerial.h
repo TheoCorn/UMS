@@ -23,12 +23,13 @@
 #include "Stream.h"
 #include <esp_spp_api.h>
 #include <functional>
+#include "SerialCom.h"
 
 typedef std::function<void(const uint8_t *buffer, size_t size)> BluetoothSerialDataCb;
 typedef std::function<void(uint32_t num_val)> ConfirmRequestCb;
 typedef std::function<void(boolean success)> AuthCompleteCb;
 
-class BluetoothSerial: public Stream
+class BluetoothSerial: public Stream, public SerialCom
 {
     public:
 
