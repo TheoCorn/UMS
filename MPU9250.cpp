@@ -28,12 +28,14 @@ MPU9250::MPU9250(uint8_t address) : Sensor(){
 
 void MPU9250::getJson(JsonDocument *ptrDoc) {
         JsonObject mpuObj = ptrDoc->createNestedObject("MPU9250");
+        mpuObj["uuid"] = this->address;
+
         JsonObject features = mpuObj.createNestedObject("features");
 
         JsonObject xSettings = mpuObj.createNestedObject("XSettings");
 
       for (int i = 0; i < 10; i++) {
-        features[mpuFeaturesString[i]] = mpuFeaturesBool[i];
+          features[mpuFeaturesString[i]] = mpuFeaturesBool[i];
       }
 
     JsonObject accelSettings = xSettings.createNestedObject("accel");

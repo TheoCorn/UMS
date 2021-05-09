@@ -157,7 +157,7 @@ void onGetElementReceive(JsonVariant * v){
     DynamicJsonDocument *doc = new DynamicJsonDocument(sensors.size() * 2048);
 
     for(Sensor* s : sensors){
-        s->getJson()
+        s->getJson(doc);
     }
 }
 
