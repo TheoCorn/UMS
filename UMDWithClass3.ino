@@ -40,15 +40,8 @@
 #define sleepPin 33
 #define showAddressPin 18
 
-#define DEFAULT_SERIAL_COM Uart()
+#define DEFAULT_SERIAL_COM BluetoothSerial
 
-#define ETB 23
-#define DC1_SLEEP 21
-#define DC2_DISPLAY_TOGGLE 22
-//start of text
-#define STX 2
-//acknowledge
-#define ACK 6
 
 
 void doProcess4JsonObj(JsonPair* p);
@@ -59,8 +52,6 @@ void onStartReading();
 void onStopReading();
 void sleep();
 
-
-BluetoothSerial SerialBT;
 
 // std::vector<Sensor> sensors;
 std::map<uint8_t, Sensor*> sensors;
@@ -81,10 +72,10 @@ void setup() {
   mDisplay->init();
   sensorIdentifier = new SensorsIdentifierManager();
 
-  //sets up all protocols
-  Serial.begin(115200);
+  serialCom = new DEFAULT_SERIAL_COM();
+  serialCom->startConnectionCheck(5000);
   Wire.begin();
-  SerialBT.begin("UMD");
+
 
   //sets up wake up from sleep
   esp_sleep_enable_ext0_wakeup(GPIO_NUM_33, 1);

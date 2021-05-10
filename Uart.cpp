@@ -5,10 +5,12 @@
 #include "Uart.h"
 #include "JsonSerializer.h"
 #include <ArduinoJson>
+#include "asciiMakros.h"
 
 #define UART_BAUD 115200
 
 Uart::Uart() {
+    Serial.begin();
 //    serial = new Serial;
 }
 
@@ -39,6 +41,31 @@ size_t Uart::write(const int *buffer, size_t size) {
 size_t Uart::write(const JsonDocument *doc) {
     js::serializeRet * sr = js::serializeDoc(doc);
     size_t ret = Serial.write(sr->buff, sr->bufLen);
-    delete sr;
+    delete sr; 
     return ret;
 }
+
+void Uart::flush(){
+    Serial.flush();
+}
+
+void Uart::startConnectionCheck(int duration) {
+    xTaskCreate(connectionCheckTask, "UartSender", 2048, NULL, 2, &UartSenderHandle);
+    configASSERT(UartSenderHandle);
+}
+
+void Uart::connectionCheckTask() {
+    Serial.write(static_cast<char>(stx));
+    xTaskCreate(readTask, "UartReader", 2048, NULL, 2, &UartReaderTask);
+    configASSERT(UartReaderTask);
+    vTaskDelay(500);
+    if(UartReaderTask != NULL) vTaskDelete(UartReaderTask);
+
+}
+
+void Uart::readTask(bool* connected) {
+    if(Serial.read() == ACK) *connected = true;
+}
+
+
+

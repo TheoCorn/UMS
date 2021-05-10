@@ -614,6 +614,8 @@ static bool waitForConnect(int timeout) {
 BluetoothSerial::BluetoothSerial()
 {
     local_name = "ESP32"; //default bluetooth name
+
+    begin();
 }
 
 BluetoothSerial::~BluetoothSerial(void)

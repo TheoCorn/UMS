@@ -7,6 +7,7 @@
 
 #include "SerialCom.h"
 #include <ArduinoJson>
+#include "asciiMakros.h"
 
 
 class Uart: public SerialCom {
@@ -24,9 +25,20 @@ public:
     size_t write(const JsonDocument * doc) override;
     void flush() override;
 
+    void startConnectionCheck(int duration) override;
+    bool hasConnectedDevice() override;
+
+
 private:
+    bool connected = false;
 //    Serial * serial;
 
+protected:
+    TaskHandle_t UartSenderHandle = NULL;
+    TaskHandle_t UartReaderTask = NULL;
+
+    static void connectionCheckTask();
+    static void readTask(bool* connected);
 };
 
 

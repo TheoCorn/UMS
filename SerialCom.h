@@ -14,13 +14,15 @@ public:
     SerialCom();
     ~SerialCom();
 
-    virtual bool begin();
-    virtual int available();
-    virtual bool read(char* c);
-    virtual size_t write(const uint8_t c);
-    virtual size_t write(const uint8_t *buffer, size_t size);
-    virtual size_t write(const JsonDocument * doc);
+    virtual bool begin() = 0;
+    virtual int available() = 0;
+    virtual bool read(char* c) = 0;
+    virtual size_t write(const uint8_t c) = 0;
+    virtual size_t write(const uint8_t *buffer, size_t size) = 0;
+    virtual size_t write(const JsonDocument * doc) = 0;
     virtual void flush();
+    virtual void startConnectionCheck(int duration) = 0;
+    virtual bool hasConnectedDevice() = 0;
 
 };
 
