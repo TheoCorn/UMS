@@ -1,24 +1,36 @@
+//json
 #include <ArduinoJson.h>
+#include "JsonParserFunctions.hpp"
+#include "JsonSerializer.h"
+
+//sensor stuff
 #include "Sensor.hpp"
-#include <Adafruit_BMP280.h>
+#include "findSensors.h"
+
+#include "ConflictingSensors.hpp"
+#include "AddressIdentifier.hpp"
+
+//serial protocol out
+#include "SerialCom.h"
+#include "Uart.h"
 #include "BluetoothSerial.h"
 #include "esp_bt_main.h"
 #include "esp_bt_device.h"
+
+//serial protocols in (4 sensors)
 #include <SPI.h>
 #include <Wire.h>
-#include <iostream>
-#include "ConflictingSensors.hpp"
-#include "JsonParserFunctions.hpp"
-#include "AddressIdentifier.hpp"
-#include "MPU9250.hpp"
-#include <map>
-#include <vector>
-#include "displayFunctions.h"
-#include "findSensors.h"
 
 //for display
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include "displayFunctions.h"
+
+//else
+#include <iostream>
+#include <map>
+#include <vector>
+
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -28,16 +40,21 @@
 #define sleepPin 33
 #define showAddressPin 18
 
+#define DEFAULT_SERIAL_COM Uart()
+
 #define ETB 23
 #define DC1_SLEEP 21
 #define DC2_DISPLAY_TOGGLE 22
+//start of text
+#define STX 2
+//acknowledge
 #define ACK 6
 
 
-void doProcess4JsonObj(JsonPair * p);
-void onSensorsElementReceive(JsonVariant * v);
-void onReadElementReceive(JsonVariant * v);
-void onGetElementReceive(&v);
+void doProcess4JsonObj(JsonPair* p);
+void onSensorsElementReceive(JsonVariant* v);
+void onReadElementReceive(JsonVariant* v);
+void onGetElementReceive(JsonVariant* v);
 void onStartReading();
 void onStopReading();
 void sleep();
@@ -48,13 +65,15 @@ BluetoothSerial SerialBT;
 // std::vector<Sensor> sensors;
 std::map<uint8_t, Sensor*> sensors;
 
+SerialCom* serialCom;
+
 std::vector<char> btBuffer;
 
 bool reading = false;
 
 
-DisplayFunctions * mDisplay;
-SensorsIdentifierManager * sensorIdentifier;
+DisplayFunctions* mDisplay;
+SensorsIdentifierManager* sensorIdentifier;
 
 
 void setup() {

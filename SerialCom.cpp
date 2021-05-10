@@ -5,8 +5,13 @@
 #include "SerialCom.h"
 #include <ArduinoJson.h>
 
+/**
+ * if a child class did not implement these methods
+ * these default will be called
+ */
 
-bool SerialCom::begin(unsigned long boudRate) {
+
+bool SerialCom::begin() {
     return false;
 }
 
@@ -31,5 +36,5 @@ size_t SerialCom::write(const JsonDocument * doc){
 }
 
 void flush(){
-
+    return;
 }

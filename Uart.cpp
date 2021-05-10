@@ -6,6 +6,8 @@
 #include "JsonSerializer.h"
 #include <ArduinoJson>
 
+#define UART_BAUD 115200
+
 Uart::Uart() {
 //    serial = new Serial;
 }
@@ -14,8 +16,8 @@ Uart::~Uart() {
 //    delete serial;
 }
 
-bool Uart::begin(unsigned long boudRate){
-    return Serial.begin(boudRate);
+bool Uart::begin(){
+    return Serial.begin(UART_BAUD);
 }
 
 int Uart::available() {

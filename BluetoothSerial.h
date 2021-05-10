@@ -36,7 +36,8 @@ class BluetoothSerial: public Stream, public SerialCom
         BluetoothSerial(void);
         ~BluetoothSerial(void);
 
-        bool begin(String localName=String(), bool isMaster=false) override ;
+        bool begin(String localName=String(), bool isMaster=false);
+        bool begin() override;
         int available(void) override;
         int peek(void);
         bool hasClient(void);

@@ -16,7 +16,7 @@ public:
     Uart();
     ~Uart()
 
-    bool begin(unsigned long boudRate) override;
+    bool begin() override;
     int available() override;
     bool read(char* c) override;
     size_t write(const uint8_t) override;

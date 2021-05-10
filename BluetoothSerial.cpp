@@ -630,6 +630,10 @@ bool BluetoothSerial::begin(String localName, bool isMaster)
     return _init_bt(local_name.c_str());
 }
 
+bool BluetoothSerial::begin(){
+    RETURN begin(BT_NAME);
+}
+
 int BluetoothSerial::available(void)
 {
     if (_spp_rx_queue == NULL){

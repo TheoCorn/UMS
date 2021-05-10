@@ -14,7 +14,7 @@ public:
     SerialCom();
     ~SerialCom();
 
-    virtual bool begin(unsigned long boudRate);
+    virtual bool begin();
     virtual int available();
     virtual bool read(char* c);
     virtual size_t write(const uint8_t c);
