@@ -6,7 +6,7 @@
 #define UMDWITHCLASS3_UART_H
 
 #include "SerialCom.h"
-#include <ArduinoJson>
+#include <ArduinoJson.h>
 #include "asciiMakros.h"
 
 

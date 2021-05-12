@@ -4,7 +4,7 @@
 
 #include "Uart.h"
 #include "JsonSerializer.h"
-#include <ArduinoJson>
+#include <ArduinoJson.h>
 #include "asciiMakros.h"
 
 #define UART_BAUD 115200
@@ -66,6 +66,3 @@ void Uart::connectionCheckTask() {
 void Uart::readTask(bool* connected) {
     if(Serial.read() == ACK) *connected = true;
 }
-
-
-

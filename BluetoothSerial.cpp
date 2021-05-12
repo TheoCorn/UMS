@@ -19,7 +19,7 @@
 #include <cstring>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include <ArduinoJson>
+#include <ArduinoJson.h>
 
 
 #if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)

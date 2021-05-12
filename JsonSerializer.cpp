@@ -3,7 +3,7 @@
 //
 
 #include "JsonSerializer.h"
-#include <ArduinoJson>
+#include <ArduinoJson.h>
 
 js::serializeRet js::serializeDoc(JsonDocument * doc){
 

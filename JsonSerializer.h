@@ -8,12 +8,14 @@
 
 namespace js{
 
-    void serializeDoc(JsonDocument * doc);
-
     struct serializeRet{
         char* buff;
         int bufLen;
     };
+
+    js::serializeRet serializeDoc(JsonDocument * doc);
+
+
 }
 
 
