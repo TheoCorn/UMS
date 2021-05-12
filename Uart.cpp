@@ -39,7 +39,7 @@ size_t Uart::write(const uint8_t *buffer, size_t size) {
     return Serial.write(buffer, size);
 }
 
-size_t Uart::write(const JsonDocument *doc) {
+size_t Uart::write(JsonDocument *doc) {
     js::serializeRet * sr = js::serializeDoc(doc);
     size_t ret = Serial.write(sr->buff, sr->bufLen);
     delete sr; 

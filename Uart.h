@@ -22,7 +22,7 @@ public:
     bool read(char* c) override;
     size_t write(const uint8_t) override;
     size_t write(const uint8_t *buffer, size_t size) override;
-    size_t write(const JsonDocument * doc) override;
+    size_t write(JsonDocument * doc) override;
     void flush() override;
 
     void startConnectionCheck(int duration) override;
