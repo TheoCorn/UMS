@@ -10,7 +10,7 @@
 #define UART_BAUD 115200
 
 Uart::Uart() {
-    Serial.begin();
+    begin();
 //    serial = new Serial;
 }
 
@@ -19,7 +19,8 @@ Uart::~Uart() {
 }
 
 bool Uart::begin(){
-    return Serial.begin(UART_BAUD);
+    Serial.begin(UART_BAUD);
+    return true;
 }
 
 int Uart::available() {
