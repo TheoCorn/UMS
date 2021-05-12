@@ -35,7 +35,7 @@ size_t Uart::write(const uint8_t c) {
     return Serial.write(c);
 }
 
-size_t Uart::write(const int *buffer, size_t size) {
+size_t Uart::write(const uint8_t *buffer, size_t size) {
     return Serial.write(buffer, size);
 }
 
