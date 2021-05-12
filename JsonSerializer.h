@@ -5,6 +5,8 @@
 #ifndef UMDWITHCLASS3_JSONSERIALIZER_H
 #define UMDWITHCLASS3_JSONSERIALIZER_H
 
+#include <ArduinoJson.h>
+
 
 namespace js{
 
@@ -13,7 +15,7 @@ namespace js{
         int bufLen;
     };
 
-    js::serializeRet serializeDoc(JsonDocument * doc);
+    js::serializeRet* serializeDoc(JsonDocument * doc);
 
 
 }

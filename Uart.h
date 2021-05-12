@@ -15,7 +15,7 @@ class Uart: public SerialCom {
 public:
 
     Uart();
-    ~Uart()
+    ~Uart();
 
     bool begin() override;
     int available() override;
