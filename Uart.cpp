@@ -55,7 +55,7 @@ void Uart::startConnectionCheck(int duration) {
     configASSERT(UartSenderHandle);
 }
 
-void Uart::connectionCheckTask(void) {
+void Uart::connectionCheckTask(void* unused) {
     Serial.write(static_cast<char>(stx));
     xTaskCreate(readTask, "UartReader", 2048, NULL, 2, &UartReaderTask);
     configASSERT(UartReaderTask);
