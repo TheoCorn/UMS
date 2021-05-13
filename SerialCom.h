@@ -19,7 +19,7 @@ public:
     virtual bool read(char* c) = 0;
     virtual size_t write(const uint8_t c) = 0;
     virtual size_t write(const uint8_t *buffer, size_t size) = 0;
-    virtual size_t write(const JsonDocument * doc) = 0;
+    virtual size_t write(JsonDocument * doc) = 0;
     virtual void flush();
     virtual void startConnectionCheck(int duration) = 0;
     virtual bool hasConnectedDevice() = 0;
