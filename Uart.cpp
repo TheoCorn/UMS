@@ -55,15 +55,19 @@ void Uart::startConnectionCheck(int duration) {
     configASSERT(UartSenderHandle);
 }
 
-void Uart::connectionCheckTask(void* unused) {
-    Serial.write(static_cast<char>(stx));
+void Uart::connectionCheckTask(void* duration) {
+    long endTime = millis() + (long)(*(int*)duration);
     xTaskCreate(readTask, "UartReader", 2048, NULL, 2, &UartReaderTask);
     configASSERT(UartReaderTask);
-    vTaskDelay(500);
+    while(millis() < endTime){
+        Serial.write(static_cast<char>(stx));
+        vTaskDelay(50);
+    }
+
     if(UartReaderTask != NULL) vTaskDelete(UartReaderTask);
 
 }
 
-void Uart::readTask(bool* connected) {
-    if(Serial.read() == ACK) *connected = true;
+void Uart::readTask(void* connected) {
+    if(Serial.read() == ACK) *((bool*)connected) = true;
 }

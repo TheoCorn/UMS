@@ -26,7 +26,7 @@ public:
     void flush() override;
 
     void startConnectionCheck(int duration) override;
-    void connectionCheckTask(void* unused);
+    void connectionCheckTask(void* duration);
     bool hasConnectedDevice() override;
 
 
