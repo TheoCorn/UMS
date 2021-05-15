@@ -35,8 +35,8 @@ private:
 //    Serial * serial;
 
 protected:
-    TaskHandle_t UartSenderHandle = NULL;
-    TaskHandle_t UartReaderTask = NULL;
+    TaskHandle_t UartConnCheckHandle = NULL;
+//    TaskHandle_t UartReaderTask = NULL;
 
     static void connectionCheckTask();
     static void readTask(bool* connected);

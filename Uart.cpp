@@ -51,14 +51,16 @@ void Uart::flush(){
 }
 
 void Uart::startConnectionCheck(int duration) {
-    xTaskCreate(connectionCheckTask, "UartSender", 2048, NULL, 2, &UartSenderHandle);
+    xTaskCreate(connectionCheckTask, "UartSender", 2048, NULL, 2, &UartConnCheckHandle);
     configASSERT(UartSenderHandle);
 }
 
 void Uart::connectionCheckTask(void* duration) {
     long endTime = millis() + (long)(*(int*)duration);
-    xTaskCreate(readTask, "UartReader", 2048, NULL, 2, &UartReaderTask);
-    configASSERT(UartReaderTask);
+    TaskHandle_t UartReaderHandle = NULL;
+    xTaskCreate(readTask, "UartReader", 2048, NULL, 2, &UartReaderHandle);
+    configASSERT(UartReaderHandle);
+
     while(millis() < endTime){
         Serial.write(static_cast<char>(stx));
         vTaskDelay(50);
