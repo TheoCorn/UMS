@@ -134,6 +134,9 @@
 		<Unit filename="D:/DATA/OneDrive/Documents/Arduino/UMDWithClass3/findSensors.h">
 			<Option target="UMDWithClass3"/>
 		</Unit>
+		<Unit filename="D:/DATA/OneDrive/Documents/Arduino/UMDWithClass3/gpioNames.h">
+			<Option target="UMDWithClass3"/>
+		</Unit>
 		<Unit filename="D:/DATA/OneDrive/Documents/Arduino/UMDWithClass3/sensorEnum.h">
 			<Option target="UMDWithClass3"/>
 		</Unit>

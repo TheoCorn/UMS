@@ -30,6 +30,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include "gpioNames.h"
 
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
@@ -37,8 +38,6 @@
 #endif
 
 
-#define sleepPin 33
-#define showAddressPin 18
 
 #define DEFAULT_SERIAL_COM BluetoothSerial
 

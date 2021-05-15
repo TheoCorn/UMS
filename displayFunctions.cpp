@@ -9,9 +9,8 @@
 #include "esp_bt_main.h"
 #include "esp_bt_device.h"
 
-#define showAddressPin 26
-#define batteryReadPin 13
-#define traScreen 32
+#include "gpioNames.h"
+
 
 void DisplayFunctions::init() {
     pinMode(showAddressPin, INPUT);
