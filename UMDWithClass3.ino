@@ -65,10 +65,6 @@ bool reading = false;
 DisplayFunctions* mDisplay;
 SensorsIdentifierManager* sensorIdentifier;
 
-#define showAddressPin 26
-#define batteryReadPin 13
-#define traScreen 32
-
 
 void setup() {
     pinMode(showAddressPin, INPUT);
