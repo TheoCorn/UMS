@@ -8,6 +8,9 @@
 #include "SerialCom.h"
 #include <ArduinoJson.h>
 #include "asciiMakros.h"
+#include "sdkconfig.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 
 class Uart: public SerialCom {
