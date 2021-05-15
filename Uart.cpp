@@ -6,6 +6,10 @@
 #include "JsonSerializer.h"
 #include <ArduinoJson.h>
 #include "asciiMakros.h"
+#include "sdkconfig.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
 
 #define UART_BAUD 115200
 
