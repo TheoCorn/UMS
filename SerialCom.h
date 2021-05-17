@@ -85,5 +85,9 @@ public:
 
 };
 
+namespace sce{
+    
+}
+
 
 #endif //UMDWITHCLASS3_SERIALCOM_H
