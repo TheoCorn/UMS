@@ -42,7 +42,7 @@ protected:
 //    TaskHandle_t UartReaderTask = NULL;
 
     static void connectionCheckTask();
-    static void readTask(bool* connected);
+    static void readTask(void* connected);
 };
 
 
