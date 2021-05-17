@@ -55,7 +55,7 @@ void Uart::flush(){
 }
 
 void Uart::startConnectionCheck(int duration) {
-    ConnCheckInfo info = new ConnCheckInfo(duration, &connected);
+    ConnCheckInfo* info = new ConnCheckInfo(duration, &connected);
     xTaskCreate(connectionCheckTask, "UartSender", 2048, info, 2, &UartConnCheckHandle);
     configASSERT(UartConnCheckHandle);
 }
