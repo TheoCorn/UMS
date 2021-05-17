@@ -74,5 +74,6 @@ void Uart::connectionCheckTask(void* connInfo) {
             break;
         }
     }
+    delete info;
 }
 
