@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//tweaked by Theodor Capek big thanks to the original author
+
 #ifndef _BLUETOOTH_SERIAL_H_
 #define _BLUETOOTH_SERIAL_H_
 
@@ -38,7 +40,7 @@ class BluetoothSerial: public Stream, public SerialCom
         BluetoothSerial(void);
         ~BluetoothSerial(void);
 
-        bool begin(String localName=String(), bool isMaster=false);
+        bool actualBegin(String localName=String(), bool isMaster=false);
         bool begin() override;
         int available(void) override;
         int peek(void);

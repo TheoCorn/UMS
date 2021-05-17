@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//tweaked by Theodor Capek big thanks to the original author
+
 #include "sdkconfig.h"
 #include <cstdint>
 #include <cstdio>
@@ -613,8 +615,6 @@ static bool waitForConnect(int timeout) {
 
 BluetoothSerial::BluetoothSerial()
 {
-    local_name = "ESP32"; //default bluetooth name
-
     begin();
 }
 
@@ -623,7 +623,7 @@ BluetoothSerial::~BluetoothSerial(void)
     _stop_bt();
 }
 
-bool BluetoothSerial::begin(String localName, bool isMaster)
+bool BluetoothSerial::actualBegin(String localName, bool isMaster)
 {
     _isMaster = isMaster;
     if (localName.length()){
@@ -633,7 +633,7 @@ bool BluetoothSerial::begin(String localName, bool isMaster)
 }
 
 bool BluetoothSerial::begin(){
-    return begin(BT_NAME);
+    return actualBegin(BT_NAME);
 }
 
 
@@ -858,11 +858,11 @@ bool BluetoothSerial::connected(int timeout) {
 
 bool BluetoothSerial::isReady(bool checkMaster, int timeout) {
     if (checkMaster && !_isMaster) {
-        log_e("Master mode is not active. Call begin(localName, true) to enable Master mode");
+        log_e("Master mode is not active. Call actualBegin(localName, true) to enable Master mode");
         return false;
     }
     if (!btStarted()) {
-        log_e("BT is not initialized. Call begin() first");
+        log_e("BT is not initialized. Call actualBegin() first");
         return false;
     }
     TickType_t xTicksToWait = timeout / portTICK_PERIOD_MS;
