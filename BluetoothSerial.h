@@ -19,6 +19,8 @@
 
 #if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
 
+#define BT_NAME "UMD"
+
 #include "Arduino.h"
 #include "Stream.h"
 #include <esp_spp_api.h>

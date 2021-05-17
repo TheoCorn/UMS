@@ -636,6 +636,7 @@ bool BluetoothSerial::begin(){
     return begin(BT_NAME);
 }
 
+
 int BluetoothSerial::available(void)
 {
     if (_spp_rx_queue == NULL){
