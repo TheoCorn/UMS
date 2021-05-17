@@ -66,14 +66,13 @@ void Uart::connectionCheckTask(void* connInfo) {
     TaskHandle_t UartReaderHandle = NULL;
 
     while(millis() < endTime){
-        Serial.write(static_cast<char>(stx));
+        Serial.write(static_cast<char>(STX));
         vTaskDelay(50);
         if(Serial.available() > 0) {
-            info->connected = true;
+            *(info->connected) = true;
             Serial.flush();
             break;
         }
     }
     delete info;
 }
-

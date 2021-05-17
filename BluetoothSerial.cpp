@@ -633,7 +633,7 @@ bool BluetoothSerial::begin(String localName, bool isMaster)
 }
 
 bool BluetoothSerial::begin(){
-    RETURN begin(BT_NAME);
+    return begin(BT_NAME);
 }
 
 int BluetoothSerial::available(void)

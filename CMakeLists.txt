@@ -24,4 +24,5 @@ add_executable(UMDWithClass3
         sensorEnum.h
         spiffs.cpp
         spiffs.hpp
-        UMDWithClass3.ino gpioNames.h)
+        UMDWithClass3.ino
+        gpioNames.h)
