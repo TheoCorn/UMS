@@ -42,7 +42,7 @@ class BluetoothSerial: public Stream, public SerialCom
         int peek(void);
         bool hasClient(void);
         int read(void);
-        int read(char * c) override;
+        void read(char * c) override;
         size_t write(uint8_t c) override;
         size_t write(const uint8_t *buffer, size_t size) override;
         size_t write(JsonDocument * doc) override;

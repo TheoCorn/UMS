@@ -25,11 +25,12 @@ public:
     bool read(char* c) override;
     size_t write(const uint8_t) override;
     size_t write(const uint8_t *buffer, size_t size) override;
-    size_t write(JsonDocument * doc) override;
+    size_t write(JsonDocument* doc) override;
     void flush() override;
 
     void startConnectionCheck(int duration) override;
     void connectionCheckTask(void* duration);
+
     bool hasConnectedDevice() override;
 
 
@@ -39,9 +40,8 @@ private:
 
 protected:
     TaskHandle_t UartConnCheckHandle = NULL;
-//    TaskHandle_t UartReaderTask = NULL;
 
-    static void connectionCheckTask();
+    static void connectionCheckTask(void* connInfo);
     static void readTask(void* connected);
 };
 

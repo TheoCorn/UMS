@@ -14,7 +14,7 @@
 #define UART_BAUD 115200
 
 Uart::Uart() {
-    begin();
+    Serial.begin(UART_BAUD);
 //    serial = new Serial;
 }
 
@@ -31,7 +31,7 @@ int Uart::available() {
     return Serial.available();
 }
 
-bool Uart::read(char *c) {
+void Uart::read(char *c) {
     *c = Serial.read();
 }
 
@@ -43,7 +43,7 @@ size_t Uart::write(const uint8_t *buffer, size_t size) {
     return Serial.write(buffer, size);
 }
 
-size_t Uart::write(JsonDocument *doc) {
+size_t Uart::write(JsonDocument* doc) {
     js::serializeRet * sr = js::serializeDoc(doc);
     size_t ret = Serial.write(sr->buff, sr->bufLen);
     delete sr; 
@@ -55,25 +55,24 @@ void Uart::flush(){
 }
 
 void Uart::startConnectionCheck(int duration) {
-    xTaskCreate(connectionCheckTask, "UartSender", 2048, NULL, 2, &UartConnCheckHandle);
+    ConnCheckInfo info = new ConnCheckInfo(duration, &connected);
+    xTaskCreate(connectionCheckTask, "UartSender", 2048, info, 2, &UartConnCheckHandle);
     configASSERT(UartConnCheckHandle);
 }
 
-void Uart::connectionCheckTask(void* duration) {
-    long endTime = millis() + (long)(*(int*)duration);
+void Uart::connectionCheckTask(void* connInfo) {
+    ConnCheckInfo* info = (ConnCheckInfo*)connInfo;
+    long endTime = millis() + (long)(info->duration);
     TaskHandle_t UartReaderHandle = NULL;
-    xTaskCreate(readTask, "UartReader", 2048, NULL, 2, &UartReaderHandle);
-    configASSERT(UartReaderHandle);
 
     while(millis() < endTime){
         Serial.write(static_cast<char>(stx));
         vTaskDelay(50);
+        if(Serial.available() > 0) {
+            info->connected = true;
+            Serial.flush();
+            break;
+        }
     }
-
-    if(UartReaderTask != NULL) vTaskDelete(UartReaderTask);
-
 }
 
-void Uart::readTask(void* connected) {
-    if(Serial.read() == ACK) *((bool*)connected) = true;
-}
