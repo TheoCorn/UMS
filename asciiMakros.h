@@ -4,8 +4,8 @@
 
 #ifndef UMDWITHCLASS3_ASCIIMAKROS_H
 #define UMDWITHCLASS3_ASCIIMAKROS_H
-
-#define ETB 23
+//end of text
+#define ETX 3
 #define DC1_SLEEP 21
 #define DC2_DISPLAY_TOGGLE 22
 //start of text

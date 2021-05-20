@@ -31,6 +31,7 @@
 #include <map>
 #include <vector>
 #include "gpioNames.h"
+#include "asciiMakros.h"
 
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
@@ -78,6 +79,7 @@ void setup() {
 
   serialCom = new DEFAULT_SERIAL_COM();
   serialCom->startConnectionCheck(5000);
+
   Wire.begin();
 
 
@@ -91,14 +93,24 @@ void setup() {
 
 void loop() {
   char sRead;
-  int errCode = SerialBT.read(&sRead);
-  if (errCode != -1) {
-      switch(sRead){
-          case ETB: jp::parseJsonWithCycleThru(&btBuffer, &doProcess4JsonObj); break;
+  for(int i = 0; i < serialCom->available(); ++i) {
+      serialCom->read(&sRead);
+      if (sRead != NULL) {
+          switch (sRead) {
+              case ETX:
+                  jp::parseJsonWithCycleThru(&btBuffer, &doProcess4JsonObj);
+                  break;
+              case STX:
+                  break;
+              case ACK:
+                  break;
 
-          default: btBuffer.emplace_back(sRead); break;
+              default:
+                  btBuffer.emplace_back(sRead);
+                  break;
+          }
+
       }
-
   }
   
   if(reading){
