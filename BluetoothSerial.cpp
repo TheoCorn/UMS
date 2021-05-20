@@ -22,6 +22,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include <ArduinoJson.h>
+#include "JsonSerializer.h"
 
 
 #if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
@@ -698,8 +699,8 @@ size_t write(JsonDocument * doc){
         return 0;
     }
 
-    js::serializeRet* sr = js::serializeDoc(JsonDocument * doc);
-    size_t ret = write(sr->buff, sr->bufLen);
+    js::serializeRet * sr = js::serializeDoc(JsonDocument * doc);
+    size_t ret = write((sr->buff), (sr->bufLen));
     delete sr;
     return ret;
 
