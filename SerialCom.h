@@ -14,8 +14,8 @@ class ConnCheckInfo{
 public:
 
     /*
-     * @param dur
-     * @param conn
+     * @param dur duration in millis
+     * @param conn pointer to boolean to be changed
      */
     ConnCheckInfo(int dur, bool* conn){
         this->duration = dur;
@@ -77,17 +77,22 @@ public:
     virtual void flush();
 
     /*
-     * usually starts a freeRTOS task that periodically sends STX ascii char
+     * usually starts a freeRTOS task that periodically sends STX ascii char depends on implementation
      *
+     * @param duration time in millis to check weather a device is connected
      */
     virtual void startConnectionCheck(int duration) = 0;
+
+    /*
+     * @return true if at least one device is connected
+     */
     virtual bool hasConnectedDevice() = 0;
 
 };
 
-namespace sce{
-    
-}
+//namespace sce{
+//
+//}
 
 
 #endif //UMDWITHCLASS3_SERIALCOM_H
