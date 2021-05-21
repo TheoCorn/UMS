@@ -18,7 +18,7 @@ Uart::Uart() : SerialCom() {
 //    serial = new Serial;
 }
 
-Uart::~Uart() : ~SerialCom() {
+Uart::~Uart() {
 //    delete serial;
 }
 

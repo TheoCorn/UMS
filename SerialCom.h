@@ -29,8 +29,8 @@ public:
 class SerialCom {
 public:
 
-    SerialCom();
-    ~SerialCom();
+    SerialCom() = default;
+    ~SerialCom() = default;
 
     /*
      * setups the serial port

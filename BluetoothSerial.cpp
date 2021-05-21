@@ -619,7 +619,7 @@ BluetoothSerial::BluetoothSerial() : SerialCom()
     begin();
 }
 
-BluetoothSerial::~BluetoothSerial(void) : ~SerialCom()
+BluetoothSerial::~BluetoothSerial(void)
 {
     _stop_bt();
 }
