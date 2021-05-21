@@ -699,8 +699,8 @@ size_t write(JsonDocument * doc){
         return 0;
     }
 
-    js::serializeRet * sr = js::serializeDoc(JsonDocument * doc);
-    size_t ret = write((sr->buff), (sr->bufLen));
+    js::serializeRet* sr = js::serializeDoc(doc);
+    size_t ret = write((uint8_t *)(sr->buff), (size_t)(sr->bufLen));
     delete sr;
     return ret;
 
