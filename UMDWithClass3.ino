@@ -81,7 +81,7 @@ void setup() {
 
     Serial.println("app started");
 
-  mDisplay = new DisplayFunctions(&sensors);
+  mDisplay = new DisplayFunctions(sensors);
   mDisplay->init();
   sensorIdentifier = new SensorsIdentifierManager();
 
@@ -129,7 +129,7 @@ void loop() {
       mDisplay->displayWhenReading();
   }else{
       std::vector<csa::ConflictingAddressStruct> conflicts;
-      ss::checkI2C(&conflicts, &sensors, sensorIdentifier);
+      ss::checkI2C(&conflicts, sensors, sensorIdentifier);
       mDisplay->displayWhenNotReading();
       
   }
@@ -164,7 +164,7 @@ void onSensorsElementReceive(JsonVariant * v){
    for(JsonPair p : obj){
     try{
       uint8_t key = atoi(p.key().c_str());
-      sensors.at(key)->setJson(v);
+      sensors->at(key)->setJson(v);
     }catch(...){
       //todo: inform pair device update of sensor has failed (create function exceptionOfKeyBuilder that build json to be send)
     }
@@ -192,11 +192,11 @@ void onReadElementReceive(JsonVariant * v){
 }
 
 void onGetElementReceive(JsonVariant * v){
-    DynamicJsonDocument *doc = new DynamicJsonDocument(sensors.size() * 2048);
+    DynamicJsonDocument *doc = new DynamicJsonDocument(sensors->size() * 2048);
 
     uint8_t key;
     Sensor* value;
-    for(auto& mPair: sensors){
+    for(auto& mPair: *sensors){
         std::tie(key, value) = mPair;
         value->getJson(doc);
     }
