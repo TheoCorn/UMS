@@ -67,7 +67,6 @@ void Uart::startConnectionCheck(int duration) {
 void Uart::connectionCheckTask(void* connInfo) {
     ConnCheckInfo* info = (ConnCheckInfo*)connInfo;
     long endTime = millis() + (long)(info->duration);
-    TaskHandle_t UartReaderHandle = NULL;
 
     while(millis() < endTime){
         Serial.write(static_cast<char>(STX));
@@ -78,5 +77,6 @@ void Uart::connectionCheckTask(void* connInfo) {
             break;
         }
     }
-    delete info;
+    //todo delete info
+//    delete info;
 }

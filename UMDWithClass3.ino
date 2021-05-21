@@ -114,6 +114,7 @@ void setup() {
 }
 
 void loop() {
+  Serial.println("LOOP");
   char sRead;
   for (int i = 0; i < serialCom->available(); ++i) {
     serialCom->read(&sRead);
@@ -135,14 +136,18 @@ void loop() {
     }
   }
 
+  Serial.println("after for char in rx");
+
   if (reading) {
     mDisplay->displayWhenReading();
   } else {
-    std::vector<csa::ConflictingAddressStruct> conflicts;
-    ss::checkI2C(&conflicts, sensors, sensorIdentifier);
+//    std::vector<csa::ConflictingAddressStruct> conflicts;
+//    ss::checkI2C(&conflicts, sensors, sensorIdentifier);
     mDisplay->displayWhenNotReading();
 
   }
+
+  Serial.println("end of LOOP");
 
 }
 
