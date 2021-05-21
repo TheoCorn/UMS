@@ -184,7 +184,7 @@ void onGetElementReceive(JsonVariant * v){
 
     uint8_t key;
     Sensor* value;
-    for(auto& mPair: *sensors){
+    for(auto& mPair: sensors){
         std::tie(key, value) = mPair;
         value->getJson(doc);
     }

@@ -614,12 +614,12 @@ static bool waitForConnect(int timeout) {
  *
  * */
 
-BluetoothSerial::BluetoothSerial()
+BluetoothSerial::BluetoothSerial() : SerialCom()
 {
     begin();
 }
 
-BluetoothSerial::~BluetoothSerial(void)
+BluetoothSerial::~BluetoothSerial(void) : ~SerialCom()
 {
     _stop_bt();
 }

@@ -13,12 +13,12 @@
 
 #define UART_BAUD 115200
 
-Uart::Uart() {
+Uart::Uart() : SerialCom() {
     Serial.begin(UART_BAUD);
 //    serial = new Serial;
 }
 
-Uart::~Uart() {
+Uart::~Uart() : ~SerialCom() {
 //    delete serial;
 }
 
