@@ -54,7 +54,7 @@ void SensorsIdentifierManager::init(){
     char * cArrJson = (char*) spiffs::readFile(SPIFFS, "/SensorAddresses.txt");
 
     JsonDocument * doc = jp::parseJson(cArrJson);
-    JsonObjectToArrOfVectors(doc);
+    if(doc == nullptr) JsonObjectToArrOfVectors(doc);
     delete doc;
 }
 
