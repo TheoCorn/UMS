@@ -77,7 +77,7 @@ void setup() {
   mDisplay->init();
   sensorIdentifier = new SensorsIdentifierManager();
 
-  serialCom = new BluetoothSerial();
+  serialCom = new Uart();
   serialCom->startConnectionCheck(5000);
 
   Wire.begin();
@@ -182,9 +182,13 @@ void onReadElementReceive(JsonVariant * v){
 void onGetElementReceive(JsonVariant * v){
     DynamicJsonDocument *doc = new DynamicJsonDocument(sensors.size() * 2048);
 
-    for(Sensor* s : sensors){
-        s->getJson(doc);
+    uint8_t key;
+    Sensor* value;
+    for(auto& mPair: *sensors){
+        std::tie(key, value) = mPair;
+        value->getJson(doc);
     }
+
 }
 
 void onStartReading(){
