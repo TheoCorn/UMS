@@ -143,7 +143,7 @@ void loop() {
   } else {
 //    std::vector<csa::ConflictingAddressStruct> conflicts;
 //    ss::checkI2C(&conflicts, sensors, sensorIdentifier);
-    mDisplay->displayWhenNotReading();
+//    mDisplay->displayWhenNotReading();
 
   }
 
