@@ -77,7 +77,7 @@ void setup() {
   mDisplay->init();
   sensorIdentifier = new SensorsIdentifierManager();
 
-  serialCom = new DEFAULT_SERIAL_COM();
+  serialCom = new BluetoothSerial();
   serialCom->startConnectionCheck(5000);
 
   Wire.begin();

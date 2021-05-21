@@ -693,14 +693,14 @@ size_t BluetoothSerial::write(const uint8_t *buffer, size_t size)
     return (_spp_queue_packet((uint8_t *)buffer, size) == ESP_OK) ? size : 0;
 }
 
-size_t write(JsonDocument * doc){
+size_t BluetoothSerial::write(JsonDocument * doc){
 
     if (!_spp_client){
         return 0;
     }
 
     js::serializeRet* sr = js::serializeDoc(doc);
-    size_t ret = write((uint8_t *)(sr->buff), (size_t)(sr->bufLen));
+    size_t ret = write((const uint8_t *)(sr->buff), (size_t)(sr->bufLen));
     delete sr;
     return ret;
 
