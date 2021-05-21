@@ -109,6 +109,8 @@ void setup() {
 
   attachInterrupt(sleepPin, sleep, FALLING);
 
+  Serial.println("end of setup");
+
 }
 
 void loop() {
