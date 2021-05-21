@@ -54,11 +54,11 @@ void sleep();
 
 
 // std::vector<Sensor> sensors;
-std::map<uint8_t, Sensor*> sensors;
+std::map<uint8_t, Sensor*>* sensors;
 
 SerialCom* serialCom;
 
-std::vector<char> btBuffer;
+std::vector<char>* btBuffer;
 
 bool reading = false;
 
@@ -68,6 +68,10 @@ SensorsIdentifierManager* sensorIdentifier;
 
 
 void setup() {
+
+    sensors = new std::map<uint8_t, Sensor*>;
+    btBuffer = new std::vector<char>;
+
     Serial.begin(115200);
 
     pinMode(showAddressPin, INPUT);
