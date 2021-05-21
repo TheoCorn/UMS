@@ -8,6 +8,7 @@
 
 
 using namespace spiffs;
+
 /**
  * @param fs
  * @param path
@@ -18,19 +19,20 @@ unsigned char *spiffs::readFile(fs::FS &fs, const char *path) {
     File file = fs.open(path);
     if (!file || file.isDirectory()) return nullptr;
 
+
     size_t fileSize = file.size();
-    uint8_t *s = new uint8_t[fileSize];
+    auto *s = new uint8_t[fileSize];
+    auto arrayPointer = s;
 
-//        while (fileSize) {
-//            size_t toRead = fileSize;
-//            if(toRead > 512){
-//                toRead = 512;
-//            }
-//
-//            s  file.read()
-//        }
+    while (fileSize) {
+        size_t toRead = (fileSize <= 512) ? fileSize : 512;
+        file.read(arrayPointer, toRead);
 
-    file.read(s, fileSize);
+        arrayPointer += toRead;
+        fileSize -= toRead;
+    }
+
+
     file.close();
 
     return s;
@@ -38,15 +40,15 @@ unsigned char *spiffs::readFile(fs::FS &fs, const char *path) {
 }
 
 
-
 using namespace spiffs;
+
 /**
   *
   * @param fs
   * @param dirname
   * @return std::vector<Files>
   */
-std::vector<fs::File> spiffs::listDir(fs::FS &fs, char * dirname) {
+std::vector<fs::File> spiffs::listDir(fs::FS &fs, char *dirname) {
     std::vector<File> files;
     File root;
 
