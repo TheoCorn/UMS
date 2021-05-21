@@ -68,17 +68,25 @@ SensorsIdentifierManager* sensorIdentifier;
 
 
 void setup() {
+    Serial.begin(115200);
+
     pinMode(showAddressPin, INPUT);
     pinMode(traScreen, OUTPUT);
     digitalWrite(traScreen, HIGH);
-
     pinMode(batteryReadPin, INPUT);
+
+    Serial.println("app started");
+
   mDisplay = new DisplayFunctions(&sensors);
   mDisplay->init();
   sensorIdentifier = new SensorsIdentifierManager();
 
   serialCom = new Uart();
+  Serial.println("before startCoonCheck");
+
   serialCom->startConnectionCheck(5000);
+
+  Serial.println("afterConnCheck");
 
   Wire.begin();
 
