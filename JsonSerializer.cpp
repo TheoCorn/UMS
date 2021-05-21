@@ -5,14 +5,14 @@
 #include "JsonSerializer.h"
 #include <ArduinoJson.h>
 
-js::serializeRet* js::serializeDoc(JsonDocument * doc){
+js::serializeRet* js::serializeDoc(JsonDocument* doc){
 
     int bufLen =  measureJson(*doc);
-    char *buffer = new char[bufLen];
+    char* buffer = new char[bufLen];
 
     serializeJson(*doc, buffer, bufLen);
 
-    js::serializeRet * sr = new js::serializeRet;
+    js::serializeRet* sr;
     sr->bufLen = bufLen;
     sr->buff = buffer;
 
