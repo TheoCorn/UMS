@@ -38,7 +38,7 @@ public:
 
     void showSensors();
 
-    void showbtAddress();
+    void showComInfo();
 
     void sleep();
 
