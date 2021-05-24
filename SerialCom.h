@@ -16,14 +16,17 @@ public:
     /*
      * @param dur duration in millis
      * @param conn pointer to boolean to be changed
+     * @param taskHandle pointer to task handle so the task can delete itself
      */
-    ConnCheckInfo(int dur, bool* conn){
+    ConnCheckInfo(int dur, bool* conn, TaskHandle_t* taskHandle){
         this->duration = dur;
         this->connected = conn;
+        this->taskHandle = taskHandle;
     }
 
     int duration;
     bool* connected;
+    TaskHandle_t* taskHandle;
 };
 
 class SerialCom {

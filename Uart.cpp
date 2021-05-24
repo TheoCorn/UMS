@@ -79,5 +79,5 @@ void Uart::connectionCheckTask(void* connInfo) {
     
     delete info;
 
-    vTaskDelete(UartConnCheckHandle);
+    vTaskDelete(info->UartConnCheckHandle);
 }
