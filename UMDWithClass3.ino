@@ -128,6 +128,7 @@ void loop() {
       //todo implement sending
     mDisplay->displayWhenReading();
   } else {
+      Serial.println("not reading");
     auto conflicts = new std::vector<csa::ConflictingAddressStruct*>();
     ss::checkI2C(conflicts, sensors, sensorIdentifier);
     mDisplay->displayWhenNotReading();
