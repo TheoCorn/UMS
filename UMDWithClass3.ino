@@ -68,13 +68,9 @@ SensorsIdentifierManager* sensorIdentifier;
 
 
 void setup() {
-  Serial.begin(115200);
-  Serial.println("app started");
 
   sensors = new std::map<uint8_t, Sensor*>;
-  Serial.println("after sensors allocated");
   btBuffer = new std::vector<char>;
-  Serial.println("after btBuffer alloc");
 
 
 
@@ -86,19 +82,12 @@ void setup() {
 
   
   mDisplay = new DisplayFunctions(sensors);
-  Serial.println("after display alloc");
   mDisplay->init();
-  Serial.println("after display init");
   sensorIdentifier = new SensorsIdentifierManager();
 
-  Serial.println("after sensorIdentifier alloc");
-
   serialCom = new Uart();
-  Serial.println("before startCoonCheck");
 
   serialCom->startConnectionCheck(5000);
-
-  Serial.println("afterConnCheck");
 
   Wire.begin();
 
@@ -109,12 +98,11 @@ void setup() {
 
   attachInterrupt(sleepPin, sleep, FALLING);
 
-  Serial.println("end of setup");
 
 }
 
 void loop() {
-  Serial.println("LOOP");
+ 
   char sRead;
   for (int i = 0; i < serialCom->available(); ++i) {
     serialCom->read(&sRead);
@@ -136,18 +124,16 @@ void loop() {
     }
   }
 
-  Serial.println("after for char in rx");
 
   if (reading) {
+      //todo implement sending
     mDisplay->displayWhenReading();
   } else {
-//    std::vector<csa::ConflictingAddressStruct> conflicts;
-//    ss::checkI2C(&conflicts, sensors, sensorIdentifier);
-//    mDisplay->displayWhenNotReading();
+    std::vector<csa::ConflictingAddressStruct> conflicts;
+    ss::checkI2C(&conflicts, sensors, sensorIdentifier);
+    mDisplay->displayWhenNotReading();
 
   }
-
-  Serial.println("end of LOOP");
 
 }
 

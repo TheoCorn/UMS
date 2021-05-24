@@ -32,13 +32,15 @@ public:
 
     bool hasConnectedDevice() override;
 
+    TaskHandle_t UartConnCheckHandle = NULL;
+
 
 private:
     bool connected = false;
 //    Serial * serial;
 
 protected:
-    TaskHandle_t UartConnCheckHandle = NULL;
+
 
     static void connectionCheckTask(void* connInfo);
     static void readTask(void* connected);

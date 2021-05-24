@@ -15,11 +15,11 @@
 
 Uart::Uart() : SerialCom() {
     Serial.begin(UART_BAUD);
-//    serial = new Serial;
+    connCheckIsRunning.store(false);
 }
 
 Uart::~Uart() {
-//    delete serial;
+
 }
 
 bool Uart::begin(){
@@ -79,4 +79,6 @@ void Uart::connectionCheckTask(void* connInfo) {
     }
     
     delete info;
+
+    vTaskDelete(UartConnCheckHandle);
 }
