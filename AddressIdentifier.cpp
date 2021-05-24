@@ -27,7 +27,7 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
         con->address = address;
         con->EnumPosOfSensors = numEnumSensorInVectorArray[address];
 
-        for(unsigned int pos: con.EnumPosOfSensors){
+        for(unsigned int pos: con->EnumPosOfSensors){
             Sensor * s = getSensorPointerForEnumPos(pos, address);
             con->nameOfSensors.emplace_back(s->name());
             delete s;
