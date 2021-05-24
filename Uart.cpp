@@ -15,7 +15,6 @@
 
 Uart::Uart() : SerialCom() {
     Serial.begin(UART_BAUD);
-    connCheckIsRunning.store(false);
 }
 
 Uart::~Uart() {
