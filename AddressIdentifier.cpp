@@ -22,7 +22,7 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
 
     if (numEnumSensorInVectorArray[address].size() == 1){
         addSensor(numEnumSensorInVectorArray[address][0], address, sensors);
-    }else{
+    }else if(numEnumSensorInVectorArray[address].size() != 0){
         csa::ConflictingAddressStruct* con;
         con->address = address;
         con->EnumPosOfSensors = numEnumSensorInVectorArray[address];
