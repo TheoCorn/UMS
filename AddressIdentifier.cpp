@@ -23,13 +23,13 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
     if (numEnumSensorInVectorArray[address].size() == 1){
         addSensor(numEnumSensorInVectorArray[address][0], address, sensors);
     }else{
-        csa::ConflictingAddressStruct con;
-        con.address = address;
-        con.EnumPosOfSensors = numEnumSensorInVectorArray[address];
+        csa::ConflictingAddressStruct* con;
+        con->address = address;
+        con->EnumPosOfSensors = numEnumSensorInVectorArray[address];
 
         for(unsigned int pos: con.EnumPosOfSensors){
             Sensor * s = getSensorPointerForEnumPos(pos, address);
-            con.nameOfSensors.emplace_back(s->name());
+            con->nameOfSensors.emplace_back(s->name());
             delete s;
         }
         conflict->emplace_back(con);
