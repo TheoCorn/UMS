@@ -712,9 +712,26 @@ void BluetoothSerial::flush()
 {
     if (_spp_tx_queue != NULL){
         while(uxQueueMessagesWaiting(_spp_tx_queue) > 0){
-	    delay(5);
+        delay(5);
         }
     }
+}
+
+char* getString4Display(){
+    const uint8_t* point = esp_bt_dev_get_address();
+    auto macArr = new char[25];
+    unsigned int arrayPointer = macArr;
+    macArr[24] = '\0';
+
+    for (int i = 0; i < 6; i++) {
+
+        sprintf(arrayPointer, "%02X", (int)point[i]);
+        arrayPointer += 3;
+        if (i < 5) {
+        arrayPointer++ = ':';
+        }
+
+  }
 }
 
 void BluetoothSerial::end()

@@ -32,6 +32,8 @@ public:
 
     bool hasConnectedDevice() override;
 
+    char* getString4Display() override;
+
     TaskHandle_t UartConnCheckHandle = NULL;
 
 

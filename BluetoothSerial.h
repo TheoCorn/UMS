@@ -50,6 +50,7 @@ class BluetoothSerial: public Stream, public SerialCom
         size_t write(uint8_t c) override;
         size_t write(const uint8_t *buffer, size_t size) override;
         size_t write(JsonDocument * doc) override;
+        char* getString4Display() override;
         void flush() override;
         void end(void);
         void onData(BluetoothSerialDataCb cb);

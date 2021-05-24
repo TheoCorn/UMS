@@ -80,11 +80,11 @@ void setup() {
   pinMode(batteryReadPin, INPUT);
 
 
-  
+
   mDisplay = new DisplayFunctions(sensors);
   sensorIdentifier = new SensorsIdentifierManager();
 
-  serialCom = new Uart();
+  serialCom = new BluetoothSerial();
 
   serialCom->startConnectionCheck(5000);
 
@@ -101,7 +101,7 @@ void setup() {
 }
 
 void loop() {
- 
+
   char sRead;
   for (int i = 0; i < serialCom->available(); ++i) {
     serialCom->read(&sRead);
@@ -125,13 +125,22 @@ void loop() {
 
 
   if (reading) {
-      //todo implement sending
+    //todo implement sending
     mDisplay->displayWhenReading();
   } else {
-      Serial.println("not reading");
+    Serial.println("not reading");
     auto conflicts = new std::vector<csa::ConflictingAddressStruct*>();
+    Serial.print("after conflict creation conflict pointer: ");
+    Serial.print((int)conflicts);
+    Serial.print("\ndisplay pointer: ");
+    Serial.println((int)mDisplay);
+    
     ss::checkI2C(conflicts, sensors, sensorIdentifier);
+
+    Serial.println("after checkI2c");
     mDisplay->displayWhenNotReading();
+
+    Serial.println("after after display");
 
   }
 

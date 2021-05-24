@@ -91,6 +91,11 @@ public:
      */
     virtual bool hasConnectedDevice() = 0;
 
+    /*
+     *
+     */
+    virtual char* getString4Display() = 0;
+
 };
 
 //namespace sce{

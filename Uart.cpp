@@ -81,3 +81,9 @@ void Uart::connectionCheckTask(void* connInfo) {
 
     vTaskDelete(*(info->taskHandle));
 }
+
+
+
+char* getString4Display(){
+    return nullptr;
+}
