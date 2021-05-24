@@ -81,8 +81,7 @@ void setup() {
 
 
   
-  mDisplay = new DisplayFunctions(sensors);
-  mDisplay->init();
+//  mDisplay = new DisplayFunctions(sensors);
   sensorIdentifier = new SensorsIdentifierManager();
 
   serialCom = new Uart();
@@ -129,7 +128,7 @@ void loop() {
       //todo implement sending
     mDisplay->displayWhenReading();
   } else {
-    auto conflicts = new std::vector<csa::ConflictingAddressStruct>();
+//    auto conflicts = new std::vector<csa::ConflictingAddressStruct>();
 //    ss::checkI2C(conflicts, sensors, sensorIdentifier);
 //    mDisplay->displayWhenNotReading();
 

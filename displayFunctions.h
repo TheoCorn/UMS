@@ -21,9 +21,9 @@ public:
     explicit DisplayFunctions(std::map<uint8_t, Sensor*> * sensors){
         this->sensors = sensors;
         this->display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-        Serial.println("disFunc constructor before Init");
+//        Serial.println("disFunc constructor before Init");
         init();
-        Serial.println("disFunc constructor end");
+//        Serial.println("disFunc constructor end");
 
     }
 
