@@ -29,12 +29,14 @@ void DisplayFunctions::init() {
 }
 
 void DisplayFunctions::displayWhenReading() {
+    display->clearDisplay();
   showReading(true);
 
   display->display();
 }
 
 void DisplayFunctions::displayWhenNotReading() {
+    display->clearDisplay();
   showReading(false);
   showSensors();
   digitalRead(showAddressPin) ? showComInfo() : showBattery();
