@@ -130,7 +130,7 @@ void loop() {
   } else {
     auto conflicts = new std::vector<csa::ConflictingAddressStruct*>();
     ss::checkI2C(conflicts, sensors, sensorIdentifier);
-//    mDisplay->displayWhenNotReading();
+    mDisplay->displayWhenNotReading();
 
   }
 

@@ -35,6 +35,7 @@ void DisplayFunctions::displayWhenReading(){
 }
 
 void DisplayFunctions::displayWhenNotReading(){
+    if(display = nullptr) Serial.println("display is null")
     showReading(false);
     showSensors();
     digitalRead(showAddressPin) ? showbtAddress() : showBattery();
