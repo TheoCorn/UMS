@@ -84,6 +84,6 @@ void Uart::connectionCheckTask(void* connInfo) {
 
 
 
-char* getString4Display(){
-    return nullptr;
-}
+//char* getString4Display(){
+//    return nullptr;
+//}

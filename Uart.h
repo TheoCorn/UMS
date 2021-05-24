@@ -32,7 +32,7 @@ public:
 
     bool hasConnectedDevice() override;
 
-    char* getString4Display() override;
+    char* getString4Display() override {return nullptr;};
 
     TaskHandle_t UartConnCheckHandle = NULL;
 

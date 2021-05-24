@@ -84,7 +84,7 @@ void setup() {
   mDisplay = new DisplayFunctions(sensors);
   sensorIdentifier = new SensorsIdentifierManager();
 
-  serialCom = new BluetoothSerial();
+  serialCom = new Uart();
 
   serialCom->startConnectionCheck(5000);
 
