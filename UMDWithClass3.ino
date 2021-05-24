@@ -129,8 +129,8 @@ void loop() {
       //todo implement sending
     mDisplay->displayWhenReading();
   } else {
-    std::vector<csa::ConflictingAddressStruct> conflicts;
-    ss::checkI2C(&conflicts, sensors, sensorIdentifier);
+    auto conflicts = new std::vector<csa::ConflictingAddressStruct>();
+    ss::checkI2C(conflicts, sensors, sensorIdentifier);
     mDisplay->displayWhenNotReading();
 
   }

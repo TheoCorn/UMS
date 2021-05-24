@@ -20,6 +20,7 @@ class DisplayFunctions {
 public:
     explicit DisplayFunctions(std::map<uint8_t, Sensor*> * sensors){
         this->sensors = sensors;
+        this->display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
         init();
     }
 
@@ -50,7 +51,7 @@ public:
     void init();
 
 private:
-    Adafruit_SSD1306 * display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+    Adafruit_SSD1306 * display;
     float batCharge = 100.0f;
     std::map<uint8_t, Sensor*> * sensors;
 
