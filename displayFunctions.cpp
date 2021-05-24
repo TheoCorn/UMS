@@ -35,15 +35,9 @@ void DisplayFunctions::displayWhenReading() {
 }
 
 void DisplayFunctions::displayWhenNotReading() {
-  Serial.println("display when not reading");
-  
   showReading(false);
-  Serial.println("after showReading");
   showSensors();
-  Serial.println("after showSensors");
-    digitalRead(showAddressPin) ? showComInfo() : showBattery();
-
-  Serial.println("after show address/battery");
+  digitalRead(showAddressPin) ? showComInfo() : showBattery();
 
   display->display();
 }
@@ -52,7 +46,7 @@ void DisplayFunctions::showReading(bool reading) {
   display->setTextSize(1);             // Normal 1:1 pixel scale
   display->setTextColor(SSD1306_WHITE);        // Draw white text
   display->setCursor(120, 2);
-  reading ? display->println("1") : display->println("0");
+  reading ? display->println('1') : display->println('0');
 }
 
 
