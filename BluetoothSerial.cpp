@@ -25,7 +25,7 @@
 #include "JsonSerializer.h"
 
 
-//#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
+#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
 
 #ifdef ARDUINO_ARCH_ESP32
 #include "esp32-hal-log.h"

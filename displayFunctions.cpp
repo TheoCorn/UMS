@@ -5,11 +5,9 @@
 #include "displayFunctions.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include "BluetoothSerial.h"
-#include "esp_bt_main.h"
-#include "esp_bt_device.h"
 
 #include "gpioNames.h"
+#include "SerialCom.h"
 
 
 void DisplayFunctions::init() {
@@ -112,7 +110,7 @@ void DisplayFunctions::showComInfo() {
   display->setTextColor(SSD1306_WHITE);        // Draw white text
   display->setCursor(0, 0);
 
-
+  serialCom->getString4Display();
 
 }
 

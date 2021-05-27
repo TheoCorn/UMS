@@ -81,7 +81,7 @@ void setup() {
 
 
 
-  mDisplay = new DisplayFunctions(sensors);
+  mDisplay = new DisplayFunctions(sensors, NULL);
   sensorIdentifier = new SensorsIdentifierManager();
 
   serialCom = new BluetoothSerial();

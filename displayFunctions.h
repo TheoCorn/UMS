@@ -14,13 +14,15 @@
 #include <Adafruit_SSD1306.h>
 #include <map>
 #include "Sensor.hpp"
+#include "SerialCom.h"
 
 
 class DisplayFunctions {
 public:
-    explicit DisplayFunctions(std::map<uint8_t, Sensor*> * sensors){
+    explicit DisplayFunctions(std::map<uint8_t, Sensor *> *sensors, SerialCom *serialCom) {
         this->sensors = sensors;
         this->display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+        this->serialCom = serialCom;
         init();
     }
 
@@ -54,6 +56,7 @@ private:
     Adafruit_SSD1306 * display;
     float batCharge = 100.0f;
     std::map<uint8_t, Sensor*> * sensors;
+    SerialCom* serialCom;
 
 };
 
