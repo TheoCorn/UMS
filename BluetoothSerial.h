@@ -33,7 +33,7 @@ typedef std::function<void(const uint8_t *buffer, size_t size)> BluetoothSerialD
 typedef std::function<void(uint32_t num_val)> ConfirmRequestCb;
 typedef std::function<void(boolean success)> AuthCompleteCb;
 
-class BluetoothSerial: public Stream, public SerialCom
+class BluetoothSerial:  public SerialCom
 {
     public:
 

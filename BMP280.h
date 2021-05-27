@@ -8,7 +8,7 @@
 #include "Sensor.hpp"
 
 
-class BMP280 {
+class BMP280 : public Sensor {
 
 };
 
