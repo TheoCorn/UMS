@@ -29,6 +29,7 @@ public:
     TaskHandle_t* taskHandle;
 };
 
+
 class SerialCom {
 public:
 

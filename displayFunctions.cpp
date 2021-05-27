@@ -110,7 +110,7 @@ void DisplayFunctions::showComInfo() {
   display->setTextColor(SSD1306_WHITE);        // Draw white text
   display->setCursor(0, 0);
 
-  serialCom->getString4Display();
+  display->println(serialCom->getString4Display());
 
 }
 

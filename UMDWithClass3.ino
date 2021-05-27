@@ -73,7 +73,6 @@ void setup() {
   btBuffer = new std::vector<char>;
 
 
-
   pinMode(showAddressPin, INPUT);
   pinMode(traScreen, OUTPUT);
   digitalWrite(traScreen, HIGH);
@@ -83,8 +82,6 @@ void setup() {
   serialCom = new BluetoothSerial();
   mDisplay = new DisplayFunctions(sensors, serialCom);
   sensorIdentifier = new SensorsIdentifierManager();
-
-
 
   serialCom->startConnectionCheck(5000);
 
