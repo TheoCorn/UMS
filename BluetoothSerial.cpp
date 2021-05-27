@@ -721,7 +721,7 @@ char* BluetoothSerial::getString4Display(){
 
     for (int i = 0; i < 6; i++) {
 
-        sprintf(arrayPointer, "%02X", (int)point[i]);
+        sprintf(*arrayPointer, "%02X", (int)point[i]);
         arrayPointer += 3;
         if (i < 5) {
         *arrayPointer = ':';
