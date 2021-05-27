@@ -25,7 +25,7 @@
 #include "JsonSerializer.h"
 
 
-#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
+//#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
 
 #ifdef ARDUINO_ARCH_ESP32
 #include "esp32-hal-log.h"
@@ -655,10 +655,6 @@ int BluetoothSerial::peek(void)
     return -1;
 }
 
-bool BluetoothSerial::hasClient(void)
-{
-    return _spp_client > 0;
-}
 
 int BluetoothSerial::read(void)
 {
@@ -887,4 +883,13 @@ bool BluetoothSerial::isReady(bool checkMaster, int timeout) {
     TickType_t xTicksToWait = timeout / portTICK_PERIOD_MS;
     return (xEventGroupWaitBits(_spp_event_group, SPP_RUNNING, pdFALSE, pdTRUE, xTicksToWait) & SPP_RUNNING) != 0;
 }
+
+void BluetoothSerial::startConnectionCheck(int duration) {
+    return;
+}
+
+bool BluetoothSerial::hasConnectedDevice() {
+    return _spp_client > 0;
+}
+
 #endif

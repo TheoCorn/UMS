@@ -77,7 +77,7 @@ public:
     /*
      * flushes the Rx buffer
      */
-    virtual void flush();
+    virtual void flush() = 0;
 
     /*
      * usually starts a freeRTOS task that periodically sends STX ascii char depends on implementation

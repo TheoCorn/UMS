@@ -19,7 +19,7 @@
 
 #include "sdkconfig.h"
 
-#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
+//#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
 
 #define BT_NAME "UMD"
 
@@ -42,12 +42,11 @@ class BluetoothSerial:  public SerialCom
 
         bool actualBegin(String localName=String(), bool isMaster=false);
         bool begin() override;
-        int available(void) override;
+        int available() override;
         int peek(void);
-        bool hasClient(void);
         int read(void);
         void read(char * c) override;
-        size_t write(uint8_t c) override;
+        size_t write(const uint8_t c) override;
         size_t write(const uint8_t *buffer, size_t size) override;
         size_t write(JsonDocument * doc) override;
         char* getString4Display() override;
@@ -55,6 +54,10 @@ class BluetoothSerial:  public SerialCom
         void end(void);
         void onData(BluetoothSerialDataCb cb);
         esp_err_t register_callback(esp_spp_cb_t * callback);
+
+        void startConnectionCheck(int duration) override;
+        bool hasConnectedDevice() override;
+
         
         void onConfirmRequest(ConfirmRequestCb cb);
         void onAuthComplete(AuthCompleteCb cb);
