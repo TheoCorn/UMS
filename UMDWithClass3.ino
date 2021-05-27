@@ -80,11 +80,11 @@ void setup() {
   pinMode(batteryReadPin, INPUT);
 
 
-
-  mDisplay = new DisplayFunctions(sensors, NULL);
+  serialCom = new BluetoothSerial();
+  mDisplay = new DisplayFunctions(sensors, serialCom);
   sensorIdentifier = new SensorsIdentifierManager();
 
-  serialCom = new BluetoothSerial();
+
 
   serialCom->startConnectionCheck(5000);
 
