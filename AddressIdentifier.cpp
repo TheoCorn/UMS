@@ -76,7 +76,7 @@ void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
     int i = 0;
     for(JsonArray addressArray : arr){
         for(JsonVariant o : addressArray){
-            SensorTypeVectors[i].emplace_back(o.as<uint8_t>());
+            SensorTypeVectors[i].emplace_back(static_cast<uint8_t>(o.as<unsigned char>()));
         }
         i++;
     }
