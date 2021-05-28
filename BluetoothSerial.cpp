@@ -716,24 +716,22 @@ void BluetoothSerial::flush()
 char* BluetoothSerial::getString4Display(){
     const uint8_t* point = esp_bt_dev_get_address();
 
-    char* macArr = new char[6];
-    *macArr = std::move(point);
     
-//    auto macArr = new char[25];
-//    char* arrayPointer = macArr;
-//    macArr[24] = '\0';
+    auto macArr = new char[18];
+    char* arrayPointer = macArr;
+    macArr[17] = '\0';
 
-//    sprintf(macArr, "%X", *point);
 
-//    for (int i = 0; i < 6; i++) {
-//
-//        sprintf(*arrayPointer, "%02X", (int)point[i]);
-//        arrayPointer += 3;
-//        if (i < 5) {
-//        *arrayPointer = ':';
-//        arrayPointer++;
-//        }
-//    }
+    for (int i = 0; i < 6; i++) {
+        char str[3];
+        sprintf(str, "%02X", (int)point[i]);
+        for(uint8_t j = 0; j < 2; j++){
+            macArr[2*i + j] = str[j];
+        }
+        if (i < 5) {
+            macArr[2*i + j+1] = ':';
+        }
+    }
     return macArr;
 }
 
