@@ -79,7 +79,7 @@ void setup() {
   pinMode(batteryReadPin, INPUT);
 
 
-  serialCom = new BluetoothSerial();
+  serialCom = new Uart();
   mDisplay = new DisplayFunctions(sensors, serialCom);
   sensorIdentifier = new SensorsIdentifierManager();
 
