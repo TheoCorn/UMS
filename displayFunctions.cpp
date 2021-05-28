@@ -110,8 +110,10 @@ void DisplayFunctions::showComInfo() {
   display->setTextColor(SSD1306_WHITE);        // Draw white text
   display->setCursor(0, 0);
   char* str = serialCom->getString4Display();
-  display->println(str);
-  delete str;
+  if(str != nullptr) {
+      display->println(str);
+      delete str;
+  }
 }
 
 void DisplayFunctions::sleep() {

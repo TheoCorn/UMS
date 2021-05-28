@@ -5,9 +5,9 @@
 #ifndef UMDWITHCLASS3_GPIONAMES_H
 #define UMDWITHCLASS3_GPIONAMES_H
 
-#define sleepPin 33
-#define showAddressPin 18
-#define traScreen 32
-#define batteryReadPin 13
+#define sleepPin        33
+#define showAddressPin  18
+#define traScreen       32
+#define batteryReadPin  13
 
 #endif //UMDWITHCLASS3_GPIONAMES_H
