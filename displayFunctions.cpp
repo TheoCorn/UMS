@@ -112,7 +112,7 @@ void DisplayFunctions::showComInfo() {
   char* str = serialCom->getString4Display();
   if(str != nullptr) {
       display->println(str);
-//      delete str;
+      delete str;
   }
 }
 

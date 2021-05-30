@@ -5,6 +5,8 @@
 #include <ArduinoJson.h>
 #include "ConflictingSensors.hpp"
 
+#define CONFLICT_SIZE 256
+
 JsonDocument* csa::conflictsToString(std::vector<csa::ConflictingAddressStruct*>* conflicts){
     auto doc = new DynamicJsonDocument(conflicts->size() * CONFLICT_SIZE);
     JsonArray conflictsArr = doc->createNestedArray("C");
@@ -27,6 +29,3 @@ JsonDocument* csa::conflictsToString(std::vector<csa::ConflictingAddressStruct*>
     return doc;
 
 }
-
-
-

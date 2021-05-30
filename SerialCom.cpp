@@ -6,7 +6,7 @@
 #include <ArduinoJson.h>
 
 
-#define CONFLICT_SIZE 256
+
 
 
 
