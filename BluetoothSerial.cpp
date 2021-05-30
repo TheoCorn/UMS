@@ -717,20 +717,20 @@ char* BluetoothSerial::getString4Display(){
     const uint8_t* point = esp_bt_dev_get_address();
 
     
-    auto macArr = new char[18];
+    auto macArr = new char[13]; //18
     char* arrayPointer = macArr;
-    macArr[17] = '\0';
+    macArr[12] = '\0'; //17
 
-
+    //todo fix last digit of mac address
     for (int i = 0; i < 6; i++) {
         char str[3];
         sprintf(str, "%02X", (int)point[i]);
         for(uint8_t j = 0; j < 2; j++){
             macArr[2*i + j] = str[j];
         }
-        if (i < 5) {
-            macArr[2*i + j+1] = ':';
-        }
+//        if (i < 5) {
+//            macArr[2*i+2] = ':';
+//        }
     }
     return macArr;
 }

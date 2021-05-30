@@ -7,6 +7,8 @@
 
 #include <ArduinoJson.h>
 #include "JsonSerializer.h"
+#include <vector>
+#include "ConflictingSensors.hpp"
 
 
 //class to pass to the task startConnectionCheck usually calls
@@ -96,6 +98,9 @@ public:
      *
      */
     virtual char* getString4Display() = 0;
+
+private:
+    static char* ConflictsToC_str(std::vector<csa::ConflictingAddressStruct*>* conflicts);
 
 };
 

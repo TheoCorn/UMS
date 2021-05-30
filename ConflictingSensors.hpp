@@ -3,7 +3,7 @@
 #define ConflictingSensor_h
 
 #include "Sensor.hpp"
-
+#include <vector>
 //conflicting sensor address
 namespace csa{
 

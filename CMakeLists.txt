@@ -25,4 +25,4 @@ add_executable(UMDWithClass3
         spiffs.cpp
         spiffs.hpp
         UMDWithClass3.ino
-        gpioNames.h)
+        gpioNames.h ConflictingSensors.cpp)

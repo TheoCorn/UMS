@@ -4,3 +4,5 @@ CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
 
 
 -- Configuring incomplete, errors occurred!
+See also "/mnt/d/DATA/OneDrive/Documents/Arduino/UMDWithClass3/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+Cannot resolve compiler path 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.27.29110/bin/Hostx86/x86/cl.exe'
