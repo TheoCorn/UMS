@@ -14,6 +14,8 @@ typedef struct {
   
 } ConflictingAddressStruct;
 
+    JsonDocument* conflictsToString(std::vector<csa::ConflictingAddressStruct*>* conflicts);
+
 }
 
 #endif
