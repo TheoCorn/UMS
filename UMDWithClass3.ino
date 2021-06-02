@@ -70,7 +70,6 @@ SensorsIdentifierManager* sensorIdentifier;
 void setup() {
 
   sensors = new std::map<uint8_t, Sensor*>;
-  while(sensors == nullptr) {}
   btBuffer = new std::vector<char>;
 
 
@@ -103,7 +102,7 @@ void loop() {
   char sRead;
   for (int i = 0; i < serialCom->available(); ++i) {
     serialCom->read(&sRead);
-    if (sRead != NULL) {
+
       switch (sRead) {
         case ETX:
           jp::parseJsonWithCycleThru(btBuffer, &doProcess4JsonObj);
@@ -117,8 +116,6 @@ void loop() {
           btBuffer->emplace_back(sRead);
           break;
       }
-
-    }
   }
 
 
