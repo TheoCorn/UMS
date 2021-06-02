@@ -70,7 +70,7 @@ SensorsIdentifierManager* sensorIdentifier;
 void setup() {
 
     //debug
-    Serial.begin();
+    Serial.begin(112500);
 
   sensors = new std::map<uint8_t, Sensor*>;
   btBuffer = new std::vector<char>;
