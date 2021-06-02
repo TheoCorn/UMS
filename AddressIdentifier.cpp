@@ -40,7 +40,7 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
 
 void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, std::map<uint8_t, Sensor*> * sensors){
     //todo delete print
-    Serial.print("enumPos:")
+    Serial.print("enumPos:");
     Serial.println(enumPos);
     Sensor* sensor = getSensorPointerForEnumPos(enumPos, address);
     sensors->insert(std::pair<uint8_t, Sensor*>(address, sensor));

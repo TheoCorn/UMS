@@ -70,6 +70,7 @@ SensorsIdentifierManager* sensorIdentifier;
 void setup() {
 
   sensors = new std::map<uint8_t, Sensor*>;
+  while(sensors == nullptr) {}
   btBuffer = new std::vector<char>;
 
 
