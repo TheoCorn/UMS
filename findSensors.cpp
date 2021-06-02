@@ -13,7 +13,6 @@
 typedef uint8_t byte;
 //looks for all i2c devices
 void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::map<uint8_t, Sensor*> * sensors, SensorsIdentifierManager * sim) {
-    while(sim == nullptr) {}
     //addresses used by previusly alocated sensors
     std::vector<byte> usedAddreses;
     //addresses used by previusly alocated sensors that are still pressent

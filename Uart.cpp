@@ -59,8 +59,8 @@ bool Uart::hasConnectedDevice() {
 
 void Uart::startConnectionCheck(int duration) {
     ConnCheckInfo* info = new ConnCheckInfo(duration, &connected, &UartConnCheckHandle);
-    xTaskCreate(connectionCheckTask, "UartSender", 8196, info, 2, &UartConnCheckHandle);
-    configASSERT(UartConnCheckHandle);
+    xTaskCreatePinnedToCore(connectionCheckTask, "UartSender", 8196, info, 2, &UartConnCheckHandle, 0);
+//    configASSERT(UartConnCheckHandle);
 }
 
 void Uart::connectionCheckTask(void* connInfo) {
