@@ -43,9 +43,6 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
         if (error == 0 || error == 4) {
             if (addreses[address]) {
                 sim->addSensor(address, sensors, conflict);
-                //debug
-                Serial.print("address");
-                Serial.println(address);
 
             } else if (address != SCREEN_I2C_ADDRESS) {
 //                collUnAddresses.emplace_back(address);
