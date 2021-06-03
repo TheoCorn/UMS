@@ -24,12 +24,12 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
         Serial.print("adding sensor at: ");
         Serial.println(address);
         Serial.flush();
-        addSensor(numEnumSensorInVectorArray[address][0], address, sensors);
+        addSensor(numEnumSensorInVectorArray[address]->at(0), address, sensors);
     }else {
         Serial.println("failed");
         csa::ConflictingAddressStruct* con;
         con->address = address;
-        con->EnumPosOfSensors = numEnumSensorInVectorArray[address];
+        con->EnumPosOfSensors = numEnumSensorInVectorArray->at(address);
 
         for(unsigned int pos: con->EnumPosOfSensors){
             Sensor * s = getSensorPointerForEnumPos(pos, address);
