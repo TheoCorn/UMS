@@ -23,9 +23,10 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
     if (numEnumSensorInVectorArray[address].size() == 1){
         Serial.print("adding sensor at: ");
         Serial.println(address);
+        Serial.flush();
         addSensor(numEnumSensorInVectorArray[address][0], address, sensors);
     }else {
-        Serial.println("failed")
+        Serial.println("failed");
         csa::ConflictingAddressStruct* con;
         con->address = address;
         con->EnumPosOfSensors = numEnumSensorInVectorArray[address];
@@ -58,6 +59,8 @@ void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, 
 
 void SensorsIdentifierManager::init(){
     char * cArrJson = (char*) spiffs::readFile(SPIFFS, "/SensorAddresses.txt");
+
+    //todo delete debug
 
     Serial.println("after cArrJson alloc");
 
