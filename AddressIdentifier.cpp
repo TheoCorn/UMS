@@ -23,13 +23,12 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
     if (numEnumSensorInVectorArray[address]->size() == 1){
         Serial.print("adding sensor at: ");
         Serial.println(address);
-        Serial.flush();
         addSensor(numEnumSensorInVectorArray[address]->at(0), address, sensors);
     }else {
         Serial.println("failed");
         csa::ConflictingAddressStruct* con;
         con->address = address;
-        con->EnumPosOfSensors = numEnumSensorInVectorArray->at(address);
+        con->EnumPosOfSensors = numEnumSensorInVectorArray[address];
 
         for(unsigned int pos: con->EnumPosOfSensors){
             Sensor * s = getSensorPointerForEnumPos(pos, address);
@@ -79,7 +78,7 @@ void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
 //    JsonObject obj = doc->to<JsonObject>();
 
     //array 0-127 ie. all i2c addresses the vector contains all sensors that can be on the address
-    auto *SensorTypeVectors = new std::vector<unsigned int>[128];
+    auto SensorTypeVectors = new std::vector<unsigned int>[128];
     JsonArray arr = doc->as<JsonArray>();
 
     int i = 0;
