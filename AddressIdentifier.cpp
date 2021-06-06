@@ -84,6 +84,8 @@ void SensorsIdentifierManager::init(){
 
     delete cArrJson;
 
+    Serial.println("end of init");
+
 }
 
 void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
