@@ -24,7 +24,7 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
     if (numEnumSensorInVectorArray[address].size() == 1){
         Serial.print("adding sensor at: ");
         Serial.println(address);
-        addSensor(numEnumSensorInVectorArray[address][0], address, sensors);
+        addSensor(numEnumSensorInVectorArray[address][0], address, sensors, conflict);
     }else {
         Serial.println("failed");
         csa::ConflictingAddressStruct* con;
@@ -42,19 +42,28 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
 
 }
 
-void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, std::map<uint8_t, Sensor*> * sensors){
+void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, std::map<uint8_t, Sensor*> * sensors, std::vector<csa::ConflictingAddressStruct*> * conflict){
     //todo delete print
     Serial.print("enumPos:");
     Serial.println(enumPos);
     Serial.flush();
     Sensor* sensor = getSensorPointerForEnumPos(enumPos, address);
-    sensors->insert(std::pair<uint8_t, Sensor*>(address, sensor));
+
+    if(sensor != nullptr) {
+        sensors->insert(std::pair<uint8_t, Sensor *>(address, sensor));
+    } else{
+        csa::ConflictingAddressStruct* con;
+        con->address = address;
+        conflict->emplace_back(con);
+    }
 }
 
  Sensor* SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPos, uint8_t address){
     switch (enumPos){
         case sensorEnum::MPU9250: return (Sensor*)(new class MPU9250(address)); break;
-        case sensorEnum::BMP280: return (sensor*)(new class BMP280); break;
+//        case sensorEnum::BMP280: return (sensor*)(new class BMP280); break;
+
+        default: return nullptr; break;
     }
 }
 
