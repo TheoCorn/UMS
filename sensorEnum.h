@@ -8,7 +8,8 @@
 #define ENUM_SIZE 1
 
 enum sensorEnum{
-    MPU9250 = 0
+    MPU9250 = 0,
+    BMP280
 };
 
 #endif //UMDWITHCLASS3_SENSORENUM_H

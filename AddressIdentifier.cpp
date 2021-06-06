@@ -46,6 +46,7 @@ void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, 
     //todo delete print
     Serial.print("enumPos:");
     Serial.println(enumPos);
+    Serial.flush();
     Sensor* sensor = getSensorPointerForEnumPos(enumPos, address);
     sensors->insert(std::pair<uint8_t, Sensor*>(address, sensor));
 }
@@ -53,6 +54,7 @@ void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, 
  Sensor* SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPos, uint8_t address){
     switch (enumPos){
         case sensorEnum::MPU9250: return (Sensor*)(new class MPU9250(address)); break;
+        case sensorEnum::BMP280: return (sensor*)(new class BMP280); break;
     }
 }
 
@@ -92,12 +94,12 @@ void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
 
     //todo delete debug
     for(int i = 0; i < 128; i++){
-        Serial.print("[")
+        Serial.print("[");
         for(unsigned int t : SensorTypeVectors[i]){
             Serial.print(t);
             Serial.print(',');
         }
-        Serial.println("]")
+        Serial.println("]");
     }
 
     numEnumSensorInVectorArray = SensorTypeVectors;
