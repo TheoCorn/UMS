@@ -56,7 +56,7 @@ using namespace jp;
  */
 JsonDocument * jp::parseJson(const char * buffer){
     DynamicJsonDocument *doc = new DynamicJsonDocument(capacity);
-    DeserializationError err = deserializeJson(doc, buffer);
+    DeserializationError err = deserializeJson(*doc, buffer);
 
     if (err != DeserializationError::Ok) {
         log_e("error in deserialization: " + err.c_str());
