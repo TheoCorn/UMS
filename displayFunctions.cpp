@@ -100,7 +100,7 @@ void DisplayFunctions::showSensors() {
   display->setCursor(0, 17);
 
   for (auto const& x : *sensors) {
-    display->println(x.second->name() + "\t" +  x.second->getStringForDisplay());
+    display->println(x.second->getStringForDisplay());
   }
 
 }
