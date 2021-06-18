@@ -91,13 +91,13 @@ void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
 //    JsonObject obj = doc->to<JsonObject>();
 
     //array 0-127 ie. all i2c addresses the vector contains all sensors that can be on the address
-    auto SensorTypeVectors = new std::vector<unsigned int>[128];
+    numEnumSensorInVectorArray = new std::vector<unsigned int>[128];
     JsonArray arr = doc->as<JsonArray>();
 
     int i = 0;
     for(JsonArray addressArray : arr){
         for(JsonVariant o : addressArray){
-            SensorTypeVectors[i].emplace_back(static_cast<uint8_t>(o.as<unsigned char>()));
+            numEnumSensorInVectorArray[i].emplace_back(static_cast<uint8_t>(o.as<unsigned char>()));
         }
         i++;
     }
@@ -105,7 +105,7 @@ void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
     //todo delete debug
 //    for(int i = 0; i < 128; i++){
 //        Serial.print("[");
-//        for(unsigned int t : SensorTypeVectors[i]){
+//        for(unsigned int t : numEnumSensorInVectorArray[i]){
 //            Serial.print(t);
 //            Serial.print(',');
 //        }
@@ -113,6 +113,5 @@ void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
 //    }
 //    Serial.flush();
 
-    numEnumSensorInVectorArray = SensorTypeVectors;
 
 }
