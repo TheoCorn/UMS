@@ -30,8 +30,10 @@ class Sensor{
       virtual byte currentAddress() = 0;
       //default set up for setup from user use setJson()
       virtual void setUp() = 0;
-      //used when getting dataFromSensor to display, so more data can be displayed
+      //used when getting dataFromSensor to display
       virtual String getStringForDisplay() = 0;
+      //used when getting dataFromSensor to display, so more data can be displayed
+      virtual String getExtendedStringForText() = 0;
       //used when reading
       //write JsonObject to the Json document
       virtual void readSensor(JsonDocument * ptrDoc) = 0;

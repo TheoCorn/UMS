@@ -71,22 +71,34 @@ String MPU9250::getStringForDisplay(){
   readSensor();
   String s;
   s = name();
-  s += "\t";
-  for(int i = 0; i<10; i++){
-    float f = callReadingFun(mpuFeaturesFloat[i]);
-//    ostringstream ss;
-//    ss << f;
-//    s += ss.str();
-
-      s += (String) f;
-  }
+//  s += "\t";
+//  for(int i = 0; i < 10; i++){
+//    float f = callReadingFun(mpuFeaturesFloat[i]);
+//      s += (String) f;
+//  }
 
   return s;
 }
 
+String MPU9250::getExtendedStringForDisplay() {
+    readSensor();
+    String s;
+
+    for(int i = 0; i < 10; i++){
+        float f = callReadingFun(mpuFeaturesFloat[i]);
+        s += mpuFeaturesString[i];
+        s += "  ";
+        s += mpuFeaturesBool[i] ? '1' : '0';
+        s += "  "
+        s += (String) f;
+    }
+
+
+}
+
 //my functions
 float MPU9250::callReadingFun(float(MPU9250::* fun)()){
-    return (*this.*fun)();
+    return (this->*fun)();
 }
 
 void MPU9250::setUpFeatures(){
@@ -1037,6 +1049,8 @@ int MPU9250::whoAmIAK8963(){
     // return the register value
     return _buffer[0];
 }
+
+
 
 
 

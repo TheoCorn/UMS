@@ -306,6 +306,8 @@ public:
     void readSensor(JsonDocument * ptrDoc) override;
 
     String getStringForDisplay() override;
+
+    String getExtendedStringForDisplay() override;
 };
 
 
