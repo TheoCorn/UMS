@@ -33,7 +33,7 @@ class Sensor{
       //used when getting dataFromSensor to display
       virtual String getStringForDisplay() = 0;
       //used when getting dataFromSensor to display, so more data can be displayed
-      virtual String getExtendedStringForText() = 0;
+      virtual String getExtendedStringForDisplay() = 0;
       //used when reading
       //write JsonObject to the Json document
       virtual void readSensor(JsonDocument * ptrDoc) = 0;

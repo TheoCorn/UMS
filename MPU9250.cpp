@@ -89,7 +89,7 @@ String MPU9250::getExtendedStringForDisplay() {
         s += mpuFeaturesString[i];
         s += "  ";
         s += mpuFeaturesBool[i] ? '1' : '0';
-        s += "  "
+        s += "  ";
         s += (String) f;
     }
 
