@@ -22,7 +22,10 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
     Serial.println("addSensor");
     if (numEnumSensorInVectorArray[address].empty()) return;
 
+    //todo delete Debug
     Serial.println("addSensor check if address empty");
+    Serial.flush();
+    delay(2);
 
     if (numEnumSensorInVectorArray[address].size() == 1){
         Serial.print("adding sensor at: ");
@@ -107,15 +110,15 @@ void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
     }
 
     //todo delete debug
-    for(int i = 0; i < 128; i++){
-        Serial.print("[");
-        for(unsigned int t : SensorTypeVectors[i]){
-            Serial.print(t);
-            Serial.print(',');
-        }
-        Serial.println("]");
-    }
-    Serial.flush();
+//    for(int i = 0; i < 128; i++){
+//        Serial.print("[");
+//        for(unsigned int t : SensorTypeVectors[i]){
+//            Serial.print(t);
+//            Serial.print(',');
+//        }
+//        Serial.println("]");
+//    }
+//    Serial.flush();
 
     numEnumSensorInVectorArray = SensorTypeVectors;
 

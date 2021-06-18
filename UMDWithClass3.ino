@@ -32,6 +32,7 @@
 #include <vector>
 #include "gpioNames.h"
 #include "asciiMakros.h"
+#include "SPIFFS.h"
 
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
@@ -68,6 +69,7 @@ SensorsIdentifierManager* sensorIdentifier;
 
 
 void setup() {
+  SPIFFS.begin(true);
 
     //debug
     Serial.begin(112500);
