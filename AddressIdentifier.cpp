@@ -77,20 +77,13 @@ void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, 
 void SensorsIdentifierManager::init(){
     char * cArrJson = (char*) spiffs::readFile(SPIFFS, "/SensorAddresses.txt");
 
-    //todo delete debug
-
-    Serial.println("after cArrJson alloc");
-
     JsonDocument * doc = jp::parseJson(cArrJson);
-    Serial.println("after doc creation");
     if(doc != nullptr){
         JsonObjectToArrOfVectors(doc);
         delete doc;
     }
 
     delete cArrJson;
-
-    Serial.println("end of init");
 
 }
 
