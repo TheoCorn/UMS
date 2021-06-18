@@ -79,8 +79,8 @@ void SensorsIdentifierManager::init(){
 
     JsonDocument * doc = jp::parseJson(cArrJson);
     if(doc != nullptr){
+      //doc is deleted by JsonObjectToArrOfVectors function
         JsonObjectToArrOfVectors(doc);
-        delete doc;
     }
 
     delete cArrJson;
