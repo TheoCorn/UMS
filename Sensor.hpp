@@ -16,28 +16,26 @@ class Sensor{
       Sensor()= default;
 
 
-      /**
-        the uuid identifies individual sensor even of the same type thus can be used for set up
-        every sensor gets its uuid at runtime
-        the uuid ims for internal use only, do not use uuid to change behavior of the sensor
-
-        kinda wired but OK me
-      */
-
-      //get the name of the Sensor
+      ///get the name of the Sensor
       virtual String name() = 0;
-      //the actual i2c address the sensor is using
+
+      ///the actual i2c address the sensor is using
       virtual byte currentAddress() = 0;
-      //default set up for setup from user use setJson()
+
+      ///default set up for setup from user use setJson()
       virtual void setUp() = 0;
-      //used when getting dataFromSensor to display
+
+      ///used when getting dataFromSensor to display
       virtual String getStringForDisplay() = 0;
-      //used when getting dataFromSensor to display, so more data can be displayed
+
+      ///used when getting dataFromSensor to display, so more data can be displayed
       virtual String getExtendedStringForDisplay() = 0;
-      //used when reading
-      //write JsonObject to the Json document
+
+      ///used when reading
+      ///write JsonObject to the Json document
       virtual void readSensor(JsonDocument * ptrDoc) = 0;
-      /*
+
+      /**
        * get the current settings in json format
        *
        * the method has to create a nested object in the JsonDocument which name should reflect the sensor name
@@ -61,8 +59,8 @@ class Sensor{
        * @param JsonDocument*
        */
       virtual void getJson(JsonDocument * ptrDoc) = 0;
-      //set setting of the sensor
-      // virtual void setJson(JsonDocument * ptrDoc) = 0;
+
+      ///set setting of the sensor
       virtual void setJson(JsonVariant * v) = 0;
 
       virtual ~Sensor() = default;
