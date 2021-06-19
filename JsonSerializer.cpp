@@ -20,7 +20,7 @@ js::serializeRet* js::serializeDoc(JsonDocument* doc){
     return sr;
 }
 
-js::serializeRet* serializeError(error::Error* error){
+js::serializeRet* js::serializeError(error::Error* error){
     DynamicJsonDocument *doc = new DynamicJsonDocument(256);
 
     JsonObject errObj = doc->createNestedObject("e");
