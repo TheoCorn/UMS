@@ -49,6 +49,7 @@ class BluetoothSerial:  public SerialCom
         size_t write(const uint8_t c) override;
         size_t write(const uint8_t *buffer, size_t size) override;
         size_t write(JsonDocument * doc) override;
+        size_t write(Error* error) override;
         char* getString4Display() override;
         void flush() override;
         void end(void);

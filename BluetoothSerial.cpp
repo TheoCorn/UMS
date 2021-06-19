@@ -702,7 +702,16 @@ size_t BluetoothSerial::write(JsonDocument * doc){
 
 }
 
+size_t write(Error* error) override{
+        if (!_spp_client){
+        return 0;
+    }
 
+    js::serializeRet* sr = js::serializeError(error);
+    size_t ret = write((const uint8_t *)(sr->buff), (size_t)(sr->bufLen));
+    delete sr;
+    return ret;
+}
 
 void BluetoothSerial::flush()
 {

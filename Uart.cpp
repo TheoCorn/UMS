@@ -49,6 +49,13 @@ size_t Uart::write(JsonDocument* doc) {
     return ret;
 }
 
+size_t Uart::write(Error* error) {
+    js::serializeRet * sr = js::serializeError(error);
+    size_t ret = Serial.write(sr->buff, sr->bufLen);
+    delete sr;
+    return ret
+}
+
 void Uart::flush(){
     Serial.flush();
 }

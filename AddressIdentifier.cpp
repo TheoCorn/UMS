@@ -42,10 +42,7 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
 }
 
 void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, std::map<uint8_t, Sensor*> * sensors, std::vector<csa::ConflictingAddressStruct*> * conflict){
-    //todo delete print
-    Serial.print("enumPos:");
-    Serial.println(enumPos);
-    Serial.flush();
+
     Sensor* sensor = getSensorPointerForEnumPos(enumPos, address);
 
     if(sensor != nullptr) {

@@ -8,7 +8,7 @@
 #include <ArduinoJson.h>
 
 
-namespace js{
+namespace js {
 
     struct serializeRet{
         char* buff;
@@ -16,9 +16,11 @@ namespace js{
     };
 
     js::serializeRet* serializeDoc(JsonDocument * doc);
-
+    js::serializeRet* serializeError(Error* error);
 
 }
+
+
 
 
 #endif //UMDWITHCLASS3_JSONSERIALIZER_H

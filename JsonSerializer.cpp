@@ -4,6 +4,7 @@
 
 #include "JsonSerializer.h"
 #include <ArduinoJson.h>
+#include "Error.h"
 
 js::serializeRet* js::serializeDoc(JsonDocument* doc){
 
@@ -17,4 +18,11 @@ js::serializeRet* js::serializeDoc(JsonDocument* doc){
     sr->buff = buffer;
 
     return sr;
+}
+
+js::serializeRet* serializeError(Error* error){
+    int bufLen =  measureJson(*doc);
+    char* buffer = new char[bufLen];
+
+    DynamicJsonDocument *doc = new DynamicJsonDocument(256);
 }

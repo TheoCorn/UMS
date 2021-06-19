@@ -33,6 +33,7 @@
 #include "gpioNames.h"
 #include "asciiMakros.h"
 #include "SPIFFS.h"
+#include "Error.h"
 
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
@@ -147,7 +148,7 @@ void loop() {
 
 }
 
-/*
+/**
   identifies json object by key and does the correct action
 
   @param p JsonPair of the object
@@ -178,6 +179,8 @@ void onSensorsElementReceive(JsonVariant * v) {
       sensors->at(key)->setJson(v);
     } catch (...) {
       //todo: inform pair device update of sensor has failed (create function exceptionOfKeyBuilder that build json to be send)
+
+
     }
   }
 
@@ -225,9 +228,9 @@ void onStopReading() {
   //    sensorIdentifier = new SensorsIdentifierManager();
 }
 
-/*
+/**
   prepares and deepsleeps the esp32
-**/
+*/
 void sleep() {
   mDisplay->sleep();
   esp_deep_sleep_start();
