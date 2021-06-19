@@ -21,8 +21,22 @@ js::serializeRet* js::serializeDoc(JsonDocument* doc){
 }
 
 js::serializeRet* serializeError(error::Error* error){
+    DynamicJsonDocument *doc = new DynamicJsonDocument(256);
+
+    JsonObject errObj = doc->createNestedObject("e");
+    errObj["name"] = error->name;
+    errObj["message"] = error->message;
+    errObj["cad"] = error->createAlertDialog;
+    errObj["importance"] = error->importance;
+
     int bufLen =  measureJson(*doc);
     char* buffer = new char[bufLen];
 
-    DynamicJsonDocument *doc = new DynamicJsonDocument(256);
+    serializeJson(*doc, buffer, bufLen);
+
+    js::serializeRet* sr;
+    sr->bufLen = bufLen;
+    sr->buff = buffer;
+
+    return sr;
 }

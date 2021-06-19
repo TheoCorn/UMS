@@ -39,7 +39,7 @@ namespace error {
          * @param name name of the error
          * @param message details about the error
          */
-        Error(String name, String message) : Error(name, message, true, error::Importance.MILD) {}
+        Error(String name, String message) : Error(name, message, true, error::Importance::MILD) {}
 
         /**
          * error class defines the way errors are send to host app

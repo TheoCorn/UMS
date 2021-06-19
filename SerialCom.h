@@ -81,7 +81,7 @@ public:
     /**
      * Serializes an Error as Json and sends it
      */
-    virtual size_t write(Error* error) = 0;
+    virtual size_t write(error::Error* error) = 0;
 
     /**
      * flushes the Rx buffer
