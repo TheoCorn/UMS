@@ -28,9 +28,9 @@ void DisplayFunctions::init() {
 
 void DisplayFunctions::displayWhenReading() {
     display->clearDisplay();
-  showReading(true);
+    showReading(true);
 
-  display->display();
+     display->display();
 }
 
 void DisplayFunctions::displayWhenNotReading() {

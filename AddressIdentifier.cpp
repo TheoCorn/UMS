@@ -22,17 +22,10 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
     Serial.println("addSensor");
     if (numEnumSensorInVectorArray[address].empty()) return;
 
-    //todo delete Debug
-    Serial.println("addSensor check if address empty");
-    Serial.flush();
-    delay(2);
 
     if (numEnumSensorInVectorArray[address].size() == 1){
-        Serial.print("adding sensor at: ");
-        Serial.println(address);
         addSensor(numEnumSensorInVectorArray[address][0], address, sensors, conflict);
     }else {
-        Serial.println("failed");
         csa::ConflictingAddressStruct* con;
         con->address = address;
         con->EnumPosOfSensors = numEnumSensorInVectorArray[address];
@@ -101,17 +94,5 @@ void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
         }
         i++;
     }
-
-    //todo delete debug
-//    for(int i = 0; i < 128; i++){
-//        Serial.print("[");
-//        for(unsigned int t : numEnumSensorInVectorArray[i]){
-//            Serial.print(t);
-//            Serial.print(',');
-//        }
-//        Serial.println("]");
-//    }
-//    Serial.flush();
-
 
 }

@@ -59,7 +59,7 @@ JsonDocument * jp::parseJson(const char * buffer){
     DeserializationError err = deserializeJson(*doc, buffer);
 
     if (err != DeserializationError::Ok) {
-        log_e("error in deserialization: " + err.c_str());
+//        log_e("error in deserialization: " + err.c_str());
         return nullptr;
     }
 

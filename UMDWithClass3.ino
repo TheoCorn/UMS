@@ -125,8 +125,13 @@ void loop() {
 
 
   if (reading) {
-    //todo implement sending
-    mDisplay->displayWhenReading();
+      DynamicJsonDocument* doc = new DynamicJsonDocument(capacity);
+      for (auto const& sTuple : *sensors) {
+          sTuple.second->getJson(doc);
+      }
+      serialCom->write(doc)
+      delete doc;
+
   } else {
     auto conflicts = new std::vector<csa::ConflictingAddressStruct*>();
     ss::checkI2C(conflicts, sensors, sensorIdentifier);
@@ -211,6 +216,8 @@ void onGetElementReceive(JsonVariant * v) {
 
 void onStartReading() {
   detachInterrupt(sleepPin);
+  mDisplay->displayWhenReading();
+
   //  delete sensorIdentifier;
 }
 
