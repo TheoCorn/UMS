@@ -75,7 +75,6 @@ void SensorsIdentifierManager::init(){
     }
 
     delete cArrJson;
-
 }
 
 void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){

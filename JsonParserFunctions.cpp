@@ -16,7 +16,7 @@ void jp::cycleThruObj (JsonDocument * doc, void (*actualDo)(JsonPair*)) {
 }
 
 using namespace jp;
-/*
+/**
    deserializes json and starts the process of unpacking the Json
    earpieces '\0' to the end of the vector
 
@@ -33,7 +33,7 @@ void jp::parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actualDo)(
 
 }
 using namespace jp;
-/*
+/**
  * deserializes the Json call the function mDo points to that takes as input the actualDo function Pointer
  * if the second function pointer is not needed pass nullptr
  *
@@ -48,7 +48,7 @@ void jp::parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*
 }
 
 using namespace jp;
-/*
+/**
  * parses json and return JsonDocument* the user of the function must manage the lifecycle of the JsonDocument*
  *
  * @param const char* buffer the Serialized Json

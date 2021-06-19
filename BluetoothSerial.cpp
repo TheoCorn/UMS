@@ -24,6 +24,8 @@
 #include <ArduinoJson.h>
 #include "JsonSerializer.h"
 
+#include "Error.h"
+
 
 #if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
 
@@ -702,7 +704,7 @@ size_t BluetoothSerial::write(JsonDocument * doc){
 
 }
 
-size_t write(Error* error) override{
+size_t write(error::Error* error) override{
         if (!_spp_client){
         return 0;
     }

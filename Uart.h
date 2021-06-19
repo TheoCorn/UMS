@@ -11,6 +11,7 @@
 #include "sdkconfig.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "Error.h"
 
 
 class Uart: public SerialCom {
@@ -26,7 +27,7 @@ public:
     size_t write(const uint8_t) override;
     size_t write(const uint8_t *buffer, size_t size) override;
     size_t write(JsonDocument* doc) override;
-    size_t write(Error* error) override;
+    size_t write(error::Error* error) override;
     void flush() override;
 
     void startConnectionCheck(int duration) override;

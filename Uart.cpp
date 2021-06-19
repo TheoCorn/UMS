@@ -9,6 +9,7 @@
 #include "sdkconfig.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "Error.h"
 
 
 #define UART_BAUD 115200
@@ -49,7 +50,7 @@ size_t Uart::write(JsonDocument* doc) {
     return ret;
 }
 
-size_t Uart::write(Error* error) {
+size_t Uart::write(error::Error* error) {
     js::serializeRet * sr = js::serializeError(error);
     size_t ret = Serial.write(sr->buff, sr->bufLen);
     delete sr;

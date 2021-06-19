@@ -6,6 +6,7 @@
 #define UMDWITHCLASS3_JSONSERIALIZER_H
 
 #include <ArduinoJson.h>
+#include "Error.h"
 
 
 namespace js {
@@ -16,7 +17,7 @@ namespace js {
     };
 
     js::serializeRet* serializeDoc(JsonDocument * doc);
-    js::serializeRet* serializeError(Error* error);
+    js::serializeRet* serializeError(error::Error* error);
 
 }
 

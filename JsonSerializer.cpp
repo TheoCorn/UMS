@@ -20,7 +20,7 @@ js::serializeRet* js::serializeDoc(JsonDocument* doc){
     return sr;
 }
 
-js::serializeRet* serializeError(Error* error){
+js::serializeRet* serializeError(error::Error* error){
     int bufLen =  measureJson(*doc);
     char* buffer = new char[bufLen];
 

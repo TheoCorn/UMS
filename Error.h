@@ -39,7 +39,7 @@ namespace error {
          * @param name name of the error
          * @param message details about the error
          */
-        Error(String name, String message) : Error(name, message, true, Importance.MILD) {}
+        Error(String name, String message) : Error(name, message, true, error::Importance.MILD) {}
 
         /**
          * error class defines the way errors are send to host app
@@ -50,7 +50,7 @@ namespace error {
          * @param message details about the error
          * @param importance
          */
-        Error(String name, String message, Importance importance) : Error(name, message, true, importance) {}
+        Error(String name, String message, error::Importance importance) : Error(name, message, true, importance) {}
 
         /**
          * error class defines the way errors are send to host app
@@ -67,7 +67,7 @@ namespace error {
          *
          * @param importance
          */
-        Error(String name, String message, bool createAlertDialog, Importance importance) : name(name),
+        Error(String name, String message, bool createAlertDialog, error::Importance importance) : name(name),
                                                                                             message(message),
                                                                                             createAlertDialog(
                                                                                                     createAlertDialog),
