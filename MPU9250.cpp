@@ -16,6 +16,7 @@ MPU9250::MPU9250(uint8_t address) : Sensor(){
 }
 
     void MPU9250::setUp()  {
+
       // setting the accelerometer full scale range to +/-8G
       setAccelRange(MPU9250::ACCEL_RANGE_8G);
       // setting the gyroscope full scale range to +/-500 deg/s
