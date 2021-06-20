@@ -60,7 +60,7 @@ void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, 
         case sensorEnum::MPU9250: return (Sensor*)(new class MPU9250(address)); break;
 //        case sensorEnum::BMP280: return (sensor*)(new class BMP280); break;
 
-        default: return UnknownSensor(address); break;
+        default: return (Sensor*) new UnknownSensor(address); break;
     }
 }
 

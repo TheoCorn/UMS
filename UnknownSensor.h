@@ -8,16 +8,21 @@
 #include "Sensor.hpp"
 
 class UnknownSensor : public Sensor {
-    private uint8_t address;
-
+  private:
+    uint8_t address;
+    
+  public:
     UnknownSensor(uint8_t address) : address(address) {}
 
-    String name() override { return "Unknown Sensor" }
-    byte currentAddress() override { return address }
+    String name() override { return "Unknown Sensor"; }
+    byte currentAddress() override { return address; }
     void setUp() override { }
-    String getStringForDisplay() override { return name() }
-    String getExtendedStringForDisplay() override { return nullptr }
+    String getStringForDisplay() override { return name(); }
+    String getExtendedStringForDisplay() override { return ""; }
     void readSensor(JsonDocument * ptrDoc) override { }
+    void getJson(JsonDocument * ptrDoc) override {}
+    void setJson(JsonVariant * v) override {}
+
 };
 
 

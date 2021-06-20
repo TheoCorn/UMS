@@ -54,7 +54,7 @@ size_t Uart::write(error::Error* error) {
     js::serializeRet * sr = js::serializeError(error);
     size_t ret = Serial.write(sr->buff, sr->bufLen);
     delete sr;
-    return ret
+    return ret;
 }
 
 void Uart::flush(){

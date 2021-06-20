@@ -130,7 +130,7 @@ void loop() {
       for (auto const& sTuple : *sensors) {
           sTuple.second->getJson(doc);
       }
-      serialCom->write(doc)
+      serialCom->write(doc);
       delete doc;
 
   } else {
