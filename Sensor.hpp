@@ -14,7 +14,7 @@
 class Sensor{
   public:
       Sensor()= default;
-
+      virtual ~Sensor() = default;
 
       ///get the name of the Sensor
       virtual String name() = 0;
@@ -63,7 +63,7 @@ class Sensor{
       ///set setting of the sensor
       virtual void setJson(JsonVariant * v) = 0;
 
-      virtual ~Sensor() = default;
+      inline JsonObject createSensorObject();
 };
 
 
