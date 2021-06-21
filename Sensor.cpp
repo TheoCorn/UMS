@@ -73,6 +73,24 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const String &name
     active.add(true);
 }
 
+void Sensor::generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t uuid, String feature,
+                                   XSetting& xSetting){
+
+    JsonObject sensorObj = createSensorObject(doc);
+    fillBasicInfo(sensorObj, name, uuid);
+
+    JsonObject featuresObj = createFeaturesObject(sensorObj);
+    JsonArray features = featuresObj.createNestedArray("features");
+    JsonArray active = featuresObj.createNestedArray("active");
+
+    features.add(feature);
+    active.add(true);
+
+    JsonObject xSettingsObj = createXSettingsObject(sensorObj);
+    xSettingBuilder(xSetting, xSettingsObj);
+
+}
+
 
 void Sensor::generateTemplatedSensorObject(JsonDocument *doc, String &name, uint8_t &uuid,
                                            std::vector<String> &features, std::vector<bool> &activeFeatures,
@@ -81,11 +99,8 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, String &name, uint
     JsonObject sensorObj = createSensorObject(doc);
     fillBasicInfo(sensorObj, name, uuid);
 
-    //Features
-    JsonObject featuresObj = createFeaturesObject(sensorObj);
-    JsonArray featuresArr = featuresObj.createNestedArray("features");
-    JsonArray active = featuresObj.createNestedArray("active");
-
+    generateFeatures(sensorObj, features, activeFeatures);
+    generateXSettings(sensorObj, xSettings);
 
 }
 
