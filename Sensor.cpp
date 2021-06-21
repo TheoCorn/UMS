@@ -21,6 +21,22 @@ JsonObject Sensor::createISettingsObject(JsonObject &obj) {
     return obj.createNestedObject("ISettings");
 }
 
+void Sensor::generateFeatures(JsonObject& sensorObj, std::vector<String> &features, std::vector<bool> &activeFeatures){
+    JsonObject featuresObj = createFeaturesObject(sensorObj);
+
+    JsonArray featuresArr = sensorObj.createNestedArray("features");
+    JsonArray active = sensorObj.createNestedArray("active");
+
+    for (auto const &element : features) {
+        featuresArr.add(element);
+    }
+    for(auto const &element : activeFeatures){
+        active.add(element);
+    }
+
+}
+
+
 void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const String &name, const uint8_t &uuid) {
     generateTemplatedSensorObject(doc, name, uuid, name);
 }
@@ -44,6 +60,14 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, String &name, uint
                                            std::vector<String> &features, std::vector<bool> &activeFeatures,
                                            std::vector<XSetting> &xSettings
                                            ) {
+    JsonObject sensorObj = createSensorObject(doc);
+    fillBasicInfo(sensorObj, name, uuid);
+
+    //Features
+    JsonObject featuresObj = createFeaturesObject(sensorObj);
+    JsonArray featuresArr = featuresObj.createNestedArray("features");
+    JsonArray active = featuresObj.createNestedArray("active");
+
 
 }
 
@@ -54,18 +78,8 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, String &name, uint
     JsonObject sensorObj = createSensorObject(doc);
     fillBasicInfo(sensorObj, name, uuid);
 
-    //Features
-    JsonObject featuresObj = createFeaturesObject(sensorObj);
-    JsonArray featuresArr = featuresObj.createNestedArray("features");
-    JsonArray active = featuresObj.createNestedArray("active");
 
-
-    for (auto const &element : features) {
-        featuresArr.add(element);
-    }
-    for(auto const &element : activeFeatures){
-        active.add(element);
-    }
+    generateFeatures(sensorObj, features, activeFeatures);
 
     //XSettings
     JsonObject xSettingsObj = createXSettingsObject(sensorObj);

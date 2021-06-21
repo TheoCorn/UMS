@@ -173,6 +173,13 @@ protected:
      */
     static void iSettingBuilder(const ISetting& iSetting, JsonObject& iSettingsObj);
 
+    static void generateFeatures(JsonObject& sensorObj, std::vector<String> &features, std::vector<bool> &activeFeatures);
+
+    static void generateXSettings(JsonObject& sensorObj, std::vector<XSetting> &xSettings);
+
+    static void generateISettings(JsonObject& sensorObj, std::vector<ISetting> &iSettings);
+
+
     /**
      * holds all data to create a ISetting
      */
