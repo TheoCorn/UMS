@@ -82,16 +82,16 @@ public:
     virtual void setJson(JsonVariant *v) = 0;
 
     ///@return nested json object with name "Sensor"
-    inline JsonObject createSensorObject(JsonDocument *doc);
+    static JsonObject createSensorObject(JsonDocument *doc);
 
     ///@return nested json object with name "Features"
-    inline JsonObject createFeaturesObject(JsonObject& obj);
+    static JsonObject createFeaturesObject(JsonObject& obj);
 
     ///@return nested json object with name "XSettings"
-    inline JsonObject createXSettingsObject(JsonObject& obj);
+    static JsonObject createXSettingsObject(JsonObject& obj);
 
     ///@return nested json object with name "ISettings"
-    inline JsonObject createISettingsObject(JsonObject& obj);
+    static JsonObject createISettingsObject(JsonObject& obj);
 
 
 
