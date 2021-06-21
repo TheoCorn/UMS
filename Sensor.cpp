@@ -123,7 +123,7 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, String &name, uint
 }
 
 
-void Sensor::fillBasicInfo(JsonObject &obj, String &name, uint8_t &uuid) {
+void Sensor::fillBasicInfo(JsonObject& obj, const String& name, const uint8_t& uuid) {
     obj["name"] = name;
     obj["uuid"] = uuid;
 }

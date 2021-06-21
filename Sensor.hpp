@@ -128,7 +128,7 @@ protected:
      * @param name
      * @param uuid
      */
-    static void fillBasicInfo(JsonObject& obj, String& name, uint8_t& uuid);
+    static void fillBasicInfo(JsonObject& obj, const String& name, const uint8_t& uuid);
 
     /**
      * build a xSetting object from XSetting struct and adds it to the XSettings json object
