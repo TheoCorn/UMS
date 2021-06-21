@@ -54,13 +54,13 @@ public:
      *
      *   "Features":{
      *    "features": [name0, name1, name2, name3],
-     *    "active": [true, false, true, false],
-     *        ...
+     *    "active": [true, false, true, false]
      *   }
      *
      * the method can create a nested object in the sensor object called "XSettings" short for exclusive settings
      * basically forces the user to chose between multiple options
-     * meant to be used for stuff like accuracy / range settings
+     * meant to be used for stuff like accuracy / range settings...
+     *
      * "XSettings":[
      *    "xSetting":{
      *        "name":"setting0",
@@ -70,7 +70,7 @@ public:
      *     "xSetting":{
      *        "name":"setting1",
      *        "options":["option0", "option1", "option2"],
-     *        "active":0
+     *        "active":2
      *     }
      * ]
      *
@@ -144,10 +144,38 @@ public:
 
 
 protected:
+    /**
+     * fills in name and uuid of sensor to a Templated Sensor Object
+     *
+     * @param obj
+     * @param name
+     * @param uuid
+     */
     static void fillBasicInfo(JsonObject& obj, String& name, uint8_t& uuid);
+
+    /**
+     * build a xSetting object from XSetting struct and adds it to the XSettings json object
+     *
+     * @param xSetting
+     * @param xSettingsObj
+     *
+     * @see Sensor::XSetting
+     */
     static void xSettingBuilder(const XSetting& xSetting, JsonObject& xSettingsObj);
+
+    /**
+     *
+     *
+     * @param iSetting
+     * @param iSettingsObj
+     *
+     * @see Sensor::ISetting
+     */
     static void iSettingBuilder(const ISetting& iSetting, JsonObject& iSettingsObj);
 
+    /**
+     * holds all data to create a ISetting
+     */
     struct ISetting{
         String& name;
         bool& isActive;
@@ -155,6 +183,10 @@ protected:
         ISetting(String& mName, bool& misActive) : name(mName), isActive(misActive) {}
     };
 
+
+    /**
+     * hold all data to create a XSetting
+     */
     struct XSetting{
         String& name;
         std::vector<String>& options;
