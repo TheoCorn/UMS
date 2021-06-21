@@ -144,6 +144,31 @@ public:
 
 
 protected:
+
+
+    /**
+ * holds all data to create a ISetting
+ */
+    struct ISetting{
+        String& name;
+        bool& isActive;
+
+        ISetting(String& mName, bool& misActive) : name(mName), isActive(misActive) {}
+    };
+
+
+    /**
+     * hold all data to create a XSetting
+     */
+    struct XSetting{
+        String& name;
+        std::vector<String>& options;
+        int& active;
+
+        XSetting(String& name, std::vector<String>& options, int& active) : name(name), options(options), active(active) {}
+    };
+
+
     /**
      * fills in name and uuid of sensor to a Templated Sensor Object
      *
@@ -180,27 +205,6 @@ protected:
     static void generateISettings(JsonObject& sensorObj, std::vector<ISetting> &iSettings);
 
 
-    /**
-     * holds all data to create a ISetting
-     */
-    struct ISetting{
-        String& name;
-        bool& isActive;
-
-        ISetting(String& mName, bool& misActive) : name(mName), isActive(misActive) {}
-    };
-
-
-    /**
-     * hold all data to create a XSetting
-     */
-    struct XSetting{
-        String& name;
-        std::vector<String>& options;
-        int& active;
-
-        XSetting(String& name, std::vector<String>& options, int& active) : name(name), options(options), active(active) {}
-    };
 };
 
 
