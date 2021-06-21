@@ -102,7 +102,7 @@ public:
      * @param name sensor name
      * @param uuid i2cAddress
      */
-    static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid);
+    static void generateTemplatedSensorObject(JsonDocument *doc, const String& name, const uint8_t& uuid);
 
     /**
      * creates the simplest templated Sensor json nested object
@@ -113,7 +113,7 @@ public:
      * @param uuid i2cAddress
      * @param feature name of the data set
      */
-    static void generateTemplatedSensorObject(JsonDocument *doc, String name, uint8_t uuid, String feature);
+    static void generateTemplatedSensorObject(JsonDocument *doc, const String& name, const uint8_t& uuid, const String& feature);
 
     /**
      * creates a templated Sensor json nested object
@@ -134,12 +134,19 @@ public:
 
     static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid,
                                               std::vector<String>& features, std::vector<bool>& activeFeatures,
-                                              std::vector<std::vector<String>>& xSettings, std::vector<int>& activeXSettings,
-                                              )
+                                              std::vector<XSetting>& xSettings
+                                              );
+
+    static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid,
+                                              std::vector<String>& features, std::vector<bool>& activeFeatures,
+                                              std::vector<XSetting>& xSettings, std::vector<ISetting>& iSettings
+    );
 
 
-private:
+protected:
     static void fillBasicInfo(JsonObject& obj, String& name, uint8_t& uuid);
+    static void xSettingBuilder(const XSetting& xSetting, JsonObject& xSettingsObj);
+    static void iSettingBuilder(const ISetting& iSetting, JsonObject& iSettingsObj);
 
     struct ISetting{
         String& name;
