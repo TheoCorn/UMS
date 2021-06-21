@@ -36,6 +36,24 @@ void Sensor::generateFeatures(JsonObject& sensorObj, std::vector<String> &featur
 
 }
 
+void Sensor::generateXSettings(JsonObject& sensorObj, std::vector<XSetting> &xSettings){
+
+    JsonObject xSettingsObj = createXSettingsObject(sensorObj);
+    for (auto const &xs : xSettings) {
+        xSettingBuilder(xs, xSettingsObj);
+    }
+}
+
+
+void Sensor::generateISettings(JsonObject& sensorObj, std::vector<ISetting> &iSettings){
+
+    JsonObject iSettingsObj = createISettingsObject(sensorObj);
+    for( auto const& is : iSettings){
+        iSettingBuilder(is, iSettingsObj);
+    }
+
+}
+
 
 void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const String &name, const uint8_t &uuid) {
     generateTemplatedSensorObject(doc, name, uuid, name);
@@ -78,21 +96,9 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, String &name, uint
     JsonObject sensorObj = createSensorObject(doc);
     fillBasicInfo(sensorObj, name, uuid);
 
-
     generateFeatures(sensorObj, features, activeFeatures);
-
-    //XSettings
-    JsonObject xSettingsObj = createXSettingsObject(sensorObj);
-    for (auto const &xs : xSettings) {
-        xSettingBuilder(xs, xSettingsObj);
-    }
-
-    //ISettings
-    JsonObject iSettingsObj = createISettingsObject(sensorObj);
-    for( auto const& is : iSettings){
-        iSettingBuilder(is, iSettingsObj);
-    }
-
+    generateXSettings(sensorObj, xSettings);
+    generateISettings(sensorObj, iSettings);
 }
 
 
