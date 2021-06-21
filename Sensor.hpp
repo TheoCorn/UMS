@@ -94,50 +94,6 @@ public:
     inline JsonObject createISettingsObject(JsonObject& obj);
 
 
-    /**
-     * creates the simplest templated Sensor json nested object
-     * so it will contain the name, uuid, single feature (name of feature is the name parameter) that is automatically enabled no XSettings
-     *
-     * @param doc
-     * @param name sensor name
-     * @param uuid i2cAddress
-     */
-    static void generateTemplatedSensorObject(JsonDocument *doc, const String& name, const uint8_t& uuid);
-
-    /**
-     * creates the simplest templated Sensor json nested object
-     * so it will contain the name, uuid, single feature that is automatically enabled no XSettings
-     *
-     * @param doc
-     * @param name sensor name
-     * @param uuid i2cAddress
-     * @param feature name of the data set
-     */
-    static void generateTemplatedSensorObject(JsonDocument *doc, const String& name, const uint8_t& uuid, const String& feature);
-
-    /**
-     * creates a templated Sensor json nested object
-     * so it will contain the name, uuid, single feature that is automatically enabled and single XSetting
-     *
-     * @param doc
-     * @param name sensor name
-     * @param uuid i2cAddress
-     * @param feature name of the data set
-     * @param xSetting single XSetting
-     */
-    static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t uuid, String feature,
-                                             XSetting& xSetting);
-
-    static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid,
-                                              std::vector<String>& features, std::vector<bool>& activeFeatures,
-                                              std::vector<XSetting>& xSettings
-                                              );
-
-    static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid,
-                                              std::vector<String>& features, std::vector<bool>& activeFeatures,
-                                              std::vector<XSetting>& xSettings, std::vector<ISetting>& iSettings
-    );
-
 
 protected:
 
@@ -199,6 +155,50 @@ protected:
     static void generateXSettings(JsonObject& sensorObj, std::vector<XSetting> &xSettings);
 
     static void generateISettings(JsonObject& sensorObj, std::vector<ISetting> &iSettings);
+
+    /**
+ * creates the simplest templated Sensor json nested object
+ * so it will contain the name, uuid, single feature (name of feature is the name parameter) that is automatically enabled no XSettings
+ *
+ * @param doc
+ * @param name sensor name
+ * @param uuid i2cAddress
+ */
+    static void generateTemplatedSensorObject(JsonDocument *doc, const String& name, const uint8_t& uuid);
+
+    /**
+     * creates the simplest templated Sensor json nested object
+     * so it will contain the name, uuid, single feature that is automatically enabled no XSettings
+     *
+     * @param doc
+     * @param name sensor name
+     * @param uuid i2cAddress
+     * @param feature name of the data set
+     */
+    static void generateTemplatedSensorObject(JsonDocument *doc, const String& name, const uint8_t& uuid, const String& feature);
+
+    /**
+     * creates a templated Sensor json nested object
+     * so it will contain the name, uuid, single feature that is automatically enabled and single XSetting
+     *
+     * @param doc
+     * @param name sensor name
+     * @param uuid i2cAddress
+     * @param feature name of the data set
+     * @param xSetting single XSetting
+     */
+    static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t uuid, String feature,
+                                              XSetting& xSetting);
+
+    static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid,
+                                              std::vector<String>& features, std::vector<bool>& activeFeatures,
+                                              std::vector<XSetting>& xSettings
+    );
+
+    static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid,
+                                              std::vector<String>& features, std::vector<bool>& activeFeatures,
+                                              std::vector<XSetting>& xSettings, std::vector<ISetting>& iSettings
+    );
 
 
 };
