@@ -128,10 +128,6 @@ public:
     static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t uuid, String feature,
                                              XSetting& xSetting);
 
-    static void generateTemplatedSensorObject(JsonDocument *doc, String name, uint8_t uuid,
-                                             std::vector<String> features, std::vector<bool> activeFeatures,
-                                             std::vector<std::vector<String>> xSettings, std::vector<int> activeXSettings);
-
     static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid,
                                               std::vector<String>& features, std::vector<bool>& activeFeatures,
                                               std::vector<XSetting>& xSettings

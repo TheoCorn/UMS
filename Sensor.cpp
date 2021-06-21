@@ -91,6 +91,12 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, String& name, uint
 
 }
 
+void Sensor::generateTemplatedSensorObject(JsonDocument *doc, String name, uint8_t uuid,
+                                   std::vector<String> features, std::vector<bool> activeFeatures,
+                                   std::vector<std::vector<String>> xSettings, std::vector<int> activeXSettings){
+
+}
+
 
 void Sensor::generateTemplatedSensorObject(JsonDocument *doc, String &name, uint8_t &uuid,
                                            std::vector<String> &features, std::vector<bool> &activeFeatures,
