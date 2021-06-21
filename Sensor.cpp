@@ -135,7 +135,7 @@ void Sensor::xSettingBuilder(const XSetting& xSetting, JsonObject& xSettingsObj)
 }
 
 void Sensor::iSettingBuilder(const ISetting& iSetting, JsonObject& iSettingsObj) {
-    JsonObject isjo = xSettingsObj.createNestedObject("iSetting");
+    JsonObject isjo = iSettingsObj.createNestedObject("iSetting");
     isjo["name"] = iSettingsObj.createNestedObject("iSetting");
     isjo["active"] = iSetting.isActive;
 }
