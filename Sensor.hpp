@@ -22,6 +22,9 @@ public:
     ///get the name of the Sensor
     virtual String name() = 0;
 
+    //
+    virtual uint32_t uuid() =0;
+
     ///the actual i2c address the sensor is using
     virtual byte currentAddress() = 0;
 
@@ -47,7 +50,8 @@ public:
      * (from now known as the sensor object)
      * remember that multiple sensors of the same function can be present
      *
-     * the method has to create 2 variables in the sensor object called "name" and "uuid" witch is the i2c address
+     * the method has to create 2 variables in the sensor object called "rsid" which is the i2c address or other runtime address...
+     * and "uuid" which is the sensor uuid This uuid has to have its config file in the app
      *
      * the method has to create a nested object in the sensor object called "features"
      * each variable in features represents a dataset for the graph (one feature = one 'line' in graph)
@@ -81,6 +85,10 @@ public:
     ///set setting of the sensor
     virtual void setJson(JsonVariant *v) = 0;
 
+
+
+protected:
+
     ///@return nested json object with name "Sensor"
     static JsonObject createSensorObject(JsonDocument *doc);
 
@@ -93,9 +101,6 @@ public:
     ///@return nested json object with name "ISettings"
     static JsonObject createISettingsObject(JsonObject& obj);
 
-
-
-protected:
 
 
     /// holds all data to create a ISetting
@@ -136,7 +141,7 @@ protected:
      * @param name
      * @param uuid
      */
-    static void fillBasicInfo(JsonObject& obj, const String& name, const uint8_t& uuid);
+    static void fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t& uuid);
 
     /**
      * build a xSetting object from XSetting struct and adds it to the XSettings json object
@@ -199,7 +204,7 @@ protected:
  * @param name sensor name
  * @param uuid i2cAddress
  */
-    static void generateTemplatedSensorObject(JsonDocument *doc, const String& name, const uint8_t& uuid);
+    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid);
 
     /**
      * creates the simplest templated Sensor json nested object
@@ -210,7 +215,7 @@ protected:
      * @param uuid i2cAddress
      * @param feature name of the data set
      */
-    static void generateTemplatedSensorObject(JsonDocument *doc, const String& name, const uint8_t& uuid, const String& feature);
+    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid, const String& feature);
 
     /**
      * creates a templated Sensor json nested object
@@ -222,7 +227,7 @@ protected:
      * @param feature name of the data set
      * @param xSetting single XSetting
      */
-    static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t uuid, String feature,
+    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid, String feature,
                                               XSetting& xSetting);
 
 
@@ -238,7 +243,7 @@ protected:
      * @param activeFeatures which features will be used when reading the Sensor
      * @param xSettings
      */
-    static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid,
+    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid,
                                               std::vector<String>& features, std::vector<bool>& activeFeatures,
                                               std::vector<XSetting>& xSettings
     );
@@ -256,7 +261,7 @@ protected:
      * @param xSettings
      * @param iSettings
      */
-    static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid,
+    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid,
                                               std::vector<String>& features, std::vector<bool>& activeFeatures,
                                               std::vector<XSetting>& xSettings, std::vector<ISetting>& iSettings
     );

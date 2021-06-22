@@ -54,7 +54,7 @@ class MPU9250 : public Sensor{
         LP_ACCEL_ODR_500HZ = 11
     };
 
-    String accelRangeString[4] = { "2g", "4G", "8G", "16G" };
+    String accelRangeString[4] = { "2G", "4G", "8G", "16G" };
     AccelRange accelRangeEnum[4] = { AccelRange::ACCEL_RANGE_2G, AccelRange::ACCEL_RANGE_4G, AccelRange::ACCEL_RANGE_8G, AccelRange::ACCEL_RANGE_16G };
     bool accelRangeBool[4] = { false, false, true, false };
 
