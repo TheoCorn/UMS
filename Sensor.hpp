@@ -103,6 +103,11 @@ protected:
         String& name;
         bool& isActive;
 
+        /**
+         *
+         * @param mName name of the setting
+         * @param misActive is active(on/ off)
+         */
         ISetting(String& mName, bool& misActive) : name(mName), isActive(misActive) {}
     };
 
