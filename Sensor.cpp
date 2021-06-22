@@ -30,7 +30,7 @@ void Sensor::generateFeatures(JsonObject& sensorObj, std::vector<String> &featur
     for (auto const &element : features) {
         featuresArr.add(element);
     }
-    for(auto const &element : activeFeatures){
+    for(auto const element : activeFeatures){
         active.add(element);
     }
 
