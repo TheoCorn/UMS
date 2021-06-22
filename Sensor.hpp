@@ -98,9 +98,7 @@ public:
 protected:
 
 
-    /**
- * holds all data to create a ISetting
- */
+    /// holds all data to create a ISetting
     struct ISetting{
         String& name;
         bool& isActive;
@@ -109,14 +107,19 @@ protected:
     };
 
 
-    /**
-     * hold all data to create a XSetting
-     */
+
+    ///holds  all data to create a XSetting
     struct XSetting{
         String& name;
         std::vector<String>& options;
         int& active;
 
+        /**
+         *
+         * @param name name of the Setting
+         * @param options options
+         * @param active active option
+         */
         XSetting(String& name, std::vector<String>& options, int& active) : name(name), options(options), active(active) {}
     };
 
@@ -141,7 +144,7 @@ protected:
     static void xSettingBuilder(const XSetting& xSetting, JsonObject& xSettingsObj);
 
     /**
-     *
+     *builds an ISetting Json Object from ISetting struct
      *
      * @param iSetting
      * @param iSettingsObj
@@ -150,10 +153,37 @@ protected:
      */
     static void iSettingBuilder(const ISetting& iSetting, JsonObject& iSettingsObj);
 
+    /**
+     * generates a Features Json object
+     *
+     * @param sensorObj
+     * @param features
+     * @param activeFeatures
+     */
     static void generateFeatures(JsonObject& sensorObj, std::vector<String> &features, std::vector<bool> &activeFeatures);
 
+    /**
+     * generates XSettings Json object
+     * calls Sensor::createXSettingsObject and calls Sensor::xSettingBuilder for each element of the vector
+     *
+     * @see Sensor::createXSettingsObject
+     * @see Sensor::xSettingBuilder
+     *
+     * @param sensorObj
+     * @param xSettings
+     */
     static void generateXSettings(JsonObject& sensorObj, std::vector<XSetting> &xSettings);
 
+    /**
+     * generates ISettings Json object
+     * calls Sensor::createISettingsObject and calls Sensor::iSettingBuilder for each element of the vector
+     *
+     * @see Sensor::createISettingsObject
+     * @see Sensor::iSettingBuilder
+     *
+     * @param sensorObj
+     * @param iSettings
+     */
     static void generateISettings(JsonObject& sensorObj, std::vector<ISetting> &iSettings);
 
     /**
@@ -190,11 +220,37 @@ protected:
     static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t uuid, String feature,
                                               XSetting& xSetting);
 
+
+    /**
+     *
+     * creates a templated Sensor json nested object
+     * so it will contain the name, uuid, multiple features and XSettings
+     *
+     * @param doc
+     * @param name name of the sensor
+     * @param uuid i2c address
+     * @param features names of the datasets
+     * @param activeFeatures which features will be used when reading the Sensor
+     * @param xSettings
+     */
     static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid,
                                               std::vector<String>& features, std::vector<bool>& activeFeatures,
                                               std::vector<XSetting>& xSettings
     );
 
+
+    /**
+     *
+     * creates a templated Sensor json nested object
+     * so it will contain the name, uuid, multiple features, XSettings and ISettings
+     * @param doc
+     * @param name
+     * @param uuid
+     * @param features
+     * @param activeFeatures
+     * @param xSettings
+     * @param iSettings
+     */
     static void generateTemplatedSensorObject(JsonDocument *doc, String& name, uint8_t& uuid,
                                               std::vector<String>& features, std::vector<bool>& activeFeatures,
                                               std::vector<XSetting>& xSettings, std::vector<ISetting>& iSettings

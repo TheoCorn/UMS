@@ -27,10 +27,10 @@ void Sensor::generateFeatures(JsonObject& sensorObj, std::vector<String> &featur
     JsonArray featuresArr = sensorObj.createNestedArray("features");
     JsonArray active = sensorObj.createNestedArray("active");
 
-    for (auto const &element : features) {
+    for (auto const element : features) {
         featuresArr.add(element);
     }
-    for(auto const element : activeFeatures){
+    for(bool const element : activeFeatures){
         active.add(element);
     }
 
