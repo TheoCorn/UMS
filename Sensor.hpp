@@ -22,8 +22,17 @@ public:
     ///get the name of the Sensor
     virtual String name() = 0;
 
-    //
-    virtual uint32_t uuid() =0;
+    ///unique identification of the Sensor type
+    virtual uint32_t uuid() = 0;
+
+    /**
+     * unique id of the Sensor object at runtime.
+     * If there are multiple same sensors they will have the same uuid but different rsid
+     * rsid stands for runtime specific id
+     *
+     * @return rsid
+     */
+    virtual uint32_t rsid() = 0;
 
     ///the actual i2c address the sensor is using
     virtual byte currentAddress() = 0;
