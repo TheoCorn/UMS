@@ -50,6 +50,8 @@ public:
     ///write JsonArray to the Json document
     virtual void readSensor(JsonArray &jra) = 0;
 
+    virtual void saveConfig() = 0;
+
     /**
      * get the current settings in json format
      *

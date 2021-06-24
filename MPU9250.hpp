@@ -286,6 +286,8 @@ protected:
     int whoAmI();
     int whoAmIAK8963();
 
+    void setXSettings();
+
 public:
 
     explicit MPU9250(uint8_t address);
@@ -312,6 +314,8 @@ public:
     String getStringForDisplay() override;
 
     String getExtendedStringForDisplay() override;
+
+    void saveConfig() override;
 };
 
 

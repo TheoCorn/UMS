@@ -63,6 +63,8 @@ JsonDocument * jp::parseJson(const char * buffer){
         return nullptr;
     }
 
+    doc->shrinkToFit();
+
     return doc;
 
 }

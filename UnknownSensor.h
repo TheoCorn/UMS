@@ -27,6 +27,8 @@ class UnknownSensor : public Sensor {
     uint32_t sid() override { return sensorEnum::UNKNOWN_SENSOR; };
     uint32_t rsid() override { return address; }
 
+    void saveConfig() override {}
+
 };
 
 
