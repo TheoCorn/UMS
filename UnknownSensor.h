@@ -19,9 +19,12 @@ class UnknownSensor : public Sensor {
     void setUp() override { }
     String getStringForDisplay() override { return name(); }
     String getExtendedStringForDisplay() override { return ""; }
-    void readSensor(JsonDocument * ptrDoc) override { }
+    void readSensor(JsonArray &jra) override { }
     void getJson(JsonDocument * ptrDoc) override {}
     void setJson(JsonVariant * v) override {}
+
+    uint32_t sid() override { return 0; };
+    uint32_t rsid() override { return address; }
 
 };
 
