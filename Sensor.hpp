@@ -49,7 +49,7 @@ public:
 
     ///used when reading
     ///write JsonObject to the Json document
-    virtual void readSensor(JsonDocument *ptrDoc) = 0;
+    virtual void readSensor(JsonArray &jra) = 0;
 
     /**
      * get the current settings in json format

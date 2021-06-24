@@ -66,7 +66,7 @@ void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, 
 
 
 void SensorsIdentifierManager::init(){
-    char * cArrJson = (char*) spiffs::readFile(SPIFFS, "/SensorAddresses.txt");
+    char * cArrJson = (char*) spiffs::readFile(SPIFFS, "/SensorAddresses.json");
 
     JsonDocument * doc = jp::parseJson(cArrJson);
     if(doc != nullptr){

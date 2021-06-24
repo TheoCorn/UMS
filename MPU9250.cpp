@@ -1,12 +1,10 @@
 
 #include "MPU9250.hpp"
-#include "Arduino.h"
-#include <sstream>
+
 
 
 
 MPU9250::MPU9250(uint8_t address) : Sensor(){
-    this->address = address;
     _i2c = &Wire; // I2C bus
     _address = address; // I2C address
     _useSPI = false; // set to use I2C
@@ -16,6 +14,8 @@ MPU9250::MPU9250(uint8_t address) : Sensor(){
 }
 
     void MPU9250::setUp()  {
+
+
 
       // setting the accelerometer full scale range to +/-8G
       setAccelRange(MPU9250::ACCEL_RANGE_8G);
@@ -28,9 +28,15 @@ MPU9250::MPU9250(uint8_t address) : Sensor(){
     }
 
 void MPU9250::getJson(JsonDocument *ptrDoc) {
+
+
+    generateTemplatedSensorObject(ptrDoc, this->_address, sid(), );
+
+
+
         JsonObject mpuObj = Sensor::createSensorObject(ptrDoc);
         mpuObj["name"] = this->name();
-        mpuObj["uuid"] = this->address;
+        mpuObj["uuid"] = this->_address;
 
         JsonObject features = mpuObj.createNestedObject("features");
 
@@ -59,13 +65,11 @@ void MPU9250::setJson(JsonVariant * v){
 
 
 
-void MPU9250::readSensor(JsonDocument * ptrDoc)  {
-        JsonObject rData = ptrDoc->createNestedObject(name());
+void MPU9250::readSensor(JsonArray &jra)  {
+        JsonArray rData = jra.createNestedArray(rsid());
         readSensor();
         for (int i = 0; i < 10; i++) {
-          if (mpuFeaturesBool[i]) {
-            rData[mpuFeaturesString[i]] = callReadingFun(mpuFeaturesFloat[i]);
-           }
+          if (activeFeaturesVec[i]) rData.add(readFeature(i));
         }
 }
 
@@ -87,10 +91,10 @@ String MPU9250::getExtendedStringForDisplay() {
     String s;
 
     for(int i = 0; i < 10; i++){
-        float f = callReadingFun(mpuFeaturesFloat[i]);
+        float f = readFeature(i);
         s += mpuFeaturesString[i];
         s += "  ";
-        s += mpuFeaturesBool[i] ? '1' : '0';
+        s += activeFeaturesVec[i] ? '1' : '0';
         s += "  ";
         s += (String) f;
     }
@@ -98,24 +102,7 @@ String MPU9250::getExtendedStringForDisplay() {
 
 }
 
-//my functions
-float MPU9250::callReadingFun(float(MPU9250::* fun)()){
-    return (this->*fun)();
-}
 
-void MPU9250::setUpFeatures(){
-    mpuFeaturesFloat[0] = &MPU9250::getAccelX_mss;
-    mpuFeaturesFloat[1] = &MPU9250::getAccelY_mss;
-    mpuFeaturesFloat[2] = &MPU9250::getAccelZ_mss;
-    mpuFeaturesFloat[3] = &MPU9250::getGyroX_rads;
-    mpuFeaturesFloat[4] = &MPU9250::getGyroY_rads;
-    mpuFeaturesFloat[5] = &MPU9250::getGyroZ_rads;
-    mpuFeaturesFloat[6] = &MPU9250::getMagX_uT;
-    mpuFeaturesFloat[7] = &MPU9250::getMagY_uT;
-    mpuFeaturesFloat[8] = &MPU9250::getMagZ_uT;
-    mpuFeaturesFloat[9] = &MPU9250::getTemperature_C;
-}
-//
 
 /* starts communication with the MPU-9250 */
 int MPU9250::begin(){
@@ -1058,6 +1045,23 @@ uint32_t MPU9250::sid() {
 
 uint32_t MPU9250::rsid() {
     return _address;
+}
+
+float MPU9250::readFeature(const unsigned int &feature) {
+    switch(feature){
+        case 0: return getAccelX_mss(); break;
+        case 1: return getAccelY_mss(); break;
+        case 2: return getAccelZ_mss(); break;
+        case 3: return getGyroX_rads(); break;
+        case 4: return getGyroY_rads(); break;
+        case 5: return getGyroZ_rads(); break;
+        case 6: return getMagX_uT(); break;
+        case 7: return getMagY_uT(); break;
+        case 8: return getMagZ_uT(); break;
+        case 9: return getTemperature_C(); break;
+
+        default: throw std::invalid_argument;
+    }
 }
 
 

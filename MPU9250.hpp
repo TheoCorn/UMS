@@ -9,6 +9,8 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <vector>
+#include <exception>
+#include "Arduino.h"
 
 using namespace std;
 
@@ -17,14 +19,14 @@ class MPU9250 : public Sensor{
 
     enum GyroRange
     {
-        GYRO_RANGE_250DPS,
+        GYRO_RANGE_250DPS = 0,
         GYRO_RANGE_500DPS,
         GYRO_RANGE_1000DPS,
         GYRO_RANGE_2000DPS
     };
     enum AccelRange
     {
-        ACCEL_RANGE_2G,
+        ACCEL_RANGE_2G = 0,
         ACCEL_RANGE_4G,
         ACCEL_RANGE_8G,
         ACCEL_RANGE_16G
@@ -54,28 +56,26 @@ class MPU9250 : public Sensor{
         LP_ACCEL_ODR_500HZ = 11
     };
 
-    String accelRangeString[4] = { "2G", "4G", "8G", "16G" };
-    AccelRange accelRangeEnum[4] = { AccelRange::ACCEL_RANGE_2G, AccelRange::ACCEL_RANGE_4G, AccelRange::ACCEL_RANGE_8G, AccelRange::ACCEL_RANGE_16G };
-    bool accelRangeBool[4] = { false, false, true, false };
+//    String accelRangeString[4] = { "2G", "4G", "8G", "16G" };
+//    AccelRange accelRangeEnum[4] = { AccelRange::ACCEL_RANGE_2G, AccelRange::ACCEL_RANGE_4G, AccelRange::ACCEL_RANGE_8G, AccelRange::ACCEL_RANGE_16G };
+//    bool accelRangeBool[4] = { false, false, true, false };
+//
+//
+//    String gyroRangeString[4] = { "250DPS", "500DPS", "1000DPS", "2000DPS", };
+//    GyroRange gyroRangeEnum[4] = { GyroRange::GYRO_RANGE_250DPS, GyroRange::GYRO_RANGE_500DPS, GyroRange::GYRO_RANGE_1000DPS, GyroRange::GYRO_RANGE_2000DPS };
+//    bool gyroRangeBool[4] = { false, true, false, false };
+//
+//    String mpuFeaturesString[10] = { "accelerometerX", "accelerometerY", "accelerometerZ", "gyroX", "gyroY", "gyroZ", "magnetometerX", "magnetometerY", "magnetometerZ", "temperature"};
+//    bool mpuFeaturesBool[10] = { true, true, true, true, true, true, true, true, true, false };
 
-    String gyroRangeString[4] = { "250DPS", "500DPS", "1000DPS", "2000DPS", };
-    GyroRange gyroRangeEnum[4] = { GyroRange::GYRO_RANGE_250DPS, GyroRange::GYRO_RANGE_500DPS, GyroRange::GYRO_RANGE_1000DPS, GyroRange::GYRO_RANGE_2000DPS };
-    bool gyroRangeBool[4] = { false, true, false, false };                                                                  
-
-    String mpuFeaturesString[10] = { "accelerometerX", "accelerometerY", "accelerometerZ", "gyroX", "gyroY", "gyroZ", "magnetometerX", "magnetometerY", "magnetometerZ", "temperature"};
-    bool mpuFeaturesBool[10] = { true, true, true, true, true, true, true, true, true, false };
+    std::vector<bool> activeFeaturesVec;
+    unsigned int gyroRangeEnum;
+    unsigned int AccelRangeEnum;
 
 
-
-    uint8_t address;
-
-    //myFun
-    void setUpFeatures();
 
     //my functions
-    float callReadingFun(float (MPU9250::*fun)());
-    float (MPU9250::*mpuFeaturesFloat[10])();
-    //
+    float readFeature(const unsigned int& feature);
 
     int begin();
     int setAccelRange(AccelRange range);
@@ -308,7 +308,7 @@ public:
 
     void setUp() override;
 
-    void readSensor(JsonDocument * ptrDoc) override;
+    void readSensor(JsonArray& jra) override;
 
     String getStringForDisplay() override;
 
