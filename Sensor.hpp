@@ -162,20 +162,20 @@ protected:
  * @param sid i2cAddress
  */
     static void
-    generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rsid, const uint32_t &sid, const bool &isActive);
+    generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rsid, const uint32_t &sid, const bool isActive);
 
-    /**
-     * creates a templated Sensor json nested object
-     * so it will contain the name, sid, single feature that is automatically enabled and single XSetting
-     *
-     * @param doc
-     * @param name sensor name
-     * @param sid i2cAddress
-     * @param feature name of the data set
-     * @param xSetting single XSetting
-     */
-    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid, String feature,
-                                              XSetting& xSetting);
+//    /**
+//     * creates a templated Sensor json nested object
+//     * so it will contain the name, sid, single feature that is automatically enabled and single XSetting
+//     *
+//     * @param doc
+//     * @param name sensor name
+//     * @param sid i2cAddress
+//     * @param feature name of the data set
+//     * @param xSetting single XSetting
+//     */
+//    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid, String feature,
+//                                              const unsigned int& xSetting);
 
 
     /**
@@ -192,7 +192,7 @@ protected:
      */
     static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid,
                                               std::vector<String>& features, std::vector<bool>& activeFeatures,
-                                              std::vector<XSetting>& xSettings
+                                              std::vector<unsigned int> &xSettings
     );
 
 
@@ -210,7 +210,7 @@ protected:
      */
     static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid,
                                               std::vector<String>& features, std::vector<bool>& activeFeatures,
-                                              std::vector<XSetting>& xSettings, std::vector<ISetting>& iSettings
+                                              std::vector<unsigned int> &xSettings, std::vector<unsigned int> &iSettings
     );
 
 
