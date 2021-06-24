@@ -76,10 +76,8 @@ void Sensor::generateTemplatedSensorObject(JsonArray&doc, const uint32_t &rsid, 
 }
 
 
-void Sensor::generateTemplatedSensorObject(JsonArray&doc, const uint32_t& rsid, const uint32_t& sid,
-                                           std::vector<String> &features, std::vector<bool> &activeFeatures,
-                                           std::vector<unsigned int> &xSettings
-                                           ) {
+void Sensor::generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid,
+                                           std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings) {
     JsonObject sensorObj = createSensorObject(doc);
     fillBasicInfo(sensorObj, rsid, sid);
 
@@ -88,16 +86,14 @@ void Sensor::generateTemplatedSensorObject(JsonArray&doc, const uint32_t& rsid, 
 
 }
 
-void Sensor::generateTemplatedSensorObject(JsonArray&doc, const uint32_t& rsid, const uint32_t& sid,
-                                           std::vector<String> &features, std::vector<bool> &activeFeatures,
-                                           std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings
-) {
+void Sensor::generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid,
+                                           std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings) {
     JsonObject sensorObj = createSensorObject(doc);
     fillBasicInfo(sensorObj, rsid, sid);
 
     generateFeatures(sensorObj, activeFeatures);
-    generateXSettings(sensorObj, xSettings);
-    generateISettings(sensorObj, iSettings);
+    generateXSettings(sensorObj, activeFeatures);
+    generateISettings(sensorObj, xSettings);
 }
 
 

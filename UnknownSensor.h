@@ -6,13 +6,14 @@
 #define UMDWITHCLASS3_UNKNOWNSENSOR_H
 
 #include "Sensor.hpp"
+#include "sensorEnum.h"
 
 class UnknownSensor : public Sensor {
   private:
     uint8_t address;
     
   public:
-    UnknownSensor(uint8_t address) : address(address) {}
+    explicit UnknownSensor(uint8_t address) : address(address) {}
 
     String name() override { return "Unknown Sensor"; }
     byte currentAddress() override { return address; }
@@ -23,7 +24,7 @@ class UnknownSensor : public Sensor {
     void getJson(JsonDocument * ptrDoc) override {}
     void setJson(JsonVariant * v) override {}
 
-    uint32_t sid() override { return 0; };
+    uint32_t sid() override { return sensorEnum::UNKNOWN_SENSOR; };
     uint32_t rsid() override { return address; }
 
 };

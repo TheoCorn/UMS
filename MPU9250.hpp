@@ -69,8 +69,7 @@ class MPU9250 : public Sensor{
 //    bool mpuFeaturesBool[10] = { true, true, true, true, true, true, true, true, true, false };
 
     std::vector<bool> activeFeaturesVec;
-    unsigned int gyroRangeEnum;
-    unsigned int AccelRangeEnum;
+    std::vector<unsigned int> xSettings;
 
 
 
@@ -302,7 +301,7 @@ public:
 
     byte currentAddress() override { return address; }
     
-    void getJson(JsonDocument *ptrDoc) override;
+    void getJson(JsonArray& jArr) override;
     
     void setJson(JsonVariant * v) override;
 

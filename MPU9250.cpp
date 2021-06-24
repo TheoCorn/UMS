@@ -1,7 +1,7 @@
 
 #include "MPU9250.hpp"
-
-
+#include "spiffs.hpp"
+#include "JsonParserFunctions.hpp"
 
 
 MPU9250::MPU9250(uint8_t address) : Sensor(){
@@ -14,8 +14,13 @@ MPU9250::MPU9250(uint8_t address) : Sensor(){
 }
 
     void MPU9250::setUp()  {
+        char * cArrJson = (char*) spiffs::readFile(SPIFFS, "/sensorData/1.json");
 
-
+        JsonDocument * doc = jp::parseJson(cArrJson);
+        if(doc != nullptr){
+            //doc is deleted by JsonObjectToArrOfVectors function
+            JsonObjectToArrOfVectors(doc);
+        }
 
       // setting the accelerometer full scale range to +/-8G
       setAccelRange(MPU9250::ACCEL_RANGE_8G);
@@ -27,34 +32,33 @@ MPU9250::MPU9250(uint8_t address) : Sensor(){
       setSrd(19);
     }
 
-void MPU9250::getJson(JsonDocument *ptrDoc) {
+void MPU9250::getJson(JsonArray& jArr) {
 
 
-    generateTemplatedSensorObject(ptrDoc, this->_address, sid(), );
+    generateTemplatedSensorObject(jArr, rsid(), sid(), activeFeaturesVec, xSettings);
 
 
-
-        JsonObject mpuObj = Sensor::createSensorObject(ptrDoc);
-        mpuObj["name"] = this->name();
-        mpuObj["uuid"] = this->_address;
-
-        JsonObject features = mpuObj.createNestedObject("features");
-
-        JsonObject xSettings = mpuObj.createNestedObject("XSettings");
-
-      for (int i = 0; i < 10; i++) {
-          features[mpuFeaturesString[i]] = mpuFeaturesBool[i];
-      }
-
-    JsonObject accelSettings = xSettings.createNestedObject("accel");
-    for (int i = 0; i < 4; i++) {
-      accelSettings[accelRangeString[i]] = accelRangeBool[i];
-    }
-
-    JsonObject gyroSettings = xSettings.createNestedObject("gyro");
-     for (int i = 0; i < 4; i++) {
-      gyroSettings[gyroRangeString[i]] = gyroRangeBool[i];
-    }    
+//        JsonObject mpuObj = Sensor::createSensorObject(jArr);
+//        mpuObj["name"] = this->name();
+//        mpuObj["uuid"] = this->_address;
+//
+//        JsonObject features = mpuObj.createNestedObject("features");
+//
+//        JsonObject xSettings = mpuObj.createNestedObject("XSettings");
+//
+//      for (int i = 0; i < 10; i++) {
+//          features[mpuFeaturesString[i]] = mpuFeaturesBool[i];
+//      }
+//
+//    JsonObject accelSettings = xSettings.createNestedObject("accel");
+//    for (int i = 0; i < 4; i++) {
+//      accelSettings[accelRangeString[i]] = accelRangeBool[i];
+//    }
+//
+//    JsonObject gyroSettings = xSettings.createNestedObject("gyro");
+//     for (int i = 0; i < 4; i++) {
+//      gyroSettings[gyroRangeString[i]] = gyroRangeBool[i];
+//    }
 }
 
 //todo
