@@ -71,7 +71,7 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rs
     JsonArray xSettingsObj = createXSettingsArray(sensorObj);
     //todo fix nonsense
     unsigned int b = xSetting;
-    xSettingsObj.add(b)
+    xSettingsObj.add(b);
 
 }
 
@@ -90,7 +90,7 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rs
 
 void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid,
                                            std::vector<String> &features, std::vector<bool> &activeFeatures,
-                                           std::vector<unsigned int> &xSettings, std::vector<unsigned int> &iSettings
+                                           std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings
 ) {
     JsonObject sensorObj = createSensorObject(doc);
     fillBasicInfo(sensorObj, rsid, sid);
