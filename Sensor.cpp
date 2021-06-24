@@ -5,8 +5,8 @@
 
 //TwoWire Sensor::wire = Wire;
 
-JsonObject Sensor::createSensorObject(JsonDocument *doc) {
-    return doc->createNestedObject("Sensor");
+JsonObject Sensor::createSensorObject(JsonArray &doc) {
+    return doc.createNestedObject("Sensor");
 }
 
 JsonArray Sensor::createFeaturesArray(JsonObject &obj) {
@@ -48,7 +48,7 @@ void Sensor::generateISettings(JsonObject& sensorObj, std::vector<bool> &iSettin
 }
 
 
-void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rsid, const uint32_t &sid,
+void Sensor::generateTemplatedSensorObject(JsonArray&doc, const uint32_t &rsid, const uint32_t &sid,
                                            const bool& isActive) {
 
     JsonObject sensorObj = createSensorObject(doc);
@@ -59,7 +59,7 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rs
 
 }
 
-void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rsid, const uint32_t &sid,
+void Sensor::generateTemplatedSensorObject(JsonArray&doc, const uint32_t &rsid, const uint32_t &sid,
                                            const unsigned int &xSetting, const bool &isActive) {
 
     JsonObject sensorObj = createSensorObject(doc);
@@ -76,7 +76,7 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rs
 }
 
 
-void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid,
+void Sensor::generateTemplatedSensorObject(JsonArray&doc, const uint32_t& rsid, const uint32_t& sid,
                                            std::vector<String> &features, std::vector<bool> &activeFeatures,
                                            std::vector<unsigned int> &xSettings
                                            ) {
@@ -88,7 +88,7 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rs
 
 }
 
-void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid,
+void Sensor::generateTemplatedSensorObject(JsonArray&doc, const uint32_t& rsid, const uint32_t& sid,
                                            std::vector<String> &features, std::vector<bool> &activeFeatures,
                                            std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings
 ) {

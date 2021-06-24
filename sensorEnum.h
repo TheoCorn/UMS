@@ -8,7 +8,8 @@
 #define ENUM_SIZE 1
 
 enum sensorEnum{
-    MPU9250 = 0,
+    UNKNOWN_SENSOR = 0,
+    MPU9250 = 1,
     BMP280
 };
 
