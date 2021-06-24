@@ -9,15 +9,15 @@ JsonObject Sensor::createSensorObject(JsonDocument *doc) {
     return doc->createNestedObject("Sensor");
 }
 
-JsonObject Sensor::createFeaturesArray(JsonObject &obj) {
+JsonArray Sensor::createFeaturesArray(JsonObject &obj) {
     return obj.createNestedArray("Features");
 }
 
-JsonObject Sensor::createXSettingsArray(JsonObject &obj) {
+JsonArray Sensor::createXSettingsArray(JsonObject &obj) {
     return obj.createNestedArray("XSettings");
 }
 
-JsonObject Sensor::createISettingsArray(JsonObject &obj) {
+JsonArray Sensor::createISettingsArray(JsonObject &obj) {
     return obj.createNestedArray("ISettings");
 }
 
@@ -105,4 +105,3 @@ void Sensor::fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t
     obj["rsid"] = rsid;
     obj["sid"] = sid;
 }
-

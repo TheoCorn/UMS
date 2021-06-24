@@ -102,13 +102,13 @@ protected:
     static JsonObject createSensorObject(JsonDocument *doc);
 
     ///@return nested json object with name "Features"
-    static JsonObject createFeaturesArray(JsonObject& obj);
+    static JsonArray createFeaturesArray(JsonObject& obj);
 
     ///@return nested json object with name "XSettings"
-    static JsonObject createXSettingsArray(JsonObject& obj);
+    static JsonArray createXSettingsArray(JsonObject& obj);
 
     ///@return nested json object with name "ISettings"
-    static JsonObject createISettingsArray(JsonObject& obj);
+    static JsonArray createISettingsArray(JsonObject& obj);
 
 
 
