@@ -175,6 +175,9 @@ protected:
 //    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid, String feature,
 //                                              const unsigned int& xSetting);
 
+    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rsid, const uint32_t &sid,
+        const unsigned int &xSetting, const bool &isActive);
+
 
     /**
      *
