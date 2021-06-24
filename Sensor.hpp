@@ -52,6 +52,8 @@ public:
 
     virtual void saveConfig() = 0;
 
+
+    //todo update comments
     /**
      * get the current settings in json format
      *
