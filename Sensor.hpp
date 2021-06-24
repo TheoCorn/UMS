@@ -211,7 +211,7 @@ protected:
      */
     static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid,
                                               std::vector<String>& features, std::vector<bool>& activeFeatures,
-                                              std::vector<unsigned int> &xSettings, std::vector<unsigned int> &iSettings
+                                              std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings
     );
 
 
