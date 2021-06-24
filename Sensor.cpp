@@ -68,8 +68,10 @@ void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rs
     JsonArray featuresObj = createFeaturesArray(sensorObj);
     active.add(true);
 
-    JsonObject xSettingsObj = createXSettingsArray(sensorObj);
-    xSettingBuilder(xSetting, xSettingsObj);
+    JsonArray xSettingsObj = createXSettingsArray(sensorObj);
+    //todo fix nonsense
+    unsigned int b = xSetting;
+    xSettingsObj.add(b)
 
 }
 

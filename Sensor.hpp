@@ -132,10 +132,9 @@ protected:
 
     /**
      * generates XSettings Json object
-     * calls Sensor::createXSettingsArray and calls Sensor::xSettingBuilder for each element of the vector
+     * calls Sensor::createXSettingsArray and add the vector
      *
      * @see Sensor::createXSettingsArray
-     * @see Sensor::xSettingBuilder
      *
      * @param sensorObj
      * @param xSettings
