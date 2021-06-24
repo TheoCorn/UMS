@@ -206,13 +206,14 @@ void onReadElementReceive(JsonVariant * v) {
 }
 
 void onGetElementReceive(JsonVariant * v) {
-  DynamicJsonDocument *doc = new DynamicJsonDocument(sensors->size() * 2048);
+  DynamicJsonDocument doc = DynamicJsonDocument(sensors->size() * 2048);
+  JsonArray arr = doc.to<JsonArray>;
 
   uint8_t key;
   Sensor* value;
   for (auto& mPair : *sensors) {
     std::tie(key, value) = mPair;
-    value->getJson(doc);
+    value->getJson(arr);
   }
 
 }
