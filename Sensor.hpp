@@ -153,15 +153,14 @@ protected:
     static void generateISettings(JsonObject& sensorObj, std::vector<bool> &iSettings);
 
     /**
- * creates the simplest templated Sensor json nested object
- * so it will contain the name, sid, single feature (name of feature is the name parameter) that is automatically enabled no XSettings
- *
- * @param doc
- * @param name sensor name
- * @param sid i2cAddress
- */
-    static void
-    generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rsid, const uint32_t &sid, const bool isActive);
+     * creates the simplest templated Sensor json nested object
+     * so it will contain the name, sid, single feature (name of feature is the name parameter) that is automatically enabled no XSettings
+     *
+     * @param doc
+     * @param name sensor name
+     * @param sid i2cAddress
+     */
+    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rsid, const uint32_t &sid, const bool& isActive);
 
 //    /**
 //     * creates a templated Sensor json nested object

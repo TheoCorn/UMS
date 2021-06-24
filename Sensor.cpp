@@ -49,24 +49,24 @@ void Sensor::generateISettings(JsonObject& sensorObj, std::vector<bool> &iSettin
 
 
 void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rsid, const uint32_t &sid,
-                                           const bool isActive) {
+                                           const bool& isActive) {
 
     JsonObject sensorObj = createSensorObject(doc);
     fillBasicInfo(sensorObj, rsid, sid);
 
     JsonArray featuresObj = createFeaturesArray(sensorObj);
-    active.add(isActive);
+    featuresObj.add(isActive);
 
 }
 
-void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid,
-                                           const unsigned int& xSetting){
+void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rsid, const uint32_t &sid,
+                                           const unsigned int &xSetting, const bool &isActive) {
 
     JsonObject sensorObj = createSensorObject(doc);
     fillBasicInfo(sensorObj, rsid, sid);
 
     JsonArray featuresObj = createFeaturesArray(sensorObj);
-    active.add(true);
+    featuresObj.add(isActive);
 
     JsonArray xSettingsObj = createXSettingsArray(sensorObj);
     //todo fix nonsense
