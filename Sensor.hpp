@@ -23,11 +23,11 @@ public:
     virtual String name() = 0;
 
     ///unique identification of the Sensor type
-    virtual uint32_t uuid() = 0;
+    virtual uint32_t sid() = 0;
 
     /**
      * unique id of the Sensor object at runtime.
-     * If there are multiple same sensors they will have the same uuid but different rsid
+     * If there are multiple same sensors they will have the same sid but different rsid
      * rsid stands for runtime specific id
      *
      * @return rsid
@@ -60,7 +60,7 @@ public:
      * remember that multiple sensors of the same function can be present
      *
      * the method has to create 2 variables in the sensor object called "rsid" which is the i2c address or other runtime address...
-     * and "uuid" which is the sensor uuid This uuid has to have its config file in the app
+     * and "sid" which is the sensor sid This sid has to have its config file in the app
      *
      * the method has to create a nested object in the sensor object called "features"
      * each variable in features represents a dataset for the graph (one feature = one 'line' in graph)
@@ -102,75 +102,24 @@ protected:
     static JsonObject createSensorObject(JsonDocument *doc);
 
     ///@return nested json object with name "Features"
-    static JsonObject createFeaturesObject(JsonObject& obj);
+    static JsonObject createFeaturesArray(JsonObject& obj);
 
     ///@return nested json object with name "XSettings"
-    static JsonObject createXSettingsObject(JsonObject& obj);
+    static JsonObject createXSettingsArray(JsonObject& obj);
 
     ///@return nested json object with name "ISettings"
-    static JsonObject createISettingsObject(JsonObject& obj);
+    static JsonObject createISettingsArray(JsonObject& obj);
 
-
-
-    /// holds all data to create a ISetting
-    struct ISetting{
-        String& name;
-        bool& isActive;
-
-        /**
-         *
-         * @param mName name of the setting
-         * @param misActive is active(on/ off)
-         */
-        ISetting(String& mName, bool& misActive) : name(mName), isActive(misActive) {}
-    };
-
-
-
-    ///holds  all data to create a XSetting
-    struct XSetting{
-        String& name;
-        std::vector<String>& options;
-        int& active;
-
-        /**
-         *
-         * @param name name of the Setting
-         * @param options options
-         * @param active active option
-         */
-        XSetting(String& name, std::vector<String>& options, int& active) : name(name), options(options), active(active) {}
-    };
 
 
     /**
-     * fills in name and uuid of sensor to a Templated Sensor Object
+     * fills in SID and RSID of sensor to a Templated Sensor Object
      *
      * @param obj
      * @param name
-     * @param uuid
+     * @param sid
      */
-    static void fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t& uuid);
-
-    /**
-     * build a xSetting object from XSetting struct and adds it to the XSettings json object
-     *
-     * @param xSetting
-     * @param xSettingsObj
-     *
-     * @see Sensor::XSetting
-     */
-    static void xSettingBuilder(const XSetting& xSetting, JsonObject& xSettingsObj);
-
-    /**
-     *builds an ISetting Json Object from ISetting struct
-     *
-     * @param iSetting
-     * @param iSettingsObj
-     *
-     * @see Sensor::ISetting
-     */
-    static void iSettingBuilder(const ISetting& iSetting, JsonObject& iSettingsObj);
+    static void fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t& sid);
 
     /**
      * generates a Features Json object
@@ -179,80 +128,69 @@ protected:
      * @param features
      * @param activeFeatures
      */
-    static void generateFeatures(JsonObject& sensorObj, std::vector<String> &features, std::vector<bool> &activeFeatures);
+    static void generateFeatures(JsonObject &sensorObj, std::vector<bool> &activeFeatures);
 
     /**
      * generates XSettings Json object
-     * calls Sensor::createXSettingsObject and calls Sensor::xSettingBuilder for each element of the vector
+     * calls Sensor::createXSettingsArray and calls Sensor::xSettingBuilder for each element of the vector
      *
-     * @see Sensor::createXSettingsObject
+     * @see Sensor::createXSettingsArray
      * @see Sensor::xSettingBuilder
      *
      * @param sensorObj
      * @param xSettings
      */
-    static void generateXSettings(JsonObject& sensorObj, std::vector<XSetting> &xSettings);
+    static void generateXSettings(JsonObject& sensorObj, std::vector<unsigned int> &xSettings);
 
     /**
      * generates ISettings Json object
-     * calls Sensor::createISettingsObject and calls Sensor::iSettingBuilder for each element of the vector
+     * calls Sensor::createISettingsArray and ads each element of the vector
      *
-     * @see Sensor::createISettingsObject
-     * @see Sensor::iSettingBuilder
+     * @see Sensor::createISettingsArray
      *
      * @param sensorObj
      * @param iSettings
      */
-    static void generateISettings(JsonObject& sensorObj, std::vector<ISetting> &iSettings);
+    static void generateISettings(JsonObject& sensorObj, std::vector<bool> &iSettings);
 
     /**
  * creates the simplest templated Sensor json nested object
- * so it will contain the name, uuid, single feature (name of feature is the name parameter) that is automatically enabled no XSettings
+ * so it will contain the name, sid, single feature (name of feature is the name parameter) that is automatically enabled no XSettings
  *
  * @param doc
  * @param name sensor name
- * @param uuid i2cAddress
+ * @param sid i2cAddress
  */
-    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid);
-
-    /**
-     * creates the simplest templated Sensor json nested object
-     * so it will contain the name, uuid, single feature that is automatically enabled no XSettings
-     *
-     * @param doc
-     * @param name sensor name
-     * @param uuid i2cAddress
-     * @param feature name of the data set
-     */
-    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid, const String& feature);
+    static void
+    generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rsid, const uint32_t &sid, const bool &isActive);
 
     /**
      * creates a templated Sensor json nested object
-     * so it will contain the name, uuid, single feature that is automatically enabled and single XSetting
+     * so it will contain the name, sid, single feature that is automatically enabled and single XSetting
      *
      * @param doc
      * @param name sensor name
-     * @param uuid i2cAddress
+     * @param sid i2cAddress
      * @param feature name of the data set
      * @param xSetting single XSetting
      */
-    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid, String feature,
+    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid, String feature,
                                               XSetting& xSetting);
 
 
     /**
      *
      * creates a templated Sensor json nested object
-     * so it will contain the name, uuid, multiple features and XSettings
+     * so it will contain the name, sid, multiple features and XSettings
      *
      * @param doc
      * @param name name of the sensor
-     * @param uuid i2c address
+     * @param sid i2c address
      * @param features names of the datasets
      * @param activeFeatures which features will be used when reading the Sensor
      * @param xSettings
      */
-    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid,
+    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid,
                                               std::vector<String>& features, std::vector<bool>& activeFeatures,
                                               std::vector<XSetting>& xSettings
     );
@@ -261,16 +199,16 @@ protected:
     /**
      *
      * creates a templated Sensor json nested object
-     * so it will contain the name, uuid, multiple features, XSettings and ISettings
+     * so it will contain the name, sid, multiple features, XSettings and ISettings
      * @param doc
      * @param name
-     * @param uuid
+     * @param sid
      * @param features
      * @param activeFeatures
      * @param xSettings
      * @param iSettings
      */
-    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid,
+    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid,
                                               std::vector<String>& features, std::vector<bool>& activeFeatures,
                                               std::vector<XSetting>& xSettings, std::vector<ISetting>& iSettings
     );

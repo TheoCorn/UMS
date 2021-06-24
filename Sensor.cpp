@@ -9,133 +9,97 @@ JsonObject Sensor::createSensorObject(JsonDocument *doc) {
     return doc->createNestedObject("Sensor");
 }
 
-JsonObject Sensor::createFeaturesObject(JsonObject &obj) {
-    return obj.createNestedObject("Features");
+JsonObject Sensor::createFeaturesArray(JsonObject &obj) {
+    return obj.createNestedArray("Features");
 }
 
-JsonObject Sensor::createXSettingsObject(JsonObject &obj) {
-    return obj.createNestedObject("XSettings");
+JsonObject Sensor::createXSettingsArray(JsonObject &obj) {
+    return obj.createNestedArray("XSettings");
 }
 
-JsonObject Sensor::createISettingsObject(JsonObject &obj) {
-    return obj.createNestedObject("ISettings");
+JsonObject Sensor::createISettingsArray(JsonObject &obj) {
+    return obj.createNestedArray("ISettings");
 }
 
-void Sensor::generateFeatures(JsonObject& sensorObj, std::vector<String> &features, std::vector<bool> &activeFeatures){
-    JsonObject featuresObj = createFeaturesObject(sensorObj);
+void Sensor::generateFeatures(JsonObject &sensorObj, std::vector<bool> &activeFeatures) {
 
-    JsonArray featuresArr = sensorObj.createNestedArray("features");
-    JsonArray active = sensorObj.createNestedArray("active");
-
-    for (auto const element : features) {
-        featuresArr.add(element);
-    }
+    JsonArray featuresObj = createFeaturesArray(sensorObj);
     for(bool const element : activeFeatures){
-        active.add(element);
+        featuresObj.add(element);
     }
 
 }
 
-void Sensor::generateXSettings(JsonObject& sensorObj, std::vector<XSetting> &xSettings){
+void Sensor::generateXSettings(JsonObject& sensorObj, std::vector<unsigned int> &xSettings){
 
-    JsonObject xSettingsObj = createXSettingsObject(sensorObj);
+    JsonArray xSettingsObj = createXSettingsArray(sensorObj);
     for (auto const &xs : xSettings) {
-        xSettingBuilder(xs, xSettingsObj);
+        xSettingsObj.add(xs);
     }
 }
 
 
-void Sensor::generateISettings(JsonObject& sensorObj, std::vector<ISetting> &iSettings){
+void Sensor::generateISettings(JsonObject& sensorObj, std::vector<bool> &iSettings){
 
-    JsonObject iSettingsObj = createISettingsObject(sensorObj);
-    for( auto const& is : iSettings){
-        iSettingBuilder(is, iSettingsObj);
+    JsonArray iSettingsObj = createISettingsArray(sensorObj);
+    for(bool const is : iSettings){
+        iSettingsObj.add(is);
     }
-
 }
 
 
-void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid) {
-    generateTemplatedSensorObject(doc, name, uuid, name);
-}
-
-void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid,
-                                           const String &feature) {
-    JsonObject sensorObj = createSensorObject(doc);
-    fillBasicInfo(sensorObj, rsid, uuid);
-
-    //Features
-    JsonObject featuresObj = createFeaturesObject(sensorObj);
-    JsonArray features = featuresObj.createNestedArray("features");
-    JsonArray active = featuresObj.createNestedArray("active");
-
-    features.add(feature);
-    active.add(true);
-}
-
-void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid, String feature,
-                                   XSetting& xSetting){
+void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t &rsid, const uint32_t &sid,
+                                           const bool isActive) {
 
     JsonObject sensorObj = createSensorObject(doc);
-    fillBasicInfo(sensorObj, rsid, uuid);
+    fillBasicInfo(sensorObj, rsid, sid);
 
-    JsonObject featuresObj = createFeaturesObject(sensorObj);
-    JsonArray features = featuresObj.createNestedArray("features");
-    JsonArray active = featuresObj.createNestedArray("active");
+    JsonArray featuresObj = createFeaturesArray(sensorObj);
+    active.add(isActive);
 
-    features.add(feature);
+}
+
+void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid, const unsigned int& xSetting){
+
+    JsonObject sensorObj = createSensorObject(doc);
+    fillBasicInfo(sensorObj, rsid, sid);
+
+    JsonArray featuresObj = createFeaturesArray(sensorObj);
     active.add(true);
 
-    JsonObject xSettingsObj = createXSettingsObject(sensorObj);
+    JsonObject xSettingsObj = createXSettingsArray(sensorObj);
     xSettingBuilder(xSetting, xSettingsObj);
 
 }
 
 
-void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid,
+void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid,
                                            std::vector<String> &features, std::vector<bool> &activeFeatures,
                                            std::vector<XSetting> &xSettings
                                            ) {
     JsonObject sensorObj = createSensorObject(doc);
-    fillBasicInfo(sensorObj, rsid, uuid);
+    fillBasicInfo(sensorObj, rsid, sid);
 
-    generateFeatures(sensorObj, features, activeFeatures);
+    generateFeatures(sensorObj, activeFeatures);
     generateXSettings(sensorObj, xSettings);
 
 }
 
-void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& uuid,
+void Sensor::generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid,
                                            std::vector<String> &features, std::vector<bool> &activeFeatures,
                                            std::vector<XSetting> &xSettings, std::vector<ISetting> &iSettings
 ) {
     JsonObject sensorObj = createSensorObject(doc);
-    fillBasicInfo(sensorObj, rsid, uuid);
+    fillBasicInfo(sensorObj, rsid, sid);
 
-    generateFeatures(sensorObj, features, activeFeatures);
+    generateFeatures(sensorObj, activeFeatures);
     generateXSettings(sensorObj, xSettings);
     generateISettings(sensorObj, iSettings);
 }
 
 
-void Sensor::fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t& uuid) {
+void Sensor::fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t& sid) {
     obj["rsid"] = rsid;
-    obj["uuid"] = uuid;
+    obj["sid"] = sid;
 }
 
-void Sensor::xSettingBuilder(const XSetting& xSetting, JsonObject& xSettingsObj){
-    JsonObject xsjo = xSettingsObj.createNestedObject("xSetting");
-    xsjo["name"] = xSetting.name;
-    JsonArray optionsArr = xsjo.createNestedArray("options");
-
-    for( auto const& option : xSetting.options){
-        optionsArr.add(option);
-    }
-
-    xsjo["active"] = xSetting.active;
-}
-
-void Sensor::iSettingBuilder(const ISetting& iSetting, JsonObject& iSettingsObj) {
-    JsonObject isjo = iSettingsObj.createNestedObject("iSetting");
-    isjo["name"] = iSettingsObj.createNestedObject("iSetting");
-    isjo["active"] = iSetting.isActive;
-}
