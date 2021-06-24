@@ -295,6 +295,11 @@ public:
         
     String name() override { return "MPU9250"; }
 //    std::vector<uint8_t> c() override{ return i2cAddresses; }
+
+    uint32_t sid() override;
+
+    uint32_t rsid() override;
+
     byte currentAddress() override { return address; }
     
     void getJson(JsonDocument *ptrDoc) override;

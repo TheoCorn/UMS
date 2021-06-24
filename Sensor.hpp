@@ -9,6 +9,7 @@
 #include <string>
 #include "SPI.h"
 #include <ArduinoJson.h>
+#include "sensorEnum.h"
 
 
 

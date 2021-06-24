@@ -1052,6 +1052,14 @@ int MPU9250::whoAmIAK8963(){
     return _buffer[0];
 }
 
+uint32_t MPU9250::sid() {
+    return sensorEnum::MPU9250;
+}
+
+uint32_t MPU9250::rsid() {
+    return _address;
+}
+
 
 
 
