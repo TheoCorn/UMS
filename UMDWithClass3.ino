@@ -126,9 +126,10 @@ void loop() {
 
 
   if (reading) {
-      DynamicJsonDocument* doc = new DynamicJsonDocument(capacity);
+      DynamicJsonDocument doc = DynamicJsonDocument(capacity);
+      JsonArray arr = doc.createNestedArray("Sensors");
       for (auto const& sTuple : *sensors) {
-          sTuple.second->getJson(doc);
+          sTuple.second->getJson(arr);
       }
       serialCom->write(doc);
       delete doc;

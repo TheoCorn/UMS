@@ -21,7 +21,7 @@ class UnknownSensor : public Sensor {
     String getStringForDisplay() override { return name(); }
     String getExtendedStringForDisplay() override { return ""; }
     void readSensor(JsonArray &jra) override { }
-    void getJson(JsonDocument * ptrDoc) override {}
+    void getJson(JsonArray& ptrDoc) override {}
     void setJson(JsonVariant * v) override {}
 
     uint32_t sid() override { return sensorEnum::UNKNOWN_SENSOR; };

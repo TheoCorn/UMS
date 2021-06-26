@@ -2,6 +2,7 @@
 #include "MPU9250.hpp"
 #include "spiffs.hpp"
 #include "JsonParserFunctions.hpp"
+#include <string>
 
 
 MPU9250::MPU9250(uint8_t address) : Sensor() {
@@ -9,8 +10,6 @@ MPU9250::MPU9250(uint8_t address) : Sensor() {
     _address = address; // I2C address
     _useSPI = false; // set to use I2C
     begin();
-    setUpFeatures();
-
 }
 
 void MPU9250::setUp() {
@@ -18,11 +17,11 @@ void MPU9250::setUp() {
 
     JsonDocument *doc = jp::parseJson(cArrJson);
     if (doc != nullptr) {
-        JsonArray activeFeatures = doc["activeFeatures"];
-        JsonArray locXSettings = doc["xSettings"];
+        JsonArray activeFeatures = (*doc)["activeFeatures"];
+        JsonArray locXSettings = (*doc)["xSettings"];
 
         for (JsonVariant v : activeFeatures) {
-            activeFeaturesVec.emplace_back(v.as <bool> );
+            activeFeaturesVec.emplace_back(v.as<bool>());
         }
 
         for (JsonVariant v : locXSettings) {
@@ -79,16 +78,21 @@ void MPU9250::getJson(JsonArray &jArr) {
 
 //todo
 void MPU9250::setJson(JsonVariant *v) {
-    JsonObject obj = v.as<JsonObject>();
+    JsonObject obj = v->as<JsonObject>();
     
 }
 
 
 void MPU9250::readSensor(JsonArray &jra) {
-    JsonArray rData = jra.createNestedArray(rsid());
+    char rsidStr[11];
+    itoa(rsid(), rsidStr, 10);
+
+    JsonObject rData = jra.createNestedObject();
+    rData["rsid"] = rsidStr;
+    JsonArray values = rData.createNestedArray("values");
     readSensor();
     for (int i = 0; i < 10; i++) {
-        if (activeFeaturesVec[i]) rData.add(readFeature(i));
+        if (activeFeaturesVec[i]) values.add(readFeature(i));
     }
 }
 

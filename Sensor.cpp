@@ -6,7 +6,7 @@
 //TwoWire Sensor::wire = Wire;
 
 JsonObject Sensor::createSensorObject(JsonArray &doc) {
-    return doc.createNestedObject("Sensor");
+    return doc.createNestedObject();
 }
 
 JsonArray Sensor::createFeaturesArray(JsonObject &obj) {
