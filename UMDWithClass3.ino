@@ -131,8 +131,7 @@ void loop() {
       for (auto const& sTuple : *sensors) {
           sTuple.second->getJson(arr);
       }
-      serialCom->write(doc);
-      delete doc;
+      serialCom->write(arr);
 
   } else {
     auto conflicts = new std::vector<csa::ConflictingAddressStruct*>();
@@ -208,7 +207,7 @@ void onReadElementReceive(JsonVariant * v) {
 
 void onGetElementReceive(JsonVariant * v) {
   DynamicJsonDocument doc = DynamicJsonDocument(sensors->size() * 2048);
-  JsonArray arr = doc.to<JsonArray>;
+  JsonArray arr = doc.to<JsonArray>();
 
   uint8_t key;
   Sensor* value;

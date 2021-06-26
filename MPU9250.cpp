@@ -2,7 +2,7 @@
 #include "MPU9250.hpp"
 #include "spiffs.hpp"
 #include "JsonParserFunctions.hpp"
-#include <string>
+
 
 
 MPU9250::MPU9250(uint8_t address) : Sensor() {
@@ -1099,7 +1099,7 @@ float MPU9250::readFeature(const unsigned int &feature) {
             break;
 
         default:
-            throw std::invalid_argument;
+            throw std::invalid_argument("invalid feature");
     }
 }
 
