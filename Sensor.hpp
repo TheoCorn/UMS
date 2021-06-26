@@ -209,7 +209,8 @@ protected:
      * @param activeFeatures
      * @param xSettings
      */
-    static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid, std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings);
+    static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid,
+                                              std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings);
 
 
 };
