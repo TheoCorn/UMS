@@ -179,8 +179,7 @@ protected:
 //    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid, String feature,
 //                                              const unsigned int& xSetting);
 
-    static void generateTemplatedSensorObject(JsonArray& doc, const uint32_t &rsid, const uint32_t &sid,
-        const unsigned int &xSetting, const bool &isActive);
+    static void generateTemplatedSensorObject(JsonArray& doc, const uint32_t &rsid, const uint32_t &sid, const unsigned int &xSetting, const bool &isActive);
 
 
     /**
@@ -195,8 +194,7 @@ protected:
      * @param activeFeatures which features will be used when reading the Sensor
      * @param xSettings
      */
-    static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid,
-                                              std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings);
+    static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid, std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings);
 
 
     /**
@@ -211,8 +209,7 @@ protected:
      * @param activeFeatures
      * @param xSettings
      */
-    static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid,
-                                              std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings);
+    static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid, std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings);
 
 
 };

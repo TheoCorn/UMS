@@ -22,11 +22,11 @@ void MPU9250::setUp() {
         JsonArray locXSettings = doc["xSettings"];
 
         for (JsonVariant v : activeFeatures) {
-            activeFeaturesVec.emplace_back(v.as < bool > );
+            activeFeaturesVec.emplace_back(v.as <bool> );
         }
 
         for (JsonVariant v : locXSettings) {
-            unsigned int setting = v.as<unsigned int>;
+            unsigned int setting = v.as<unsigned int>();
             xSettings.emplace_back(setting);
         }
 
@@ -79,7 +79,8 @@ void MPU9250::getJson(JsonArray &jArr) {
 
 //todo
 void MPU9250::setJson(JsonVariant *v) {
-
+    JsonObject obj = v.as<JsonObject>();
+    
 }
 
 

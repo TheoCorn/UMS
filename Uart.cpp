@@ -1,6 +1,3 @@
-//
-// Created by theo on 5/9/2021.
-//
 
 #include "Uart.h"
 #include "JsonSerializer.h"
@@ -18,9 +15,7 @@ Uart::Uart() : SerialCom() {
     Serial.begin(UART_BAUD);
 }
 
-Uart::~Uart() {
-
-}
+Uart::~Uart() = default;
 
 bool Uart::begin(){
     Serial.begin(UART_BAUD);
