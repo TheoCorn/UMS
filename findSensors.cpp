@@ -19,7 +19,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
 //    std::vector<byte> collUnAddresses;
     bool addreses[128];
 
-    for (int i = 0; i < 127; i++) {
+    for (int i = 0; i < 128; i++) {
         addreses[i] = true;
     }
 
@@ -36,7 +36,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
     }
 
 
-    for (byte address = 0; address < 127; address++) {
+    for (byte address = 0; address < 128; address++) {
         Wire.beginTransmission(address);
         byte error = Wire.endTransmission();
 
