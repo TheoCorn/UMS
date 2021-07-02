@@ -106,8 +106,9 @@ void setup() {
 void loop() {
 
   char sRead;
-  for (int i = 0; i < serialCom->available(); ++i) {
+  for (int i = 0; i <= serialCom->available(); ++i) {
     serialCom->read(&sRead);
+    Serial.println(sRead);
 
       switch (sRead) {
         case ETX:

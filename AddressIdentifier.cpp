@@ -12,27 +12,27 @@
 #include "UnknownSensor.h"
 
 
-
 /*
 adds the the correct sensor type to the specified vector
 
 @param address the address of the i2c device
 @param vector std::vector<Sensor> pointer with the sensor will be added to
 */
-void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sensor*> * sensors, std::vector<csa::ConflictingAddressStruct*> * conflict) {
+void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sensor *> *sensors,
+                                         std::vector<csa::ConflictingAddressStruct *> *conflict) {
     Serial.println("addSensor");
     if (numEnumSensorInVectorArray[address].empty()) return;
 
 
-    if (numEnumSensorInVectorArray[address].size() == 1){
+    if (numEnumSensorInVectorArray[address].size() <= 1) {
         addSensor(numEnumSensorInVectorArray[address][0], address, sensors, conflict);
-    }else {
-        csa::ConflictingAddressStruct* con;
+    } else {
+        csa::ConflictingAddressStruct *con;
         con->address = address;
         con->EnumPosOfSensors = numEnumSensorInVectorArray[address];
 
-        for(unsigned int pos: con->EnumPosOfSensors){
-            Sensor * s = getSensorPointerForEnumPos(pos, address);
+        for (unsigned int pos: con->EnumPosOfSensors) {
+            Sensor *s = getSensorPointerForEnumPos(pos, address);
             con->nameOfSensors.emplace_back(s->name());
             delete s;
         }
@@ -42,42 +42,43 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
 
 }
 
-void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, std::map<uint8_t, Sensor*> * sensors, std::vector<csa::ConflictingAddressStruct*> * conflict){
+void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, std::map<uint8_t, Sensor *> *sensors,
+                                         std::vector<csa::ConflictingAddressStruct *> *conflict) {
 
-    Sensor* sensor = getSensorPointerForEnumPos(enumPos, address);
+    Sensor *sensor = getSensorPointerForEnumPos(enumPos, address);
 
-    if(sensor != nullptr) {
+    if (sensor != nullptr) {
         sensors->insert(std::pair<uint8_t, Sensor *>(address, sensor));
-    } else{
-        csa::ConflictingAddressStruct* con;
+    } else {
+        csa::ConflictingAddressStruct *con;
         con->address = address;
         conflict->emplace_back(con);
     }
 }
 
- Sensor* SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPos, uint8_t address){
-    switch (enumPos){
-        case sensorEnum::MPU9250: return (Sensor*)(new class MPU9250(address)); break;
+Sensor *SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPos, uint8_t address) {
+    switch (enumPos) {
+        case sensorEnum::MPU9250: return (Sensor *) (new class MPU9250(address)); break;
 //        case sensorEnum::BMP280: return (sensor*)(new class BMP280); break;
 
-        default: return (Sensor*) new UnknownSensor(address); break;
+        default: return (Sensor *) new UnknownSensor(address); break;
     }
 }
 
 
-void SensorsIdentifierManager::init(){
-    char * cArrJson = (char*) spiffs::readFile(SPIFFS, "/SensorAddresses.json");
+void SensorsIdentifierManager::init() {
+    char *cArrJson = (char *) spiffs::readFile(SPIFFS, "/SensorAddresses.json");
 
-    JsonDocument * doc = jp::parseJson(cArrJson);
-    if(doc != nullptr){
-      //doc is deleted by JsonObjectToArrOfVectors function
+    JsonDocument *doc = jp::parseJson(cArrJson);
+    if (doc != nullptr) {
+        //doc is deleted by JsonObjectToArrOfVectors function
         JsonObjectToArrOfVectors(doc);
     }
 
     delete cArrJson;
 }
 
-void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
+void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument *doc) {
 //    JsonObject obj = doc->to<JsonObject>();
 
     //array 0-127 ie. all i2c addresses the vector contains all sensors that can be on the address
@@ -85,9 +86,9 @@ void SensorsIdentifierManager::JsonObjectToArrOfVectors(JsonDocument* doc){
     JsonArray arr = doc->as<JsonArray>();
 
     int i = 0;
-    for(JsonArray addressArray : arr){
-        for(JsonVariant o : addressArray){
-            numEnumSensorInVectorArray[i].emplace_back(static_cast<uint8_t>(o.as<unsigned char>()));
+    for (JsonArray addressArray : arr) {
+        for (JsonVariant o : addressArray) {
+            numEnumSensorInVectorArray[i].emplace_back(o.as<unsigned int>());
         }
         i++;
     }

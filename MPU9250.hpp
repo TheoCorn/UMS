@@ -83,7 +83,7 @@ class MPU9250 : public Sensor{
     int setSrd(uint8_t srd);
     int enableDataReadyInterrupt();
     int disableDataReadyInterrupt();
-    int enableWakeOnMotion(float womThresh_mg,LpAccelOdr odr);
+//    int enableWakeOnMotion(float womThresh_mg,LpAccelOdr odr);
     int readSensor();
     float getAccelX_mss();
     float getAccelY_mss();
