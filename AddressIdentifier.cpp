@@ -27,7 +27,7 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
     if (numEnumSensorInVectorArray[address].size() == 1) {
         addSensor(numEnumSensorInVectorArray[address][0], address, sensors, conflict);
     } else if (numEnumSensorInVectorArray[address].empty()){
-        sensors->insert(std::pair<uint8_t, Sensor *>(address, ( (Sensor *) new UnknownSensor(address)) ) )
+        sensors->insert(std::pair<uint8_t, Sensor *>(address, ( (Sensor *) new UnknownSensor(address)) ) );
     }
     else {
         csa::ConflictingAddressStruct *con;
