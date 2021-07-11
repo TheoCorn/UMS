@@ -21,8 +21,7 @@ adds the the correct sensor type to the specified vector
 void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sensor *> *sensors,
                                          std::vector<csa::ConflictingAddressStruct *> *conflict) {
     Serial.print("addSensor at address ");
-    Serial.printl(address);
-    if (numEnumSensorInVectorArray[address].empty()) return;
+    Serial.println(address);
 
 
     if (numEnumSensorInVectorArray[address].size() == 1) {

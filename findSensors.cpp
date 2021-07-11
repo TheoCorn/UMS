@@ -19,8 +19,8 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
 //    std::vector<byte> collUnAddresses;
     bool addreses[128];
 
-    for (int i = 0; i < 128; i++) {
-        addreses[i] = true;
+    for (bool & address : addreses) {
+        address = true;
     }
 
     //make screen address unavailable
