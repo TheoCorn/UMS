@@ -62,7 +62,7 @@ void DisplayFunctions::showBattery() {
     display->setTextColor(SSD1306_WHITE);
     display->setCursor(15, 0);            // Start at top-left corner
 
-    int battery = getBateryProcentige();
+    int battery = sysInfo::batteryPercentage;
     String bateryPr = String(battery);
 
     display->println(batteryPr + "%");
