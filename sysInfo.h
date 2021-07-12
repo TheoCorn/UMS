@@ -5,6 +5,8 @@
 #ifndef UMDWITHCLASS3_SYSINFO_H
 #define UMDWITHCLASS3_SYSINFO_H
 
+#include "SerialCom.h"
+
 namespace sysInfo {
 
     struct BatteryInfo{
