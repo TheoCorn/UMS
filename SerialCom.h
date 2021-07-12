@@ -12,24 +12,23 @@
 #include <string>
 
 
+
 //class to pass to the task startConnectionCheck usually calls
 class ConnCheckInfo{
 public:
+
+    int duration;
+    bool* connected;
+    TaskHandle_t* taskHandle;
 
     /***
      * @param dur duration in millis
      * @param conn pointer to boolean to be changed
      * @param taskHandle pointer to task handle so the task can delete itself
      */
-    ConnCheckInfo(int dur, bool* conn, TaskHandle_t* taskHandle){
-        this->duration = dur;
-        this->connected = conn;
-        this->taskHandle = taskHandle;
-    }
+    ConnCheckInfo(int dur, bool* conn, TaskHandle_t* taskHandle) : duration(dur), connected(conn), taskHandle(taskHandle){}
 
-    int duration;
-    bool* connected;
-    TaskHandle_t* taskHandle;
+
 };
 
 
@@ -109,9 +108,14 @@ public:
 
 };
 
-//namespace sce{
-//
-//}
+namespace sce{
+    enum SerialComs: unsigned int{
+        BLUETOOTH_SPP   = 0,
+        USB_SERIAL      = 1,
+    };
+}
+
+SerialCom* getSerialCom4EnumPos(unsigned int enumPos);
 
 
 #endif //UMDWITHCLASS3_SERIALCOM_H

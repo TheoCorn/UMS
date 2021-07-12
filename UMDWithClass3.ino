@@ -12,10 +12,8 @@
 
 //serial protocol out
 #include "SerialCom.h"
-#include "Uart.h"
+#include "usbSerial.h"
 #include "BluetoothSerial.h"
-#include "esp_bt_main.h"
-#include "esp_bt_device.h"
 
 //serial protocols in (4 sensors)
 #include <SPI.h>
@@ -34,15 +32,14 @@
 #include "asciiMakros.h"
 #include "SPIFFS.h"
 #include "Error.h"
+#include "spiffs.hpp"
+#include "sysInfo.h"
 
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 #endif
 
-
-
-#define DEFAULT_SERIAL_COM BluetoothSerial
 
 
 
@@ -55,18 +52,28 @@ void onStopReading();
 void sleep();
 
 
-// std::vector<Sensor> sensors;
+
+
 std::map<uint8_t, Sensor*>* sensors;
 
-SerialCom* serialCom;
+
 
 std::vector<char>* btBuffer;
 
 bool reading = false;
 
+unsigned int sysInfo::screenAddress;
+String sysInfo::snid;
+sysInfo::BatteryInfo sysInfo::batteryInfo;
+unsigned int sysInfo::batteryPercentage;
+
+SerialCom* sysInfo::serialCom;
+
 
 DisplayFunctions* mDisplay;
 SensorsIdentifierManager* sensorIdentifier;
+
+
 
 
 void setup() {
@@ -84,12 +91,20 @@ void setup() {
   digitalWrite(traScreen, HIGH);
   pinMode(batteryReadPin, INPUT);
 
+  char* sysInfoStr = (char *) spiffs::readFile(SPIFFS, "/sysInfo.json");
+  StaticJsonDocument<256> sysInfoDoc;
+  deserializeJson(sysInfoDoc, *sysInfoStr);
 
-  serialCom = new BluetoothSerial();
-  mDisplay = new DisplayFunctions(sensors, serialCom);
+  sysInfo::screenAddress sysInfoDoc["screenAddress"];
+  unsigned int defCom = sysInfoDoc["defCom"];
+
+
+
+  sysInfo::serialCom = getSerialCom4EnumPos(defCom);
+  mDisplay = new DisplayFunctions(sensors, sysInfo::serialCom);
   sensorIdentifier = new SensorsIdentifierManager();
 
-  serialCom->startConnectionCheck(5000);
+  sysInfo::serialCom->startConnectionCheck(5000);
 
   Wire.begin();
 
@@ -106,8 +121,8 @@ void setup() {
 void loop() {
 
   char sRead;
-  for (int i = 0; i <= serialCom->available(); ++i) {
-    serialCom->read(&sRead);
+  for (int i = 0; i <= sysInfo::serialCom->available(); ++i) {
+    sysInfo::serialCom->read(&sRead);
     Serial.println(sRead);
 
       switch (sRead) {
@@ -132,7 +147,7 @@ void loop() {
       for (auto const& sTuple : *sensors) {
           sTuple.second->getJson(arr);
       }
-      serialCom->write(arr);
+      sysInfo::serialCom->write(arr);
 
   } else {
     auto conflicts = new std::vector<csa::ConflictingAddressStruct*>();
@@ -140,7 +155,7 @@ void loop() {
     mDisplay->displayWhenNotReading();
 
     if(!conflicts->empty()){
-        serialCom->write(csa::conflictsToString(conflicts));
+        sysInfo::serialCom->write(csa::conflictsToString(conflicts));
     }
     delete conflicts;
   }
@@ -181,7 +196,13 @@ void onSensorsElementReceive(JsonVariant * v) {
     } catch (...) {
       //todo: inform pair device update of sensor has failed (create function exceptionOfKeyBuilder that build json to be send)
 
+      error::Error errMsg = new Error(FAILED_TO_PARSE_JSON_NAME,
+                               SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
+                               error::Appearance::SNACK_BAR,
+                               error::Importance::IMPORTANT,
+                               error::BackgroundAppActions::REQUIRES_USER_ACTION);
 
+      SerialCom->write(errMsg);
     }
   }
 
@@ -231,9 +252,14 @@ void onStopReading() {
 }
 
 /**
-  prepares and deepsleeps the esp32
+  prepares and deep sleeps the esp32
 */
 void sleep() {
   mDisplay->sleep();
   esp_deep_sleep_start();
+}
+
+//todo: implement battery percentage
+void readBatteryCharge(){
+    sysInfo::batteryPercentage = 10;
 }

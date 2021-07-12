@@ -2,8 +2,8 @@
 // Created by theo on 5/9/2021.
 //
 
-#ifndef UMDWITHCLASS3_UART_H
-#define UMDWITHCLASS3_UART_H
+#ifndef UMDWITHCLASS3_USBSERIAL_H
+#define UMDWITHCLASS3_USBSERIAL_H
 
 #include "SerialCom.h"
 #include <ArduinoJson.h>
@@ -14,12 +14,12 @@
 #include "Error.h"
 
 
-class Uart: public SerialCom {
+class usbSerial: public SerialCom {
 
 public:
 
-    Uart();
-    ~Uart();
+    usbSerial();
+    ~usbSerial();
 
     bool begin() override;
     int available() override;
@@ -51,4 +51,4 @@ protected:
 };
 
 
-#endif //UMDWITHCLASS3_UART_H
+#endif //UMDWITHCLASS3_USBSERIAL_H

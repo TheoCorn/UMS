@@ -5,56 +5,90 @@
 #ifndef UMDWITHCLASS3_ERROR_H
 #define UMDWITHCLASS3_ERROR_H
 
+#define FAILED_TO_PARSE_JSON_NAME "failed to parse json configuration"
+#define SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE "unable to set sensor config json"
+
 
 namespace error {
-    /*
+    /**
+     * sets the appearance of an error there is no guarantee the request will be accepted unless you use Importance::REQUIRES_USER_ACTION
+     * (excluding Appearance::ERROR_TERMINAL)
      *
+     * @see Importance
      */
-    enum Importance {
+    enum class Appearance: unsigned int {
+        ///doesnt create any ui depending on app settings will log to error terminal
+        NONE            = 0,
+
+        ///prompts the app to create an alert dialog
+        ALERT_DIALOG    = 1,
+
+        ///prompts the app to create a snack bar dialog
+        SNACK_BAR       = 2,
+
+        /**
+         * guarantees the error will be logged in error terminal
+         * should be used for debugging instead of NONE
+         */
+        ERROR_TERMINAL  = 3
+    };
+
+    /**
+     * defines the importance of an error
+     */
+    enum class Importance: unsigned int {
         UNIMPORTANT = 0,
         MILD = 1,
         IMPORTANT = 2,
 
+        /**
+         * this is a special importance that guarantees the user will be informed about the error via the Appearance requested
+         */
         REQUIRES_USER_ACTION = 3,
-        REQUIRES_APP_ACTION = 4,
+    };
+
+    enum class BackgroundAppActions: unsigned int{
+        NONE    = 0,
+        RESEND  = 1,
     };
 
     /**
      * error class defines the way errors are send to host app
-     * max size of name + message = 146 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
+     * max size of name + message = 158 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
      */
     class Error {
 
     public:
         String name;
         String message;
-        bool createAlertDialog;
-        Importance importance;
+        unsigned int appearance;
+        unsigned int importance;
+        unsigned int backgroundAction;
 
         /**
          * error class defines the way errors are send to host app
-         * max size of name + message = 146 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
+         * max size of name + message = 158 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
          * sets createAlertDialog to true and importance to MILD (1)
          *
          * @param name name of the error
          * @param message details about the error
          */
-        Error(String name, String message) : Error(name, message, true, error::Importance::MILD) {}
+        Error(String name, String message) : Error(name, message, error::Appearance::SNACK_BAR, error::Importance::MILD, BackgroundAppActions::NONE) {}
 
         /**
          * error class defines the way errors are send to host app
-         * max size of name + message = 146 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
-         * sets createAlertDialog to true
+         * max size of name + message = 158 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
+         * prompts the creation of a snackbar dialog
          *
          * @param name name of the error
          * @param message details about the error
          * @param importance
          */
-        Error(String name, String message, error::Importance importance) : Error(name, message, true, importance) {}
+        Error(String name, String message, error::Importance importance) : Error(name, message, error::Appearance::SNACK_BAR, importance, BackgroundAppActions::NONE) {}
 
         /**
          * error class defines the way errors are send to host app
-         * max size of name + message = 146 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
+         * max size of name + message = 158 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
          * sets createAlertDialog to true
          *
          * @param name name of the error
@@ -67,11 +101,11 @@ namespace error {
          *
          * @param importance
          */
-        Error(String name, String message, bool createAlertDialog, error::Importance importance) : name(name),
+        Error(String name, String message, error::Appearance ui, error::Importance importance, error::BackgroundAppActions backgroundAction) : name(name),
                                                                                             message(message),
-                                                                                            createAlertDialog(
-                                                                                                    createAlertDialog),
-                                                                                            importance(importance) {}
+                                                                                            appearance(static_cast<unsigned int>(ui)),
+                                                                                            importance(static_cast<unsigned int>(importance)),
+                                                                                            backgroundAction(static_cast<unsigned int>(backgroundAction)){}
 
     };
 

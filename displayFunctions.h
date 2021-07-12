@@ -15,6 +15,7 @@
 #include <map>
 #include "Sensor.hpp"
 #include "SerialCom.h"
+#include "sysInfo.h"
 
 
 class DisplayFunctions {
@@ -43,12 +44,6 @@ public:
     void showComInfo();
 
     void sleep();
-
-
-    //todo: implement battery percentage
-    static int getBateryProcentige(){
-        return 10;
-    }
 
     void init();
 
