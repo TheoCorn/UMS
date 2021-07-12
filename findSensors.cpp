@@ -7,12 +7,12 @@
 #include <vector>
 #include "AddressIdentifier.hpp"
 #include <algorithm>
-
+#include "sysInfo.h"
 
 
 typedef uint8_t byte;
 //looks for all i2c devices
-void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::map<uint8_t, Sensor*> * sensors, SensorsIdentifierManager * sim, unsigned int screenI2cAddress) {
+void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::map<uint8_t, Sensor*> * sensors, SensorsIdentifierManager * sim) {
     //addresses used by previously allocated sensors
     std::vector<byte> usedAddreses;
     //addresses used by previously allocated sensors that are still present
@@ -24,7 +24,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
     }
 
     //make screen address unavailable
-    addreses[screenI2cAddress] = false;
+    addreses[sysInfo::screenI2cAddress] = false;
 
     //make conn devices unavailable
     uint8_t key;
@@ -43,7 +43,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
         if (error == 0 || error == 4) {
             if (addreses[address]) {
                 sim->addSensor(address, sensors, conflict);
-            } else if (address != screenI2cAddress) {
+            } else if (address != sysInfo::screenI2cAddress) {
 //                collUnAddresses.emplace_back(address);
                 auto pos = std::find(usedAddreses.begin(), usedAddreses.end(), address);
                 if(pos != usedAddreses.end()) usedAddreses.erase(pos);

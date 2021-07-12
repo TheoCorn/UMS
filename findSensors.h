@@ -10,6 +10,7 @@
 #include "ConflictingSensors.hpp"
 #include "AddressIdentifier.hpp"
 
+
 namespace ss{
     void checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::map<uint8_t, Sensor*> * sensors, SensorsIdentifierManager * sim);
 }
