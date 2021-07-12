@@ -142,7 +142,7 @@ void loop() {
 
 
   if (reading) {
-      DynamicJsonDocument doc = DynamicJsonDocument(capacity);
+      DynamicJsonDocument doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
       JsonArray arr = doc.createNestedArray("Sensors");
       for (auto const& sTuple : *sensors) {
           sTuple.second->getJson(arr);

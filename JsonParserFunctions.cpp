@@ -55,7 +55,7 @@ using namespace jp;
  * @return JsonDocument* can be null pointer if the the deserialization failed
  */
 JsonDocument * jp::parseJson(const char * buffer){
-    DynamicJsonDocument *doc = new DynamicJsonDocument(capacity);
+    DynamicJsonDocument *doc = new DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
     DeserializationError err = deserializeJson(*doc, buffer);
 
     if (err != DeserializationError::Ok) {

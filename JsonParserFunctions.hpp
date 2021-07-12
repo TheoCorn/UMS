@@ -5,7 +5,7 @@
 #include <map>
 #include <ArduinoJson.h>
 
-#define capacity 8192
+#define DEFAULT_JDOC_CAPACITY 8192
 
 
 namespace jp {
