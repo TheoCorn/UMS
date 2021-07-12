@@ -24,7 +24,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
     }
 
     //make screen address unavailable
-    addreses[sysInfo::screenI2cAddress] = false;
+    addreses[sysInfo::screenAddress] = false;
 
     //make conn devices unavailable
     uint8_t key;
@@ -43,7 +43,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
         if (error == 0 || error == 4) {
             if (addreses[address]) {
                 sim->addSensor(address, sensors, conflict);
-            } else if (address != sysInfo::screenI2cAddress) {
+            } else if (address != sysInfo::screenAddress) {
 //                collUnAddresses.emplace_back(address);
                 auto pos = std::find(usedAddreses.begin(), usedAddreses.end(), address);
                 if(pos != usedAddreses.end()) usedAddreses.erase(pos);
