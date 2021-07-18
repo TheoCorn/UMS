@@ -62,12 +62,12 @@ void DisplayFunctions::showBattery() {
     display->setTextColor(SSD1306_WHITE);
     display->setCursor(15, 0);            // Start at top-left corner
 
-    int battery = sysInfo::batteryPercentage;
+    unsigned int battery = sysInfo::batteryPercentage;
     String bateryPr = String(battery);
 
     display->println(battery + "%");
 
-    if (batCharge < battery) {
+    if (batCharge < (float) battery) {
         display->fillRect(0, 2, 10, 10, SSD1306_WHITE);
         display->drawPixel(3, 3, SSD1306_BLACK);
         display->drawPixel(4, 3, SSD1306_BLACK);

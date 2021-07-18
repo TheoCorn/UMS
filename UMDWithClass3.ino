@@ -79,6 +79,9 @@ SensorsIdentifierManager* sensorIdentifier;
 void setup() {
   SPIFFS.begin(true);
 
+  //todo untill battery sensor is added
+  sysInfo::batteryPercentage = 10;
+
     //debug
     Serial.begin(112500);
 
@@ -123,7 +126,7 @@ void loop() {
   char sRead;
   for (int i = 0; i <= sysInfo::serialCom->available(); ++i) {
     sysInfo::serialCom->read(&sRead);
-    Serial.println(sRead);
+//    Serial.println(sRead);
 
       switch (sRead) {
         case ETX:
