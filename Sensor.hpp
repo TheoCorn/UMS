@@ -22,7 +22,11 @@ public:
     ///get the name of the Sensor
     virtual String name() = 0;
 
-    ///unique identification of the Sensor type
+    /**
+     * unique identification of the Sensor type
+     *
+     * this is the same as the sensors id defined in sensorsEnum and SensorAddresses.json
+     */
     virtual uint32_t sid() = 0;
 
     /**
@@ -53,45 +57,37 @@ public:
     virtual void saveConfig() = 0;
 
 
-    //todo update comments
+    //todo add ISettings
     /**
-     * get the current settings in json format
+     * get the current settings in json format.
      *
+     * in most cases the Sensor::generateTemplatedSensorObject methods should be sufficient
+     * @see Sensor::generateTemplatedSensorObject
      *
+     * this is the actual format of the communication
      *
-     * the method has to create a nested object in the JsonDocument which name has to be "Sensor" (use Sensor::createSensorObject(JsonDocument*))
+     * the method has to create a nested object in the JsonArray passed to it which name has to be "Sensor" (use Sensor::createSensorObject(JsonArray &doc))
      * (from now known as the sensor object)
-     * remember that multiple sensors of the same function can be present
      *
-     * the method has to create 2 variables in the sensor object called "rsid" which is the i2c address or other runtime address...
-     * and "sid" which is the sensor sid This sid has to have its config file in the app
+     * the method has to create 2 variables in the sensor object called "rsid" which is the i2c address or in the feature other runtime address @see Sensor::rsid
+     * and "sid" which is the sensor id. This sid has to have its config file in the app
+     * @see Sensor::sid
      *
-     * the method has to create a nested object in the sensor object called "features"
-     * each variable in features represents a dataset for the graph (one feature = one 'line' in graph)
+     * the method has to create a nested array in the sensor object called "Features"
+     * this is a boolean array which corresponds with the features defined by "sid.json" in the user device.
+     * each variable in features represents a dataset for the graph (one feature = one 'line' in the graph)
      *
-     *   "Features":{
-     *    "features": [name0, name1, name2, name3],
-     *    "active": [true, false, true, false]
-     *   }
+     *   "Features":[true, false, true, false]
      *
-     * the method can create a nested object in the sensor object called "XSettings" short for exclusive settings
+     * the method can create a nested array in the sensor object called "XSettings" short for exclusive settings
      * basically forces the user to chose between multiple options
      * meant to be used for stuff like accuracy / range settings...
+     * xSettings is a boolean array
+     * similarly to features the values correspond to xSettings defined "sid.json" in the user device
      *
-     * "XSettings":[
-     *    "xSetting":{
-     *        "name":"setting0",
-     *        "options":["option0", "option1", "option2"],
-     *        "active":0
-     *     },
-     *     "xSetting":{
-     *        "name":"setting1",
-     *        "options":["option0", "option1", "option2"],
-     *        "active":2
-     *     }
-     * ]
+     * "XSettings":[0, 0, 1, 4]
      *
-     * @param JsonDocument*
+     * @param JsonArray&
      */
     virtual void getJson(JsonArray& jArr) = 0;
 

@@ -79,6 +79,7 @@ void MPU9250::getJson(JsonArray &jArr) {
 //todo
 void MPU9250::setJson(JsonVariant *v) {
     JsonObject obj = v->as<JsonObject>();
+
     
 }
 
