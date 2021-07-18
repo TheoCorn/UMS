@@ -5,7 +5,6 @@
 #include <vector>
 #include "JsonParserFunctions.hpp"
 
-using namespace jp;
 
 void jp::cycleThruObj (JsonDocument * doc, void (*actualDo)(JsonPair*)) {
 
@@ -15,7 +14,6 @@ void jp::cycleThruObj (JsonDocument * doc, void (*actualDo)(JsonPair*)) {
     }
 }
 
-using namespace jp;
 /**
    deserializes json and starts the process of unpacking the Json
    earpieces '\0' to the end of the vector
@@ -32,7 +30,6 @@ void jp::parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actualDo)(
     parseJson(toPass, &jp::cycleThruObj, actualDo);
 
 }
-using namespace jp;
 /**
  * deserializes the Json call the function mDo points to that takes as input the actualDo function Pointer
  * if the second function pointer is not needed pass nullptr
@@ -41,13 +38,12 @@ using namespace jp;
  * @param void(*mDo)(JsonDocument*, void(JsonPair*))
  * @param void(*actualDo)(JsonPair*)
  */
-void jp::parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*)()), void(*actualDo)(JsonPair*)){
+void jp::parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*)), void(*actualDo)(JsonPair*)){
     JsonDocument *doc = jp::parseJson(buffer);
     mDo(doc, actualDo);
     delete doc;
 }
 
-using namespace jp;
 /**
  * parses json and return JsonDocument* the user of the function must manage the lifecycle of the JsonDocument*
  *

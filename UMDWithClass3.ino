@@ -187,6 +187,8 @@ void doProcess4JsonObj(JsonPair * p) {
       onReadElementReceive(&v); break;
 
     case 'g': onGetElementReceive(&v); break;
+
+    default: Serial.println("no process");
   }
 
 }
