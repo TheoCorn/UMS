@@ -63,7 +63,7 @@ void DisplayFunctions::showBattery() {
     display->setCursor(15, 0);            // Start at top-left corner
 
     unsigned int battery = sysInfo::batteryPercentage;
-    String bateryPr = String(battery);
+    String batteryPr = String(battery);
 
     display->print(battery);
     display->print('%');

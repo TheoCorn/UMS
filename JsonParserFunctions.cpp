@@ -28,7 +28,7 @@ using namespace jp;
 void jp::parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actualDo)(JsonPair*)) {
 
     btBuffer->emplace_back('\0');
-    char * toPass = &(btBuffer->front());
+    char * toPass = btBuffer->data();
     parseJson(toPass, &jp::cycleThruObj, actualDo);
 
 }

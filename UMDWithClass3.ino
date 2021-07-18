@@ -79,10 +79,10 @@ SensorsIdentifierManager* sensorIdentifier;
 void setup() {
   SPIFFS.begin(true);
 
-  //todo untill battery sensor is added
+  //todo until battery sensor is added
   sysInfo::batteryPercentage = 10;
 
-    //debug
+    // todo delete before release debug
     Serial.begin(112500);
 
   sensors = new std::map<uint8_t, Sensor*>;
@@ -131,8 +131,10 @@ void loop() {
       switch (sRead) {
         case ETX:
           jp::parseJsonWithCycleThru(btBuffer, &doProcess4JsonObj);
+          btBuffer->clear();
           break;
         case STX:
+            btBuffer->clear();
           break;
         case ACK:
           break;
