@@ -129,7 +129,8 @@ void loop() {
 //    Serial.println(sRead);
 
       switch (sRead) {
-        case ETX:
+          //todo change to ETX
+        case "\n":
           jp::parseJsonWithCycleThru(btBuffer, &doProcess4JsonObj);
           btBuffer->clear();
           break;
@@ -174,7 +175,7 @@ void loop() {
 
   @param p JsonPair of the object
 */
-void doProcess4JsonObj(JsonPair * p) {
+static void doProcess4JsonObj(JsonPair * p) {
   JsonVariant v = p->value();
 
   switch (p->key().c_str()[0]) {
