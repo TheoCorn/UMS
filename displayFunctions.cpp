@@ -65,7 +65,7 @@ void DisplayFunctions::showBattery() {
     int battery = sysInfo::batteryPercentage;
     String bateryPr = String(battery);
 
-    display->println(batteryPr + "%");
+    display->println(battery + "%");
 
     if (batCharge < battery) {
         display->fillRect(0, 2, 10, 10, SSD1306_WHITE);

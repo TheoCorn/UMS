@@ -93,9 +93,9 @@ void setup() {
 
   char* sysInfoStr = (char *) spiffs::readFile(SPIFFS, "/sysInfo.json");
   StaticJsonDocument<256> sysInfoDoc;
-  deserializeJson(sysInfoDoc, *sysInfoStr);
+  deserializeJson(sysInfoDoc, sysInfoStr);
 
-  sysInfo::screenAddress sysInfoDoc["screenAddress"];
+  sysInfo::screenAddress = sysInfoDoc["screenAddress"];
   unsigned int defCom = sysInfoDoc["defCom"];
 
 
@@ -194,15 +194,14 @@ void onSensorsElementReceive(JsonVariant * v) {
       uint8_t key = atoi(p.key().c_str());
       sensors->at(key)->setJson(v);
     } catch (...) {
-      //todo: inform pair device update of sensor has failed (create function exceptionOfKeyBuilder that build json to be send)
 
-      error::Error errMsg = new Error(FAILED_TO_PARSE_JSON_NAME,
-                               SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
-                               error::Appearance::SNACK_BAR,
-                               error::Importance::IMPORTANT,
-                               error::BackgroundAppActions::REQUIRES_USER_ACTION);
+//      error::Error* errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,
+//                               SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
+//                               error::Appearance::SNACK_BAR,
+//                               error::Importance::REQUIRES_USER_ACTION,
+//                               error::BackgroundAppActions::NONE);
 
-      SerialCom->write(errMsg);
+//      sysInfo::serialCom->write(errMsg);
     }
   }
 
