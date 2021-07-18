@@ -130,7 +130,7 @@ void loop() {
 
       switch (sRead) {
           //todo change to ETX
-        case "\n":
+        case ETX:
           jp::parseJsonWithCycleThru(btBuffer, &doProcess4JsonObj);
           btBuffer->clear();
           break;
@@ -175,7 +175,7 @@ void loop() {
 
   @param p JsonPair of the object
 */
-static void doProcess4JsonObj(JsonPair * p) {
+void doProcess4JsonObj(JsonPair * p) {
   JsonVariant v = p->value();
 
   switch (p->key().c_str()[0]) {
