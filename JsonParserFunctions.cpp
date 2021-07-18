@@ -41,7 +41,7 @@ using namespace jp;
  * @param void(*mDo)(JsonDocument*, void(JsonPair*))
  * @param void(*actualDo)(JsonPair*)
  */
-void jp::parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*)), void(*actualDo)(JsonPair*)){
+void jp::parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*)()), void(*actualDo)(JsonPair*)){
     JsonDocument *doc = jp::parseJson(buffer);
     mDo(doc, actualDo);
     delete doc;
