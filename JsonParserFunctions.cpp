@@ -6,7 +6,7 @@
 #include "JsonParserFunctions.hpp"
 
 
-void jp::cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)> actualDo) {
+void jp::cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)>& actualDo) {
 
     JsonObject obj = doc->to<JsonObject>();
     for (JsonPair p : obj) {
@@ -14,7 +14,7 @@ void jp::cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)> actual
 
         //todo delete before relese
         Serial.print("key: ");
-        Serial.print(p.key())
+        Serial.print(p.key().c_str());
     }
 }
 
@@ -31,7 +31,7 @@ void jp::parseJsonWithCycleThru (std::vector<char> * btBuffer, std::function<voi
 
     btBuffer->emplace_back('\0');
     char * toPass = btBuffer->data();
-    std::function<void(JsonDocument*, std::function<JsonPair*>)> cycleThru = jp::cycleThruObj;
+    std::function<void(JsonDocument*, std::function<void(JsonPair*)>&)> cycleThru = jp::cycleThruObj;
     parseJson(toPass, cycleThru, actualDo);
 
 }
