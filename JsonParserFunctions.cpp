@@ -6,11 +6,15 @@
 #include "JsonParserFunctions.hpp"
 
 
-void jp::cycleThruObj (JsonDocument * doc, void (*actualDo)(JsonPair*)) {
+void jp::cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)> actualDo) {
 
     JsonObject obj = doc->to<JsonObject>();
     for (JsonPair p : obj) {
         actualDo(&p);
+
+        //todo delete before relese
+        Serial.print("key: ");
+        Serial.print(p.key())
     }
 }
 
@@ -23,11 +27,12 @@ void jp::cycleThruObj (JsonDocument * doc, void (*actualDo)(JsonPair*)) {
 
    @exception DeserializationError
 */
-void jp::parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actualDo)(JsonPair*)) {
+void jp::parseJsonWithCycleThru (std::vector<char> * btBuffer, std::function<void(JsonPair*)>& actualDo) {
 
     btBuffer->emplace_back('\0');
     char * toPass = btBuffer->data();
-    parseJson(toPass, &jp::cycleThruObj, actualDo);
+    std::function<void(JsonDocument*, std::function<JsonPair*>)> cycleThru = jp::cycleThruObj;
+    parseJson(toPass, cycleThru, actualDo);
 
 }
 /**
@@ -38,7 +43,7 @@ void jp::parseJsonWithCycleThru (std::vector<char> * btBuffer, void (*actualDo)(
  * @param void(*mDo)(JsonDocument*, void(JsonPair*))
  * @param void(*actualDo)(JsonPair*)
  */
-void jp::parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*)), void(*actualDo)(JsonPair*)){
+void jp::parseJson(const char * buffer, std::function<void(JsonDocument*, std::function<JsonPair*>)>& mDo, std::function<void(JsonPair*)>& actualDo){
     JsonDocument *doc = jp::parseJson(buffer);
     mDo(doc, actualDo);
     delete doc;

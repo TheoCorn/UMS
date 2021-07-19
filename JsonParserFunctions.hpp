@@ -4,6 +4,7 @@
 
 #include <map>
 #include <ArduinoJson.h>
+#include <functional>
 
 #define DEFAULT_JDOC_CAPACITY 8192
 
@@ -12,7 +13,7 @@ namespace jp {
 
     void parseJson(const char * buffer, void(*mDo)(JsonDocument*, void(JsonPair*)), void(*actualDo)(JsonPair*));
 
-    void cycleThruObj(JsonDocument * doc, void (*actualDo)(JsonPair*));
+    void cycleThruObj(JsonDocument * doc, std::function<JsonPair*> actualDo);
 
     void parseJsonWithCycleThru(std::vector<char> * btBuffer, void (*actualDo)(JsonPair*));
 
