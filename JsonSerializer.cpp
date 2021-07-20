@@ -21,6 +21,7 @@ js::serializeRet* js::serializeDoc(JsonDocument* doc){
     js::serializeRet* sr;
     sr->bufLen = bufLen;
     sr->buff = buffer;
+    Serial.println(buffer, bufLen);
 
     Serial.println("serializeDoc");
 
