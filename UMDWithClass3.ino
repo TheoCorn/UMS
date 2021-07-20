@@ -128,9 +128,9 @@ void loop() {
 
         switch (sRead) {
             case ETX:{
-                std::function<void(JsonPair*)> doProcess = doProcess4JsonObj;
+                std::function<void(JsonPair*)> doProcess(doProcess4JsonObj);
                 jp::parseJsonWithCycleThru(btBuffer, doProcess);
-                btBuffer->clear();
+//                btBuffer->clear();
             }
                 break;
             case STX:
