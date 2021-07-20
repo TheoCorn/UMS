@@ -127,9 +127,11 @@ void loop() {
 //    Serial.println(sRead);
 
         switch (sRead) {
-            case ETX:
-                jp::parseJsonWithCycleThru(btBuffer, std::function<void(JsonPair*)>(doProcess4JsonObj));
+            case ETX:{
+                std::function<void(JsonPair*)> doProcess = doProcess4JsonObj;
+                jp::parseJsonWithCycleThru(btBuffer, doProcess);
                 btBuffer->clear();
+            }
                 break;
             case STX:
                 btBuffer->clear();
