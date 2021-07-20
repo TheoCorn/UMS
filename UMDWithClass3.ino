@@ -122,15 +122,18 @@ void setup() {
 void loop() {
 
     char sRead;
-    for (int i = 0; i <= sysInfo::serialCom->available(); ++i) {
+    for (int i = 0; i < sysInfo::serialCom->available(); ++i) {
         sysInfo::serialCom->read(&sRead);
-//    Serial.println(sRead);
+    Serial.println(sRead);
 
         switch (sRead) {
             case ETX:{
                 std::function<void(JsonPair*)> doProcess(doProcess4JsonObj);
                 jp::parseJsonWithCycleThru(btBuffer, doProcess);
-//                btBuffer->clear();
+                for(const char& c : *btBuffer){
+                  Serial.print(c); 
+                }
+                Serial.println();
             }
                 break;
             case STX:
@@ -239,7 +242,7 @@ void onReadElementReceive(JsonVariant *v) {
 
 void onGetElementReceive(JsonVariant *v) {
     DynamicJsonDocument* doc = new DynamicJsonDocument(sensors->size() * 2048);
-    JsonArray arr = doc->creteNesteadArray("SCof");
+    JsonArray arr = doc->createNestedArray("SCof");
 
     uint8_t key;
     Sensor *value;
@@ -247,6 +250,8 @@ void onGetElementReceive(JsonVariant *v) {
         std::tie(key, value) = mPair;
         value->getJson(arr);
     }
+
+    Serial.println("onGetElement");
 
     size_t success = sysInfo::serialCom->write(doc);
 
