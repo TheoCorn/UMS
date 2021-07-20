@@ -8,7 +8,7 @@
 
 void jp::cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)>& actualDo) {
     Serial.println("cycleThru");
-    JsonObject obj = doc->to<JsonObject>();
+    JsonObject obj = doc->as<JsonObject>();
     for (JsonPair p : obj) {
         Serial.println("cycleThru");
 
