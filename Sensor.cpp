@@ -26,6 +26,7 @@ void Sensor::generateFeatures(JsonObject &sensorObj, std::vector<bool> &activeFe
     JsonArray featuresObj = createFeaturesArray(sensorObj);
     for(bool element : activeFeatures){
         featuresObj.add(element);
+        Serial.println(element);
     }
 
 
