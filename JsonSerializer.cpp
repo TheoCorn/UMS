@@ -22,7 +22,7 @@ js::serializeRet* js::serializeDoc(JsonDocument* doc){
     sr->bufLen = bufLen;
     sr->buff = buffer;
 
-    Serial.write(buffer, bufLen);
+    Serial.write(sr->buff, sr->bufLen);
     Serial.println();
 
     return sr;
