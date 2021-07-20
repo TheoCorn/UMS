@@ -18,7 +18,7 @@ void jp::cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)>& actua
         Serial.print("key: ");
         Serial.print(p.key().c_str());
     }
-    //if swcpu restart change to obj to JsonObject* and delete
+
 }
 
 /**
@@ -53,6 +53,7 @@ void jp::parseJson(
 
     JsonDocument *doc = jp::parseJson(buffer);
     cycleFun(doc, actualDo);
+    delete doc;
 }
 
 /**

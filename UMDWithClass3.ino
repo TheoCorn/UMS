@@ -253,6 +253,10 @@ void onGetElementReceive(JsonVariant *v) {
 
     size_t success = sysInfo::serialCom->write(doc);
 
+    Serial.println("onGetElement");
+
+    delete doc;
+
 }
 
 void onStartReading() {
