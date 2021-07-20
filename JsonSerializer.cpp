@@ -9,7 +9,7 @@
 js::serializeRet* js::serializeDoc(JsonDocument* doc){
     Serial.println("serializeDoc");
 
-    size_t bufLen =  measureJson(*doc);
+    size_t bufLen =  measureJson(*doc) + 1;
     char* buffer = new char[bufLen];
 
     Serial.println("serializeDoc");
@@ -21,9 +21,9 @@ js::serializeRet* js::serializeDoc(JsonDocument* doc){
     js::serializeRet* sr;
     sr->bufLen = bufLen;
     sr->buff = buffer;
-    Serial.println(buffer, bufLen);
 
-    Serial.println("serializeDoc");
+    Serial.write(buffer, bufLen);
+    Serial.println();
 
     return sr;
 }

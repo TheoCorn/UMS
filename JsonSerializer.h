@@ -14,6 +14,10 @@ namespace js {
     struct serializeRet{
         char* buff;
         int bufLen;
+
+        ~serializeRet(){
+          delete[] buff;
+        }
     };
 
     js::serializeRet* serializeDoc(JsonDocument * doc);

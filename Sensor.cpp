@@ -24,9 +24,11 @@ JsonArray Sensor::createISettingsArray(JsonObject &obj) {
 void Sensor::generateFeatures(JsonObject &sensorObj, std::vector<bool> &activeFeatures) {
 
     JsonArray featuresObj = createFeaturesArray(sensorObj);
-    for(bool const element : activeFeatures){
+    for(bool element : activeFeatures){
         featuresObj.add(element);
     }
+
+
 
 }
 
