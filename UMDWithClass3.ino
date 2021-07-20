@@ -130,10 +130,6 @@ void loop() {
             case ETX:{
                 std::function<void(JsonPair*)> doProcess(doProcess4JsonObj);
                 jp::parseJsonWithCycleThru(btBuffer, doProcess);
-                for(const char& c : *btBuffer){
-                  Serial.print(c); 
-                }
-                Serial.println();
             }
                 break;
             case STX:
