@@ -30,6 +30,8 @@ void jp::cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)>& actua
 */
 void jp::parseJsonWithCycleThru (std::vector<char> * btBuffer, std::function<void(JsonPair*)>& actualDo) {
 
+    Serial.println("parseJson with cycle thru");
+
     btBuffer->emplace_back('\0');
     const char * toPass = btBuffer->data();
     std::function<void(JsonDocument*, std::function<void(JsonPair*)>&)> cycleThru = jp::cycleThruObj;

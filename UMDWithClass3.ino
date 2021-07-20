@@ -179,6 +179,8 @@ void loop() {
 void doProcess4JsonObj(JsonPair *p) {
     JsonVariant v = p->value();
 
+    Serial.println("doProcess4JsonObj");
+
     switch (p->key().c_str()[0]) {
 
         case 's':
