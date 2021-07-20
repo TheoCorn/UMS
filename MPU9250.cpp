@@ -9,6 +9,7 @@ MPU9250::MPU9250(uint8_t address) : Sensor() {
     _i2c = &Wire; // I2C bus
     _address = address; // I2C address
     _useSPI = false; // set to use I2C
+    setUp();
     begin();
 }
 
