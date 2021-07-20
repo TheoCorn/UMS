@@ -11,11 +11,14 @@
 
 namespace jp {
 
-    void parseJson(const char * buffer, std::function<void(JsonDocument*, std::function<JsonPair*>)>& cycleFun, std::function<void(JsonPair *)>& actualDo);
+    void parseJson(
+            const char * buffer,
+            std::function<void(JsonDocument*, std::function<void(JsonPair*)>&)>& cycleFun,
+            std::function<void(JsonPair*)>& actualDo);
 
-    void cycleThruObj(JsonDocument * doc, std::function<void(JsonPair*)>& actualDo);
+    void cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)>& actualDo);
 
-    void parseJsonWithCycleThru(std::vector<char> * btBuffer, std::function<void(JsonPair*)>& actualDo);
+    void parseJsonWithCycleThru (std::vector<char> * btBuffer, std::function<void(JsonPair*)>& actualDo);
 
     JsonDocument * parseJson(const char * buffer);
 
