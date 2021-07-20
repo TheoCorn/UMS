@@ -238,8 +238,8 @@ void onReadElementReceive(JsonVariant *v) {
 }
 
 void onGetElementReceive(JsonVariant *v) {
-    DynamicJsonDocument doc = DynamicJsonDocument(sensors->size() * 2048);
-    JsonArray arr = doc.to<JsonArray>();
+    DynamicJsonDocument* doc = new DynamicJsonDocument(sensors->size() * 2048);
+    JsonArray arr = doc->creteNesteadArray("SCof");
 
     uint8_t key;
     Sensor *value;
@@ -247,6 +247,8 @@ void onGetElementReceive(JsonVariant *v) {
         std::tie(key, value) = mPair;
         value->getJson(arr);
     }
+
+    size_t success = sysInfo::serialCom->write(doc);
 
 }
 
