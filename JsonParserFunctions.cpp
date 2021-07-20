@@ -30,22 +30,26 @@ void jp::cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)>& actua
 void jp::parseJsonWithCycleThru (std::vector<char> * btBuffer, std::function<void(JsonPair*)>& actualDo) {
 
     btBuffer->emplace_back('\0');
-    char * toPass = btBuffer->data();
+    const char * toPass = btBuffer->data();
     std::function<void(JsonDocument*, std::function<void(JsonPair*)>&)> cycleThru = jp::cycleThruObj;
     parseJson(toPass, cycleThru, actualDo);
 
 }
 /**
- * deserializes the Json call the function mDo points to that takes as input the actualDo function Pointer
+ * deserializes the Json call the function cycleFun points to that takes as input the actualDo function Pointer
  * if the second function pointer is not needed pass nullptr
  *
  * @param buffer the serialised Json
- * @param void(*mDo)(JsonDocument*, void(JsonPair*))
+ * @param void(*cycleFun)(JsonDocument*, void(JsonPair*))
  * @param void(*actualDo)(JsonPair*)
  */
-void jp::parseJson(const char * buffer, std::function<void(JsonDocument*, std::function<JsonPair*>)>& mDo, std::function<void(JsonPair*)>& actualDo){
+void jp::parseJson(
+        const char * buffer,
+        std::function<void(JsonDocument*, std::function<void(JsonPair*)>&)>& cycleFun,
+        std::function<void(JsonPair*)>& actualDo){
+
     JsonDocument *doc = jp::parseJson(buffer);
-    mDo(doc, actualDo);
+    cycleFun(doc, actualDo);
     delete doc;
 }
 
