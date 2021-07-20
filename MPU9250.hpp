@@ -69,7 +69,6 @@ class MPU9250 : public Sensor{
 //    bool mpuFeaturesBool[10] = { true, true, true, true, true, true, true, true, true, false };
 
     std::vector<bool> activeFeaturesVec;
-    std::vector<bool> activeFeaturesVec;
     std::vector<unsigned int> xSettings;
 
 

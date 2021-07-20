@@ -21,10 +21,12 @@ void MPU9250::setUp() {
         JsonArray activeFeatures = (*doc)["activeFeatures"];
         JsonArray locXSettings = (*doc)["xSettings"];
 
+        activeFeaturesVec.clear();
         for (JsonVariant v : activeFeatures) {
             activeFeaturesVec.emplace_back(v.as<bool>());
         }
 
+        xSettings.clear();
         for (JsonVariant v : locXSettings) {
             unsigned int setting = v.as<unsigned int>();
             xSettings.emplace_back(setting);
@@ -33,8 +35,8 @@ void MPU9250::setUp() {
 
     }
 
-    delete[] cArrJson;
     delete doc;
+    delete[] cArrJson;
 
     setXSettings();
 
