@@ -35,7 +35,7 @@ void MPU9250::setUp() {
 
     }
 
-    delete doc;
+//    delete doc;
     delete[] cArrJson;
 
     setXSettings();
