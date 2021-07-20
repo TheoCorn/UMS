@@ -701,7 +701,7 @@ size_t BluetoothSerial::write(JsonDocument * doc){
 
     Serial.println(sr->buff);
 
-    size_t ret = write(static_cast<const uint8_t*>(sr->buff), sr->bufLen);
+    size_t ret = write(reinterpret_cast<const uint8_t*>(sr->buff), sr->bufLen);
     delete sr;
     return ret;
 
