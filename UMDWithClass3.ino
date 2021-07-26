@@ -230,7 +230,7 @@ void onReadElementReceive(JsonVariant *v) {
             reading = true;
             onStartReading();
         } else {
-            if (reading) return;
+            if (!reading) return;
             reading = false;
             onStopReading();
         }
