@@ -208,13 +208,13 @@ void onSensorsElementReceive(JsonVariant *v) {
             sensors->at(key)->setJson(v);
         } catch (...) {
 
-//      error::Error* errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,
-//                               SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
-//                               error::Appearance::SNACK_BAR,
-//                               error::Importance::REQUIRES_USER_ACTION,
-//                               error::BackgroundAppActions::NONE);
+      error::Error* errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,
+                               SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
+                               error::Appearance::SNACK_BAR,
+                               error::Importance::REQUIRES_USER_ACTION,
+                               error::BackgroundAppActions::NONE);
 
-//      sysInfo::serialCom->write(errMsg);
+      sysInfo::serialCom->write(errMsg);
         }
     }
 
