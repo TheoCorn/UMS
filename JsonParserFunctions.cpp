@@ -53,7 +53,7 @@ void jp::parseJson(
 
     JsonDocument *doc = jp::parseJson(buffer);
     cycleFun(doc, actualDo);
-    delete doc;
+//    delete doc;
 }
 
 /**
