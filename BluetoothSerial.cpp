@@ -700,7 +700,7 @@ size_t BluetoothSerial::write(JsonDocument * doc){
     js::serializeRet* sr = js::serializeDoc(doc);
 
 
-    size_t ret = this->write((const uint8_t*)(sr->buff), sr->bufLen);
+    size_t ret = this->write((sr->buff), sr->bufLen);
 //    delete sr;
     return ret;
 
