@@ -150,12 +150,12 @@ void loop() {
 
 
     if (reading) {
-        DynamicJsonDocument doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
+        DynamicJsonDocument doc = DynamicJsonDocument(readJsonCapacity);
         JsonArray arr = doc.createNestedArray("Sensors");
         for (auto const &sTuple : *sensors) {
             sTuple.second->getJson(arr);
         }
-        sysInfo::serialCom->write(arr);
+        sysInfo::serialCom->write(doc);
 
     } else {
         auto conflicts = new std::vector<csa::ConflictingAddressStruct *>();
@@ -274,7 +274,8 @@ void onStartReading() {
 }
 
 void onStopReading() {
-        sensorIdentifier = new SensorsIdentifierManager();
+
+    ensorIdentifier = new SensorsIdentifierManager();
 }
 
 /**
