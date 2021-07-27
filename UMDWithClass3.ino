@@ -146,10 +146,10 @@ void loop() {
 
 
     if (reading) {
-        auto doc = DynamicJsonDocument(readJsonCapacity);
+        auto doc = new DynamicJsonDocument(readJsonCapacity);
         JsonArray arr = doc->createNestedArray("Sensors");
         for (auto const &sTuple : *sensors) {
-            sTuple.second->getJson(arr);
+            sTuple.second->readSensor(arr);
         }
         sysInfo::serialCom->write(doc);
 
