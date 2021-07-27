@@ -79,10 +79,24 @@ void MPU9250::getJson(JsonArray &jArr) {
 //    }
 }
 
-//todo
-void MPU9250::setJson(JsonVariant *v) {
-    JsonObject obj = v->as<JsonObject>();
 
+void MPU9250::setJson(JsonObject& sConf) {
+
+    JsonArray features = sConf["Features"];
+    JsonArray locXSettings = sConf["xSettings"];
+//    JsonArray ISettings = sConf["ISettings"];
+
+    activeFeaturesVec.clear();
+    xSettings.clear();
+
+
+    for(JsonVariant v : features){
+        activeFeaturesVec.emplace_back(v.as<bool>());
+    }
+
+    for (JsonVariant v : locXSettings) {
+        xSettings.emplace_back(v.as<unsigned int>());
+    }
     
 }
 

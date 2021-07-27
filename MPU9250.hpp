@@ -305,7 +305,7 @@ public:
     
     void getJson(JsonArray& jArr) override;
     
-    void setJson(JsonVariant * v) override;
+    void setJson(JsonObject& sConf) override;
 
     void setUp() override;
 

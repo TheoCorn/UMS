@@ -200,21 +200,22 @@ void doProcess4JsonObj(JsonPair *p) {
 
 
 void onSensorsElementReceive(JsonVariant *v) {
-    JsonObject obj = v->as<JsonObject>();
+    JsonArray arr = v->as<JsonArray>();
 
-    for (JsonPair p : obj) {
+    for (JsonVariant sConf : arr) {
         try {
-            uint8_t key = atoi(p.key().c_str());
-            sensors->at(key)->setJson(v);
+            JsonObject obj = sConf.as<JsonObject>();
+            unsigned int key = obj["rsid"];
+            sensors->at(key)->setJson(obj);
         } catch (...) {
 
-      error::Error* errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,
+            error::Error* errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,
                                SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
                                error::Appearance::SNACK_BAR,
                                error::Importance::REQUIRES_USER_ACTION,
                                error::BackgroundAppActions::NONE);
 
-      sysInfo::serialCom->write(errMsg);
+            sysInfo::serialCom->write(errMsg);
         }
     }
 

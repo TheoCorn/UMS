@@ -44,7 +44,7 @@ void jp::parseJson(
         std::function<void(JsonPair*)>& actualDo){
 
     JsonDocument *doc = jp::parseJson(buffer);
-    cycleFun(doc, actualDo);
+    if(doc != nullptr) cycleFun(doc, actualDo);
 //    delete doc;
 }
 

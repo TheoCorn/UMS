@@ -91,8 +91,12 @@ public:
      */
     virtual void getJson(JsonArray& jArr) = 0;
 
-    ///set setting of the sensor
-    virtual void setJson(JsonVariant *v) = 0;
+    /**
+     * set setting of the sensor
+     *
+     *
+     */
+    virtual void setJson(JsonObject& sConf) = 0;
 
 
 
@@ -207,6 +211,8 @@ protected:
      */
     static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid,
                                               std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings);
+
+
 
 
 };
