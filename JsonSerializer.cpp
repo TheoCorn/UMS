@@ -19,7 +19,7 @@ js::serializeRet* js::serializeDoc(JsonDocument* doc){
 
     Serial.println("serializeDoc");
 
-    js::serializeRet* sr;
+    auto* sr = new js::serializeRet();
     sr->bufLen = bufLen;
     sr->buff = buffer;
 
