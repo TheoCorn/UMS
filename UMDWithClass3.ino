@@ -100,9 +100,9 @@ void setup() {
 
     sysInfo::screenAddress = sysInfoDoc["screenAddress"];
     unsigned int defCom = sysInfoDoc["defCom"];
-
-
+    sysInfo::comName = sysInfoDoc["comName"]
     sysInfo::serialCom = getSerialCom4EnumPos(defCom);
+
     mDisplay = new DisplayFunctions(sensors, sysInfo::serialCom);
     sensorIdentifier = new SensorsIdentifierManager();
 

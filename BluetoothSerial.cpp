@@ -637,7 +637,7 @@ bool BluetoothSerial::actualBegin(String localName, bool isMaster)
 }
 
 bool BluetoothSerial::begin(){
-    return actualBegin(sysInfo::comName, true);
+    return actualBegin(sysInfo::comName);
 }
 
 
