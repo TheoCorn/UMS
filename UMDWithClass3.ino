@@ -40,6 +40,8 @@
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 #endif
 
+#define JSON_SINGLE_SENSOR_SIZE 256;
+
 
 void doProcess4JsonObj(JsonPair *p);
 
@@ -73,6 +75,8 @@ SerialCom *sysInfo::serialCom;
 
 DisplayFunctions *mDisplay;
 SensorsIdentifierManager *sensorIdentifier;
+
+unsigned int readJsonCapacity = DEFAULT_JDOC_CAPACITY;
 
 
 void setup() {
@@ -261,14 +265,16 @@ void onGetElementReceive(JsonVariant *v) {
 }
 
 void onStartReading() {
+
     detachInterrupt(sleepPin);
     mDisplay->displayWhenReading();
+    readJsonCapacity = JSON_SINGLE_SENSOR_SIZE * sensors->size()
 
-    //  delete sensorIdentifier;
+    delete sensorIdentifier;
 }
 
 void onStopReading() {
-    //    sensorIdentifier = new SensorsIdentifierManager();
+        sensorIdentifier = new SensorsIdentifierManager();
 }
 
 /**
