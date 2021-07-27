@@ -81,8 +81,8 @@ void setup() {
     //todo until battery sensor is added
     sysInfo::batteryPercentage = 10;
 
-    // todo delete before release debug
-    Serial.begin(112500);
+//    // todo delete before release debug
+//    Serial.begin(112500);
 
     sensors = new std::map<uint8_t, Sensor *>;
     btBuffer = new std::vector<char>;

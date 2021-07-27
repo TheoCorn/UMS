@@ -13,6 +13,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <map>
+#include <functional>
 #include "Sensor.hpp"
 #include "SerialCom.h"
 #include "sysInfo.h"
@@ -47,6 +48,11 @@ public:
 
     void init();
 
+    namespace ui{
+        std::vector<String> tabNames{"Sensors", "Settings", "com"};
+        std::vector<std::function<void(Adafruit_SSD1306*)> uiRenderers{std::function<void()>(showSensors) };
+    }
+
 private:
     Adafruit_SSD1306 * display;
     float batCharge = 100.0f;
@@ -54,6 +60,8 @@ private:
     SerialCom* serialCom;
 
 };
+
+
 
 
 #endif //UMDWITHCLASS3_DISPLAYFUNCTIONS_H
