@@ -63,7 +63,7 @@ std::vector<char> *btBuffer;
 bool reading = false;
 
 unsigned int sysInfo::screenAddress;
-String sysInfo::snid;
+String sysInfo::sn;
 sysInfo::BatteryInfo sysInfo::batteryInfo;
 unsigned int sysInfo::batteryPercentage;
 String sysInfo::comName;
@@ -100,8 +100,14 @@ void setup() {
 
     sysInfo::screenAddress = sysInfoDoc["screenAddress"];
     unsigned int defCom = sysInfoDoc["defCom"];
-    sysInfo::comName = sysInfoDoc["comName"]
+    sysInfo::comName = sysInfoDoc["comName"].as<String>();
     sysInfo::serialCom = getSerialCom4EnumPos(defCom);
+
+    sysInfo::sn = sysInfoDoc["sn"].as<String>();
+
+    JsonObject batObj = sysInfoDoc["battery"].as<JsonObject>();
+    sysInfo::batteryInfo.name = batObj["name"];
+    sysInfo::batteryInfo.capacity = batObj["capacity"];
 
     mDisplay = new DisplayFunctions(sensors, sysInfo::serialCom);
     sensorIdentifier = new SensorsIdentifierManager();

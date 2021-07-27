@@ -15,7 +15,7 @@ namespace sysInfo {
     };
 
     extern unsigned int screenAddress;
-    extern String snid;
+    extern String sn;
     extern BatteryInfo batteryInfo;
     extern SerialCom* serialCom;
     extern unsigned int batteryPercentage;
