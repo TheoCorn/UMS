@@ -42,8 +42,9 @@ size_t usbSerial::write(JsonDocument* doc) {
     Serial.println("write document");
     js::serializeRet * sr = js::serializeDoc(doc);
     Serial.println("write document");
+    Serial.println("write document");
     Serial.println(sr->bufLen);
-    Serial.println((int)sr->buff)
+    Serial.println((int)sr->buff);
     size_t ret = Serial.write(sr->buff, sr->bufLen);
     Serial.println("write document");
     delete sr;
