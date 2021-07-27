@@ -44,7 +44,7 @@ size_t usbSerial::write(JsonDocument* doc) {
     Serial.println("write document");
     size_t ret = Serial.write(sr->buff, sr->bufLen);
     Serial.println("write document");
-    delete sr; 
+    delete sr;
     return ret;
 }
 
