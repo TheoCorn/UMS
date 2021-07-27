@@ -150,8 +150,8 @@ void loop() {
 
 
     if (reading) {
-        DynamicJsonDocument doc = DynamicJsonDocument(readJsonCapacity);
-        JsonArray arr = doc.createNestedArray("Sensors");
+        auto doc = new DynamicJsonDocument(readJsonCapacity);
+        JsonArray arr = doc->createNestedArray("Sensors");
         for (auto const &sTuple : *sensors) {
             sTuple.second->getJson(arr);
         }
