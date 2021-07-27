@@ -7,18 +7,10 @@
 
 
 void jp::cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)>& actualDo) {
-    Serial.println("cycleThru");
     JsonObject obj = doc->as<JsonObject>();
     for (JsonPair p : obj) {
-        Serial.println("cycleThru");
-
         actualDo(&p);
-
-        //todo delete before relese
-        Serial.print("key: ");
-        Serial.print(p.key().c_str());
     }
-
 }
 
 /**

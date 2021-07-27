@@ -67,7 +67,6 @@ String sysInfo::snid;
 sysInfo::BatteryInfo sysInfo::batteryInfo;
 unsigned int sysInfo::batteryPercentage;
 String sysInfo::comName;
-
 SerialCom *sysInfo::serialCom;
 
 
@@ -126,7 +125,6 @@ void loop() {
     char sRead;
     for (int i = 0; i < sysInfo::serialCom->available(); ++i) {
         sysInfo::serialCom->read(&sRead);
-    Serial.println(sRead);
 
         switch (sRead) {
             case ETX:{
@@ -177,8 +175,6 @@ void loop() {
 void doProcess4JsonObj(JsonPair *p) {
     JsonVariant v = p->value();
 
-    Serial.println("doProcess4JsonObj");
-
     switch (p->key().c_str()[0]) {
 
         case 's':
@@ -194,7 +190,7 @@ void doProcess4JsonObj(JsonPair *p) {
             break;
 
         default:
-            Serial.println("no process");
+            break;
     }
 
 
@@ -251,12 +247,7 @@ void onGetElementReceive(JsonVariant *v) {
         value->getJson(arr);
     }
 
-    Serial.println("onGetElement");
-
     size_t success = sysInfo::serialCom->write(doc);
-
-    Serial.println("onGetElement");
-
 
     delete doc;
 

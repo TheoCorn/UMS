@@ -16,9 +16,7 @@ namespace js {
         unsigned int bufLen;
 
         ~serializeRet(){
-            Serial.println("SerReturnDelete");
           delete[] buff;
-            Serial.println("SerReturnDelete");
         }
     };
 

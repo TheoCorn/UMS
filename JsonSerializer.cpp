@@ -7,24 +7,15 @@
 #include "Error.h"
 
 js::serializeRet* js::serializeDoc(JsonDocument* doc){
-    Serial.println("serializeDoc");
 
     unsigned int bufLen =  measureJson(*doc) + 1;
-    Serial.println(bufLen);
     char* buffer = new char[bufLen];
 
-    Serial.println("serializeDoc");
-
     serializeJson(*doc, buffer, bufLen);
-
-    Serial.println("serializeDoc");
 
     auto* sr = new js::serializeRet();
     sr->bufLen = bufLen;
     sr->buff = buffer;
-
-    Serial.write(sr->buff, sr->bufLen);
-    Serial.println();
 
     return sr;
 }
