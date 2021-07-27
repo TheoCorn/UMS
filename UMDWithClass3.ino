@@ -59,16 +59,14 @@ void sleep();
 
 
 std::map<uint8_t, Sensor *> *sensors;
-
-
 std::vector<char> *btBuffer;
-
 bool reading = false;
 
 unsigned int sysInfo::screenAddress;
 String sysInfo::snid;
 sysInfo::BatteryInfo sysInfo::batteryInfo;
 unsigned int sysInfo::batteryPercentage;
+String sysInfo::comName;
 
 SerialCom *sysInfo::serialCom;
 
