@@ -146,12 +146,14 @@ void loop() {
 
 
     if (reading) {
-        auto doc = new DynamicJsonDocument(readJsonCapacity);
+        auto doc = DynamicJsonDocument(readJsonCapacity);
         JsonArray arr = doc->createNestedArray("Sensors");
         for (auto const &sTuple : *sensors) {
             sTuple.second->getJson(arr);
         }
         sysInfo::serialCom->write(doc);
+
+        delete doc;
 
     } else {
         auto conflicts = new std::vector<csa::ConflictingAddressStruct *>();
