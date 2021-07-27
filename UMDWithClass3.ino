@@ -76,7 +76,7 @@ SerialCom *sysInfo::serialCom;
 DisplayFunctions *mDisplay;
 SensorsIdentifierManager *sensorIdentifier;
 
-unsigned int readJsonCapacity = DEFAULT_JDOC_CAPACITY;
+size_t readJsonCapacity = DEFAULT_JDOC_CAPACITY;
 
 
 void setup() {
@@ -275,7 +275,7 @@ void onStartReading() {
 
 void onStopReading() {
 
-    ensorIdentifier = new SensorsIdentifierManager();
+    sensorIdentifier = new SensorsIdentifierManager();
 }
 
 /**
