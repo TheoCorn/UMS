@@ -22,7 +22,7 @@ class UnknownSensor : public Sensor {
     String getExtendedStringForDisplay() override { return ""; }
     void readSensor(JsonArray &jra) override { }
     void getJson(JsonArray& ptrDoc) override {}
-    void setJson(JsonVariant * v) override {}
+    void setJson(JsonObject& sConf) override {}
 
     uint32_t sid() override { return sensorEnum::UNKNOWN_SENSOR; };
     uint32_t rsid() override { return address; }

@@ -83,7 +83,7 @@ void MPU9250::getJson(JsonArray &jArr) {
 void MPU9250::setJson(JsonObject& sConf) {
 
     JsonArray features = sConf["Features"];
-    JsonArray locXSettings = sConf["xSettings"];
+    JsonArray locXSettings = sConf["XSettings"];
 //    JsonArray ISettings = sConf["ISettings"];
 
     activeFeaturesVec.clear();
