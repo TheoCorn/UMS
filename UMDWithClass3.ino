@@ -268,7 +268,7 @@ void onStartReading() {
 
     detachInterrupt(sleepPin);
     mDisplay->displayWhenReading();
-    readJsonCapacity = JSON_SINGLE_SENSOR_SIZE * sensors->size();
+    readJsonCapacity = DEFAULT_JDOC_CAPACITY;  //JSON_SINGLE_SENSOR_SIZE * sensors->size();
 
     delete sensorIdentifier;
 }

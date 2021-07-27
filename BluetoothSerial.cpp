@@ -25,6 +25,7 @@
 #include "JsonSerializer.h"
 
 #include "Error.h"
+#include "sysInfo.h"
 
 
 #if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
@@ -636,7 +637,7 @@ bool BluetoothSerial::actualBegin(String localName, bool isMaster)
 }
 
 bool BluetoothSerial::begin(){
-    return actualBegin(BT_NAME);
+    return actualBegin(sysInfo::comName, true);
 }
 
 

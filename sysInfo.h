@@ -19,6 +19,8 @@ namespace sysInfo {
     extern BatteryInfo batteryInfo;
     extern SerialCom* serialCom;
     extern unsigned int batteryPercentage;
+
+    String comName;
 }
 
 #endif //UMDWITHCLASS3_SYSINFO_H
