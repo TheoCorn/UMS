@@ -21,6 +21,8 @@ namespace sysInfo {
     extern unsigned int batteryPercentage;
 
     extern String comName;
+
+    bool isCharging;
 }
 
 #endif //UMDWITHCLASS3_SYSINFO_H

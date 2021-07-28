@@ -81,6 +81,7 @@ void setup() {
 
     //todo until battery sensor is added
     sysInfo::batteryPercentage = 10;
+    sysInfo::isCharging = false;
 
 //    // todo delete before release debug
 //    Serial.begin(112500);
@@ -108,6 +109,8 @@ void setup() {
     JsonObject batObj = sysInfoDoc["battery"].as<JsonObject>();
     sysInfo::batteryInfo.name = batObj["name"];
     sysInfo::batteryInfo.capacity = batObj["capacity"];
+
+
 
     mDisplay = new DisplayFunctions(sensors, sysInfo::serialCom);
     sensorIdentifier = new SensorsIdentifierManager();

@@ -68,7 +68,7 @@ void DisplayFunctions::showBattery() {
     display->print(battery);
     display->print('%');
 
-    if (batCharge < (float) battery) {
+    if (sysInfo::isCharging) {
         display->fillRect(0, 2, 10, 10, SSD1306_WHITE);
         display->drawPixel(3, 3, SSD1306_BLACK);
         display->drawPixel(4, 3, SSD1306_BLACK);
