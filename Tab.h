@@ -7,6 +7,7 @@
 
 
 #include <Adafruit_SSD1306.h>
+#include "ui.h"
 
 
 class ui::Tab {

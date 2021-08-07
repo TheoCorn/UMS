@@ -5,7 +5,7 @@
 #include "SensorsTab.h"
 
 
-void ui::SensorsTab::AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) {
+void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) {
     display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);
 
     auto it = activeSensorIterator;
@@ -17,7 +17,7 @@ void ui::SensorsTab::AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coo
 
 }
 
-bool ui::SensorsTab::AllSensorsScreen::onUp() {
+bool AllSensorsScreen::onUp() {
     if (activeSensorIterator != sensors->begin()) {
         activeSensorIterator--;
         return false;
@@ -26,16 +26,16 @@ bool ui::SensorsTab::AllSensorsScreen::onUp() {
     }
 }
 
-void ui::SensorsTab::AllSensorsScreen::onDown() {
+void AllSensorsScreen::onDown() {
     if (activeSensorIterator != sensors->end()) activeSensorIterator++;
 }
 
-void ui::SensorsTab::AllSensorsScreen::onClick() {
-    subScreen = (ui::Tab *) (new ui::SensorsTab::SpecificSensor(activeSensorIterator, subScreen, sensors));
+void AllSensorsScreen::onClick() {
+    subScreen = (ui::Tab *) (new SpecificSensor(activeSensorIterator, subScreen, sensors));
     delete this;
 }
 
-void ui::SensorsTab::AllSensorsScreen::printSensors(Adafruit_SSD1306 *display,
+void AllSensorsScreen::printSensors(Adafruit_SSD1306 *display,
                                                     std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &itStart,
                                                     std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &&itEnd,
                                                     ui::coordinates &end) {
@@ -49,14 +49,16 @@ void ui::SensorsTab::AllSensorsScreen::printSensors(Adafruit_SSD1306 *display,
 }
 
 
-void ui::SensorsTab::SpecificSensor::render(Adafruit_SSD1306 *display,
+void SpecificSensor::render(Adafruit_SSD1306 *display,
                                             ui::coordinates &start,
                                             ui::coordinates &end) {
     display->println(activeSensorIterator->second->getExtendedStringForDisplay());
 }
 
 
-void ui::SensorsTab::SpecificSensor::onClick() {
-    subScreen = (ui::Tab *) (new ui::SensorsTab::AllSensorsScreen(activeSensorIterator, sensors, subScreen));
+void SpecificSensor::onClick() {
+    subScreen = (ui::Tab *) (new AllSensorsScreen(activeSensorIterator, sensors, subScreen));
     delete this;
 }
+
+
