@@ -10,10 +10,11 @@
 #include "Sensor.hpp"
 
 
-class SensorsTab : public ui::Tab {
+class ui::SensorsTab : public ui::Tab {
 private:
 
     class AllSensorsScreen;
+
     class SpecificSensorScreen;
 
     std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &&activeSensorIterator;
@@ -88,8 +89,6 @@ public:
 
     void onClick() override;
 };
-
-
 
 
 #endif //UMDWITHCLASS3_SENSORSTAB_H

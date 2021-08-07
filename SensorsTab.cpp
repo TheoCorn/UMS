@@ -30,8 +30,7 @@ void ui::SensorsTab::AllSensorsScreen::onDown() {
     if (activeSensorIterator != sensors->end()) activeSensorIterator++;
 }
 
-void
-ui::SensorsTab::AllSensorsScreen::onClick() {
+void ui::SensorsTab::AllSensorsScreen::onClick() {
     subScreen = (ui::Tab *) (new ui::SensorsTab::SpecificSensor(activeSensorIterator, subScreen, sensors));
     delete this;
 }
