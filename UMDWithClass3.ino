@@ -99,7 +99,7 @@ void setup() {
     StaticJsonDocument<256> sysInfoDoc;
     deserializeJson(sysInfoDoc, sysInfoStr);
 
-    sysInfo::screenAddress = sysInfoDoc["screenAddress"];
+    sysInfo::screenAddress = sysInfoDoc["screenAddress"].as<unsigned int>();
     unsigned int defCom = sysInfoDoc["defCom"];
     sysInfo::comName = sysInfoDoc["comName"].as<String>();
     sysInfo::serialCom = getSerialCom4EnumPos(defCom);
