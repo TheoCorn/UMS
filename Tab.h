@@ -6,6 +6,7 @@
 #define UMDWITHCLASS3_TAB_H
 
 #include "ui.h"
+#include <Adafruit_SSD1306.h>
 
 
 class ui::Tab {
