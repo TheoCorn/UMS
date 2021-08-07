@@ -68,6 +68,7 @@ sysInfo::BatteryInfo sysInfo::batteryInfo;
 unsigned int sysInfo::batteryPercentage;
 String sysInfo::comName;
 SerialCom *sysInfo::serialCom;
+bool sysInfo::isCharging;
 
 
 DisplayFunctions *mDisplay;
@@ -107,7 +108,7 @@ void setup() {
     sysInfo::sn = sysInfoDoc["sn"].as<String>();
 
     JsonObject batObj = sysInfoDoc["battery"].as<JsonObject>();
-    sysInfo::batteryInfo.name = batObj["name"];
+    sysInfo::batteryInfo.name = batObj["name"].as<String>();
     sysInfo::batteryInfo.capacity = batObj["capacity"];
 
 
@@ -260,6 +261,10 @@ void onGetElementReceive(JsonVariant *v) {
     }
 
     size_t success = sysInfo::serialCom->write(doc);
+
+    if(!success){
+//        error::Error error()
+    }
 
     delete doc;
 

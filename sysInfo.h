@@ -22,7 +22,7 @@ namespace sysInfo {
 
     extern String comName;
 
-    bool isCharging;
+    extern bool isCharging;
 }
 
 #endif //UMDWITHCLASS3_SYSINFO_H
