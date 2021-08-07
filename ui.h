@@ -6,7 +6,7 @@
 #define UMDWITHCLASS3_UI_H
 
 #include "Tab.h"
-#include "SensorsTab.h"
+
 
 namespace ui {
 
@@ -19,7 +19,7 @@ namespace ui {
 
     class Tab;
 
-    class SensorsTab;
+//    class SensorsTab;
 
 
 }
