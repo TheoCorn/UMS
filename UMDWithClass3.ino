@@ -87,8 +87,8 @@ void setup() {
     sysInfo::batteryPercentage = 10;
     sysInfo::isCharging = false;
 
-    // todo delete before release debug
-    Serial.begin(112500);
+//    // todo delete before release debug
+//    Serial.begin(112500);
 
     sensors = new std::map<uint8_t, Sensor *>;
     btBuffer = new std::vector<char>;
@@ -107,6 +107,10 @@ void setup() {
     deserializeJson(sysInfoDoc, sysInfoStr);
 
     sysInfo::screenAddress = sysInfoDoc["screenAddress"].as<unsigned int>();
+
+    Serial.println(sysInfo::screenAddress);
+
+
     unsigned int defCom = sysInfoDoc["defCom"];
     sysInfo::comName = sysInfoDoc["comName"].as<String>();
     sysInfo::serialCom = getSerialCom4EnumPos(defCom);
