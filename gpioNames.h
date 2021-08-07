@@ -9,4 +9,8 @@
 #define traScreen       32
 #define batteryReadPin  13
 
+#define BUTTON_PIN      19
+#define REA             34
+#define REB             35
+
 #endif //UMDWITHCLASS3_GPIONAMES_H
