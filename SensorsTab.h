@@ -13,10 +13,57 @@
 class ui::SensorsTab : public ui::Tab {
 private:
 
-    class AllSensorsScreen;
+//    class AllSensorsScreen;
+//
+//    class SpecificSensorScreen;
 
-    class SpecificSensorScreen;
 
+
+class AllSensorsScreen : public ui::Tab {
+protected:
+    std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator;
+    std::map<unsigned int, Sensor *> *sensors;
+    ui::Tab *&subScreen;
+
+    void printSensors(Adafruit_SSD1306 *display,
+                      std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &itStart,
+                      std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &&itEnd,
+                      ui::coordinates &end);
+
+public:
+
+    AllSensorsScreen(std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator,
+                     std::map<unsigned int, Sensor *> *sensors,
+                     ui::Tab *&subScreen) :
+                     sensors(sensors), activeSensorIterator(activeSensorIterator), subScreen(subScreen) {}
+
+                     void render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end) override;
+
+    void onClick() override;
+
+};
+
+
+class SpecificSensor : public ui::Tab {
+    std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator;
+    ui::Tab *&subScreen;
+    std::map<unsigned int, Sensor *> *sensors;
+public:
+
+    SpecificSensor(std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator,
+                   ui::Tab *&subScreen,
+                   std::map<unsigned int, Sensor *> *sensors) :
+
+                   activeSensorIterator(activeSensorIterator),
+                   subScreen(subScreen),
+                   sensors(sensors) {}
+
+                   void render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end) override;
+
+    bool onUp() override { return false; };
+
+    void onClick() override;
+};
     std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &&activeSensorIterator;
     std::map<unsigned int, Sensor *> *sensors;
 
@@ -44,51 +91,6 @@ public:
 };
 
 
-class ui::AllSensorsScreen : public ui::Tab {
-protected:
-    std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator;
-    std::map<unsigned int, Sensor *> *sensors;
-    ui::Tab *&subScreen;
-
-    void printSensors(Adafruit_SSD1306 *display,
-                      std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &itStart,
-                      std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &&itEnd,
-                      ui::coordinates &end);
-
-public:
-
-    AllSensorsScreen(std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator,
-                     std::map<unsigned int, Sensor *> *sensors,
-                     ui::Tab *&subScreen) :
-            sensors(sensors), activeSensorIterator(activeSensorIterator), subScreen(subScreen) {}
-
-    void render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end) override;
-
-    void onClick() override;
-
-};
-
-
-class ui::SpecificSensor : public ui::Tab {
-    std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator;
-    ui::Tab *&subScreen;
-    std::map<unsigned int, Sensor *> *sensors;
-public:
-
-    SpecificSensor(std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator,
-                   ui::Tab *&subScreen,
-                   std::map<unsigned int, Sensor *> *sensors) :
-
-            activeSensorIterator(activeSensorIterator),
-            subScreen(subScreen),
-            sensors(sensors) {}
-
-    void render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end) override;
-
-    bool onUp() override { return false; };
-
-    void onClick() override;
-};
 
 
 #endif //UMDWITHCLASS3_SENSORSTAB_H
