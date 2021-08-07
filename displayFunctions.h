@@ -21,10 +21,9 @@
 
 class DisplayFunctions {
 public:
-    explicit DisplayFunctions(std::map<uint8_t, Sensor *> *sensors, SerialCom *serialCom) {
+    explicit DisplayFunctions(std::map<uint8_t, Sensor *> *sensors) {
         this->sensors = sensors;
         this->display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-        this->serialCom = serialCom;
         init();
     }
 
@@ -56,7 +55,6 @@ public:
 private:
     Adafruit_SSD1306 * display;
     std::map<uint8_t, Sensor*> * sensors;
-    SerialCom* serialCom;
 
 };
 

@@ -110,7 +110,7 @@ void DisplayFunctions::showComInfo() {
     display->setTextSize(1);             // Normal 1:1 pixel scale
     display->setTextColor(SSD1306_WHITE);        // Draw white text
     display->setCursor(0, 0);
-    char *str = serialCom->getString4Display();
+    char *str = sysInfo::serialCom->getString4Display();
 
     display->println(str);
     delete str;
