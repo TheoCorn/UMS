@@ -57,6 +57,9 @@ void onStopReading();
 
 void sleep();
 
+//void reA();
+//void reB();
+
 
 std::map<uint8_t, Sensor *> *sensors;
 std::vector<char> *btBuffer;
@@ -94,6 +97,10 @@ void setup() {
     pinMode(traScreen, OUTPUT);
     digitalWrite(traScreen, HIGH);
     pinMode(batteryReadPin, INPUT);
+
+    pinMode(BUTTON_PIN, INPUT);
+    pinMode(REA, INPUT);
+    pinMode(REB, INPUT);
 
     char *sysInfoStr = (char *) spiffs::readFile(SPIFFS, "/sysInfo.json");
     StaticJsonDocument<256> sysInfoDoc;
