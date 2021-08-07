@@ -31,7 +31,7 @@ void ui::SensorsTab::AllSensorsScreen::onDown() {
 }
 
 void
-ui::SensorsTab::AllSensorsScreen::onPress() {
+ui::SensorsTab::AllSensorsScreen::onClick() {
     subScreen = (ui::Tab *) (new ui::SensorsTab::SpecificSensor(activeSensorIterator, subScreen, sensors));
     delete this;
 }
@@ -60,7 +60,7 @@ bool ui::SensorsTab::SpecificSensor::onUp() {
     return Tab::onUp();
 }
 
-void ui::SensorsTab::SpecificSensor::onPress() {
+void ui::SensorsTab::SpecificSensor::onClick() {
     subScreen = (ui::Tab *) (new ui::SensorsTab::AllSensorsScreen(activeSensorIterator, sensors, subScreen));
     delete this;
 }
