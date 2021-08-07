@@ -13,7 +13,6 @@
 
 
 void DisplayFunctions::init() {
-    pinMode(showAddressPin, INPUT);
     pinMode(traScreen, OUTPUT);
     digitalWrite(traScreen, HIGH);
 
@@ -39,7 +38,7 @@ void DisplayFunctions::displayWhenNotReading() {
     display->clearDisplay();
     showReading(false);
     showSensors();
-    digitalRead(showAddressPin) ? showComInfo() : showBattery();
+    showBattery();
 
     display->display();
 }
@@ -62,10 +61,10 @@ void DisplayFunctions::showBattery() {
     display->setTextColor(SSD1306_WHITE);
     display->setCursor(15, 0);            // Start at top-left corner
 
-    unsigned int battery = sysInfo::batteryPercentage;
-    String batteryPr = String(battery);
 
-    display->print(battery);
+    String batteryPr = String(sysInfo::batteryPercentage);
+
+    display->print(sysInfo::batteryPercentage);
     display->print('%');
 
     if (sysInfo::isCharging) {
@@ -85,15 +84,14 @@ void DisplayFunctions::showBattery() {
 
     } else {
 
-        if (battery >= 75) {
+        if (sysInfo::batteryPercentage >= 75) {
             display->fillRect(0, 2, 10, 10, SSD1306_WHITE);
-        } else if (battery >= 50) {
+        } else if (sysInfo::batteryPercentage >= 50) {
             display->fillRect(0, 7, 10, 5, SSD1306_WHITE);
-        } else if (battery >= 10) {
+        } else if (sysInfo::batteryPercentage >= 10) {
             display->fillRect(0, 8, 10, 3, SSD1306_WHITE);
         }
     }
-    batCharge = battery;
 
 }
 
@@ -123,4 +121,5 @@ void DisplayFunctions::sleep() {
     display->clearDisplay();
     delay(5);
     digitalWrite(traScreen, LOW);
+    delay(5);
 }

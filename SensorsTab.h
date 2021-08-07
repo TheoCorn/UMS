@@ -32,14 +32,14 @@ public:
         display->setTextSize(1);
         display->setCursor(start.x, start.y);
 
-        subScreen->render(display, start, end)
+        subScreen->render(display, start, end);
     }
 
-    bool onUp() override { subScreen->onUp() }
+    bool onUp() override { subScreen->onUp(); }
 
-    void onDown() override { SensorsTab::subScreen->onDown() }
+    void onDown() override { SensorsTab::subScreen->onDown(); }
 
-    void onClick() override { subScreen->onClick() }
+    void onClick() override { subScreen->onClick(); }
 
 
 };
@@ -63,7 +63,7 @@ public:
                      ui::Tab *&subScreen) :
             sensors(sensors), activeSensorIterator(activeSensorIterator), subScreen(subScreen) {}
 
-    void render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end) override;
+    void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;
 
     void onClick() override;
 
@@ -88,7 +88,7 @@ public:
             subScreen(subScreen),
             sensors(sensors) {}
 
-    void render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end) override;
+    void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;
 
     bool onUp() override { return false; };
 

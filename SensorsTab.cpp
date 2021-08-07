@@ -42,7 +42,7 @@ void AllSensorsScreen::printSensors(Adafruit_SSD1306 *display,
     display->setTextColor(SSD1306_WHITE);
 
     for (itStart; itStart != itEnd; ++itStart) {
-        if (display->getCursorY >= end.y) return;
+        if (display->getCursorY() >= end.y) return;
         display->println(itStart->second->getStringForDisplay());
     }
 }
@@ -59,5 +59,3 @@ void SpecificSensor::onClick() {
     subScreen = (ui::Tab *) (new AllSensorsScreen(activeSensorIterator, sensors, subScreen));
     delete this;
 }
-
-

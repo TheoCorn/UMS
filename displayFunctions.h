@@ -55,7 +55,6 @@ public:
 
 private:
     Adafruit_SSD1306 * display;
-    float batCharge = 100.0f;
     std::map<uint8_t, Sensor*> * sensors;
     SerialCom* serialCom;
 

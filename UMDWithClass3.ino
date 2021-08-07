@@ -91,7 +91,6 @@ void setup() {
     btBuffer = new std::vector<char>;
 
 
-    pinMode(showAddressPin, INPUT);
     pinMode(traScreen, OUTPUT);
     digitalWrite(traScreen, HIGH);
     pinMode(batteryReadPin, INPUT);
@@ -223,7 +222,7 @@ void onSensorsElementReceive(JsonVariant *v) {
                                SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
                                error::Appearance::SNACK_BAR,
                                error::Importance::REQUIRES_USER_ACTION,
-                               error::BackgroundAppActions::NONE);
+                               error::BackgroundAppActions::RESEND);
 
             sysInfo::serialCom->write(errMsg);
         }
