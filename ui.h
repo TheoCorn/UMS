@@ -18,6 +18,25 @@ namespace ui {
         coordinates(unsigned int x, unsigned int y) : x(x), y(y) {}
     };
 
+    class Tab {
+
+    public:
+
+        virtual void render(Adafruit_SSD1306* display, coordinates& start, coordinates& end) = 0;
+
+        /**
+         * @return return true if you want to go back to all tabs
+         */
+        virtual bool onUp() { return true; }
+
+        virtual void onDown() {}
+
+        virtual void onClick() {}
+
+        virtual void onLongClick() {}
+
+    };
+
     class Tab;
 
     class SensorsTab;
