@@ -111,7 +111,7 @@ void setup() {
     Serial.println(sysInfo::screenAddress);
 
 
-    unsigned int defCom = sysInfoDoc["defCom"];
+    unsigned int defCom = sysInfoDoc["defCom"].as<unsigned int>();
     sysInfo::comName = sysInfoDoc["comName"].as<String>();
     sysInfo::serialCom = getSerialCom4EnumPos(defCom);
 
