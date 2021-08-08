@@ -18,7 +18,7 @@ void DisplayFunctions::init() {
 
     pinMode(batteryReadPin, INPUT);
     //Address 0x3C can not be a sensor
-    if (!this->display->begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3C for 128x32
+    if (!this->display->begin(SSD1306_SWITCHCAPVCC, sysInfo::screenAddress)) { // Address 0x3C for 128x32
         for (;;); // Don't proceed, loop forever
     }
 
