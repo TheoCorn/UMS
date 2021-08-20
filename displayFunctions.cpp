@@ -37,6 +37,10 @@ void DisplayFunctions::displayWhenReading() {
 void DisplayFunctions::displayWhenNotReading() {
     display->clearDisplay();
     showReading(false);
+
+    auto it = tabs.begin();
+
+
     showSensors();
     showBattery();
 

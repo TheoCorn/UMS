@@ -27,6 +27,9 @@ public:
     explicit SensorsTab(std::map<unsigned int, Sensor *> *sensors) : sensors(sensors),
                                                                      activeSensorIterator(sensors->begin()) {}
 
+
+    String name() override { return "SENSORS"; }
+
     void render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end) override {
 
         display->setTextSize(1);
@@ -63,6 +66,8 @@ public:
                      ui::Tab *&subScreen) :
             sensors(sensors), activeSensorIterator(activeSensorIterator), subScreen(subScreen) {}
 
+    String name() override { return "SENSORS"; }
+
     void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;
 
     void onClick() override;
@@ -87,6 +92,8 @@ public:
             activeSensorIterator(activeSensorIterator),
             subScreen(subScreen),
             sensors(sensors) {}
+
+    String name() override { return activeSensorIterator->second->name(); }
 
     void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;
 

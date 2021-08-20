@@ -13,19 +13,37 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <map>
+#include <vector>
 #include <functional>
 #include "Sensor.hpp"
 #include "SerialCom.h"
 #include "sysInfo.h"
+#include "SensorsTab.h"
+#include "Tab.h"
 
 
 class DisplayFunctions {
+
+private:
+    Adafruit_SSD1306 * display;
+    std::map<uint8_t, Sensor*> * sensors;
+
+    ui::coordinates start
+
+    std::vector<ui::Tab> tabs {ui::SensorsTab(sensors)};
+    std::vector<ui::Tab>::iterator tabIterator;
+
+
 public:
     explicit DisplayFunctions(std::map<uint8_t, Sensor *> *sensors): sensors(sensors) {
 
         display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+        tabIterator = tabs.begin();
+
         init();
     }
+
+
 
     ~DisplayFunctions() = default;
 
@@ -50,9 +68,6 @@ public:
 //        std::vector<std::function<void(Adafruit_SSD1306*)> uiRenderers{std::function<void()>(showSensors) };
 //    }
 
-private:
-    Adafruit_SSD1306 * display;
-    std::map<uint8_t, Sensor*> * sensors;
 
 };
 

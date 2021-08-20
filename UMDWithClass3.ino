@@ -108,6 +108,9 @@ void setup() {
 
     sysInfo::screenAddress = sysInfoDoc["screenAddress"].as<unsigned int>();
 
+
+    //todo delete
+    Serial.print("screen i2c address: ");
     Serial.println(sysInfo::screenAddress);
 
 

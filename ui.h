@@ -22,6 +22,8 @@ namespace ui {
 
     public:
 
+        virtual String name() = 0;
+
         virtual void render(Adafruit_SSD1306* display, coordinates& start, coordinates& end) = 0;
 
         /**
