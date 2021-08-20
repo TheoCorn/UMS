@@ -28,14 +28,14 @@ private:
     Adafruit_SSD1306 * display;
     std::map<uint8_t, Sensor*> * sensors;
 
-    ui::coordinates start
+    ui::coordinates start = ui::coordinates(0, 17);
 
     std::vector<ui::Tab> tabs {ui::SensorsTab(sensors)};
     std::vector<ui::Tab>::iterator tabIterator;
 
 
 public:
-    explicit DisplayFunctions(std::map<uint8_t, Sensor *> *sensors): sensors(sensors) {
+    explicit DisplayFunctions(std::map<uint32_t , Sensor *> *sensors): sensors(sensors) {
 
         display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
         tabIterator = tabs.begin();
