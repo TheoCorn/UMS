@@ -90,7 +90,7 @@ void setup() {
     sysInfo::isCharging = false;
 
 //    // todo delete before release debug
-//    Serial.begin(112500);
+    Serial.begin(112500);
 
     sensors = new std::map<uint32_t, Sensor *>;
     btBuffer = new std::vector<char>;
@@ -131,7 +131,7 @@ void setup() {
     mDisplay = new DisplayFunctions(sensors);
     sensorIdentifier = new SensorsIdentifierManager();
 
-    sysInfo::serialCom->startConnectionCheck(5000);
+//    sysInfo::serialCom->startConnectionCheck(5000);
 
     Wire.begin();
 

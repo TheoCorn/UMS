@@ -28,7 +28,7 @@ public:
     sensors(sensors) {}
 
     ~SensorsTab() {
-            delete subScreen;
+         delete subScreen;
     }
 
     String name() override { return "SENSORS"; }
