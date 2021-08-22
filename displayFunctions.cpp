@@ -126,5 +126,10 @@ void DisplayFunctions::sleep() {
 }
 
 void DisplayFunctions::onREAISR() {
+    if (digitalRead(REB)){
+        if (tabIterator != tabs.begin()) tabIterator--;
+    }else{
+        if (tabIterator != tabs.end()) tabIterator++;
+    }
 
 }
