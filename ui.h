@@ -22,7 +22,7 @@ namespace ui {
 
     public:
 
-        virtual ~Tab() = 0;
+        virtual ~Tab()  = 0;
 
         virtual String name() = 0;
 

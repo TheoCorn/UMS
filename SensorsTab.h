@@ -27,7 +27,9 @@ public:
     explicit SensorsTab(std::map<uint32_t, Sensor *> *sensors) : activeSensorIterator(sensors->begin()),
     sensors(sensors) {}
 
-    ~SensorsTab() = default;
+    ~SensorsTab() = {
+            delete subScreen();
+    };
 
     String name() override { return "SENSORS"; }
 
