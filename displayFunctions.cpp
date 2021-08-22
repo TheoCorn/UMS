@@ -137,5 +137,5 @@ void DisplayFunctions::onREAInterrupt() {
 }
 
 void DisplayFunctions::onClick() {
-    tabIterator->onClick();
+    (*tabIterator)->onClick();
 }
