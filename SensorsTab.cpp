@@ -35,8 +35,8 @@ void AllSensorsScreen::onClick() {
 }
 
 void AllSensorsScreen::printSensors(Adafruit_SSD1306 *display,
-                                                    std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &itStart,
-                                                    std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &&itEnd,
+                                                    std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &itStart,
+                                                    std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &&itEnd,
                                                     ui::coordinates &end) {
 
     display->setTextColor(SSD1306_WHITE);

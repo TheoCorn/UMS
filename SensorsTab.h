@@ -18,13 +18,13 @@ private:
     class SpecificSensorScreen;
 
 
-    std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &&activeSensorIterator;
-    std::map<unsigned int, Sensor *> *sensors;
+    std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &&activeSensorIterator;
+    std::map<uint32_t, Sensor *> *sensors;
 
     ui::Tab *subScreen;
 
 public:
-    explicit SensorsTab(std::map<unsigned int, Sensor *> *sensors) : activeSensorIterator(sensors->begin()), 
+    explicit SensorsTab(std::map<uint32_t, Sensor *> *sensors) : activeSensorIterator(sensors->begin()),
     sensors(sensors) {}
 
 
@@ -50,19 +50,19 @@ public:
 
 class AllSensorsScreen : public ui::Tab {
 protected:
-    std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator;
-    std::map<unsigned int, Sensor *> *sensors;
+    std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &activeSensorIterator;
+    std::map<uint32_t, Sensor *> *sensors;
     ui::Tab *&subScreen;
 
     static void printSensors(Adafruit_SSD1306 *display,
-                      std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &itStart,
-                      std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &&itEnd,
+                      std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &itStart,
+                      std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &&itEnd,
                       ui::coordinates &end);
 
 public:
 
-    AllSensorsScreen(std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator,
-                     std::map<unsigned int, Sensor *> *sensors,
+    AllSensorsScreen(std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &activeSensorIterator,
+                     std::map<uint32_t, Sensor *> *sensors,
                      ui::Tab *&subScreen) :
                      activeSensorIterator(activeSensorIterator), sensors(sensors), subScreen(subScreen) {}
 
@@ -80,14 +80,14 @@ public:
 
 
 class SpecificSensor : public ui::Tab {
-    std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator;
+    std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &activeSensorIterator;
     ui::Tab *&subScreen;
-    std::map<unsigned int, Sensor *> *sensors;
+    std::map<uint32_t, Sensor *> *sensors;
 public:
 
-    SpecificSensor(std::_Rb_tree_iterator <std::pair<const unsigned int, Sensor *>> &activeSensorIterator,
+    SpecificSensor(std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &activeSensorIterator,
                    ui::Tab *&subScreen,
-                   std::map<unsigned int, Sensor *> *sensors) :
+                   std::map<uint32_t, Sensor *> *sensors) :
 
             activeSensorIterator(activeSensorIterator),
             subScreen(subScreen),
