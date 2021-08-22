@@ -732,7 +732,6 @@ char* BluetoothSerial::getString4Display(){
 
     
     auto macArr = new char[13]; //18
-    char* arrayPointer = macArr;
     macArr[12] = '\0'; //17
 
 

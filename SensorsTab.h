@@ -38,7 +38,7 @@ public:
         subScreen->render(display, start, end);
     }
 
-    bool onUp() override { subScreen->onUp(); }
+    bool onUp() override { return subScreen->onUp(); }
 
     void onDown() override { SensorsTab::subScreen->onDown(); }
 
