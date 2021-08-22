@@ -134,12 +134,14 @@ String MPU9250::getExtendedStringForDisplay() {
     for (int i = 0; i < 10; i++) {
         float f = readFeature(i);
         s += mpuFeaturesString[i];
-        s += "  ";
+        s += "\t";
         s += activeFeaturesVec[i] ? '1' : '0';
-        s += "  ";
+        s += "\t";
         s += (String) f;
+        s += '\n';
     }
 
+    return s;
 
 }
 
