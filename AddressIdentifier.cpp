@@ -18,13 +18,13 @@ adds the the correct sensor type to the specified vector
 @param address the address of the i2c device
 @param vector std::vector<Sensor> pointer with the sensor will be added to
 */
-void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sensor *> *sensors,
+void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Sensor *> *sensors,
                                          std::vector<csa::ConflictingAddressStruct *> *conflict) {
 
     if (numEnumSensorInVectorArray[address].size() == 1) {
         addSensor(numEnumSensorInVectorArray[address][0], address, sensors, conflict);
     } else if (numEnumSensorInVectorArray[address].empty()){
-        sensors->insert(std::pair<uint8_t, Sensor *>(address, ( (Sensor *) new UnknownSensor(address)) ) );
+        sensors->insert(std::pair<uint32_t, Sensor *>(address, ( (Sensor *) new UnknownSensor(address)) ) );
     }
     else {
         csa::ConflictingAddressStruct *con;
@@ -42,13 +42,13 @@ void SensorsIdentifierManager::addSensor(uint8_t address, std::map<uint8_t, Sens
 
 }
 
-void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, std::map<uint8_t, Sensor *> *sensors,
+void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint32_t address, std::map<uint32_t, Sensor *> *sensors,
                                          std::vector<csa::ConflictingAddressStruct *> *conflict) {
 
     Sensor *sensor = getSensorPointerForEnumPos(enumPos, address);
 
     if (sensor != nullptr) {
-        sensors->insert(std::pair<uint8_t, Sensor *>(address, sensor));
+        sensors->insert(std::pair<uint32_t, Sensor *>(address, sensor));
     } else {
         csa::ConflictingAddressStruct *con;
         con->address = address;
@@ -56,7 +56,7 @@ void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint8_t address, 
     }
 }
 
-Sensor *SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPos, uint8_t address) {
+Sensor *SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPos, uint32_t address) {
     switch (enumPos) {
         case sensorEnum::MPU9250: return (Sensor *) (new class MPU9250(address)); break;
 //        case sensorEnum::BMP280: return (sensor*)(new class BMP280); break;

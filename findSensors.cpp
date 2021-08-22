@@ -27,7 +27,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
     addreses[sysInfo::screenAddress] = false;
 
     //make conn devices unavailable
-    uint8_t key;
+    uint32_t key;
     Sensor* value;
     for(auto& mPair: *sensors){
         std::tie(key, value) = mPair;
@@ -36,7 +36,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
     }
 
 
-    for (uint32_t address = 0; address < 128; address++) {
+    for (size_t address = 0; address < 128; address++) {
         Wire.beginTransmission(address);
         uint32_t error = Wire.endTransmission();
 
