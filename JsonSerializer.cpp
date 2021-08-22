@@ -13,11 +13,7 @@ js::serializeRet* js::serializeDoc(JsonDocument* doc){
 
     serializeJson(*doc, buffer, bufLen);
 
-    auto* sr = new js::serializeRet();
-    sr->bufLen = bufLen;
-    sr->buff = buffer;
-
-    return sr;
+    return new js::serializeRet(buffer, bufLen);
 }
 
 js::serializeRet* js::serializeError(error::Error* error){
