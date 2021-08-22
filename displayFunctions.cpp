@@ -125,6 +125,6 @@ void DisplayFunctions::sleep() {
     delay(5);
 }
 
-void DisplayFunctions::onROPinAInterupt() {
+void DisplayFunctions::onREAISR() {
 
 }

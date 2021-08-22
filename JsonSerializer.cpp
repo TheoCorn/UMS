@@ -36,9 +36,6 @@ js::serializeRet* js::serializeError(error::Error* error){
 
     serializeJson(*doc, buffer, bufLen);
 
-    js::serializeRet* sr;
-    sr->bufLen = bufLen;
-    sr->buff = buffer;
+    return new js::serializeRet(buffer, bufLen);
 
-    return sr;
 }

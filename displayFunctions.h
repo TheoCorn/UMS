@@ -43,7 +43,7 @@ public:
         display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
         tabIterator = tabs.begin();
 
-        attachInterrupt(REA, sleep, FALLING);
+        attachInterrupt(REA, onREAISR, RISING);
 
         init();
     }
@@ -51,7 +51,7 @@ public:
 
     ~DisplayFunctions() = default;
 
-    void IRAM_ATTR onROPinAInterupt();
+    void IRAM_ATTR onREAISR();
 
     void displayWhenReading();
 
