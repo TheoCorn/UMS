@@ -40,6 +40,8 @@
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 #endif
 
+#define RE_GPIO_PIN_SEL ((1ULL<< BUTTON_PIN) | (1ULL<< REA) | (1ULL<< REB))
+
 #define JSON_SINGLE_SENSOR_SIZE 256;
 
 
@@ -95,6 +97,13 @@ void setup() {
     sensors = new std::map<uint32_t, Sensor *>;
     btBuffer = new std::vector<char>;
 
+//    gpio_config_t reIo_conf;
+//    reIo_conf.intr_type = GPIO_INTR_POSEDGE;
+//    reIo_conf.mode = GPIO_MODE_INPUT;
+//    reIo_confpin_bit_mask = RE_GPIO_PIN_SEL;
+//    reIo_conf.pull_up_en = 1;
+
+
 
     pinMode(traScreen, OUTPUT);
     digitalWrite(traScreen, HIGH);
@@ -103,6 +112,10 @@ void setup() {
     pinMode(BUTTON_PIN, INPUT);
     pinMode(REA, INPUT);
     pinMode(REB, INPUT);
+
+    digitalWrite(BUTTON_PIN, true);
+    digitalWrite(REA, true);
+    digitalWrite(REB, true);
 
     char *sysInfoStr = (char *) spiffs::readFile(SPIFFS, "/sysInfo.json");
     StaticJsonDocument<256> sysInfoDoc;
@@ -113,8 +126,9 @@ void setup() {
 
     //todo delete
     Serial.print("screen i2c address: ");
+    delay(30);
     Serial.println(sysInfo::screenAddress);
-
+    delay(50);
 
     unsigned int defCom = sysInfoDoc["defCom"].as<unsigned int>();
     sysInfo::comName = sysInfoDoc["comName"].as<String>();

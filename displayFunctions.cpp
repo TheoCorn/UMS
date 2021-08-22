@@ -126,10 +126,12 @@ void DisplayFunctions::sleep() {
 }
 
 void DisplayFunctions::onREAInterrupt() {
-    if (digitalRead(REB)){
+    if (!digitalRead(REB)){
         if (tabIterator != tabs.begin()) tabIterator--;
+        Serial.println("--")
     }else{
         if (tabIterator != tabs.end()) tabIterator++;
+        Serial.println("++")
     }
 
 }
