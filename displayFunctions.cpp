@@ -125,7 +125,7 @@ void DisplayFunctions::sleep() {
     delay(5);
 }
 
-void DisplayFunctions::onREAISR() {
+void DisplayFunctions::onREAInterrupt() {
     if (digitalRead(REB)){
         if (tabIterator != tabs.begin()) tabIterator--;
     }else{

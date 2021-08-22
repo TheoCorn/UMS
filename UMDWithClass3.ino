@@ -57,6 +57,8 @@ void onStopReading();
 
 void sleep();
 
+void onREAISR();
+
 //void reA();
 //void reB();
 
@@ -132,6 +134,8 @@ void setup() {
     sysInfo::serialCom->startConnectionCheck(5000);
 
     Wire.begin();
+
+    attachInterrupt(REA, onREAISR, RISING);
 
 
 //    //sets up wake up from sleep
@@ -308,4 +312,8 @@ void sleep() {
 //todo: implement battery percentage
 void readBatteryCharge() {
     sysInfo::batteryPercentage = 10;
+}
+
+void IRAM_ATTR onREAISR() {
+    mDisplay->onREAInterrupt()
 }
