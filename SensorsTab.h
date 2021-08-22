@@ -25,7 +25,7 @@ private:
 
 public:
     explicit SensorsTab(std::map<uint32_t, Sensor *> *sensors) : activeSensorIterator(sensors->begin()),
-    sensors(sensors), subScreen(dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen)) {}
+    sensors(sensors), subScreen(dynamic_cast<ui::Tab*>(new SensorsTab::AllSensorsScreen(activeSensorIterator, sensors, subScreen))) {}
 
     ~SensorsTab() {
          delete subScreen;
