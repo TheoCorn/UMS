@@ -315,5 +315,5 @@ void readBatteryCharge() {
 }
 
 void IRAM_ATTR onREAISR() {
-    mDisplay->onREAInterrupt()
+    mDisplay->onREAInterrupt();
 }
