@@ -8,6 +8,12 @@
 #include "ui.h"
 #include <map>
 #include "Sensor.hpp"
+#include "AllSensorsScreen.h"
+#include "SpecificSensorScreen.h"
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+
 
 
 class ui::SensorsTab : public ui::Tab {
@@ -25,7 +31,9 @@ private:
 
 public:
     explicit SensorsTab(std::map<uint32_t, Sensor *> *sensors) : activeSensorIterator(sensors->begin()),
-    sensors(sensors), subScreen(dynamic_cast<ui::Tab*>(new SensorsTab::AllSensorsScreen(activeSensorIterator, sensors, subScreen))) {}
+    sensors(sensors) {
+        subScreen = dynamic_cast<ui::Tab*>(new SensorsTab::AllSensorsScreen(activeSensorIterator, sensors, subScreen));
+      }
 
     ~SensorsTab() {
          delete subScreen;
@@ -51,59 +59,10 @@ public:
 };
 
 
-class AllSensorsScreen : public ui::Tab {
-protected:
-    std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &activeSensorIterator;
-    std::map<uint32_t, Sensor *> *sensors;
-    ui::Tab *&subScreen;
-
-    static void printSensors(Adafruit_SSD1306 *display,
-                      std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &itStart,
-                      std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &&itEnd,
-                      ui::coordinates &end);
-
-public:
-
-    AllSensorsScreen(std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &activeSensorIterator,
-                     std::map<uint32_t, Sensor *> *sensors,
-                     ui::Tab *&subScreen) :
-                     activeSensorIterator(activeSensorIterator), sensors(sensors), subScreen(subScreen) {}
-
-    String name() override { return "SENSORS"; }
-
-    void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;
-
-    void onClick() override;
-
-    bool onUp() override;
-
-    void onDown() override;
-
-};
 
 
-class SpecificSensor : public ui::Tab {
-    std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &activeSensorIterator;
-    ui::Tab *&subScreen;
-    std::map<uint32_t, Sensor *> *sensors;
-public:
 
-    SpecificSensor(std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &activeSensorIterator,
-                   ui::Tab *&subScreen,
-                   std::map<uint32_t, Sensor *> *sensors) :
 
-            activeSensorIterator(activeSensorIterator),
-            subScreen(subScreen),
-            sensors(sensors) {}
-
-    String name() override { return activeSensorIterator->second->name(); }
-
-    void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;
-
-    bool onUp() override { return false; };
-
-    void onClick() override;
-};
 
 
 #endif //UMDWITHCLASS3_SENSORSTAB_H
