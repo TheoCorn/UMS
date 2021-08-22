@@ -10,11 +10,11 @@
 #include "sysInfo.h"
 
 
-typedef uint8_t byte;
+
 //looks for all i2c devices
-void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::map<uint8_t, Sensor*> * sensors, SensorsIdentifierManager * sim) {
+void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::map<uint32_t , Sensor*> * sensors, SensorsIdentifierManager * sim) {
     //addresses used by previously allocated sensors
-    std::vector<byte> usedAddreses;
+    std::vector<uint32_t> usedAddreses;
     //addresses used by previously allocated sensors that are still present
 //    std::vector<byte> collUnAddresses;
     bool addreses[128];
@@ -36,9 +36,9 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
     }
 
 
-    for (byte address = 0; address < 128; address++) {
+    for (uint32_t address = 0; address < 128; address++) {
         Wire.beginTransmission(address);
-        byte error = Wire.endTransmission();
+        uint32_t error = Wire.endTransmission();
 
         if (error == 0 || error == 4) {
             if (addreses[address]) {
@@ -66,7 +66,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
 //            }
 //        }
 //    }
-    for(byte address : usedAddreses){
+    for(uint32_t address : usedAddreses){
         auto pos = sensors->find(address);
         sensors->erase(pos);
     }

@@ -26,12 +26,12 @@ class DisplayFunctions {
 
 private:
     Adafruit_SSD1306 * display;
-    std::map<uint8_t, Sensor*> * sensors;
+    std::map<uint32_t, Sensor*> * sensors;
 
     ui::coordinates start = ui::coordinates(0, 17);
 
-    std::vector<ui::Tab> tabs {ui::SensorsTab(sensors)};
-    std::vector<ui::Tab>::iterator tabIterator;
+    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>(new ui::SensorsTab(sensors))};
+    std::vector<ui::Tab*>::iterator tabIterator;
 
 
 public:

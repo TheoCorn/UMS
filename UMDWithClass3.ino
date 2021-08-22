@@ -61,7 +61,7 @@ void sleep();
 //void reB();
 
 
-std::map<uint8_t, Sensor *> *sensors;
+std::map<uint32_t, Sensor *> *sensors;
 std::vector<char> *btBuffer;
 bool reading = false;
 
@@ -90,7 +90,7 @@ void setup() {
 //    // todo delete before release debug
 //    Serial.begin(112500);
 
-    sensors = new std::map<uint8_t, Sensor *>;
+    sensors = new std::map<uint32_t, Sensor *>;
     btBuffer = new std::vector<char>;
 
 
