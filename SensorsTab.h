@@ -19,11 +19,6 @@
 class ui::SensorsTab : public ui::Tab {
 private:
 
-    class AllSensorsScreen;
-
-    class SpecificSensorScreen;
-
-
     std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &&activeSensorIterator;
     std::map<uint32_t, Sensor *> *sensors;
 
@@ -32,7 +27,7 @@ private:
 public:
     explicit SensorsTab(std::map<uint32_t, Sensor *> *sensors) : activeSensorIterator(sensors->begin()),
     sensors(sensors) {
-        subScreen = dynamic_cast<ui::Tab*>(new SensorsTab::AllSensorsScreen(activeSensorIterator, sensors, subScreen));
+        subScreen = dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen));
       }
 
     ~SensorsTab() {
