@@ -52,6 +52,8 @@ public:
 
     void onREAInterrupt();
 
+    void onClick();
+
     void displayWhenReading();
 
     void displayWhenNotReading();

@@ -149,7 +149,8 @@ void setup() {
 
     Wire.begin();
 
-    attachInterrupt(REA, onREAISR, RISING);
+    attachInterrupt(REA, onREAISR, FALLING);
+    attachInterrupt(BUTTON_PIN, )
 
 
 //    //sets up wake up from sleep
@@ -330,4 +331,8 @@ void readBatteryCharge() {
 
 void IRAM_ATTR onREAISR() {
     mDisplay->onREAInterrupt();
+}
+
+void IRAM_ATTR onREBISR() {
+    mDisplay->onClick();
 }
