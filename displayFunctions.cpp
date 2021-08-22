@@ -17,7 +17,7 @@ void DisplayFunctions::init() {
     digitalWrite(traScreen, HIGH);
 
     pinMode(batteryReadPin, INPUT);
-    //Address 0x3C can not be a sensor
+    //Address 0x3C can not be a sensor for me
     if (!this->display->begin(SSD1306_SWITCHCAPVCC, sysInfo::screenAddress)) { // Address 0x3C for 128x32
         for (;;); // Don't proceed, loop forever
     }
@@ -123,4 +123,8 @@ void DisplayFunctions::sleep() {
     delay(5);
     digitalWrite(traScreen, LOW);
     delay(5);
+}
+
+void DisplayFunctions::onROPinAInterupt() {
+
 }

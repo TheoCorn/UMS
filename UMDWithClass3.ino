@@ -134,11 +134,11 @@ void setup() {
     Wire.begin();
 
 
-    //sets up wake up from sleep
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_33, 1);
-    pinMode(sleepPin, INPUT);
-
-    attachInterrupt(sleepPin, sleep, FALLING);
+//    //sets up wake up from sleep
+//    esp_sleep_enable_ext0_wakeup(GPIO_NUM_33, 1);
+//    pinMode(sleepPin, INPUT);
+//
+//    attachInterrupt(sleepPin, sleep, FALLING);
 
 
 }

@@ -24,8 +24,8 @@ private:
     ui::Tab *subScreen;
 
 public:
-    explicit SensorsTab(std::map<unsigned int, Sensor *> *sensors) : sensors(sensors),
-                                                                     activeSensorIterator(sensors->begin()) {}
+    explicit SensorsTab(std::map<unsigned int, Sensor *> *sensors) : activeSensorIterator(sensors->begin()), 
+    sensors(sensors) {}
 
 
     String name() override { return "SENSORS"; }

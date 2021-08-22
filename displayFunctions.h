@@ -33,6 +33,8 @@ private:
     std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>(new ui::SensorsTab(sensors))};
     std::vector<ui::Tab*>::iterator tabIterator;
 
+//    bool rePinALast = false;
+
 
 public:
     explicit DisplayFunctions(std::map<uint32_t , Sensor *> *sensors): sensors(sensors) {
@@ -40,12 +42,15 @@ public:
         display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
         tabIterator = tabs.begin();
 
+        attachInterrupt(, sleep, FALLING);
+
         init();
     }
 
 
-
     ~DisplayFunctions() = default;
+
+    void IRAM_ATTR onROPinAInterupt();
 
     void displayWhenReading();
 

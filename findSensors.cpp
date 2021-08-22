@@ -36,7 +36,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
     }
 
 
-    for (size_t address = 0; address < 128; address++) {
+    for (uint8_t address = 0; address < 128; address++) {
         Wire.beginTransmission(address);
         uint32_t error = Wire.endTransmission();
 
