@@ -41,7 +41,7 @@ void AllSensorsScreen::printSensors(Adafruit_SSD1306 *display,
 
     display->setTextColor(SSD1306_WHITE);
 
-    for (itStart; itStart != itEnd; ++itStart) {
+    for (; itStart != itEnd; ++itStart) {
         if (display->getCursorY() >= end.y) return;
         display->println(itStart->second->getStringForDisplay());
     }
