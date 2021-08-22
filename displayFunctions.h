@@ -20,6 +20,7 @@
 #include "sysInfo.h"
 #include "SensorsTab.h"
 #include "Tab.h"
+#include "gpioNames.h"
 
 
 class DisplayFunctions {
@@ -42,7 +43,7 @@ public:
         display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
         tabIterator = tabs.begin();
 
-        attachInterrupt(, sleep, FALLING);
+        attachInterrupt(REA, sleep, FALLING);
 
         init();
     }
