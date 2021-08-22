@@ -61,6 +61,8 @@ void sleep();
 
 void onREAISR();
 
+void onREBISR();
+
 //void reA();
 //void reB();
 
@@ -150,7 +152,7 @@ void setup() {
     Wire.begin();
 
     attachInterrupt(REA, onREAISR, FALLING);
-    attachInterrupt(BUTTON_PIN, )
+    attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
 
 
 //    //sets up wake up from sleep
