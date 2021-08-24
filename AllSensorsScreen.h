@@ -10,6 +10,7 @@
 #include "Sensor.hpp"
 #include "SpecificSensorScreen.h"
 #include "SensorsTab.h"
+#include "ui.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
