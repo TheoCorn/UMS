@@ -31,7 +31,7 @@ private:
 
     ui::coordinates start = ui::coordinates(0, 17);
 
-    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>(new ui::SensorsTab(sensors))};
+    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>(new SensorsTab(sensors))};
     std::vector<ui::Tab*>::iterator tabIterator;
 
 //    bool rePinALast = false;

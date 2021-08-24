@@ -43,7 +43,7 @@ namespace ui {
 
     class Tab;
 
-    class SensorsTab;
+//    class SensorsTab;
 
 
 }
