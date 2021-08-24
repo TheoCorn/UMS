@@ -15,8 +15,8 @@ namespace ui {
         unsigned int x;
         unsigned int y;
 
-        coordinates(unsigned int x, unsigned int y) : x(x), y(y) {}
-    };
+                    coordinates(unsigned int x, unsigned int y) : x(x), y(y) {}
+                };
 
     class Tab {
 
