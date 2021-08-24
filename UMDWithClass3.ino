@@ -45,6 +45,9 @@
 #define JSON_SINGLE_SENSOR_SIZE 256;
 
 
+#define GPIO_PIN_SEL  ((1ULL<<BUTTON_PIN) | (1ULL<<REB) | (1ULL<<REA))
+
+
 void doProcess4JsonObj(JsonPair *p);
 
 void onSensorsElementReceive(JsonVariant *v);
@@ -104,6 +107,20 @@ void setup() {
 //    reIo_conf.mode = GPIO_MODE_INPUT;
 //    reIo_confpin_bit_mask = RE_GPIO_PIN_SEL;
 //    reIo_conf.pull_up_en = 1;
+
+gpio_config_t io_conf;
+//disable interrupt
+io_conf.intr_type = static_cast<gpio_int_type_t>(GPIO_PIN_INTR_DISABLE);
+//set as output mode
+io_conf.mode = GPIO_MODE_INPUT;
+//bit mask of the pins that you want to set,e.g.GPIO18/19
+io_conf.pin_bit_mask = GPIO_PIN_SEL;
+//disable pull-down mode
+io_conf.pull_down_en = static_cast<gpio_pulldown_t>(0);
+//enable pull-up mode
+io_conf.pull_up_en = static_cast<gpio_pullup_t>(1);
+//configure GPIO with the given settings
+gpio_config(&io_conf);
 
 
 

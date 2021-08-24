@@ -9,7 +9,7 @@
 #include <map>
 #include "Sensor.hpp"
 #include "AllSensorsScreen.h"
-#include "SensorsTab.h"
+//#include "SensorsTab.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
