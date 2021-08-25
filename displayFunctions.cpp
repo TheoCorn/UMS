@@ -35,13 +35,13 @@ void DisplayFunctions::displayWhenReading() {
 }
 
 void DisplayFunctions::displayWhenNotReading() {
-    display->clearDisplay();
-    showReading(false);
-
-    showSensors();
-    showBattery();
-
-    display->display();
+//    display->clearDisplay();
+//    showReading(false);
+//
+//    showSensors();
+//    showBattery();
+//
+//    display->display();
 }
 
 void DisplayFunctions::showReading(bool reading) {
