@@ -43,6 +43,7 @@ public:
         display->setCursor(start.x, start.y);
 
         subScreen->render(display, start, end);
+
     }
 
     bool onUp() override { return subScreen->onUp(); }

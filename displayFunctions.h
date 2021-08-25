@@ -46,14 +46,11 @@ public:
         init();
 
         display->clearDisplay();
-        display->setTextSize(1);             // Normal 1:1 pixel scale
-        display->setTextColor(SSD1306_WHITE);        // Draw white text
-        display->setCursor(0, 17);
-        display->println("hi");
+
+
+        delay(2000);
+        (*tabIterator)->render(display, start, end);
         display->display();
-
-        delay(2000000);
-
 
     }
 
