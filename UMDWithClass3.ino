@@ -144,11 +144,6 @@ gpio_config(&io_conf);
     sysInfo::screenAddress = sysInfoDoc["screenAddress"].as<unsigned int>();
 
 
-    //todo delete
-    Serial.print("screen i2c address: ");
-    delay(30);
-    Serial.println(sysInfo::screenAddress);
-    delay(50);
 
     unsigned int defCom = sysInfoDoc["defCom"].as<unsigned int>();
     sysInfo::comName = sysInfoDoc["comName"].as<String>();

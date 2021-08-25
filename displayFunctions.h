@@ -29,6 +29,7 @@ private:
     std::map<uint32_t, Sensor*> * sensors;
 
     ui::coordinates start = ui::coordinates(0, 17);
+    ui::coordinates end = ui::coordinates(128, 64);
 
     std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>(new SensorsTab(sensors))};
     std::vector<ui::Tab*>::iterator tabIterator;
@@ -41,6 +42,8 @@ public:
 
         display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
         tabIterator = tabs.begin();
+
+        (*tabIterator)->render(display, start, )
 
 
         init();
