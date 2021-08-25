@@ -43,12 +43,12 @@ public:
         display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
         tabIterator = tabs.begin();
 
+        init();
+
         display->clearDisplay();
         (*tabIterator)->render(display, start, end);
         display->display();
 
-
-        init();
     }
 
 
