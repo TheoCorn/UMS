@@ -5,9 +5,6 @@
 #ifndef UMDWITHCLASS3_UI_H
 #define UMDWITHCLASS3_UI_H
 
-#include "Tab.h"
-#include "SensorsTab.h"
-
 
 namespace ui {
 
