@@ -46,6 +46,7 @@ public:
         init();
 
         display->clearDisplay();
+        display->println("hi");
         (*tabIterator)->render(display, start, end);
         display->display();
 
