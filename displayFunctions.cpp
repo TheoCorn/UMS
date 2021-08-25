@@ -13,8 +13,8 @@
 
 
 void DisplayFunctions::init() {
-    pinMode(traScreen, OUTPUT);
-    digitalWrite(traScreen, HIGH);
+    pinMode(SCREEN_EN_PIN, OUTPUT);
+    digitalWrite(SCREEN_EN_PIN, HIGH);
 
     pinMode(batteryReadPin, INPUT);
     //Address 0x3C can not be a sensor for me
@@ -121,7 +121,7 @@ void DisplayFunctions::showComInfo() {
 void DisplayFunctions::sleep() {
     display->clearDisplay();
     delay(5);
-    digitalWrite(traScreen, LOW);
+    digitalWrite(SCREEN_EN_PIN, LOW);
     delay(5);
 }
 

@@ -45,7 +45,8 @@
 #define JSON_SINGLE_SENSOR_SIZE 256;
 
 
-#define GPIO_PIN_SEL  ((1ULL<<BUTTON_PIN) | (1ULL<<REB) | (1ULL<<REA))
+#define GPIO_RE_PIN_SEL  ((1ULL<<BUTTON_PIN) | (1ULL<<REB) | (1ULL<<REA))
+#define GPIO_OUTPUT_PIN_SEL ((1ULL<<))
 
 
 void doProcess4JsonObj(JsonPair *p);
@@ -114,7 +115,7 @@ io_conf.intr_type = static_cast<gpio_int_type_t>(GPIO_PIN_INTR_DISABLE);
 //set as output mode
 io_conf.mode = GPIO_MODE_INPUT;
 //bit mask of the pins that you want to set,e.g.GPIO18/19
-io_conf.pin_bit_mask = GPIO_PIN_SEL;
+io_conf.pin_bit_mask = GPIO_RE_PIN_SEL;
 //disable pull-down mode
 io_conf.pull_down_en = static_cast<gpio_pulldown_t>(0);
 //enable pull-up mode
@@ -124,8 +125,8 @@ gpio_config(&io_conf);
 
 
 
-    pinMode(traScreen, OUTPUT);
-    digitalWrite(traScreen, HIGH);
+    pinMode(SCREEN_EN_PIN, OUTPUT);
+    digitalWrite(SCREEN_EN_PIN, HIGH);
     pinMode(batteryReadPin, INPUT);
 
     pinMode(BUTTON_PIN, INPUT);
@@ -323,7 +324,7 @@ void onGetElementReceive(JsonVariant *v) {
 
 void onStartReading() {
 
-    detachInterrupt(sleepPin);
+//    detachInterrupt(sleepPin);
     mDisplay->displayWhenReading();
     readJsonCapacity = DEFAULT_JDOC_CAPACITY;  //JSON_SINGLE_SENSOR_SIZE * sensors->size();
 
