@@ -6,14 +6,18 @@
 #define UMDWITHCLASS3_UI_H
 
 
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+
 namespace ui {
 
-    struct coordinates{
+    struct coordinates {
         unsigned int x;
         unsigned int y;
 
-                    coordinates(unsigned int x, unsigned int y) : x(x), y(y) {}
-                };
+        coordinates(unsigned int x, unsigned int y) : x(x), y(y) {}
+    };
 
     class Tab {
 
@@ -23,7 +27,7 @@ namespace ui {
 
         virtual String name() = 0;
 
-        virtual void render(Adafruit_SSD1306* display, coordinates& start, coordinates& end) = 0;
+        virtual void render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end) = 0;
 
         /**
          * @return return true if you want to go back to all tabs
