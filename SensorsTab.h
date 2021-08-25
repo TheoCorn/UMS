@@ -16,7 +16,7 @@
 
 
 
-class ui::SensorsTab : public ui::Tab {
+class SensorsTab : public ui::Tab {
 private:
 
     std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &&activeSensorIterator;
@@ -26,8 +26,8 @@ private:
 
 public:
     explicit SensorsTab(std::map<uint32_t, Sensor *> *sensors) : activeSensorIterator(sensors->begin()),
-    sensors(sensors) {
-        subScreen = dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen));
+    sensors(sensors), subScreen(dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen))) {
+//        subScreen = dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen));
       }
 
     ~SensorsTab() {
@@ -36,7 +36,7 @@ public:
 
     String name() override { return "SENSORS"; }
 
-    void render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end) override {
+    void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override {
 
         display->setTextSize(1);
         display->setCursor(start.x, start.y);

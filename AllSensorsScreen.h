@@ -14,7 +14,7 @@
 #include <Adafruit_SSD1306.h>
 
 
-class AllSensorsScreen : public Tab {
+class AllSensorsScreen : public ui::Tab {
 protected:
     std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> &activeSensorIterator;
     std::map<uint32_t, Sensor *> *sensors;
