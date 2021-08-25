@@ -5,7 +5,7 @@
 #include "AllSensorsScreen.h"
 
 void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) {
-    display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);
+//    display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);
 
     auto it = activeSensorIterator;
 
