@@ -14,6 +14,10 @@
 #include <Adafruit_SSD1306.h>
 
 
+enum class SensorsTabSubScreen{
+    ALL_SENSORS_SCREEN,
+    SPECIFIC_SENSOR_SCREEN
+};
 
 
 class SensorsTab : public ui::Tab {
@@ -25,10 +29,7 @@ private:
     ui::Tab *subScreen;
 
 public:
-    explicit SensorsTab(std::map<uint32_t, Sensor *> *sensors) : activeSensorIterator(sensors->begin()),
-    sensors(sensors), subScreen(dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen))) {
-//        subScreen = dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen));
-      }
+    explicit SensorsTab(std::map<uint32_t, Sensor *> *sensors);
 
     ~SensorsTab() {
          delete subScreen;
@@ -50,6 +51,7 @@ public:
 
     void onClick() override { subScreen->onClick(); }
 
+//    void switchSubScreen(SensorsTabSubScreen subScreen);
 
 };
 

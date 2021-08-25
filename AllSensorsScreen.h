@@ -34,13 +34,16 @@ public:
 
     String name() override { return "SENSORS"; }
 
-    void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;
 
     void onClick() override;
 
     bool onUp() override;
 
+    void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;
+
     void onDown() override;
+
+    void onLongClick override {};
 
 };
 
