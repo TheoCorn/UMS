@@ -49,9 +49,8 @@ public:
         display->println("hi");
         display->display();
 
-        delay(2000);
-        (*tabIterator)->render(display, start, end);
-        display->display();
+        delay(2000000);
+
 
     }
 
