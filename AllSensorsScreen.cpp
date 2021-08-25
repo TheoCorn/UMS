@@ -29,7 +29,7 @@ void AllSensorsScreen::onDown() {
 }
 
 void AllSensorsScreen::onClick() {
-    subScreen = (ui::Tab *) (new SpecificSensor(activeSensorIterator, subScreen, sensors));
+    subScreen = dynamic_cast<ui::Tab*>(new class SpecificSensorScreen(activeSensorIterator, subScreen, sensors));
     delete this;
 }
 

@@ -43,7 +43,6 @@ public:
 
     void onDown() override;
 
-    void onLongClick override {};
 
 };
 
