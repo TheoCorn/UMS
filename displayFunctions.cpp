@@ -35,6 +35,15 @@ void DisplayFunctions::displayWhenReading() {
 }
 
 void DisplayFunctions::displayWhenNotReading() {
+
+    display->clearDisplay();
+    showReading(false);
+    showBattery();
+
+    (*tabIterator)->render(display, start, end);
+
+    display->display();
+
 //    display->clearDisplay();
 //    showReading(false);
 //
