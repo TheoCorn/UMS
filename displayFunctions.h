@@ -38,10 +38,9 @@ private:
 
 
 public:
-    explicit DisplayFunctions(std::map<uint32_t , Sensor *> *sensors): sensors(sensors) {
+    explicit DisplayFunctions(std::map<uint32_t , Sensor *> *sensors): sensors(sensors), tabIterator(tabs.begin()) {
 
         display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-        tabIterator = tabs.begin();
 
         init();
 

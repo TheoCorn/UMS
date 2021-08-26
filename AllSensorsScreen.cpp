@@ -9,7 +9,7 @@ void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start,
 
     auto it = activeSensorIterator;
 
-    String s = it->second->getStringForDisplay();
+    String s = activeSensorIterator->second->getStringForDisplay();
     display->println(s);
     printSensors(display, ++it, sensors->end(), end);
 
@@ -41,7 +41,7 @@ void AllSensorsScreen::printSensors(Adafruit_SSD1306 *display,
     display->setTextColor(SSD1306_WHITE);
 
     for (; itStart != itEnd; ++itStart) {
-        printf("coordinates end x: %d, y%; current cursor y: %d", end.x, end.y, display->getCursorY())
+        printf("coordinates end x: %d, y%; current cursor y: %d", end.x, end.y, display->getCursorY());
         if (display->getCursorY() >= end.y) return;
         display->println(itStart->second->getStringForDisplay());
     }
