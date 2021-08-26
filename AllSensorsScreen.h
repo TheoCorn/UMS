@@ -30,7 +30,9 @@ public:
     AllSensorsScreen(std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> &activeSensorIterator,
                      std::map<uint32_t, Sensor *> *sensors,
                      ui::Tab *&subScreen) :
-            activeSensorIterator(activeSensorIterator), sensors(sensors), subScreen(subScreen) {}
+            activeSensorIterator(activeSensorIterator), sensors(sensors), subScreen(subScreen) {
+        activeSensorIterator-
+    }
 
     String name() override { return "SENSORS"; }
 

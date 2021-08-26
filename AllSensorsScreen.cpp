@@ -9,7 +9,7 @@ void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start,
 
     auto it = activeSensorIterator;
 
-    String s = activeSensorIterator->second->getStringForDisplay();
+    String s = activeSensorIterator.second->getStringForDisplay();
     display->println(s);
     printSensors(display, ++it, sensors->end(), end);
 
