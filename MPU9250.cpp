@@ -115,16 +115,7 @@ void MPU9250::readSensor(JsonArray &jra) {
 }
 
 String MPU9250::getStringForDisplay() {
-    readSensor();
-    String s;
-    s = name();
-//  s += "\t";
-//  for(int i = 0; i < 10; i++){
-//    float f = callReadingFun(mpuFeaturesFloat[i]);
-//      s += (String) f;
-//  }
-
-    return s;
+    return name();
 }
 
 String MPU9250::getExtendedStringForDisplay() {
