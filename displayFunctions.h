@@ -46,6 +46,11 @@ public:
 
         display->clearDisplay();
 
+        uint32_t sid = sensors->second->sid();
+        display->println(sid);
+
+        display->display();
+
 
         delay(2000);
         (*tabIterator)->render(display, start, end);
