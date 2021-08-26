@@ -5,6 +5,9 @@
 #include "AllSensorsScreen.h"
 
 void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) {
+
+    if (sensors->empty()) return
+
     display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);
 
     std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> it = activeSensorIterator;
