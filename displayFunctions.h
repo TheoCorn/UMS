@@ -44,17 +44,20 @@ public:
 
         init();
 
-        display->clearDisplay();
-
-        uint32_t sid = sensors->second->sid();
-        display->println(sid);
-
-        display->display();
-
-
-        delay(2000);
-        (*tabIterator)->render(display, start, end);
-        display->display();
+//                Serial.println(sensors->size());
+//
+//        display->clearDisplay();
+//
+//        Sensor* sensor = sensors->begin()->second;
+//        uint32_t sid = sensor->sid();
+//        display->println(sid);
+//
+//        display->display();
+//
+//
+//        delay(2000);
+//        (*tabIterator)->render(display, start, end);
+//        display->display();
 
     }
 

@@ -103,26 +103,20 @@ void setup() {
     sensors = new std::map<uint32_t, Sensor *>;
     btBuffer = new std::vector<char>;
 
-//    gpio_config_t reIo_conf;
-//    reIo_conf.intr_type = GPIO_INTR_POSEDGE;
-//    reIo_conf.mode = GPIO_MODE_INPUT;
-//    reIo_confpin_bit_mask = RE_GPIO_PIN_SEL;
-//    reIo_conf.pull_up_en = 1;
 
-gpio_config_t io_conf;
-//disable interrupt
-io_conf.intr_type = static_cast<gpio_int_type_t>(GPIO_PIN_INTR_DISABLE);
-//set as output mode
-io_conf.mode = GPIO_MODE_INPUT;
-//bit mask of the pins that you want to set,e.g.GPIO18/19
-io_conf.pin_bit_mask = GPIO_RE_PIN_SEL;
-//disable pull-down mode
-io_conf.pull_down_en = static_cast<gpio_pulldown_t>(0);
-//enable pull-up mode
-io_conf.pull_up_en = static_cast<gpio_pullup_t>(1);
-//configure GPIO with the given settings
-gpio_config(&io_conf);
-
+//    gpio_config_t io_conf;
+////disable interrupt
+//    io_conf.intr_type = static_cast<gpio_int_type_t>(GPIO_PIN_INTR_DISABLE);
+////set as output mode
+//    io_conf.mode = GPIO_MODE_INPUT;
+////bit mask of the pins that you want to set,e.g.GPIO18/19
+//    io_conf.pin_bit_mask = GPIO_RE_PIN_SEL;
+////disable pull-down mode
+//    io_conf.pull_down_en = static_cast<gpio_pulldown_t>(0);
+////enable pull-up mode
+//    io_conf.pull_up_en = static_cast<gpio_pullup_t>(1);
+////configure GPIO with the given settings
+//    gpio_config(&io_conf);
 
 
     pinMode(SCREEN_EN_PIN, OUTPUT);
@@ -144,7 +138,6 @@ gpio_config(&io_conf);
     sysInfo::screenAddress = sysInfoDoc["screenAddress"].as<unsigned int>();
 
 
-
     unsigned int defCom = sysInfoDoc["defCom"].as<unsigned int>();
     sysInfo::comName = sysInfoDoc["comName"].as<String>();
     sysInfo::serialCom = getSerialCom4EnumPos(defCom);
@@ -156,9 +149,11 @@ gpio_config(&io_conf);
     sysInfo::batteryInfo.capacity = batObj["capacity"];
 
 
+    sensorIdentifier = new SensorsIdentifierManager();
+    auto conflicts = new std::vector<csa::ConflictingAddressStruct *>();
+    ss::checkI2C(conflicts, sensors, sensorIdentifier);
 
     mDisplay = new DisplayFunctions(sensors);
-    sensorIdentifier = new SensorsIdentifierManager();
 
 //    sysInfo::serialCom->startConnectionCheck(5000);
 
@@ -184,8 +179,8 @@ void loop() {
         sysInfo::serialCom->read(&sRead);
 
         switch (sRead) {
-            case ETX:{
-                std::function<void(JsonPair*)> doProcess(doProcess4JsonObj);
+            case ETX: {
+                std::function<void(JsonPair * )> doProcess(doProcess4JsonObj);
                 jp::parseJsonWithCycleThru(btBuffer, doProcess);
             }
                 break;
@@ -205,7 +200,7 @@ void loop() {
     if (reading) {
         auto doc = new DynamicJsonDocument(readJsonCapacity);
         JsonArray arr = doc->createNestedArray("Sensors");
-        for (auto const &sTuple : *sensors) {
+        for (auto const &sTuple: *sensors) {
             sTuple.second->readSensor(arr);
         }
         sysInfo::serialCom->write(doc);
@@ -259,18 +254,18 @@ void doProcess4JsonObj(JsonPair *p) {
 void onSensorsElementReceive(JsonVariant *v) {
     JsonArray arr = v->as<JsonArray>();
 
-    for (JsonVariant sConf : arr) {
+    for (JsonVariant sConf: arr) {
         try {
             JsonObject obj = sConf.as<JsonObject>();
             unsigned int key = obj["rsid"];
             sensors->at(key)->setJson(obj);
         } catch (...) {
 
-            error::Error* errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,
-                               SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
-                               error::Appearance::SNACK_BAR,
-                               error::Importance::REQUIRES_USER_ACTION,
-                               error::BackgroundAppActions::RESEND);
+            error::Error *errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,
+                                                    SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
+                                                    error::Appearance::SNACK_BAR,
+                                                    error::Importance::REQUIRES_USER_ACTION,
+                                                    error::BackgroundAppActions::RESEND);
 
             sysInfo::serialCom->write(errMsg);
         }
@@ -297,19 +292,19 @@ void onReadElementReceive(JsonVariant *v) {
 }
 
 void onGetElementReceive(JsonVariant *v) {
-    DynamicJsonDocument* doc = new DynamicJsonDocument(sensors->size() * 2048);
+    DynamicJsonDocument *doc = new DynamicJsonDocument(sensors->size() * 2048);
     JsonArray arr = doc->createNestedArray("SCof");
 
     uint8_t key;
     Sensor *value;
-    for (auto &mPair : *sensors) {
+    for (auto &mPair: *sensors) {
         std::tie(key, value) = mPair;
         value->getJson(arr);
     }
 
     size_t success = sysInfo::serialCom->write(doc);
 
-    if(!success){
+    if (!success) {
 //        error::Error error()
     }
 
@@ -344,10 +339,14 @@ void readBatteryCharge() {
     sysInfo::batteryPercentage = 10;
 }
 
-void IRAM_ATTR onREAISR() {
+void IRAM_ATTR
+
+onREAISR() {
     mDisplay->onREAInterrupt();
 }
 
-void IRAM_ATTR onREBISR() {
+void IRAM_ATTR
+
+onREBISR() {
     mDisplay->onClick();
 }
