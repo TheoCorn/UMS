@@ -36,7 +36,7 @@ private:
 
 //    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>(new SensorsTab(sensors))};
 
-    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>( dynamic_cast<ui::Tab*>(new SpecificSensorScreen(sensors)), new AllSensorsScreen(sensors))};
+    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>(new SpecificSensorScreen(sensors)), dynamic_cast<ui::Tab*>( new AllSensorsScreen(sensors) ) };
 
     std::vector<ui::Tab*>::iterator tabIterator;
 
