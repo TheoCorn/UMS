@@ -13,6 +13,6 @@ void SpecificSensorScreen::render(Adafruit_SSD1306 *display,
 
 
 void SpecificSensorScreen::onClick() {
-    subScreen = dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen));
-    delete this;
+//    subScreen = dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen));
+//    delete this;
 }

@@ -34,12 +34,14 @@ bool AllSensorsScreen::onUp() {
 }
 
 void AllSensorsScreen::onDown() {
-    if (activeSensorIterator != sensors->end()) activeSensorIterator++;
+    auto end = sensors->end();
+    end--;
+    if (activeSensorIterator != end) activeSensorIterator++;
 }
 
 void AllSensorsScreen::onClick() {
-    subScreen = dynamic_cast<ui::Tab*>(new class SpecificSensorScreen(activeSensorIterator, subScreen, sensors));
-    delete this;
+//    subScreen = dynamic_cast<ui::Tab*>(new class SpecificSensorScreen(activeSensorIterator, subScreen, sensors));
+//    delete this;
 }
 
 void AllSensorsScreen::printSensors(Adafruit_SSD1306 *display,

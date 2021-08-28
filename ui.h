@@ -8,6 +8,8 @@
 
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <map>
+#include "Sensor.hpp"
 
 
 namespace ui {
@@ -23,9 +25,7 @@ namespace ui {
 
     public:
 
-        static std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> sensorIterator;
-
-        static void sensorIterNext() {++sensorIterator}
+//        static std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> sensorIterator;
 
 //        virtual ~Tab()  = 0;
 

@@ -14,20 +14,17 @@
 
 
 class SpecificSensorScreen : public ui::Tab {
-    std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> &activeSensorIterator;
-    ui::Tab *&subScreen;
+
     std::map<uint32_t, Sensor *> *sensors;
+    std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> activeSensorIterator;
+
 public:
 
-    SpecificSensorScreen(std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> &activeSensorIterator,
-                         ui::Tab *&subScreen,
-                         std::map<uint32_t, Sensor *> *sensors) :
+    SpecificSensorScreen(std::map<uint32_t, Sensor *> *sensors) : sensors(sensors) {
+        activeSensorIterator = sensors->begin();
+    }
 
-            activeSensorIterator(activeSensorIterator),
-            subScreen(subScreen),
-            sensors(sensors) {}
-
-    String name() override { return activeSensorIterator->second->name(); }
+    String name() override { return "SENSOR DATA"; }
 
     void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;
 

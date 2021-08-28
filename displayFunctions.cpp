@@ -11,6 +11,8 @@
 
 #include "sysInfo.h"
 
+#include "ui.h"
+
 
 void DisplayFunctions::init() {
     pinMode(SCREEN_EN_PIN, OUTPUT);
@@ -26,7 +28,7 @@ void DisplayFunctions::init() {
     delay(5);
     display->clearDisplay();
 
-    ui::Tab::sensorIterator = sensors->begin();
+//    ui::Tab::sensorIterator = sensors->begin();
 }
 
 void DisplayFunctions::displayWhenReading() {

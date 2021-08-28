@@ -16,9 +16,9 @@
 
 class AllSensorsScreen : public ui::Tab {
 protected:
-    std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> &activeSensorIterator;
     std::map<uint32_t, Sensor *> *sensors;
-    ui::Tab *&subScreen;
+    std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> &&activeSensorIterator;
+//    ui::Tab *&subScreen;
 
     static void printSensors(Adafruit_SSD1306 *display,
                              std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> &itStart,
@@ -27,10 +27,8 @@ protected:
 
 public:
 
-    AllSensorsScreen(std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> &activeSensorIterator,
-                     std::map<uint32_t, Sensor *> *sensors,
-                     ui::Tab *&subScreen) :
-            activeSensorIterator(activeSensorIterator), sensors(sensors), subScreen(subScreen) {}
+    AllSensorsScreen(std::map<uint32_t, Sensor *> *sensors) :
+    sensors(sensors) {}
 
     String name() override { return "SENSORS"; }
 
