@@ -21,10 +21,14 @@ class SpecificSensorScreen : public ui::Tab {
 public:
 
     SpecificSensorScreen(std::map<uint32_t, Sensor *> *sensors) : sensors(sensors) {
-        activeSensorIterator = sensors->begin();
-        String name = activeSensorIterator->second->name();
+        if (!sensors->empty()) {
+            activeSensorIterator = sensors->begin();
+            String name = activeSensorIterator->second->name();
 
-        Serial.println(name);
+            Serial.println(name);
+        }else{
+            Serial.println("sensors empty");
+        }
     }
 
     String name() override { return "SENSOR DATA"; }
