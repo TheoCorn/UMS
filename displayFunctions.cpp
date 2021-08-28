@@ -25,6 +25,8 @@ void DisplayFunctions::init() {
     display->display();
     delay(5);
     display->clearDisplay();
+
+    ui::Tab::sensorIterator = sensors->begin();
 }
 
 void DisplayFunctions::displayWhenReading() {

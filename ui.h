@@ -23,6 +23,10 @@ namespace ui {
 
     public:
 
+        static std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> sensorIterator;
+
+        static void sensorIterNext() {++sensorIterator}
+
 //        virtual ~Tab()  = 0;
 
         virtual String name() = 0;

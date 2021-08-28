@@ -6,17 +6,21 @@
 
 void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) {
 
-    if (sensors->empty()) return
+    if (!sensors->empty()){
 
     display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);
 
     std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> it = activeSensorIterator;
 
-//    String s = activeSensorIterator->second->getStringForDisplay();
+    Sensor* sensor = activeSensorIterator->second;
 
-    String s = sensors[105]->getStringForDisplay()
+//    Sensor* sensor = sensors->begin()->second;
+    String s = sensor->name();
+
     display->println(s);
-    printSensors(display, ++it, sensors->end(), end);
+
+//    printSensors(display, it, sensors->end(), end);
+    }
 
 }
 
@@ -44,8 +48,8 @@ void AllSensorsScreen::printSensors(Adafruit_SSD1306 *display,
                                     ui::coordinates &end) {
 
     display->setTextColor(SSD1306_WHITE);
-
-    for (; itStart != itEnd; ++itStart) {
+    
+    for (++itStart; itStart != itEnd; ++itStart) {
 //        printf("coordinates end x: %d, y%; current cursor y: %d", end.x, end.y, display->getCursorY());
         if (display->getCursorY() >= end.y) return;
         display->println(itStart->second->getStringForDisplay());
