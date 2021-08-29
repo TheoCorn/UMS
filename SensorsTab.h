@@ -23,14 +23,14 @@ enum class SensorsTabSubScreen{
 class SensorsTab : public ui::Tab {
 private:
 
-    std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> &&activeSensorIterator;
+    std::_Rb_tree_iterator <std::pair<const uint32_t, Sensor *>> activeSensorIterator;
     std::map<uint32_t, Sensor *> *sensors;
 
     ui::Tab *subScreen;
     SensorsTabSubScreen subScreenType = SensorsTabSubScreen::ALL_SENSORS_SCREEN;
 
 public:
-    explicit SensorsTab(std::map<uint32_t, Sensor *> *sensors) {}
+    explicit SensorsTab(std::map<uint32_t, Sensor *> *sensors);
 
     ~SensorsTab() {
          delete subScreen;
