@@ -153,7 +153,7 @@ void setup() {
   sensorIdentifier = new SensorsIdentifierManager();
   auto conflicts = new std::vector<csa::ConflictingAddressStruct *>();
   ss::checkI2C(conflicts, sensors, sensorIdentifier);
-  
+
 
   mDisplay = new DisplayFunctions(sensors);
 
@@ -340,9 +340,8 @@ void readBatteryCharge() {
   sysInfo::batteryPercentage = 10;
 }
 
-void IRAM_ATTR
-
-onREAISR() {
+void IRAM_ATTR onREAISR() {
+    Serial.println("onREAISR");
   mDisplay->onREAInterrupt();
 }
 
