@@ -91,136 +91,136 @@ size_t readJsonCapacity = DEFAULT_JDOC_CAPACITY;
 
 
 void setup() {
-    SPIFFS.begin(true);
+  SPIFFS.begin(true);
 
-    //todo until battery sensor is added
-    sysInfo::batteryPercentage = 10;
-    sysInfo::isCharging = false;
+  //todo until battery sensor is added
+  sysInfo::batteryPercentage = 10;
+  sysInfo::isCharging = false;
 
-//    // todo delete before release debug
-    Serial.begin(112500);
+  //    // todo delete before release debug
+  Serial.begin(112500);
 
-    sensors = new std::map<uint32_t, Sensor *>;
-    btBuffer = new std::vector<char>;
-
-
-//    gpio_config_t io_conf;
-////disable interrupt
-//    io_conf.intr_type = static_cast<gpio_int_type_t>(GPIO_PIN_INTR_DISABLE);
-////set as output mode
-//    io_conf.mode = GPIO_MODE_INPUT;
-////bit mask of the pins that you want to set,e.g.GPIO18/19
-//    io_conf.pin_bit_mask = GPIO_RE_PIN_SEL;
-////disable pull-down mode
-//    io_conf.pull_down_en = static_cast<gpio_pulldown_t>(0);
-////enable pull-up mode
-//    io_conf.pull_up_en = static_cast<gpio_pullup_t>(1);
-////configure GPIO with the given settings
-//    gpio_config(&io_conf);
+  sensors = new std::map<uint32_t, Sensor *>;
+  btBuffer = new std::vector<char>;
 
 
-    pinMode(SCREEN_EN_PIN, OUTPUT);
-    digitalWrite(SCREEN_EN_PIN, HIGH);
-    pinMode(batteryReadPin, INPUT);
-
-    pinMode(BUTTON_PIN, INPUT);
-    pinMode(REA, INPUT);
-    pinMode(REB, INPUT);
-
-    digitalWrite(BUTTON_PIN, true);
-    digitalWrite(REA, true);
-    digitalWrite(REB, true);
-
-    char *sysInfoStr = (char *) spiffs::readFile(SPIFFS, "/sysInfo.json");
-    StaticJsonDocument<256> sysInfoDoc;
-    deserializeJson(sysInfoDoc, sysInfoStr);
-
-    sysInfo::screenAddress = sysInfoDoc["screenAddress"].as<unsigned int>();
+  //    gpio_config_t io_conf;
+  ////disable interrupt
+  //    io_conf.intr_type = static_cast<gpio_int_type_t>(GPIO_PIN_INTR_DISABLE);
+  ////set as output mode
+  //    io_conf.mode = GPIO_MODE_INPUT;
+  ////bit mask of the pins that you want to set,e.g.GPIO18/19
+  //    io_conf.pin_bit_mask = GPIO_RE_PIN_SEL;
+  ////disable pull-down mode
+  //    io_conf.pull_down_en = static_cast<gpio_pulldown_t>(0);
+  ////enable pull-up mode
+  //    io_conf.pull_up_en = static_cast<gpio_pullup_t>(1);
+  ////configure GPIO with the given settings
+  //    gpio_config(&io_conf);
 
 
-    unsigned int defCom = sysInfoDoc["defCom"].as<unsigned int>();
-    sysInfo::comName = sysInfoDoc["comName"].as<String>();
-    sysInfo::serialCom = getSerialCom4EnumPos(defCom);
+  pinMode(SCREEN_EN_PIN, OUTPUT);
+  digitalWrite(SCREEN_EN_PIN, HIGH);
+  pinMode(batteryReadPin, INPUT);
 
-    sysInfo::sn = sysInfoDoc["sn"].as<String>();
+  pinMode(BUTTON_PIN, INPUT);
+  pinMode(REA, INPUT);
+  pinMode(REB, INPUT);
 
-    JsonObject batObj = sysInfoDoc["battery"].as<JsonObject>();
-    sysInfo::batteryInfo.name = batObj["name"].as<String>();
-    sysInfo::batteryInfo.capacity = batObj["capacity"];
+  digitalWrite(BUTTON_PIN, true);
+  digitalWrite(REA, true);
+  digitalWrite(REB, true);
 
+  char *sysInfoStr = (char *) spiffs::readFile(SPIFFS, "/sysInfo.json");
+  StaticJsonDocument<256> sysInfoDoc;
+  deserializeJson(sysInfoDoc, sysInfoStr);
 
-    sensorIdentifier = new SensorsIdentifierManager();
-    auto conflicts = new std::vector<csa::ConflictingAddressStruct *>();
-    ss::checkI2C(conflicts, sensors, sensorIdentifier);
-
-    for( auto& it : sensors){
-        Serial.println(it.first);
-    }
-
-    mDisplay = new DisplayFunctions(sensors);
-
-//    sysInfo::serialCom->startConnectionCheck(5000);
-
-    Wire.begin();
-
-//    attachInterrupt(REA, onREAISR, FALLING);
-//    attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
+  sysInfo::screenAddress = sysInfoDoc["screenAddress"].as<unsigned int>();
 
 
-//    //sets up wake up from sleep
-//    esp_sleep_enable_ext0_wakeup(GPIO_NUM_33, 1);
-//    pinMode(sleepPin, INPUT);
-//
-//    attachInterrupt(sleepPin, sleep, FALLING);
+  unsigned int defCom = sysInfoDoc["defCom"].as<unsigned int>();
+  sysInfo::comName = sysInfoDoc["comName"].as<String>();
+  sysInfo::serialCom = getSerialCom4EnumPos(defCom);
+
+  sysInfo::sn = sysInfoDoc["sn"].as<String>();
+
+  JsonObject batObj = sysInfoDoc["battery"].as<JsonObject>();
+  sysInfo::batteryInfo.name = batObj["name"].as<String>();
+  sysInfo::batteryInfo.capacity = batObj["capacity"];
+
+  Wire.begin();
+
+  sensorIdentifier = new SensorsIdentifierManager();
+  auto conflicts = new std::vector<csa::ConflictingAddressStruct *>();
+  ss::checkI2C(conflicts, sensors, sensorIdentifier);
+
+  for ( auto it : *sensors) {
+    Serial.println(it.first);
+  }
+
+  mDisplay = new DisplayFunctions(sensors);
+
+  //    sysInfo::serialCom->startConnectionCheck(5000);
+
+
+  //    attachInterrupt(REA, onREAISR, FALLING);
+  //    attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
+
+
+  //    //sets up wake up from sleep
+  //    esp_sleep_enable_ext0_wakeup(GPIO_NUM_33, 1);
+  //    pinMode(sleepPin, INPUT);
+  //
+  //    attachInterrupt(sleepPin, sleep, FALLING);
 
 
 }
 
 void loop() {
 
-    char sRead;
-    for (int i = 0; i < sysInfo::serialCom->available(); ++i) {
-        sysInfo::serialCom->read(&sRead);
+  char sRead;
+  for (int i = 0; i < sysInfo::serialCom->available(); ++i) {
+    sysInfo::serialCom->read(&sRead);
 
-        switch (sRead) {
-            case ETX: {
-                std::function<void(JsonPair * )> doProcess(doProcess4JsonObj);
-                jp::parseJsonWithCycleThru(btBuffer, doProcess);
-            }
-                break;
-            case STX:
-                btBuffer->clear();
-                break;
-            case ACK:
-                break;
-
-            default:
-                btBuffer->emplace_back(sRead);
-                break;
+    switch (sRead) {
+      case ETX: {
+          std::function<void(JsonPair * )> doProcess(doProcess4JsonObj);
+          jp::parseJsonWithCycleThru(btBuffer, doProcess);
         }
+        break;
+      case STX:
+        btBuffer->clear();
+        break;
+      case ACK:
+        break;
+
+      default:
+        btBuffer->emplace_back(sRead);
+        break;
     }
+  }
 
 
-    if (reading) {
-        auto doc = new DynamicJsonDocument(readJsonCapacity);
-        JsonArray arr = doc->createNestedArray("Sensors");
-        for (auto const &sTuple: *sensors) {
-            sTuple.second->readSensor(arr);
-        }
-        sysInfo::serialCom->write(doc);
-
-        delete doc;
-
-    } else {
-        auto conflicts = new std::vector<csa::ConflictingAddressStruct *>();
-        ss::checkI2C(conflicts, sensors, sensorIdentifier);
-        mDisplay->displayWhenNotReading();
-
-        if (!conflicts->empty()) {
-            sysInfo::serialCom->write(csa::conflictsToString(conflicts));
-        }
-        delete conflicts;
+  if (reading) {
+    auto doc = new DynamicJsonDocument(readJsonCapacity);
+    JsonArray arr = doc->createNestedArray("Sensors");
+    for (auto const &sTuple : *sensors) {
+      sTuple.second->readSensor(arr);
     }
+    sysInfo::serialCom->write(doc);
+
+    delete doc;
+
+  } else {
+    auto conflicts = new std::vector<csa::ConflictingAddressStruct *>();
+    ss::checkI2C(conflicts, sensors, sensorIdentifier);
+    mDisplay->displayWhenNotReading();
+
+    if (!conflicts->empty()) {
+      sysInfo::serialCom->write(csa::conflictsToString(conflicts));
+    }
+    delete conflicts;
+  }
 
 
 }
@@ -231,126 +231,126 @@ void loop() {
   @param p JsonPair of the object
 */
 void doProcess4JsonObj(JsonPair *p) {
-    JsonVariant v = p->value();
+  JsonVariant v = p->value();
 
-    switch (p->key().c_str()[0]) {
+  switch (p->key().c_str()[0]) {
 
-        case 's':
-            onSensorsElementReceive(&v);
-            break;
+    case 's':
+      onSensorsElementReceive(&v);
+      break;
 
-        case 'r':
-            onReadElementReceive(&v);
-            break;
+    case 'r':
+      onReadElementReceive(&v);
+      break;
 
-        case 'g':
-            onGetElementReceive(&v);
-            break;
+    case 'g':
+      onGetElementReceive(&v);
+      break;
 
-        default:
-            break;
-    }
+    default:
+      break;
+  }
 
 
 }
 
 
 void onSensorsElementReceive(JsonVariant *v) {
-    JsonArray arr = v->as<JsonArray>();
+  JsonArray arr = v->as<JsonArray>();
 
-    for (JsonVariant sConf: arr) {
-        try {
-            JsonObject obj = sConf.as<JsonObject>();
-            unsigned int key = obj["rsid"];
-            sensors->at(key)->setJson(obj);
-        } catch (...) {
+  for (JsonVariant sConf : arr) {
+    try {
+      JsonObject obj = sConf.as<JsonObject>();
+      unsigned int key = obj["rsid"];
+      sensors->at(key)->setJson(obj);
+    } catch (...) {
 
-            error::Error *errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,
-                                                    SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
-                                                    error::Appearance::SNACK_BAR,
-                                                    error::Importance::REQUIRES_USER_ACTION,
-                                                    error::BackgroundAppActions::RESEND);
+      error::Error *errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,
+                                              SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
+                                              error::Appearance::SNACK_BAR,
+                                              error::Importance::REQUIRES_USER_ACTION,
+                                              error::BackgroundAppActions::RESEND);
 
-            sysInfo::serialCom->write(errMsg);
-        }
+      sysInfo::serialCom->write(errMsg);
     }
+  }
 
 
 }
 
 
 void onReadElementReceive(JsonVariant *v) {
-    if (v->is<int>()) {
-        int locReading = v->as<int>();
-        if (locReading == 1) {
-            if (reading) return;
-            reading = true;
-            onStartReading();
-        } else {
-            if (!reading) return;
-            reading = false;
-            onStopReading();
-        }
+  if (v->is<int>()) {
+    int locReading = v->as<int>();
+    if (locReading == 1) {
+      if (reading) return;
+      reading = true;
+      onStartReading();
+    } else {
+      if (!reading) return;
+      reading = false;
+      onStopReading();
     }
+  }
 
 }
 
 void onGetElementReceive(JsonVariant *v) {
-    DynamicJsonDocument *doc = new DynamicJsonDocument(sensors->size() * 2048);
-    JsonArray arr = doc->createNestedArray("SCof");
+  DynamicJsonDocument *doc = new DynamicJsonDocument(sensors->size() * 2048);
+  JsonArray arr = doc->createNestedArray("SCof");
 
-    uint8_t key;
-    Sensor *value;
-    for (auto &mPair: *sensors) {
-        std::tie(key, value) = mPair;
-        value->getJson(arr);
-    }
+  uint8_t key;
+  Sensor *value;
+  for (auto &mPair : *sensors) {
+    std::tie(key, value) = mPair;
+    value->getJson(arr);
+  }
 
-    size_t success = sysInfo::serialCom->write(doc);
+  size_t success = sysInfo::serialCom->write(doc);
 
-    if (!success) {
-//        error::Error error()
-    }
+  if (!success) {
+    //        error::Error error()
+  }
 
-    delete doc;
+  delete doc;
 
 }
 
 void onStartReading() {
 
-//    detachInterrupt(sleepPin);
-    mDisplay->displayWhenReading();
-    readJsonCapacity = DEFAULT_JDOC_CAPACITY;  //JSON_SINGLE_SENSOR_SIZE * sensors->size();
+  //    detachInterrupt(sleepPin);
+  mDisplay->displayWhenReading();
+  readJsonCapacity = DEFAULT_JDOC_CAPACITY;  //JSON_SINGLE_SENSOR_SIZE * sensors->size();
 
-    delete sensorIdentifier;
+  delete sensorIdentifier;
 }
 
 void onStopReading() {
 
-    sensorIdentifier = new SensorsIdentifierManager();
+  sensorIdentifier = new SensorsIdentifierManager();
 }
 
 /**
   prepares and deep sleeps the esp32
 */
 void sleep() {
-    mDisplay->sleep();
-    esp_deep_sleep_start();
+  mDisplay->sleep();
+  esp_deep_sleep_start();
 }
 
 //todo: implement battery percentage
 void readBatteryCharge() {
-    sysInfo::batteryPercentage = 10;
+  sysInfo::batteryPercentage = 10;
 }
 
 void IRAM_ATTR
 
 onREAISR() {
-    mDisplay->onREAInterrupt();
+  mDisplay->onREAInterrupt();
 }
 
 void IRAM_ATTR
 
 onREBISR() {
-    mDisplay->onClick();
+  mDisplay->onClick();
 }
