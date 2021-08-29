@@ -40,11 +40,12 @@ void DisplayFunctions::displayWhenReading() {
 
 void DisplayFunctions::displayWhenNotReading() {
 
-    Serial.println("display when Not Reading");
-
     display->clearDisplay();
     showReading(false);
     showBattery();
+
+    display->setTextSize(1);
+    display->setCursor(60, 0);
 
     (*tabIterator)->render(display, start, end);
 

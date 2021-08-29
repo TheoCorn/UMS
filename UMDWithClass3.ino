@@ -163,8 +163,8 @@ void setup() {
   //    sysInfo::serialCom->startConnectionCheck(5000);
 
 
-  //    attachInterrupt(REA, onREAISR, FALLING);
-  //    attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
+      attachInterrupt(REA, onREAISR, FALLING);
+      attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
 
 
   //    //sets up wake up from sleep
