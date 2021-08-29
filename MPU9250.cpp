@@ -124,11 +124,13 @@ String MPU9250::getExtendedStringForDisplay() {
 
     for (int i = 0; i < 10; i++) {
         float f = readFeature(i);
+        char cBuffer[64];
+        int ret = sprintf(cBuffer, cBuffer, "%f", f);
         s += mpuFeaturesString[i];
         s += "\t";
         s += activeFeaturesVec[i] ? '1' : '0';
         s += "\t";
-        s += (String) f;
+        s += cBuffer;
         s += '\n';
     }
 
