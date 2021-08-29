@@ -49,7 +49,7 @@ void AllSensorsScreen::printSensors(Adafruit_SSD1306 *display,
     
     for (++itStart; itStart != itEnd; ++itStart) {
 //        printf("coordinates end x: %d, y%; current cursor y: %d", end.x, end.y, display->getCursorY());
-        if (display->getCursorY() >= end.y) return;
+        if (display->getCursorY() <= end.y) return;
         display->println(itStart->second->getStringForDisplay());
     }
 }
