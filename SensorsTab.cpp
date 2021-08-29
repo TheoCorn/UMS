@@ -9,9 +9,19 @@
 //
 //}
 
-//SensorsTab::SensorsTab(std::map<uint32_t, Sensor *> *sensors) : activeSensorIterator(sensors->begin()),
-//                                                                sensors(sensors), subScreen(dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen))) {
-////        subScreen = dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen));
-//   String s = activeSensorIterator->second->name();
-//   Serial.println(s);
-//}
+SensorsTab::SensorsTab(std::map<uint32_t, Sensor *> *sensors) : activeSensorIterator(sensors->begin()),
+                                                                sensors(sensors), subScreen(dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen))) {
+//        subScreen = dynamic_cast<ui::Tab*>(new AllSensorsScreen(activeSensorIterator, sensors, subScreen));
+}
+
+void SensorsTab::onClick() {
+    if(subScreenType == SensorsTabSubScreen::ALL_SENSORS_SCREEN){
+        subScreenType = SensorsTabSubScreen::SPECIFIC_SENSOR_SCREEN;
+        delete subScreen;
+        subScreen = dynamic_cast<ui::Tab*>(new SpecificSensorScreen(sensors, activeSensorIterator));
+    }else{
+        subScreenType = SensorsTabSubScreen::ALL_SENSORS_SCREEN;
+        delete subScreen;
+        subScreen = dynamic_cast<ui::Tab*>(new AllSensorsScreen(sensors, activeSensorIterator));
+    }
+}

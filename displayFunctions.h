@@ -34,9 +34,9 @@ private:
     ui::coordinates start = ui::coordinates(0, 17);
     ui::coordinates end = ui::coordinates(128, 64);
 
-//    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>(new SensorsTab(sensors))};
+    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>(new SensorsTab(sensors))};
 
-    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>( new AllSensorsScreen(sensors) ), dynamic_cast<ui::Tab*>(new SpecificSensorScreen(sensors)) };
+//    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>( new AllSensorsScreen(sensors) ), dynamic_cast<ui::Tab*>(new SpecificSensorScreen(sensors)) };
 
     std::vector<ui::Tab*>::iterator tabIterator;
 
