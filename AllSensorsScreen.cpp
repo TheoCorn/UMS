@@ -48,7 +48,7 @@ void AllSensorsScreen::printSensors(Adafruit_SSD1306 *display,
     display->setTextColor(SSD1306_WHITE);
     
     for (++itStart; itStart != itEnd; ++itStart) {
-        Serial.printf("coordinates end x: %d, y: %d; current cursor y: %d", end.x, end.y, display->getCursorY());
+        Serial.printf("coordinates end x: %d, y: %d; current cursor y: %d\n", end.x, end.y, display->getCursorY());
         if ( end.y >= display->getCursorY() ) return;
         display->println(itStart->second->getStringForDisplay());
     }
