@@ -12,9 +12,9 @@ void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start,
 
     std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> it = activeSensorIterator;
 
-    Sensor* sensor = activeSensorIterator->second;
+    display->println(activeSensorIterator->second->getStringForDisplay());
 
-    printSensors(display, it, sensors->end(), end);
+    printSensors(display, ++it, sensors->end(), end);
     }
 
 }

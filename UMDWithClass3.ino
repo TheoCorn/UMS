@@ -153,10 +153,7 @@ void setup() {
   sensorIdentifier = new SensorsIdentifierManager();
   auto conflicts = new std::vector<csa::ConflictingAddressStruct *>();
   ss::checkI2C(conflicts, sensors, sensorIdentifier);
-
-  for ( auto it : *sensors) {
-    Serial.println(it.first);
-  }
+  
 
   mDisplay = new DisplayFunctions(sensors);
 

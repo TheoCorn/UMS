@@ -160,7 +160,7 @@ void DisplayFunctions::onREAInterrupt() {
     }else{
         if (iteratingTabs) {
             auto endIt = --(tabs.end());
-            if (tabIterator != endIt) tabIterator++
+            if (tabIterator != endIt) tabIterator++;
             Serial.println("tab++");
         }else{
             (*tabIterator)->onDown();
