@@ -40,6 +40,8 @@ void DisplayFunctions::displayWhenReading() {
 
 void DisplayFunctions::displayWhenNotReading() {
 
+    Serial.println("display when Not Reading");
+
     display->clearDisplay();
     showReading(false);
     showBattery();
