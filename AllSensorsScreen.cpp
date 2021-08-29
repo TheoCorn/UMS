@@ -14,7 +14,7 @@ void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start,
 
     display->println(activeSensorIterator->second->getStringForDisplay());
 
-    printSensors(display, ++it, sensors->end(), end);
+    printSensors(display, it, sensors->end(), end);
     }
 
 }
