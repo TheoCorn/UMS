@@ -39,6 +39,7 @@ private:
 //    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>( new AllSensorsScreen(sensors) ), dynamic_cast<ui::Tab*>(new SpecificSensorScreen(sensors)) };
 
     std::vector<ui::Tab*>::iterator tabIterator;
+    bool iteratingTabs = false;
 
 //    bool rePinALast = false;
 
@@ -66,8 +67,6 @@ public:
     void showReading(bool reading);
 
     void showBattery();
-
-    void showSensors();
 
     void showComInfo();
 

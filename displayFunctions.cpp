@@ -47,6 +47,14 @@ void DisplayFunctions::displayWhenNotReading() {
     display->setTextSize(1);
     display->setCursor(60, 0);
 
+    if (iteratingTabs){
+        display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);
+    }else{
+        display->setTextColor(SSD1306_WHITE);
+    }
+
+    display->print((*tabIterator)->name());
+
     (*tabIterator)->render(display, start, end);
 
     display->display();
@@ -112,16 +120,16 @@ void DisplayFunctions::showBattery() {
 
 }
 
-void DisplayFunctions::showSensors() {
-    display->setTextSize(1);             // Normal 1:1 pixel scale
-    display->setTextColor(SSD1306_WHITE);        // Draw white text
-    display->setCursor(0, 17);
-
-    for (auto const &x : *sensors) {
-        display->println(x.second->getStringForDisplay());
-    }
-
-}
+//void DisplayFunctions::showSensors() {
+//    display->setTextSize(1);             // Normal 1:1 pixel scale
+//    display->setTextColor(SSD1306_WHITE);        // Draw white text
+//    display->setCursor(0, 17);
+//
+//    for (auto const &x : *sensors) {
+//        display->println(x.second->getStringForDisplay());
+//    }
+//
+//}
 
 void DisplayFunctions::showComInfo() {
     display->setTextSize(1);             // Normal 1:1 pixel scale
@@ -143,11 +151,20 @@ void DisplayFunctions::sleep() {
 
 void DisplayFunctions::onREAInterrupt() {
     if (!digitalRead(REB)){
-        if (tabIterator != tabs.begin()) tabIterator--;
-        Serial.println("--");
+        if (iteratingTabs) {
+            if (tabIterator != tabs.begin()) tabIterator--;
+            Serial.println("tab--");
+        }else{
+            (*tabIterator)->onUp();
+        }
     }else{
-        if (tabIterator != tabs.end()) tabIterator++;
-        Serial.println("++");
+        if (iteratingTabs) {
+            auto endIt = --(tabs.end());
+            if (tabIterator != endIt) tabIterator++
+            Serial.println("tab++");
+        }else{
+            (*tabIterator)->onDown();
+        }
     }
 
 }

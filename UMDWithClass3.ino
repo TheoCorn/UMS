@@ -349,8 +349,6 @@ onREAISR() {
   mDisplay->onREAInterrupt();
 }
 
-void IRAM_ATTR
-
-onREBISR() {
+void IRAM_ATTR onREBISR() {
   mDisplay->onClick();
 }
