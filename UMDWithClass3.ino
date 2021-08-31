@@ -72,7 +72,7 @@ void onREBISR();
 
 
 std::map<uint32_t, Sensor *> *sensors;
-std::vector<char> *btBuffer;
+std::vector<char> *comBuffer;
 bool reading = false;
 
 unsigned int sysInfo::screenAddress;
@@ -101,7 +101,7 @@ void setup() {
   Serial.begin(112500);
 
   sensors = new std::map<uint32_t, Sensor *>;
-  btBuffer = new std::vector<char>;
+  comBuffer = new std::vector<char>;
 
 
   //    gpio_config_t io_conf;
@@ -182,17 +182,17 @@ void loop() {
     switch (sRead) {
       case ETX: {
           std::function<void(JsonPair * )> doProcess(doProcess4JsonObj);
-          jp::parseJsonWithCycleThru(btBuffer, doProcess);
+          jp::parseJsonWithCycleThru(comBuffer, doProcess);
         }
         break;
       case STX:
-        btBuffer->clear();
+        comBuffer->clear();
         break;
       case ACK:
         break;
 
       default:
-        btBuffer->emplace_back(sRead);
+        comBuffer->emplace_back(sRead);
         break;
     }
   }

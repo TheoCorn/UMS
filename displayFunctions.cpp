@@ -45,7 +45,7 @@ void DisplayFunctions::displayWhenNotReading() {
     showBattery();
 
     display->setTextSize(1);
-    display->setCursor(60, 0);
+    display->setCursor(50, 0);
 
     if (iteratingTabs){
         display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);

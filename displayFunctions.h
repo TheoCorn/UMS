@@ -74,12 +74,6 @@ public:
 
     void init();
 
-//    namespace ui{
-//        std::vector<String> tabNames{"Sensors", "Settings", "com"};
-//        std::vector<std::function<void(Adafruit_SSD1306*)> uiRenderers{std::function<void()>(showSensors) };
-//    }
-
-
 };
 
 
