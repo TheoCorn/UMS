@@ -40,9 +40,13 @@ void DisplayFunctions::displayWhenReading() {
 
 void DisplayFunctions::displayWhenNotReading() {
 
-    if (wasClicked){
-        (*tabIterator)->onClick();
-        wasClicked = false;
+    if (wasClicked) {
+        if (iteratingTabs) {
+            iteratingTabs = false;
+        } else {
+            (*tabIterator)->onClick();
+            wasClicked = false;
+        }
     }
 
     if (reaWasLow) reStatusDispatch();
