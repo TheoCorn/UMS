@@ -155,7 +155,7 @@ void DisplayFunctions::onREAInterrupt() {
             if (tabIterator != tabs.begin()) tabIterator--;
             Serial.println("tab--");
         }else{
-            (*tabIterator)->onUp();
+            iteratingTabs = (*tabIterator)->onUp();
         }
     }else{
         if (iteratingTabs) {
