@@ -161,7 +161,7 @@ void setup() {
 
 
       attachInterrupt(REA, onREAISR, FALLING);
-//      attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
+      attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
 
 
   //    //sets up wake up from sleep
