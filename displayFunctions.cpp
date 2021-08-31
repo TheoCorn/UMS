@@ -40,6 +40,13 @@ void DisplayFunctions::displayWhenReading() {
 
 void DisplayFunctions::displayWhenNotReading() {
 
+    if (wasClicked){
+        (*tabIterator)->onClick();
+        wasClicked = false;
+    }
+
+    if (reaWasLow) reStatusDispatch();
+
     display->clearDisplay();
     showReading(false);
     showBattery();
@@ -149,14 +156,16 @@ void DisplayFunctions::sleep() {
     delay(5);
 }
 
-void DisplayFunctions::onREAInterrupt() {
-    if (!digitalRead(REB)){
+void DisplayFunctions::reStatusDispatch() {
+    reaWasLow = false;
+    if (rebWasLow){
         if (iteratingTabs) {
             if (tabIterator != tabs.begin()) tabIterator--;
             Serial.println("tab--");
         }else{
             iteratingTabs = (*tabIterator)->onUp();
         }
+        rebWasLow = false;
     }else{
         if (iteratingTabs) {
             auto endIt = --(tabs.end());
@@ -170,6 +179,5 @@ void DisplayFunctions::onREAInterrupt() {
 }
 
 void DisplayFunctions::onClick() {
-//    (*tabIterator.base())->onClick();
-    (*tabIterator)->onClick();
+
 }

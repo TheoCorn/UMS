@@ -21,6 +21,12 @@ namespace ui {
         coordinates(unsigned int x, unsigned int y) : x(x), y(y) {}
     };
 
+    enum class REStatus{
+        UP,
+        DOWN,
+        STATIC
+    };
+
     class Tab {
 
     public:

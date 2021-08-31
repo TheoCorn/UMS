@@ -41,10 +41,16 @@ private:
     std::vector<ui::Tab*>::iterator tabIterator;
     bool iteratingTabs = false;
 
-//    bool rePinALast = false;
+    void reStatusDispatch();
 
 
 public:
+
+    bool wasClicked = false;
+    bool reaWasLow = false;
+    bool rebWasLow = false;
+
+
     explicit DisplayFunctions(std::map<uint32_t , Sensor *> *sensors): sensors(sensors), tabIterator(tabs.begin()) {
 
         display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
@@ -55,8 +61,6 @@ public:
 
 
     ~DisplayFunctions() = default;
-
-    void onREAInterrupt();
 
     void onClick();
 

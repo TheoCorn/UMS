@@ -341,9 +341,10 @@ void readBatteryCharge() {
 }
 
 void IRAM_ATTR onREAISR() {
-  mDisplay->onREAInterrupt();
+    mDisplay->rebWasLow = !digitalRead(REB);
+    mDisplay->reaWasLow = true;
 }
 
 void IRAM_ATTR onREBISR() {
-  mDisplay->onClick();
+  mDisplay->wasClicked = true;
 }
