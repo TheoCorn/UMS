@@ -154,10 +154,9 @@ char const * MPU9250::getExtendedStringForDisplay() {
 
         *(last - 1) = '\n';
 
-
     }
 
-    *last = '\0';
+    *(last + 1) = '\0';
 
     return str;
 
