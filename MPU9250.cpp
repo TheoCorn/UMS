@@ -127,11 +127,10 @@ String MPU9250::getExtendedStringForDisplay() {
         char cBuffer[64];
         int ret = sprintf(cBuffer, cBuffer, "%f", f);
         s += mpuFeaturesString[i];
-        s += "\t";
+        s += " ";
         s += activeFeaturesVec[i] ? '1' : '0';
-        s += "\t";
+        s += " ";
         s += cBuffer;
-        s += '\n';
     }
 
     return s;
