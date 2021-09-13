@@ -3,7 +3,8 @@
 #include "spiffs.hpp"
 #include "JsonParserFunctions.hpp"
 
-
+#include <stdio.h>
+#include <string.h>
 
 MPU9250::MPU9250(uint8_t address) : Sensor() {
     _i2c = &Wire; // I2C bus
@@ -118,22 +119,45 @@ String MPU9250::getStringForDisplay() {
     return name();
 }
 
-String MPU9250::getExtendedStringForDisplay() {
+char const * MPU9250::getExtendedStringForDisplay() {
     readSensor();
-    String s;
+//    String s;
+//
+//    for (int i = 0; i < 10; i++) {
+//        float f = readFeature(i);
+//        char cBuffer[64];
+//        int ret = sprintf(&cBuffer[0], "%.3f", f);
+//        s += mpuFeaturesString[i];
+//        s += " ";
+//        s += activeFeaturesVec[i] ? '1' : '0';
+//        s += " ";
+//        s += cBuffer;
+//        s += "\n";
+//    }
+
+    auto str = new char[512];
+    auto last = str;
 
     for (int i = 0; i < 10; i++) {
         float f = readFeature(i);
-        char cBuffer[64];
-        int ret = sprintf(cBuffer, cBuffer, "%f", f);
-        s += mpuFeaturesString[i];
-        s += " ";
-        s += activeFeaturesVec[i] ? '1' : '0';
-        s += " ";
-        s += cBuffer;
+
+        size_t featureStrLen = sizeof(*mpuFeaturesString[i]);
+        memcpy(last, mpuFeaturesString[i], featureStrLen);
+
+        last += featureStrLen;
+
+        *(last - 1) = ' ';
+
+        *last = activeFeaturesVec[i] ? '1' : '0';
+
+        last += sprintf(last, "%.3f", f);
+
+        *(last - 1) = ' ';
+
+        *last = '\0';
     }
 
-    return s;
+    return str;
 
 }
 

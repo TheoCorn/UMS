@@ -65,7 +65,7 @@ class MPU9250 : public Sensor{
 //    GyroRange gyroRangeEnum[4] = { GyroRange::GYRO_RANGE_250DPS, GyroRange::GYRO_RANGE_500DPS, GyroRange::GYRO_RANGE_1000DPS, GyroRange::GYRO_RANGE_2000DPS };
 //    bool gyroRangeBool[4] = { false, true, false, false };
 //
-    String mpuFeaturesString[10] = { "accX", "accY", "accZ", "gyroX", "gyroY", "gyroZ", "magnetometerX", "magnetometerY", "magnetometerZ", "temperature"};
+    char const * mpuFeaturesString[10] = { "accX", "accY", "accZ", "gyroX", "gyroY", "gyroZ", "magnetometerX", "magnetometerY", "magnetometerZ", "temperature"};
 //    bool mpuFeaturesBool[10] = { true, true, true, true, true, true, true, true, true, false };
 
     std::vector<bool> activeFeaturesVec;
@@ -313,7 +313,7 @@ public:
 
     String getStringForDisplay() override;
 
-    String getExtendedStringForDisplay() override;
+    char const * getExtendedStringForDisplay() override;
 
     void saveConfig() override;
 };

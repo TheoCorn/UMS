@@ -48,7 +48,7 @@ public:
     virtual String getStringForDisplay() = 0;
 
     ///used when getting dataFromSensor to display, so more data can be displayed
-    virtual String getExtendedStringForDisplay() = 0;
+    virtual char const * getExtendedStringForDisplay() = 0;
 
     ///used when reading
     ///write JsonArray to the Json document
