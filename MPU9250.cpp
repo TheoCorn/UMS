@@ -150,7 +150,7 @@ char const * MPU9250::getExtendedStringForDisplay() {
 
         *last = activeFeaturesVec[i] ? '1' : '0';
 
-        last += sprintf(last, "%.3f", f);
+        last += sprintf(last, "%f", f);
 
         *(last - 1) = ' ';
 
