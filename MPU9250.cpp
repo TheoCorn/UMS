@@ -152,10 +152,12 @@ char const * MPU9250::getExtendedStringForDisplay() {
 
         last += sprintf(last, "%f", f);
 
-        *(last - 1) = ' ';
+        *(last - 1) = '\n';
 
-        *last = '\0';
+
     }
+
+    *last = '\0';
 
     return str;
 
