@@ -42,11 +42,12 @@ void DisplayFunctions::displayWhenNotReading() {
 
     if (wasClicked) {
         if (iteratingTabs) {
+            Serial.println("ack click")
             iteratingTabs = false;
         } else {
             (*tabIterator)->onClick();
-            wasClicked = false;
         }
+        wasClicked = false;
     }
 
     if (reaWasLow) reStatusDispatch();
@@ -58,7 +59,7 @@ void DisplayFunctions::displayWhenNotReading() {
     display->setTextSize(1);
     display->setCursor(50, 0);
 
-    if (iteratingTabs){
+    if(iteratingTabs){
         display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);
     }else{
         display->setTextColor(SSD1306_WHITE);
