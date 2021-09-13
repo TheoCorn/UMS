@@ -144,6 +144,8 @@ char const * MPU9250::getExtendedStringForDisplay() {
         size_t featureStrLen = sizeof(*mpuFeaturesString[i]);
         memcpy(last, mpuFeaturesString[i], featureStrLen);
 
+        Serial.println(*mpuFeaturesString[i]);
+
         last += featureStrLen;
 
         *(last - 1) = ' ';
