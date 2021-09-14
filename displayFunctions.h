@@ -24,6 +24,8 @@
 
 #include "AllSensorsScreen.h"
 #include "SpecificSensorScreen.h"
+#include "SysInfoTab.h"
+#include "SettingsTab.h"
 
 class DisplayFunctions {
 
@@ -34,7 +36,11 @@ private:
     ui::coordinates start = ui::coordinates(0, 17);
     ui::coordinates end = ui::coordinates(128, 64);
 
-    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>(new SensorsTab(sensors))};
+    std::vector<ui::Tab*> tabs {
+        dynamic_cast<ui::Tab*>(new SensorsTab(sensors)),
+        dynamic_cast<ui::Tab*>(new SettingsTab),
+        dynamic_cast<ui::Tab*>(new SysInfoTab)
+        };
 
 //    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>( new AllSensorsScreen(sensors) ), dynamic_cast<ui::Tab*>(new SpecificSensorScreen(sensors)) };
 

@@ -109,6 +109,7 @@ public:
 };
 
 namespace sce{
+#define SERIAL_COMM_NAMES {"Bluetooth SPP", "USB serial"}
     enum SerialComs: unsigned int{
         BLUETOOTH_SPP   = 0,
         USB_SERIAL      = 1,
