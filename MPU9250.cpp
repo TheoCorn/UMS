@@ -39,7 +39,7 @@ void MPU9250::setUp() {
 //    delete doc;
     delete[] cArrJson;
 
-    setXSettings();
+//    setXSettings();
 
     setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_184HZ);
     // setting SRD to 19 for a 50 Hz update rate
