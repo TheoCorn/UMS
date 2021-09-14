@@ -67,6 +67,8 @@ void DisplayFunctions::displayWhenNotReading() {
 
     display->print((*tabIterator)->name());
 
+    display->setTextColor(SSD1306_WHITE);
+
     (*tabIterator)->render(display, start, end);
 
     display->display();
