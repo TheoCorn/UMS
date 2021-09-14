@@ -8,12 +8,10 @@
 void SpecificSensorScreen::render(Adafruit_SSD1306 *display,
                             ui::coordinates &start,
                             ui::coordinates &end) {
-    char const * str = activeSensorIterator->second->getExtendedStringForDisplay();
-    Serial.printf(str);
-    display->println(str);
 
-    delete[] str;
-//    display->println(sensors->begin()->second->getExtendedStringForDisplay());
+    Serial.println(activeSensorIterator->second->getExtendedStringForDisplay());
+
+    display->println(sensors->begin()->second->getExtendedStringForDisplay());
 }
 
 
