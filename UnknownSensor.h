@@ -19,7 +19,7 @@ class UnknownSensor : public Sensor {
     byte currentAddress() override { return address; }
     void setUp() override { }
     String getStringForDisplay() override { return name(); }
-    char const * getExtendedStringForDisplay() override { return ""; }
+    String getExtendedStringForDisplay() override { return ""; }
     void readSensor(JsonArray &jra) override { }
     void getJson(JsonArray& ptrDoc) override {}
     void setJson(JsonObject& sConf) override {}

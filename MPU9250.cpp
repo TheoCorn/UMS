@@ -119,48 +119,48 @@ String MPU9250::getStringForDisplay() {
     return name();
 }
 
-char const * MPU9250::getExtendedStringForDisplay() {
+String MPU9250::getExtendedStringForDisplay() {
     readSensor();
-//    String s;
-//
-//    for (int i = 0; i < 10; i++) {
-//        float f = readFeature(i);
-//        char cBuffer[64];
-//        int ret = sprintf(&cBuffer[0], "%.3f", f);
-//        s += mpuFeaturesString[i];
-//        s += " ";
-//        s += activeFeaturesVec[i] ? '1' : '0';
-//        s += " ";
-//        s += cBuffer;
-//        s += "\n";
-//    }
-
-    auto str = new char[512];
-    auto last = str;
+    String s;
 
     for (int i = 0; i < 10; i++) {
         float f = readFeature(i);
-
-        size_t featureStrLen = sizeof(*mpuFeaturesString[i]);
-        memcpy(last, mpuFeaturesString[i], featureStrLen);
-
-        Serial.println(*mpuFeaturesString[i]);
-
-        last += featureStrLen;
-
-        *(last - 1) = ' ';
-
-        *last = activeFeaturesVec[i] ? '1' : '0';
-
-        last += sprintf(last, "%f", f);
-
-        *(last - 1) = '\n';
-
+        char cBuffer[64];
+        int ret = sprintf(&cBuffer[0], "%.3f", f);
+        s += mpuFeaturesString[i];
+        s += " ";
+        s += activeFeaturesVec[i] ? '1' : '0';
+        s += " ";
+        s += cBuffer;
+        s += "\n";
     }
 
-    *(last + 1) = '\0';
+//    auto str = new char[512];
+//    auto last = str;
+//
+//    for (int i = 0; i < 10; i++) {
+//        float f = readFeature(i);
+//
+//        size_t featureStrLen = sizeof(*mpuFeaturesString[i]);
+//        memcpy(last, mpuFeaturesString[i], featureStrLen);
+//
+//        Serial.println(*mpuFeaturesString[i]);
+//
+//        last += featureStrLen;
+//
+//        *(last - 1) = ' ';
+//
+//        *last = activeFeaturesVec[i] ? '1' : '0';
+//
+//        last += sprintf(last, "%f", f);
+//
+//        *(last - 1) = '\n';
+//
+//    }
+//
+//    *(last + 1) = '\0';
 
-    return str;
+    return s;
 
 }
 

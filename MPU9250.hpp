@@ -313,7 +313,8 @@ public:
 
     String getStringForDisplay() override;
 
-    char const * getExtendedStringForDisplay() override;
+//    char const * getExtendedStringForDisplay() override;
+    String getExtendedStringForDisplay() override;
 
     void saveConfig() override;
 };
