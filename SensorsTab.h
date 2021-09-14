@@ -49,7 +49,7 @@ public:
 
     bool onUp() override { return subScreen->onUp(); }
 
-    void onDown() override { SensorsTab::subScreen->onDown(); }
+    void onDown() override { subScreen->onDown(); }
 
     void onClick() override;
 

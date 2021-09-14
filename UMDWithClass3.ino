@@ -249,10 +249,12 @@ void doProcess4JsonObj(JsonPair *p) {
             break;
 
         case 'u':
+            Serial.println("case u");
             mDisplay->reaWasLow = true;
             mDisplay->rebWasLow = true;
             break;
         case 'd':
+            Serial.println("case d");
             mDisplay->reaWasLow = true;
 
         default:
