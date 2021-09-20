@@ -8,21 +8,45 @@
 #define SETTINGS_ARRAY_SIZE 1
 
 #include "ui.h"
+#include "sysInfo.h"
+#include "SerialCom.h"
+
+class SettingsTab : public ui::Tab {
 
 
-
-class SettingsTab : public ui::Tab{
-
-    struct Setting{
-        std::vector<const char *>& values;
+    /**
+     *
+     */
+    struct Setting {
+        std::vector<const char *> &values;
         size_t currentIndex;
-        String name;
+        const char* name;
 
-        Setting(String name, std::vector<const char *>&& values, size_t currentIndex) :
-            name(name), values(values), currentIndex(currentIndex) {}
+        Setting(const char* name, std::vector<const char *> &&values, size_t currentIndex) :
+                name(name), values(values), currentIndex(currentIndex) {}
+
+        /**
+         * if possible decrements index of the setting
+         *
+         * @param setting
+         */
+        inline void onUp();
+        inline void onDown();
     };
 
-    std::vector<Setting> settingsArr[SETTINGS_ARRAY_SIZE];
+    /**
+     * array that holds all system settings
+     *
+     * @see Setting
+     */
+    Setting settingsArr[SETTINGS_ARRAY_SIZE];
+
+    size_t settArrIndex{0};
+
+    ///variable that describes whether you are iterating @settingArr or the individual Settings
+    bool isConfigSetting{false};
+
+    void printSetting(size_t index, size_t xOffset);
 
 
 public:

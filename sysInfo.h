@@ -18,6 +18,7 @@ namespace sysInfo {
     extern String sn;
     extern BatteryInfo batteryInfo;
     extern SerialCom* serialCom;
+    size_t serialComIndex;
     extern unsigned int batteryPercentage;
 
     extern String comName;

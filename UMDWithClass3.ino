@@ -48,6 +48,7 @@
 #define GPIO_RE_PIN_SEL  ((1ULL<<BUTTON_PIN) | (1ULL<<REB) | (1ULL<<REA))
 #define GPIO_OUTPUT_PIN_SEL ((1ULL<<))
 
+void setDefSysInfo();
 
 void doProcess4JsonObj(JsonPair *p);
 
@@ -131,22 +132,7 @@ void setup() {
     digitalWrite(REA, true);
     digitalWrite(REB, true);
 
-    char *sysInfoStr = (char *) spiffs::readFile(SPIFFS, "/sysInfo.json");
-    StaticJsonDocument<256> sysInfoDoc;
-    deserializeJson(sysInfoDoc, sysInfoStr);
-
-    sysInfo::screenAddress = sysInfoDoc["screenAddress"].as<unsigned int>();
-
-
-    unsigned int defCom = sysInfoDoc["defCom"].as<unsigned int>();
-    sysInfo::comName = sysInfoDoc["comName"].as<String>();
-    sysInfo::serialCom = getSerialCom4EnumPos(defCom);
-
-    sysInfo::sn = sysInfoDoc["SN"].as<String>();
-
-    JsonObject batObj = sysInfoDoc["battery"].as<JsonObject>();
-    sysInfo::batteryInfo.name = batObj["name"].as<String>();
-    sysInfo::batteryInfo.capacity = batObj["capacity"];
+    setDefSysInfo();
 
     Wire.begin();
 
@@ -200,6 +186,9 @@ void loop() {
 
     if (reading) {
         auto doc = new DynamicJsonDocument(readJsonCapacity);
+
+        //todo implement time
+//        doc["time"] =
         JsonArray arr = doc->createNestedArray("Sensors");
         for (auto const &sTuple: *sensors) {
             sTuple.second->readSensor(arr);
@@ -365,4 +354,29 @@ void IRAM_ATTR
 onREBISR() {
     Serial.println("onClick");
     mDisplay->wasClicked = true;
+}
+
+
+/**
+ * Loads sysInfo from /sysInfo.json
+ * if used after setup first free SerialCom
+ */
+void setDefSysInfo(){
+    char *sysInfoStr = (char *) spiffs::readFile(SPIFFS, "/sysInfo.json");
+    StaticJsonDocument<256> sysInfoDoc;
+    deserializeJson(sysInfoDoc, sysInfoStr);
+
+    sysInfo::screenAddress = sysInfoDoc["screenAddress"].as<unsigned int>();
+
+
+    sysInfo::serialComIndex = sysInfoDoc["defCom"].as<unsigned int>();
+
+    sysInfo::comName = sysInfoDoc["comName"].as<String>();
+    sysInfo::serialCom = getSerialCom4EnumPos(sysInfo::serialComIndex);
+
+    sysInfo::sn = sysInfoDoc["SN"].as<String>();
+
+    JsonObject batObj = sysInfoDoc["battery"].as<JsonObject>();
+    sysInfo::batteryInfo.name = batObj["name"].as<String>();
+    sysInfo::batteryInfo.capacity = batObj["capacity"];
 }
