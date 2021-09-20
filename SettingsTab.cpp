@@ -11,3 +11,15 @@ SettingsTab::SettingsTab() {
 void SettingsTab::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end){
 
 }
+
+bool SettingsTab::onUp() {
+
+}
+
+void SettingsTab::onDown() {
+
+}
+
+void SettingsTab::onClick() {
+
+}
