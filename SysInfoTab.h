@@ -12,7 +12,7 @@
 class SysInfoTab : ui::Tab{
     String name() override { return "SysInfo"; };
 
-    void render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end) override;
+    void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;
 
 };
 

@@ -14,15 +14,15 @@
 class SettingsTab : public ui::Tab{
 
     struct Setting{
-        std::vector<const char *>&& values;
+        std::vector<const char *>& values;
         size_t currentIndex;
-        String&& name;
+        String name;
 
-        Setting(String&& name, std::vector<const char *>&& values, size_t currentIndex) :
+        Setting(String name, std::vector<const char *>&& values, size_t currentIndex) :
             name(name), values(values), currentIndex(currentIndex) {}
     };
 
-    std::vector<Setting>[SETTINGS_VECTOR_SIZE] settingsArr;
+    std::vector<Setting> settingsArr[SETTINGS_ARRAY_SIZE];
 
 
 public:
@@ -31,7 +31,7 @@ public:
 
     String name() override { return "SETTINGS"; }
 
-    void render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end) override;
+    void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;
 
     bool onUp() override;
 

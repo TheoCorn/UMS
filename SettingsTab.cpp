@@ -8,6 +8,6 @@ SettingsTab::SettingsTab() {
 
 }
 
-void SettingsTab::render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end){
+void SettingsTab::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end){
 
 }

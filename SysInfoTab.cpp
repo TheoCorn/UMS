@@ -5,7 +5,7 @@
 #include "SysInfoTab.h"
 
 
-void SysInfoTab::render(Adafruit_SSD1306 *display, coordinates &start, coordinates &end){
+void SysInfoTab::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end){
     display->print("sn: ");
     display->println(sysInfo::sn);
 
@@ -19,5 +19,5 @@ void SysInfoTab::render(Adafruit_SSD1306 *display, coordinates &start, coordinat
     display->println(sysInfo::batteryInfo::name);
 
     display->print("bat capacity: ");
-    display->print(sysInfo::batteryInfo::capacity);
+    display->print(sysInfo::batteryInfo.capacity);
 }
