@@ -142,7 +142,7 @@ void setup() {
     sysInfo::comName = sysInfoDoc["comName"].as<String>();
     sysInfo::serialCom = getSerialCom4EnumPos(defCom);
 
-    sysInfo::sn = sysInfoDoc["sn"].as<String>();
+    sysInfo::sn = sysInfoDoc["SN"].as<String>();
 
     JsonObject batObj = sysInfoDoc["battery"].as<JsonObject>();
     sysInfo::batteryInfo.name = batObj["name"].as<String>();
