@@ -65,12 +65,3 @@ void SettingsTab::onClick() {
 }
 
 
-//Setting functions
-
-void Setting::onUp() {
-    if (currentIndex != 0) currentIndex--;
-}
-
-void Setting::onDown(){
-    if (currentIndex + 1 < values.size()) currentIndex++;
-}

@@ -10,26 +10,9 @@
 #include "ui.h"
 #include "sysInfo.h"
 #include "SerialCom.h"
+#include "Setting.h"
 
-/**
- *
- */
-struct Setting {
-    std::vector<const char *> values;
-    size_t currentIndex;
-    const char* name;
 
-    Setting(const char* name, std::vector<const char *> values, size_t currentIndex) :
-            name(name), values(values), currentIndex(currentIndex) {}
-
-    /**
-     * if possible decrements index of the setting
-     *
-     * @param setting
-     */
-    inline void onUp();
-    inline void onDown();
-};
 
 class SettingsTab : public ui::Tab {
 
