@@ -9,7 +9,7 @@
 #include "sysInfo.h"
 
 
-class SysInfoTab : ui::Tab{
+class SysInfoTab : public ui::Tab{
     String name() override { return "SysInfo"; };
 
     void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override;

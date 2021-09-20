@@ -16,7 +16,7 @@ void SysInfoTab::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::c
     display->println(sysInfo::screenAddress);
 
     display->print("bat name: ");
-    display->println(sysInfo::batteryInfo::name);
+    display->println(sysInfo::batteryInfo.name);
 
     display->print("bat capacity: ");
     display->print(sysInfo::batteryInfo.capacity);
