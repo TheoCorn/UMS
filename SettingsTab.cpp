@@ -59,16 +59,16 @@ void SettingsTab::onDown() {
 }
 
 void SettingsTab::onClick() {
-    isConfigSetting != isConfigSetting;
+    isConfigSetting = !isConfigSetting;
 }
 
 
 //Setting functions
 
-void SettingsTab::Setting::onUp() {
+void Setting::onUp() {
     if (currentIndex != 0) currentIndex--;
 }
 
-void SettingsTab::Setting::onDown(){
+void Setting::onDown(){
     if (currentIndex + 1 < values.size()) currentIndex++;
 }

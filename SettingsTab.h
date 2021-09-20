@@ -11,28 +11,28 @@
 #include "sysInfo.h"
 #include "SerialCom.h"
 
-class SettingsTab : public ui::Tab {
+/**
+ *
+ */
+struct Setting {
+    std::vector<const char *> &values;
+    size_t currentIndex;
+    const char* name;
 
+    Setting(const char* name, std::vector<const char *> &&values, size_t currentIndex) :
+            name(name), values(values), currentIndex(currentIndex) {}
 
     /**
+     * if possible decrements index of the setting
      *
+     * @param setting
      */
-    struct Setting {
-        std::vector<const char *> &values;
-        size_t currentIndex;
-        const char* name;
+    inline void onUp();
+    inline void onDown();
+};
 
-        Setting(const char* name, std::vector<const char *> &&values, size_t currentIndex) :
-                name(name), values(values), currentIndex(currentIndex) {}
+class SettingsTab : public ui::Tab {
 
-        /**
-         * if possible decrements index of the setting
-         *
-         * @param setting
-         */
-        inline void onUp();
-        inline void onDown();
-    };
 
     /**
      * array that holds all system settings
