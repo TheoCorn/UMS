@@ -15,11 +15,11 @@
  *
  */
 struct Setting {
-    std::vector<const char *> &values;
+    std::vector<const char *> values;
     size_t currentIndex;
     const char* name;
 
-    Setting(const char* name, std::vector<const char *> &&values, size_t currentIndex) :
+    Setting(const char* name, std::vector<const char *> values, size_t currentIndex) :
             name(name), values(values), currentIndex(currentIndex) {}
 
     /**
