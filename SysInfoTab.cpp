@@ -15,6 +15,8 @@ void SysInfoTab::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::c
     display->print("prot: ");
     display->print(sysInfo::comName);
 
+    int y = display->getCurosorY();
+    display->setCursor((end.x - start.x) /2 + start.x);
     display->print("DA: ");
     display->println(sysInfo::screenAddress);
 
