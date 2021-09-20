@@ -6,13 +6,16 @@
 
 
 void SysInfoTab::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end){
+
+    display->setCursor(start.x, start.y);
+
     display->print("sn: ");
     display->println(sysInfo::sn);
 
-    display->print("protocol: ");
-    display->println(sysInfo::comName);
+    display->print("prot: ");
+    display->print(sysInfo::comName);
 
-    display->print("display address: ");
+    display->print("DA: ");
     display->println(sysInfo::screenAddress);
 
     display->print("bat name: ");
