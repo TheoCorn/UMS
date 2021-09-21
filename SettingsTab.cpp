@@ -6,8 +6,8 @@
 
 SettingsTab::SettingsTab() {
     std::vector<const char *> set SERIAL_COMM_NAMES;
-
-    settingsArr[0] = Setting("prot", set, sysInfo::serialComIndex);
+//    Setting setting = Setting("prot", set, sysInfo::serialComIndex);
+//    settingsArr[0] = Setting("prot", set, sysInfo::serialComIndex);
 }
 
 void SettingsTab::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end){
@@ -63,5 +63,3 @@ void SettingsTab::onDown() {
 void SettingsTab::onClick() {
     isConfigSetting = !isConfigSetting;
 }
-
-

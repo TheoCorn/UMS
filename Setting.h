@@ -13,12 +13,12 @@
 /**
  *
  */
-struct Setting {
+struct GeneralSetting {
     std::vector<const char *> values;
-    size_t currentIndex;
+    unsigned int currentIndex;
     const char* name;
 
-    Setting(const char* name, std::vector<const char *> values, size_t currentIndex) :
+    Setting(const char* name, std::vector<const char *> values, unsigned int currentIndex) :
             name(name), values(std::move(values)), currentIndex(currentIndex) {}
 
     /**
