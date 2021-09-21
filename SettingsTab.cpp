@@ -5,7 +5,7 @@
 #include "SettingsTab.h"
 
 SettingsTab::SettingsTab() {
-    std::vector<const char *> set SERIAL_COMM_NAMES;
+//    std::vector<const char *> set SERIAL_COMM_NAMES;
 //    Setting setting = Setting("prot", set, sysInfo::serialComIndex);
 //    settingsArr[0] = Setting("prot", set, sysInfo::serialComIndex);
 }

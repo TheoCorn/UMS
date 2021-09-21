@@ -18,7 +18,7 @@ struct GeneralSetting {
     unsigned int currentIndex;
     const char* name;
 
-    Setting(const char* name, std::vector<const char *> values, unsigned int currentIndex) :
+    GeneralSetting(const char* name, std::vector<const char *> values, unsigned int currentIndex) :
             name(name), values(std::move(values)), currentIndex(currentIndex) {}
 
     /**

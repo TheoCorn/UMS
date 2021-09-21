@@ -34,7 +34,7 @@ class SettingsTab : public ui::Tab {
 
 public:
 
-    SettingsTab();
+    SettingsTab(){}
 
     String name() override { return "SETTINGS"; }
 
