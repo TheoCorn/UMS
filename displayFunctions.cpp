@@ -45,6 +45,7 @@ void DisplayFunctions::displayWhenNotReading() {
             Serial.println("ack click");
             iteratingTabs = false;
         } else {
+            Serial.println("ack tab click");
             (*tabIterator)->onClick();
         }
         wasClicked = false;
