@@ -67,12 +67,12 @@ void SettingsTab::onClick() {
     isConfigSetting = !isConfigSetting;
 
     if (isConfigSetting){
+
         isConfigSetting = false;
         auto& fun = settingsArr[settArrIndex].onSet;
-        Serial.println("after storing std::fun");
-        fun(settingsArr[settArrIndex].currentIndex);
+        auto index = settingsArr[settArrIndex].currentIndex;
+        fun(index);
 
-        Serial.println("end of click");
     }else{
         isConfigSetting = true;
     }
