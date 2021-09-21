@@ -4,11 +4,11 @@
 
 #include "SettingsTab.h"
 
-SettingsTab::SettingsTab() {
-//    std::vector<const char *> set SERIAL_COMM_NAMES;
-//    Setting setting = Setting("prot", set, sysInfo::serialComIndex);
-//    settingsArr[0] = Setting("prot", set, sysInfo::serialComIndex);
-}
+//SettingsTab::SettingsTab() {
+////    std::vector<const char *> set SERIAL_COMM_NAMES;
+////    Setting setting = Setting("prot", set, sysInfo::serialComIndex);
+////    settingsArr[0] = Setting("prot", set, sysInfo::serialComIndex);
+//}
 
 void SettingsTab::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end){
 
