@@ -22,7 +22,7 @@ class SettingsTab : public ui::Tab {
      *
      * @see Setting
      */
-    GeneralSetting settingsArr[SETTINGS_ARRAY_SIZE] ;
+    GeneralSetting settingsArr[SETTINGS_ARRAY_SIZE] { GeneralSetting("prot", std::vector<const char *> {"BT_SPP", "USB"}, 0)};
 
     size_t settArrIndex = 0;
 
@@ -34,11 +34,11 @@ class SettingsTab : public ui::Tab {
 
 public:
 
-    SettingsTab(){
-        std::vector<const char *> set {"BT_SPP", "USB"};
-        GeneralSetting setting = GeneralSetting("prot", set, 0);
-        settingsArr[0] = setting;
-    }
+//    SettingsTab(){
+//        std::vector<const char *> set {"BT_SPP", "USB"};
+//        GeneralSetting setting = GeneralSetting("prot", set, 0);
+//        settingsArr[0] = setting;
+//    }
 
     String name() override { return "SETTINGS"; }
 
