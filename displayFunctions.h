@@ -38,8 +38,8 @@ private:
 
     std::vector<ui::Tab*> tabs {
         dynamic_cast<ui::Tab*>(new SensorsTab(sensors)),
-        dynamic_cast<ui::Tab*>(new SettingsTab),
-        dynamic_cast<ui::Tab*>(new SysInfoTab)
+        dynamic_cast<ui::Tab*>(new SettingsTab()),
+        dynamic_cast<ui::Tab*>(new SysInfoTab())
         };
 
 //    std::vector<ui::Tab*> tabs { dynamic_cast<ui::Tab*>( new AllSensorsScreen(sensors) ), dynamic_cast<ui::Tab*>(new SpecificSensorScreen(sensors)) };

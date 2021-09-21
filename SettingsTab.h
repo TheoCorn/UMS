@@ -24,10 +24,10 @@ class SettingsTab : public ui::Tab {
      */
     GeneralSetting settingsArr[SETTINGS_ARRAY_SIZE];
 
-    size_t settArrIndex{0};
+    size_t settArrIndex = 0;
 
     ///variable that describes whether you are iterating @settingArr or the individual Settings
-    bool isConfigSetting{false};
+    bool isConfigSetting = false;
 
     void printSetting(Adafruit_SSD1306 *display, size_t index, size_t xOffset);
 
