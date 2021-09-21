@@ -14,11 +14,11 @@
  *
  */
 struct GeneralSetting {
-    std::vector<const char *> values;
+    std::vector<char const *> values;
     unsigned int currentIndex;
     const char* name;
 
-    GeneralSetting(const char* name, std::vector<const char *> values, unsigned int currentIndex) :
+    GeneralSetting(char const * name, std::vector<const char *> values, unsigned int currentIndex) :
             name(name), values(std::move(values)), currentIndex(currentIndex) {}
 
     /**

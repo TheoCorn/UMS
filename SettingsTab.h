@@ -34,7 +34,11 @@ class SettingsTab : public ui::Tab {
 
 public:
 
-    SettingsTab();
+    SettingsTab(){
+        std::vector<const char *> set {"BT_SPP", "USB"};
+        GeneralSetting setting = GeneralSetting("prot", set, 0);
+        settingsArr[0] = setting;
+    }
 
     String name() override { return "SETTINGS"; }
 
