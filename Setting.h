@@ -26,8 +26,8 @@ struct GeneralSetting {
      *
      * @param setting
      */
-    inline void onUp();
-    inline void onDown();
+    inline void onUp() { if (currentIndex != 0) currentIndex--; }
+    inline void onDown() { if (currentIndex + 1 < values.size()) currentIndex++; }
 };
 
 

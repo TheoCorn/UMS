@@ -5,10 +5,10 @@
 #include "Setting.h"
 
 
-void GeneralSetting::onUp() {
-    if (currentIndex != 0) currentIndex--;
-}
-
-void GeneralSetting::onDown(){
-    if (currentIndex + 1 < values.size()) currentIndex++;
-}
+//void GeneralSetting::onUp() {
+//    if (currentIndex != 0) currentIndex--;
+//}
+//
+//void GeneralSetting::onDown(){
+//    if (currentIndex + 1 < values.size()) currentIndex++;
+//}
