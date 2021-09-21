@@ -71,6 +71,7 @@ void SettingsTab::onClick() {
         isConfigSetting = false;
         auto& fun = settingsArr[settArrIndex].onSet;
         auto index = settingsArr[settArrIndex].currentIndex;
+        Serial.print("before fun");
         fun(index);
 
     }else{

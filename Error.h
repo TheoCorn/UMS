@@ -41,6 +41,7 @@ namespace error {
         MILD = 1,
         IMPORTANT = 2,
 
+        //todo rename to HOT
         /**
          * this is a special importance that guarantees the user will be informed about the error via the Appearance requested
          */
