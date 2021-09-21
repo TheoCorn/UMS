@@ -29,12 +29,11 @@ class SettingsTab : public ui::Tab {
     ///variable that describes whether you are iterating @settingArr or the individual Settings
     bool isConfigSetting{false};
 
-    void printSetting(size_t index, size_t xOffset);
+    void printSetting(Adafruit_SSD1306 *display, size_t index, size_t xOffset);
 
 
 public:
 
-    SettingsTab(){}
 
     String name() override { return "SETTINGS"; }
 

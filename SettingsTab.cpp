@@ -3,6 +3,7 @@
 //
 
 #include "SettingsTab.h"
+#include "Setting.h"
 
 //SettingsTab::SettingsTab() {
 ////    std::vector<const char *> set SERIAL_COMM_NAMES;
@@ -19,17 +20,17 @@ void SettingsTab::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::
 
     size_t xOffset = (start.x - end.x)/2 + start.x - 3;
 
-    printSetting(settArrIndex, xOffset);
+    printSetting(display, settArrIndex, xOffset);
 
     display->setTextColor(SSD1306_WHITE);
 
     for (int i = settArrIndex + 1; i < SETTINGS_ARRAY_SIZE; ++i) {
-        printSetting(i, xOffset);
+        printSetting(display, i, xOffset);
     }
 }
 
-void SettingsTab::printSetting(size_t index, size_t xOffset) {
-    Setting& setting = settingsArr[index];
+void SettingsTab::printSetting(Adafruit_SSD1306 *display, size_t index, size_t xOffset) {
+    GeneralSetting& setting = settingsArr[index];
     display->print(setting.name);
     const int y = display->getCursorY();
     display->setCursor(xOffset, y);
@@ -56,7 +57,7 @@ void SettingsTab::onDown() {
         settingsArr[settArrIndex].onDown();
         return;
     }else{
-        if (settArrIndex + 1 < settingsArr.size()) settArrIndex++;
+        if (settArrIndex + 1 < SETTINGS_ARRAY_SIZE) settArrIndex++;
     }
 }
 
