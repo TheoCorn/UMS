@@ -6,8 +6,10 @@
 
 
 void sTabOnSet::comChange(unsigned int index){
-    delay(1000);
-    delete sysInfo::serialCom;
+//    delay(1000);
+//    delete sysInfo::serialCom;
+//
+//    sysInfo::serialCom = getSerialCom4EnumPos(index);
 
-    sysInfo::serialCom = getSerialCom4EnumPos(index);
+Serial.println("comChange");
 }
