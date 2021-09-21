@@ -6,6 +6,7 @@
 #include "Setting.h"
 
 SettingsTab::SettingsTab() {
+    std::vector<const char *> set SERIAL_COMM_NAMES;
     settingsArr[0] = Setting("prot", set, sysInfo::serialComIndex);
 }
 
