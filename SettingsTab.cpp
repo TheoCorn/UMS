@@ -34,8 +34,8 @@ void SettingsTab::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::
 void SettingsTab::printSetting(Adafruit_SSD1306 *display, size_t index, size_t xOffset) {
     GeneralSetting& setting = settingsArr[index];
     display->print(setting.name);
-//    const int y = display->getCursorY();
-    display->setCursor(xOffset, y);
+    const int y = display->getCursorY();
+//    display->setCursor(xOffset, y);
     display->print(": ");
     display->println(setting.values[setting.currentIndex]);
 }
@@ -65,4 +65,11 @@ void SettingsTab::onDown() {
 
 void SettingsTab::onClick() {
     isConfigSetting = !isConfigSetting;
+
+    if (isConfigSetting){
+        isConfigSetting = false;
+        settingsArr[settArrIndex].onSet();
+    }else{
+        isConfigSetting = true;
+    }
 }

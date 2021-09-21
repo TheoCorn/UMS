@@ -8,6 +8,7 @@
 #define UMDWITHCLASS3_SETTING_H
 
 #include <vector>
+#include <functional>
 
 
 /**
@@ -18,8 +19,11 @@ struct GeneralSetting {
     unsigned int currentIndex;
     const char* name;
 
-    GeneralSetting(char const * name, std::vector<const char *> values, unsigned int currentIndex) :
-            name(name), values(std::move(values)), currentIndex(currentIndex) {}
+    std::function<void(unsigned int)>& onSet;
+
+    GeneralSetting(char const * name, std::vector<const char *> values,
+                   unsigned int currentIndex, std::function<void(unsigned int)>&& onSet) :
+            name(name), values(std::move(values)), currentIndex(currentIndex), onSet(onSet) {}
 
     /**
      * if possible decrements index of the setting

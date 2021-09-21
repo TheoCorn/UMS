@@ -21,7 +21,9 @@ class SettingsTab : public ui::Tab {
      * @see Setting
      */
     GeneralSetting settingsArr[SETTINGS_ARRAY_SIZE] {
-        GeneralSetting("prot", std::vector<const char *> {"BT_SPP", "USB"}, 0)
+        GeneralSetting("prot", std::vector<const char *> SERIAL_COMM_NAMES,
+                       sysInfo::serialComIndex,
+                       std::function<void(unsigned int)>(sTabOnSet::comChange))
     };
 
     size_t settArrIndex = 0;
@@ -51,6 +53,16 @@ public:
     void onClick() override;
 
 };
+
+namespace sTabOnSet {
+
+    void comChange(unsigned int index){
+        delay(1000);
+        delete sysInfo::serialCom;
+
+        sysInfo::serialCom = getSerialCom4EnumPos(index);
+    }
+}
 
 
 #endif //UMDWITHCLASS3_SETTINGSTAB_H
