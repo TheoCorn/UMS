@@ -22,7 +22,7 @@ class SettingsTab : public ui::Tab {
      *
      * @see Setting
      */
-    Setting settingsArr[SETTINGS_ARRAY_SIZE];
+    GeneralSetting settingsArr[SETTINGS_ARRAY_SIZE];
 
     size_t settArrIndex{0};
 
