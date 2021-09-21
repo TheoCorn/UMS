@@ -12,6 +12,8 @@
 
 #define SETTINGS_ARRAY_SIZE 1
 
+
+
 class SettingsTab : public ui::Tab {
 
 
@@ -54,15 +56,7 @@ public:
 
 };
 
-namespace sTabOnSet {
 
-    void comChange(unsigned int index){
-        delay(1000);
-        delete sysInfo::serialCom;
-
-        sysInfo::serialCom = getSerialCom4EnumPos(index);
-    }
-}
 
 
 #endif //UMDWITHCLASS3_SETTINGSTAB_H

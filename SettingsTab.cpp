@@ -68,7 +68,8 @@ void SettingsTab::onClick() {
 
     if (isConfigSetting){
         isConfigSetting = false;
-        settingsArr[settArrIndex].onSet();
+        auto& fun = settingsArr[settArrIndex].onSet;
+        fun(settingsArr[settArrIndex].currentIndex);
     }else{
         isConfigSetting = true;
     }
