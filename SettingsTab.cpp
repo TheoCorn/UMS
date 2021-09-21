@@ -64,14 +64,11 @@ void SettingsTab::onDown() {
 }
 
 void SettingsTab::onClick() {
-    isConfigSetting = !isConfigSetting;
-
     if (isConfigSetting){
 
         isConfigSetting = false;
         auto& fun = settingsArr[settArrIndex].onSet;
         auto index = settingsArr[settArrIndex].currentIndex;
-        Serial.print("before fun");
         fun(index);
 
     }else{
