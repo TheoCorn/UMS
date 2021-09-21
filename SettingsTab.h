@@ -9,6 +9,7 @@
 #include "sysInfo.h"
 #include "SerialCom.h"
 #include "Setting.h"
+#include "sTabOnSet.h"
 
 #define SETTINGS_ARRAY_SIZE 1
 
