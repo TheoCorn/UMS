@@ -5,14 +5,12 @@
 #ifndef UMDWITHCLASS3_SETTINGSTAB_H
 #define UMDWITHCLASS3_SETTINGSTAB_H
 
-#define SETTINGS_ARRAY_SIZE 1
-
 #include "ui.h"
 #include "sysInfo.h"
 #include "SerialCom.h"
 #include "Setting.h"
 
-
+#define SETTINGS_ARRAY_SIZE 1
 
 class SettingsTab : public ui::Tab {
 
@@ -22,7 +20,9 @@ class SettingsTab : public ui::Tab {
      *
      * @see Setting
      */
-    GeneralSetting settingsArr[SETTINGS_ARRAY_SIZE] { GeneralSetting("prot", std::vector<const char *> {"BT_SPP", "USB"}, 0)};
+    GeneralSetting settingsArr[SETTINGS_ARRAY_SIZE] {
+        GeneralSetting("prot", std::vector<const char *> {"BT_SPP", "USB"}, 0)
+    };
 
     size_t settArrIndex = 0;
 

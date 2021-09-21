@@ -82,6 +82,7 @@ sysInfo::BatteryInfo sysInfo::batteryInfo;
 unsigned int sysInfo::batteryPercentage;
 String sysInfo::comName;
 SerialCom *sysInfo::serialCom;
+size_t sysInfo::serialComIndex;
 bool sysInfo::isCharging;
 
 
