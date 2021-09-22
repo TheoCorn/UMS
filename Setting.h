@@ -20,11 +20,11 @@ struct GeneralSetting {
     unsigned int currentIndex;
     const char* name;
 
-    std::function<void(unsigned int)>& onSet;
+    std::function<void(unsigned int)> onSet;
 
     GeneralSetting(char const * name, std::vector<const char *> values,
-                   unsigned int currentIndex, std::function<void(unsigned int)>& onSet) :
-            name(name), values(std::move(values)), currentIndex(currentIndex), onSet(onSet) {}
+                   unsigned int currentIndex, std::function<void(unsigned int)> onSet) :
+            name(name), values(std::move(values)), currentIndex(currentIndex), onSet(std::move(onSet)) {}
 
     /**
      * if possible decrements index of the setting
