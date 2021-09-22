@@ -26,7 +26,7 @@ class SettingsTab : public ui::Tab {
     GeneralSetting settingsArr[SETTINGS_ARRAY_SIZE] {
         GeneralSetting("prot", std::vector<const char *> SERIAL_COMM_NAMES,
                        sysInfo::serialComIndex,
-                       std::function<void(unsigned int)>(comChange))
+                       std::function<void(unsigned int)>{comChange})
     };
 
     size_t settArrIndex = 0;
