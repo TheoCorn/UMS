@@ -689,7 +689,7 @@ size_t BluetoothSerial::write(const uint8_t *buffer, size_t size)
     if (!_spp_client){
         return 0;
     }
-    return (_spp_queue_packet((uint8_t *)buffer, size) == ESP_OK) ? size : 0;
+    return ((_spp_queue_packet((uint8_t *)buffer, size) == ESP_OK) && (_spp_queue_packet((uint8_t *)ETX, 1) == ESP_OK)) ? size : 0;
 }
 
 size_t BluetoothSerial::write(JsonDocument * doc){

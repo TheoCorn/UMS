@@ -18,6 +18,7 @@
 #define _BLUETOOTH_SERIAL_H_
 
 #include "sdkconfig.h"
+#include "asciiMakros.h"
 
 #if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
 
