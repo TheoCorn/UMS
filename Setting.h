@@ -13,7 +13,7 @@
 
 
 /**
- *
+ * defines a general setting meant to be displayed on the display
  */
 struct GeneralSetting {
     std::vector<char const *> values;
@@ -22,26 +22,27 @@ struct GeneralSetting {
 
     std::function<void(unsigned int)> onSet;
 
+
+    /**
+     *
+     * @param name
+     * @param values
+     * @param currentIndex
+     * @param onSet
+     */
     GeneralSetting(char const * name, std::vector<const char *> values,
                    unsigned int currentIndex, std::function<void(unsigned int)> onSet) :
             name(name), values(std::move(values)), currentIndex(currentIndex), onSet(std::move(onSet)) {}
 
-    /**
-     * if possible decrements index of the setting
-     *
-     * @param setting
-     */
+
+    /// if possible decrements index of the setting
     inline void onUp() { if (currentIndex != 0) currentIndex--; }
+
+    /// if possible increments index of the setting
     inline void onDown() { if (currentIndex + 1 < values.size()) currentIndex++; }
 
-    void set() const {
-
-        Serial.print("index is: ");
-        Serial.println(currentIndex);
-
-        onSet(currentIndex);
-
-    }
+    /// calls onSet method with current index
+    void set() const { onSet(currentIndex); }
 };
 
 

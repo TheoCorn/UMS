@@ -5,20 +5,9 @@
 #include "sTabOnSet.h"
 
 
-//void sTabOnSet::comChange(unsigned int index){
-////    delay(1000);
-////    delete sysInfo::serialCom;
-////
-////    sysInfo::serialCom = getSerialCom4EnumPos(index);
-//
-//Serial.println("comChange");
-//}
+void sTabOnSet::comChange(unsigned int index){
+    delay(1000);
+    delete sysInfo::serialCom;
 
-void comChange(unsigned int index){
-//    delay(1000);
-//    delete sysInfo::serialCom;
-//
-//    sysInfo::serialCom = getSerialCom4EnumPos(index);
-
-    Serial.println("comChange");
+    sysInfo::serialCom = getSerialCom4EnumPos(index);
 }
