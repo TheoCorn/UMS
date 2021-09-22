@@ -91,6 +91,9 @@ SensorsIdentifierManager *sensorIdentifier;
 
 size_t readJsonCapacity = DEFAULT_JDOC_CAPACITY;
 
+/// the time at start reading
+double sTime;
+
 
 void setup() {
     SPIFFS.begin(true);
@@ -188,8 +191,7 @@ void loop() {
     if (reading) {
         auto doc = new DynamicJsonDocument(readJsonCapacity);
 
-        //todo implement time
-//        doc["time"] =
+        doc["time"] = millis() - sTime;
         JsonArray arr = doc->createNestedArray("Sensors");
         for (auto const &sTuple: *sensors) {
             sTuple.second->readSensor(arr);
@@ -323,6 +325,8 @@ void onStartReading() {
     readJsonCapacity = DEFAULT_JDOC_CAPACITY;  //JSON_SINGLE_SENSOR_SIZE * sensors->size();
 
     delete sensorIdentifier;
+
+    sTime = millis();
 }
 
 void onStopReading() {
