@@ -23,7 +23,7 @@ struct GeneralSetting {
     std::function<void(unsigned int)>& onSet;
 
     GeneralSetting(char const * name, std::vector<const char *> values,
-                   unsigned int currentIndex, std::function<void(unsigned int)>&& onSet) :
+                   unsigned int currentIndex, std::function<void(unsigned int)>& onSet) :
             name(name), values(std::move(values)), currentIndex(currentIndex), onSet(onSet) {}
 
     /**

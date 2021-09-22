@@ -40,7 +40,7 @@ public:
         auto setting = new GeneralSetting("prot",
                                                 std::vector<const char *> SERIAL_COMM_NAMES,
                                                 sysInfo::serialComIndex,
-                                                set;
+                                                set);
         settingsArr[0] = setting;
     }
 
