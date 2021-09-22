@@ -42,7 +42,7 @@ void SettingsTab::printSetting(Adafruit_SSD1306 *display, size_t index, size_t x
 
 bool SettingsTab::onUp() {
     if (isConfigSetting){
-        (*ettingsArr[settArrIndex]).onUp();
+        (*settingsArr[settArrIndex]).onUp();
         return false;
     }else{
         if (settArrIndex == 0){
@@ -67,9 +67,11 @@ void SettingsTab::onClick() {
     if (isConfigSetting){
 
         isConfigSetting = false;
-        auto& fun = (*settingsArr[settArrIndex]).onSet;
-        auto index = (*settingsArr[settArrIndex]).currentIndex;
-        fun(index);
+//        auto& fun = (*settingsArr[settArrIndex]).onSet;
+//        auto index = (*settingsArr[settArrIndex]).currentIndex;
+//        fun(index);
+
+        settingsArr[settArrIndex]->set();
 
     }else{
         isConfigSetting = true;

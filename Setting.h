@@ -32,6 +32,8 @@ struct GeneralSetting {
      */
     inline void onUp() { if (currentIndex != 0) currentIndex--; }
     inline void onDown() { if (currentIndex + 1 < values.size()) currentIndex++; }
+
+    void set() const { onSet(currentIndex); }
 };
 
 
