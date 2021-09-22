@@ -23,7 +23,7 @@ class SettingsTab : public ui::Tab {
      *
      * @see Setting
      */
-    GeneralSetting settingsArr[SETTINGS_ARRAY_SIZE] { };
+    GeneralSetting* settingsArr[SETTINGS_ARRAY_SIZE] { nullptr };
 
     size_t settArrIndex = 0;
 
@@ -36,7 +36,8 @@ class SettingsTab : public ui::Tab {
 public:
 
     SettingsTab(){
-        GeneralSetting setting = GeneralSetting("prot",
+      
+        auto setting = new GeneralSetting("prot",
                                                 std::vector<const char *> SERIAL_COMM_NAMES,
                                                 sysInfo::serialComIndex,
                                                 std::function<void(unsigned int)>{comChange});
