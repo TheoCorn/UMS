@@ -36,11 +36,11 @@ class SettingsTab : public ui::Tab {
 public:
 
     SettingsTab(){
-      
+        std::function<void(unsigned int)> set = comChange;
         auto setting = new GeneralSetting("prot",
                                                 std::vector<const char *> SERIAL_COMM_NAMES,
                                                 sysInfo::serialComIndex,
-                                                std::function<void(unsigned int)>{comChange});
+                                                set;
         settingsArr[0] = setting;
     }
 
