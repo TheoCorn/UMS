@@ -8,9 +8,11 @@
 #include "sysInfo.h"
 #include "SerialCom.h"
 
-namespace sTabOnSet {
+//namespace sTabOnSet {
+//
+//    void comChange(unsigned int index);
+//}
 
-    void comChange(unsigned int index);
-}
+void comChange(unsigned int index);
 
 #endif //UMDWITHCLASS3_STABONSET_H
