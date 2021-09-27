@@ -178,7 +178,7 @@ private:
 
 class ADS1015 : public ADS1X15, public Sensor{
 public:
-    ADS1015();
+    ADS1015(uint32_t address);
 
     String name() override { return "ADS1015"; }
 
@@ -210,7 +210,7 @@ public:
 /**************************************************************************/
 class ADS1115 : public ADS1X15, public Sensor {
 public:
-    ADS1115();
+    ADS1115(uint32_t address);
 
     String name() override { return "ADS1115"; }
 

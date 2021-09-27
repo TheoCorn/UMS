@@ -4,17 +4,20 @@
 
 #include "ADS1X15.h"
 
-ADS1015::ADS1015() {
+ADS1015::ADS1015(uint32_t address) {
     m_bitShift = 4;
     m_gain = GAIN_TWOTHIRDS; /* +/- 6.144V range (limited to VDD +0.3V max!) */
     m_dataRate = RATE_ADS1015_1600SPS;
+    begin(address, &Wire);
+
 }
 
 
-ADS1115::ADS1115() {
+ADS1115::ADS1115(uint32_t address) {
     m_bitShift = 0;
     m_gain = GAIN_TWOTHIRDS; /* +/- 6.144V range (limited to VDD +0.3V max!) */
     m_dataRate = RATE_ADS1115_128SPS;
+    begin(address, &Wire);
 }
 
 /**************************************************************************/
