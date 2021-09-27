@@ -19,7 +19,7 @@ adds the the correct sensor type to the specified vector
 @param vector std::vector<Sensor> pointer with the sensor will be added to
 */
 void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Sensor *> *sensors,
-                                         std::vector<csa::ConflictingAddressStruct *> *conflict) {
+                                         std::vector<csa::ConflictingAddressStruct *> *conflicts) {
 
     if (numEnumSensorInVectorArray[address].size() == 1) {
         addSensor(numEnumSensorInVectorArray[address][0], address, sensors);
@@ -27,8 +27,13 @@ void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Se
         sensors->insert(std::pair<uint32_t, Sensor *>(address, ( (Sensor *) new UnknownSensor(address)) ) );
     }
     else {
+
+        for(auto& conf : *conflicts){
+            if (conf->address == address) return;
+        }
+
         //todo make more efficient
-        csa::ConflictingAddressStruct *con;
+        auto *con = new csa::ConflictingAddressStruct();
         con->address = address;
         con->EnumPosOfSensors = numEnumSensorInVectorArray[address];
 
@@ -37,7 +42,7 @@ void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Se
             con->nameOfSensors.emplace_back(s->name());
             delete s;
         }
-        conflict->emplace_back(con);
+        conflicts->emplace_back(con);
     }
 
 

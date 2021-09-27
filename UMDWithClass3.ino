@@ -95,6 +95,9 @@ size_t readJsonCapacity = DEFAULT_JDOC_CAPACITY;
 /// the time at start reading
 double sTime;
 
+/// conflicts waiting to be resolved
+std::vector<csa::ConflictingAddressStruct *> conflicts;
+
 
 void setup() {
     SPIFFS.begin(true);
@@ -106,6 +109,7 @@ void setup() {
     //    // todo delete before release debug
     Serial.begin(112500);
 
+    conflicts = new std::vector<csa::ConflictingAddressStruct *>();
     sensors = new std::map<uint32_t, Sensor *>;
     comBuffer = new std::vector<char>;
 
@@ -192,7 +196,8 @@ void loop() {
     if (reading) {
         auto doc = new DynamicJsonDocument(readJsonCapacity);
 
-        doc["time"] = millis() - sTime;
+        auto obj = doc->as<JsonObject>();
+        obj["time"] = millis() - sTime;
         JsonArray arr = doc->createNestedArray("Sensors");
         for (auto const &sTuple: *sensors) {
             sTuple.second->readSensor(arr);
@@ -202,14 +207,15 @@ void loop() {
         delete doc;
 
     } else {
-        auto conflicts = new std::vector<csa::ConflictingAddressStruct *>();
+        auto localVConflicts = new std::vector<csa::ConflictingAddressStruct *>();
         ss::checkI2C(conflicts, sensors, sensorIdentifier);
         mDisplay->displayWhenNotReading();
 
         if (!conflicts->empty()) {
-            sysInfo::serialCom->write(csa::conflictsToString(conflicts));
+            sysInfo::serialCom->write(csa::conflictsToString(localVConflicts));
+            conflicts.insert(conflicts.end(), localVConflicts->begin(), localVConflicts->end());
         }
-        delete conflicts;
+        delete localVConflicts;
     }
 
 

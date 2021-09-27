@@ -10,6 +10,9 @@ namespace jsonTypes {
         SET_SENSOR_SETTINGS_JSON = 's',
         GET_SENSOR_SETTINGS_JSON = 'g',
 
+        MANUAL_SENSOR_SET        = "S",
+        CLEAR_CONFLICT           = "C",
+
         SET_READING_JSON         = 'r',
 
         CLICK_JSON               = 'c',
