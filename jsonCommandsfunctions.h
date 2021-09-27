@@ -9,12 +9,12 @@
 #include "JsonParserFunctions.hpp"
 #include "JsonSerializer.h"
 #include "sysInfo.h"
-#include "err.h"
+
 
 namespace jcf{
-    void onSensorsElementReceive(JsonVariant *v);
+    void onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors);
 
-    void onGetElementReceive(JsonVariant *v);
+    void onGetElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors);
 }
 
 
