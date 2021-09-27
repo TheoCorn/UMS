@@ -34,6 +34,7 @@
 #include "Error.h"
 #include "spiffs.hpp"
 #include "sysInfo.h"
+#include "jsonTypes.h"
 
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
@@ -220,32 +221,34 @@ void loop() {
   @param p JsonPair of the object
 */
 void doProcess4JsonObj(JsonPair *p) {
+    using namespace jsonTypes;
+
     JsonVariant v = p->value();
 
     switch (p->key().c_str()[0]) {
 
-        case 's':
+        case SET_SENSOR_SETTINGS_JSON:
             onSensorsElementReceive(&v);
             break;
 
-        case 'r':
+        case SET_READING_JSON:
             onReadElementReceive(&v);
             break;
 
-        case 'g':
+        case GET_SENSOR_SETTINGS_JSON:
             onGetElementReceive(&v);
             break;
 
-        case 'c':
+        case CLICK_JSON:
             onREBISR();
             break;
 
-        case 'u':
+        case UP_JSON :
             Serial.println("case u");
             mDisplay->reaWasLow = true;
             mDisplay->rebWasLow = true;
             break;
-        case 'd':
+        case DOWN_JSON:
             Serial.println("case d");
             mDisplay->reaWasLow = true;
 

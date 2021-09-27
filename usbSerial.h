@@ -12,6 +12,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "Error.h"
+#include "asciiMakros.h"
 
 
 class usbSerial: public SerialCom {
