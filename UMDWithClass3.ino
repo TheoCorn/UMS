@@ -35,6 +35,7 @@
 #include "spiffs.hpp"
 #include "sysInfo.h"
 #include "jsonTypes.h"
+#include "jsonCommandsfunctions.h"
 
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
@@ -105,7 +106,7 @@ void setup() {
     //    // todo delete before release debug
     Serial.begin(112500);
 
-    conflicts = new std::vector<csa::ConflictingAddressStruct *>();
+//    conflicts = new std::vector<csa::ConflictingAddressStruct *>();
     sensors = new std::map<uint32_t, Sensor *>;
     comBuffer = new std::vector<char>;
 
@@ -203,15 +204,15 @@ void loop() {
         delete doc;
 
     } else {
-        auto localVConflicts = new std::vector<csa::ConflictingAddressStruct *>();
-        ss::checkI2C(conflicts, sensors, sensorIdentifier);
+        auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
+        ss::checkI2C(localConflicts, sensors, sensorIdentifier);
         mDisplay->displayWhenNotReading();
 
-        if (!conflicts->empty()) {
-            sysInfo::serialCom->write(csa::conflictsToString(localVConflicts));
-            conflicts.insert(conflicts.end(), localVConflicts->begin(), localVConflicts->end());
+        if (!localConflicts->empty()) {
+            sysInfo::serialCom->write(csa::conflictsToString(localConflicts));
+            conflicts.insert(conflicts.end(), localConflicts->begin(), localConflicts->end());
         }
-        delete localVConflicts;
+        delete localConflicts;
     }
 
 
