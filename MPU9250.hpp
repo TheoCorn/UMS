@@ -301,7 +301,7 @@ public:
 
     uint32_t rsid() override;
 
-    byte currentAddress() override { return _address; }
+//    byte currentAddress() override { return _address; }
     
     void getJson(JsonArray& jArr) override;
     
@@ -317,6 +317,8 @@ public:
     String getExtendedStringForDisplay() override;
 
     void saveConfig() override;
+
+    float readFeature(size_t index) override { return 0.0f; }
 };
 
 

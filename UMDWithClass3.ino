@@ -248,7 +248,7 @@ void doProcess4JsonObj(JsonPair *p) {
 
             break;
 
-        case
+        
         case CLICK_JSON:
             delete p;
             onREBISR();

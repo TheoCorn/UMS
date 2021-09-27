@@ -31,8 +31,8 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
     Sensor* value;
     for(auto& mPair: *sensors){
         std::tie(key, value) = mPair;
-        usedAddreses.emplace_back(value->currentAddress());
-        addreses[value->currentAddress()] = false;
+        usedAddreses.emplace_back(value->rsid());
+        addreses[value->rsid()] = false;
     }
 
 

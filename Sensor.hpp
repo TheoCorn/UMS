@@ -10,6 +10,7 @@
 #include "SPI.h"
 #include <ArduinoJson.h>
 #include "sensorEnum.h"
+#include "JsonParserFunctions.hpp"
 
 
 
@@ -38,8 +39,8 @@ public:
      */
     virtual uint32_t rsid() = 0;
 
-    ///the actual i2c address the sensor is using
-    virtual byte currentAddress() = 0;
+//    ///the actual i2c address the sensor is using
+//    virtual byte currentAddress() = 0;
 
     ///default set up for setup from user use setJson()
     virtual void setUp() = 0;
@@ -100,9 +101,16 @@ public:
      */
     virtual void setJson(JsonObject& sConf) = 0;
 
+    /**
+     * reads specific feature and return its value
+     * @param index
+     * @return
+     */
+    virtual float readFeature(size_t index) = 0;
 
 
-protected:
+
+//protected:
 
     ///@return nested json object with name "Sensor"
     static JsonObject createSensorObject(JsonArray &doc);
@@ -215,7 +223,19 @@ protected:
                                               std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings);
 
 
+    static void JsonSetter(JsonObject& sConf,
+                           std::vector<bool>& activeFeaturesVec,
+                           std::vector<unsigned int>& xSettings);
 
+    static void savedSettingsLoader(char const * filename, std::vector<bool>& activeFeaturesVec,
+                                    std::vector<unsigned int>& xSettings);
+
+    static void templatedRead(JsonArray &jra, std::vector<bool>& activeFeaturesVec,
+                              uint32_t rsid, Sensor* sensor);
+
+    static String templatedExtendedString4Display(std::vector<bool>& activeFeaturesVec,
+                                                  Sensor* sensor,
+                                                  char const** FeaturesString);
 
 };
 

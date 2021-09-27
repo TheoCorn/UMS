@@ -10,7 +10,10 @@
 enum sensorEnum{
     UNKNOWN_SENSOR = 0,
     MPU9250 = 1,
+    ADS1015,
+    ADS1115,
     BMP280
+
 };
 
 #endif //UMDWITHCLASS3_SENSORENUM_H

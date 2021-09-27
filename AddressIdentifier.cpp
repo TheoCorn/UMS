@@ -10,6 +10,7 @@
 #include "MPU9250.hpp"
 #include <ArduinoJson.h>
 #include "UnknownSensor.h"
+#include "ADS1X15.h"
 
 
 /*
@@ -56,7 +57,9 @@ void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint32_t address,
 
 Sensor *SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPos, uint32_t address) {
     switch (enumPos) { // NOLINT(hicpp-multiway-paths-covered)
-        case sensorEnum::MPU9250: return (Sensor *) (new class MPU9250(address)); break;
+        case sensorEnum::MPU9250: return dynamic_cast<Sensor*>(new class MPU9250(address)); break;
+        case sensorEnum::ADS1015: return dynamic_cast<Sensor*>(new class ADS1015(address)); break;
+        case sensorEnum::ADS1115: return dynamic_cast<Sensor*>(new class ADS1115(address)); break;
 //        case sensorEnum::BMP280: return (sensor*)(new class BMP280); break;
 
         default: return (Sensor *) new UnknownSensor(address); break;

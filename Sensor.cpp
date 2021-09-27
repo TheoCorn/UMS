@@ -103,3 +103,73 @@ void Sensor::fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t
     obj["rsid"] = rsid;
     obj["sid"] = sid;
 }
+
+void Sensor::JsonSetter(JsonObject& sConf,
+                        std::vector<bool>& activeFeaturesVec,
+                        std::vector<unsigned int>& xSettings) {
+
+    JsonArray features = sConf["Features"];
+    JsonArray locXSettings = sConf["XSettings"];
+//    JsonArray ISettings = sConf["ISettings"];
+
+    activeFeaturesVec.clear();
+    xSettings.clear();
+
+
+    for(JsonVariant v : features){
+        activeFeaturesVec.emplace_back(v.as<bool>());
+    }
+
+    for (JsonVariant v : locXSettings) {
+        xSettings.emplace_back(v.as<unsigned int>());
+    }
+}
+
+void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &activeFeaturesVec,
+                                 std::vector<unsigned int> &xSettings) {
+    char *cArrJson = (char *) spiffs::readFile(SPIFFS, filename);
+
+    JsonDocument *doc = jp::parseJson(cArrJson);
+
+    if (doc != nullptr) {
+        JsonObject obj = doc->to<JsonObject>();
+        JsonSetter(obj, activeFeaturesVec, xSettings);
+    }
+
+    delete[] cArrJson;
+
+}
+
+void Sensor::templatedRead(JsonArray &jra, std::vector<bool> &activeFeaturesVec,
+                           uint32_t rsid, Sensor* sensor) {
+    char rsidStr[11];
+    itoa(rsid, rsidStr, 10);
+
+    JsonObject rData = jra.createNestedObject();
+    rData["rsid"] = rsidStr;
+    JsonArray values = rData.createNestedArray("values");
+
+    for (int i = 0; i < 10; i++) {
+        if (activeFeaturesVec[i]) values.add(sensor->readFeature(i));
+    }
+}
+
+String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeaturesVec,
+                                               Sensor* sensor,
+                                               char const** FeaturesString) {
+    String s;
+
+    for (int i = 0; i < 10; i++) {
+        float f = sensor->readFeature(i);
+        char cBuffer[64];
+        int ret = sprintf(&cBuffer[0], "%e", f);
+        s += FeaturesString[i];
+        s += " ";
+        s += activeFeaturesVec[i] ? '1' : '0';
+        s += " ";
+        s += cBuffer;
+        s += "\n";
+    }
+
+    return s;
+}
