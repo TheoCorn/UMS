@@ -53,11 +53,7 @@ void setDefSysInfo();
 
 void doProcess4JsonObj(JsonPair *p);
 
-void onSensorsElementReceive(JsonVariant *v);
-
 void onReadElementReceive(JsonVariant *v);
-
-void onGetElementReceive(JsonVariant *v);
 
 void onStartReading();
 
@@ -228,13 +224,14 @@ void loop() {
 */
 void doProcess4JsonObj(JsonPair *p) {
     using namespace jsonTypes;
+    using namespace jcf;
 
     JsonVariant v = p->value();
 
     switch (p->key().c_str()[0]) {
 
         case SET_SENSOR_SETTINGS_JSON:
-            onSensorsElementReceive(&v);
+            onSensorsElementReceive(&v, sensors);
             break;
 
         case SET_READING_JSON:
@@ -242,9 +239,15 @@ void doProcess4JsonObj(JsonPair *p) {
             break;
 
         case GET_SENSOR_SETTINGS_JSON:
-            onGetElementReceive(&v);
+            onGetElementReceive(&v, sensors);
             break;
 
+
+        case CLEAR_CONFLICT :
+
+            break;
+
+        case
         case CLICK_JSON:
             delete p;
             onREBISR();
@@ -266,31 +269,6 @@ void doProcess4JsonObj(JsonPair *p) {
 
 }
 
-
-void onSensorsElementReceive(JsonVariant *v) {
-    JsonArray arr = v->as<JsonArray>();
-
-    for (JsonVariant sConf: arr) {
-        try {
-            JsonObject obj = sConf.as<JsonObject>();
-            unsigned int key = obj["rsid"];
-            sensors->at(key)->setJson(obj);
-        } catch (...) {
-
-            error::Error *errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,
-                                                    SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
-                                                    error::Appearance::SNACK_BAR,
-                                                    error::Importance::REQUIRES_USER_ACTION,
-                                                    error::BackgroundAppActions::RESEND);
-
-            sysInfo::serialCom->write(errMsg);
-        }
-    }
-
-
-}
-
-
 void onReadElementReceive(JsonVariant *v) {
     if (v->is<int>()) {
         int locReading = v->as<int>();
@@ -307,26 +285,6 @@ void onReadElementReceive(JsonVariant *v) {
 
 }
 
-void onGetElementReceive(JsonVariant *v) {
-    DynamicJsonDocument *doc = new DynamicJsonDocument(sensors->size() * 2048);
-    JsonArray arr = doc->createNestedArray("SCof");
-
-    uint8_t key;
-    Sensor *value;
-    for (auto &mPair: *sensors) {
-        std::tie(key, value) = mPair;
-        value->getJson(arr);
-    }
-
-    size_t success = sysInfo::serialCom->write(doc);
-
-    if (!success) {
-        //        error::Error error()
-    }
-
-    delete doc;
-
-}
 
 void onStartReading() {
 

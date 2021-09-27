@@ -10,7 +10,9 @@ namespace jsonTypes {
         SET_SENSOR_SETTINGS_JSON = 's',
         GET_SENSOR_SETTINGS_JSON = 'g',
 
-        MANUAL_SENSOR_SET        = "S",
+        MANUAL_SENSOR_ADD        = "a",
+
+        /// clears up one conflict (adds appropriate sensor to sensors ...)
         CLEAR_CONFLICT           = "C",
 
         SET_READING_JSON         = 'r',
