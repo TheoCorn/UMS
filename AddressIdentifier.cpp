@@ -22,11 +22,12 @@ void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Se
                                          std::vector<csa::ConflictingAddressStruct *> *conflict) {
 
     if (numEnumSensorInVectorArray[address].size() == 1) {
-        addSensor(numEnumSensorInVectorArray[address][0], address, sensors, conflict);
+        addSensor(numEnumSensorInVectorArray[address][0], address, sensors);
     } else if (numEnumSensorInVectorArray[address].empty()){
         sensors->insert(std::pair<uint32_t, Sensor *>(address, ( (Sensor *) new UnknownSensor(address)) ) );
     }
     else {
+        //todo make more efficient
         csa::ConflictingAddressStruct *con;
         con->address = address;
         con->EnumPosOfSensors = numEnumSensorInVectorArray[address];
@@ -42,22 +43,14 @@ void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Se
 
 }
 
-void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint32_t address, std::map<uint32_t, Sensor *> *sensors,
-                                         std::vector<csa::ConflictingAddressStruct *> *conflict) {
+void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint32_t address, std::map<uint32_t, Sensor *> *sensors) {
 
     Sensor *sensor = getSensorPointerForEnumPos(enumPos, address);
-
-    if (sensor != nullptr) {
-        sensors->insert(std::pair<uint32_t, Sensor *>(address, sensor));
-    } else {
-        csa::ConflictingAddressStruct *con;
-        con->address = address;
-        conflict->emplace_back(con);
-    }
+    sensors->insert(std::pair<uint32_t, Sensor *>(address, sensor));
 }
 
 Sensor *SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPos, uint32_t address) {
-    switch (enumPos) {
+    switch (enumPos) { // NOLINT(hicpp-multiway-paths-covered)
         case sensorEnum::MPU9250: return (Sensor *) (new class MPU9250(address)); break;
 //        case sensorEnum::BMP280: return (sensor*)(new class BMP280); break;
 
