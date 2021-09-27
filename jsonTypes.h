@@ -5,16 +5,16 @@
 #ifndef UMDWITHCLASS3_JSONTYPES_H
 #define UMDWITHCLASS3_JSONTYPES_H
 
-namespace jsonTypes{
-    enum Jsons{
+namespace jsonTypes {
+    enum Jsons {
         SET_SENSOR_SETTINGS_JSON = 's',
         GET_SENSOR_SETTINGS_JSON = 'g',
 
-        SET_READING_JSON = 'r',
+        SET_READING_JSON         = 'r',
 
-        CLICK_JSON = 'c',
-        UP_JSON     = 'u',
-        DOWN_JSON = 'd'
+        CLICK_JSON               = 'c',
+        UP_JSON                  = 'u',
+        DOWN_JSON                = 'd'
     };
 }
 

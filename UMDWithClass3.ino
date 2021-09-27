@@ -240,15 +240,17 @@ void doProcess4JsonObj(JsonPair *p) {
             break;
 
         case CLICK_JSON:
+            delete p;
             onREBISR();
             break;
 
         case UP_JSON :
-            Serial.println("case u");
+            delete p;
             mDisplay->reaWasLow = true;
             mDisplay->rebWasLow = true;
             break;
         case DOWN_JSON:
+            delete p;
             Serial.println("case d");
             mDisplay->reaWasLow = true;
 
