@@ -251,7 +251,6 @@ void doProcess4JsonObj(JsonPair *p) {
             break;
         case DOWN_JSON:
             delete p;
-            Serial.println("case d");
             mDisplay->reaWasLow = true;
 
         default:
