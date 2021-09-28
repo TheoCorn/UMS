@@ -164,7 +164,7 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
                                                char const** FeaturesString) {
     String s;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < activeFeaturesVec.size(); i++) {
         float f = sensor->readFeature(i);
         char cBuffer[64];
         int ret = sprintf(&cBuffer[0], "%e", f);
