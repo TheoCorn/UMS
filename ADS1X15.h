@@ -202,7 +202,7 @@ public:
     String getStringForDisplay() override { return name(); }
 
 //    char const * getExtendedStringForDisplay() override;
-    String getExtendedStringForDisplay() override { return ADS1X15::getExtendedStringForDisplay(this); }
+    String getExtendedStringForDisplay() override { return ADS1X15::getExtendedStringForDisplay(dynamic_cast<Sensor*>(this)); }
 
     void saveConfig() override { ADS1X15::saveConfig(); }
 };
@@ -221,20 +221,20 @@ public:
     uint32_t sid() override { return sensorEnum::ADS1015; }
     uint32_t rsid() override { return m_i2c_dev->address(); }
 
-    void getJson(JsonArray& jArr) override { return ADS1X15::getJson(jArr); }
+    void getJson(JsonArray& jArr) override { return ADS1X15::getJson(jArr, rsid(), sid()); }
 
     void setJson(JsonObject& sConf) override { ADS1X15::setJson(sConf); }
 
     void setUp() override { ADS1X15::setUp("/sensorData/3.json"); }
 
-    void readSensor(JsonArray& jra) override { ADS1X15::readSensor(jra); }
+    void readSensor(JsonArray& jra) override { ADS1X15::readSensor(jra, rsid(), dynamic_cast<Sensor*>(this)); }
 
     float readFeature(size_t index) override { return ADS1X15::readFeature(index); }
 
     String getStringForDisplay() override { return name(); }
 
 //    char const * getExtendedStringForDisplay() override;
-    String getExtendedStringForDisplay() override { return getExtendedStringForDisplay(this); }
+    String getExtendedStringForDisplay() override { return getExtendedStringForDisplay(dynamic_cast<Sensor*>(this)); }
 
     void saveConfig() override { ADS1X15::saveConfig(); }
 };
