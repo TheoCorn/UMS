@@ -9,9 +9,14 @@ void SpecificSensorScreen::render(Adafruit_SSD1306 *display,
                             ui::coordinates &start,
                             ui::coordinates &end) {
 
-    Serial.println(activeSensorIterator->second->getExtendedStringForDisplay());
+    String str;
 
-    display->println(activeSensorIterator->second->getExtendedStringForDisplay());
+    try{
+        str = sensors->at(rsid)->getExtendedStringForDisplay();
+    } catch (std::out_of_range) {
+        str = SENSOR_NOT_CONNECTED;
+    }
+
 }
 
 
@@ -21,6 +26,12 @@ void SpecificSensorScreen::onClick() {
 }
 
 String SpecificSensorScreen::name() {
-    if (sensors->empty()) return "SENSOR DATA";
-    return activeSensorIterator->second->name();
+
+    try {
+        String name = sensors->at(rsid)->name();
+        return name;
+    } catch (std::out_of_range) {
+        return userMessages::NO_MESSAGE;
+    }
 }
+

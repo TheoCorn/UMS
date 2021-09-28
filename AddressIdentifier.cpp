@@ -12,8 +12,10 @@
 #include "UnknownSensor.h"
 #include "ADS1X15.h"
 
+#define SENSOR_SID_ARRAY_FILE "/SensorAddresses.json"
 
-/*
+
+/**
 adds the the correct sensor type to the specified vector
 
 @param address the address of the i2c device
@@ -68,7 +70,7 @@ Sensor *SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPo
 
 
 void SensorsIdentifierManager::init() {
-    char *cArrJson = (char *) spiffs::readFile(SPIFFS, "/SensorAddresses.json");
+    char *cArrJson = (char *) spiffs::readFile(SPIFFS, SENSOR_SID_ARRAY_FILE);
 
     JsonDocument *doc = jp::parseJson(cArrJson);
     if (doc != nullptr) {

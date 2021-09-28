@@ -36,7 +36,7 @@ public:
          delete subScreen;
     }
 
-    String name() override { return "SENSORS"; }
+    String name() override { return subScreen->name(); }
 
     void render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) override {
 

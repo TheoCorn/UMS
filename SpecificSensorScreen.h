@@ -11,16 +11,20 @@
 #include "AllSensorsScreen.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include "userMessages.h"
 
 
 class SpecificSensorScreen : public ui::Tab {
 
+//    std::map<uint32_t, Sensor *> *sensors;
+//    std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> activeSensorIterator;
+
+    uint32_t rsid;
     std::map<uint32_t, Sensor *> *sensors;
-    std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> activeSensorIterator;
 
 public:
 
-    SpecificSensorScreen(std::map<uint32_t, Sensor *> *sensors, std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> activeSensorIterator) : sensors(sensors), activeSensorIterator(activeSensorIterator) { }
+    SpecificSensorScreen(uint32_t rsid, std::map<uint32_t, Sensor *> *sensors) : sensors(sensors), rsid(rsid) {}
 
     String name() override;
 

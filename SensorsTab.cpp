@@ -18,7 +18,7 @@ void SensorsTab::onClick() {
     if(subScreenType == SensorsTabSubScreen::ALL_SENSORS_SCREEN){
         subScreenType = SensorsTabSubScreen::SPECIFIC_SENSOR_SCREEN;
         delete subScreen;
-        subScreen = dynamic_cast<ui::Tab*>(new SpecificSensorScreen(sensors, activeSensorIterator));
+        subScreen = dynamic_cast<ui::Tab*>(new SpecificSensorScreen(activeSensorIterator->first, sensors));
     }else{
         subScreenType = SensorsTabSubScreen::ALL_SENSORS_SCREEN;
         delete subScreen;
