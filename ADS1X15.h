@@ -11,6 +11,10 @@
 #include <Wire.h>
 #include "sensorEnum.h"
 
+#include "SPIFFS.h"
+#include "Error.h"
+#include "spiffs.hpp"
+
 
 /*=========================================================================
     I2C ADDRESS/BITS
