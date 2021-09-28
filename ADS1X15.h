@@ -234,7 +234,7 @@ public:
     String getStringForDisplay() override { return name(); }
 
 //    char const * getExtendedStringForDisplay() override;
-    String getExtendedStringForDisplay() override { return getExtendedStringForDisplay(dynamic_cast<Sensor*>(this)); }
+    String getExtendedStringForDisplay() override { return ADS1X15::getExtendedStringForDisplay(dynamic_cast<Sensor*>(this)); }
 
     void saveConfig() override { ADS1X15::saveConfig(); }
 };

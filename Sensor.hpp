@@ -106,7 +106,7 @@ public:
      * @param index
      * @return
      */
-    virtual float readFeature(size_t index) = 0;
+    virtual float readFeature(size_t index) { return 0.0f; };
 
 
 

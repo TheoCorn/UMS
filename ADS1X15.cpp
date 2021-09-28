@@ -370,7 +370,7 @@ uint16_t ADS1X15::readRegister(uint8_t reg) {
 }
 
 void ADS1X15::getJson(JsonArray &jArr, uint32_t rsid, uint32_t sid) {
-    generateTemplatedSensorObject(jArr, rsid, sid, activeFeaturesVec, xSettings);
+    Sensor::generateTemplatedSensorObject(jArr, rsid, sid, activeFeaturesVec, xSettings);
 }
 
 void ADS1X15::setJson(JsonObject& sConf){
