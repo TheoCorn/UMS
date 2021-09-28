@@ -16,7 +16,6 @@ class UnknownSensor : public Sensor {
     explicit UnknownSensor(uint8_t address) : address(address) {}
 
     String name() override { return "Unknown Sensor"; }
-    byte currentAddress() override { return address; }
     void setUp() override { }
     String getStringForDisplay() override { return name(); }
     String getExtendedStringForDisplay() override { return ""; }

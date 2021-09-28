@@ -71,11 +71,6 @@ class MPU9250 : public Sensor{
     std::vector<bool> activeFeaturesVec;
     std::vector<unsigned int> xSettings;
 
-
-
-    //my functions
-    float readFeature(const unsigned int& feature);
-
     int begin();
     int setAccelRange(AccelRange range);
     int setGyroRange(GyroRange range);

@@ -124,7 +124,7 @@ String MPU9250::getExtendedStringForDisplay() {
     String s;
 
     for (int i = 0; i < 10; i++) {
-        float f = this->readFeature(i);
+        float f = readFeature(i);
         char cBuffer[64];
         int ret = sprintf(&cBuffer[0], "%e", f);
         s += mpuFeaturesString[i];
