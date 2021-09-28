@@ -16,11 +16,11 @@
 class SpecificSensorScreen : public ui::Tab {
 
     std::map<uint32_t, Sensor *> *sensors;
-    std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>>& activeSensorIterator;
+    std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> activeSensorIterator;
 
 public:
 
-    SpecificSensorScreen(std::map<uint32_t, Sensor *> *sensors, std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>>& activeSensorIterator) : sensors(sensors), activeSensorIterator(activeSensorIterator) { }
+    SpecificSensorScreen(std::map<uint32_t, Sensor *> *sensors, std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> activeSensorIterator) : sensors(sensors), activeSensorIterator(activeSensorIterator) { }
 
     String name() override;
 
