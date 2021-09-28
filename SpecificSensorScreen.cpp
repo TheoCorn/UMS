@@ -9,9 +9,9 @@ void SpecificSensorScreen::render(Adafruit_SSD1306 *display,
                             ui::coordinates &start,
                             ui::coordinates &end) {
 
-//    Serial.println(activeSensorIterator->second->getExtendedStringForDisplay());
+    Serial.println(activeSensorIterator->second->getExtendedStringForDisplay());
 
-    display->println(sensors->begin()->second->getExtendedStringForDisplay());
+    display->println(activeSensorIterator->second->getExtendedStringForDisplay());
 }
 
 
