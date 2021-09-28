@@ -3,6 +3,11 @@
 #include "ArduinoJson.h"
 
 
+#include "SPIFFS.h"
+#include "Error.h"
+#include "spiffs.hpp"
+
+
 //TwoWire Sensor::wire = Wire;
 
 JsonObject Sensor::createSensorObject(JsonArray &doc) {

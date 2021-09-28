@@ -195,7 +195,7 @@ public:
 
     void setUp() override { ADS1X15::setUp("/sensorData/2.json"); }
 
-    void readSensor(JsonArray& jra) override { ADS1X15::readSensor(jra, rsid()); }
+    void readSensor(JsonArray& jra) override { ADS1X15::readSensor(jra, rsid(), dynamic_cast<Sensor*>(this)); }
 
     float readFeature(size_t index) override { return ADS1X15::readFeature(index); }
 

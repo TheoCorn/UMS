@@ -124,7 +124,7 @@ String MPU9250::getExtendedStringForDisplay() {
     String s;
 
     for (int i = 0; i < 10; i++) {
-        float f = readFeature(i);
+        float f = this->readFeature(i);
         char cBuffer[64];
         int ret = sprintf(&cBuffer[0], "%e", f);
         s += mpuFeaturesString[i];
@@ -1104,8 +1104,8 @@ uint32_t MPU9250::rsid() {
     return _address;
 }
 
-float MPU9250::readFeature(const unsigned int &feature) {
-    switch (feature) {
+float MPU9250::readFeature(size_t index) {
+    switch (index) {
         case 0:
             return getAccelX_mss();
             break;

@@ -318,7 +318,7 @@ public:
 
     void saveConfig() override;
 
-    float readFeature(size_t index) override { return 0.0f; }
+    float readFeature(size_t index) override;
 };
 
 
