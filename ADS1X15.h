@@ -185,7 +185,7 @@ public:
     uint32_t sid() override { return sensorEnum::ADS1015; }
     uint32_t rsid() override { return m_i2c_dev->address(); }
 
-    void getJson(JsonArray& jArr) override { return ADS1X15::getJson(jArr); }
+    void getJson(JsonArray& jArr) override { return ADS1X15::getJson(jArr, rsid(), sid()); }
 
     void setJson(JsonObject& sConf) override { ADS1X15::setJson(sConf); }
 
@@ -223,7 +223,7 @@ public:
 
     void setUp() override { ADS1X15::setUp("/sensorData/3.json"); }
 
-    void readSensor(JsonArray& jra) override { ADS1X15::readSensor(jra, rsid()); }
+    void readSensor(JsonArray& jra) override { ADS1X15::readSensor(jra); }
 
     float readFeature(size_t index) override { return ADS1X15::readFeature(index); }
 
