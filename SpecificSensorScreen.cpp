@@ -12,11 +12,14 @@ void SpecificSensorScreen::render(Adafruit_SSD1306 *display,
     String str;
 
     try{
-        mstr = sensors->at(rsid)->getExtendedStringForDisplay();
+        // todo fix nonsense code, crashes when direct because of WString
+        String mstr = sensors->at(rsid)->getExtendedStringForDisplay();
         str = mstr;
-    } catch (std::out_of_range) {
+    } catch (std::out_of_range&) {
         str = "sensor not available";
     }
+
+    display->println(str);
 
 }
 
@@ -31,8 +34,7 @@ String SpecificSensorScreen::name() {
     try {
         String name = sensors->at(rsid)->name();
         return name;
-    } catch (std::out_of_range) {
+    } catch (std::out_of_range&) {
         return "";
     }
 }
-
