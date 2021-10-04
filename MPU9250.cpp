@@ -134,6 +134,9 @@ String MPU9250::getExtendedStringForDisplay() {
         s += cBuffer;
         s += "\n";
     }
+    Serial.println(s);
+
+    return s;
 
 //    auto str = new char[512];
 //    auto last = str;
@@ -159,9 +162,6 @@ String MPU9250::getExtendedStringForDisplay() {
 //    }
 //
 //    *(last + 1) = '\0';
-
-    return s;
-
 }
 
 

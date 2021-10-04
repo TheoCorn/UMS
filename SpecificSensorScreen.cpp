@@ -12,7 +12,8 @@ void SpecificSensorScreen::render(Adafruit_SSD1306 *display,
     String str;
 
     try{
-        str = sensors->at(rsid)->getExtendedStringForDisplay();
+        mstr = sensors->at(rsid)->getExtendedStringForDisplay();
+        str = mstr;
     } catch (std::out_of_range) {
         str = "sensor not available";
     }
