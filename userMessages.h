@@ -11,6 +11,6 @@ namespace userMessages {
 //#define SENSOR_NOT_CONNECTED "sensor no longer connected"
 //#define SENSOR_NOT_CONNECTED "sensor no longer connected"
 //
-//}
+}
 
 #endif //UMDWITHCLASS3_USERMESSAGES_H
