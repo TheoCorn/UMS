@@ -249,7 +249,7 @@ void doProcess4JsonObj(JsonPair *p) {
             break;
 
         
-        case CLICK_JSON:g9
+        case CLICK_JSON:
             onREBISR();
             break;
 
