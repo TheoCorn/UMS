@@ -388,7 +388,7 @@ void ADS1X15::readSensor(JsonArray &jra, uint32_t rsid, Sensor* sensor) {
 
 
 String ADS1X15::getExtendedStringForDisplay(Sensor *sensor) {
-    Sensor::templatedExtendedString4Display(activeFeaturesVec, sensor, (const char**) adsFeaturesString);
+    return Sensor::templatedExtendedString4Display(activeFeaturesVec, sensor, (const char**) adsFeaturesString);
 }
 
 void ADS1X15::saveConfig() {
