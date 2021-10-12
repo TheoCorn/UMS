@@ -392,11 +392,11 @@ String ADS1X15::getExtendedStringForDisplay(Sensor *sensor) {
 
     String s;
 
-    for (int i = 0; i < activeFeaturesVec.size(); i++) {
+    for (int i = 0; i < 3; i++) {
         float f = sensor->readFeature(i);
         char cBuffer[64];
         int ret = sprintf(&cBuffer[0], "%e", f);
-        s += adsFeaturesString[i];
+        s += *adsFeaturesString[i];
         s += " ";
         s += activeFeaturesVec[i] ? '1' : '0';
         s += " ";
