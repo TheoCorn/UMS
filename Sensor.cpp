@@ -120,6 +120,7 @@ void Sensor::JsonSetter(JsonObject& sConf,
     activeFeaturesVec.clear();
     xSettings.clear();
 
+    Serial.println(features.size());
 
     for(JsonVariant v : features){
         activeFeaturesVec.emplace_back(v.as<bool>());
