@@ -167,9 +167,15 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
 
     for (int i = 0; i < activeFeaturesVec.size(); i++) {
         float f = sensor->readFeature(i);
+
+        Serial.println(f);
+
         char cBuffer[64];
         int ret = sprintf(&cBuffer[0], "%e", f);
         s += *FeaturesString[i];
+
+        Serial.println(*FeaturesString[i]);
+
         s += " ";
         s += activeFeaturesVec[i] ? '1' : '0';
         s += " ";
