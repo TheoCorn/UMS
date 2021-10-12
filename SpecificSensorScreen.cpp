@@ -17,7 +17,7 @@ void SpecificSensorScreen::render(Adafruit_SSD1306 *display,
         display->println("sensor not available");
     }
 
-    display->println(str);
+
 
 }
 
