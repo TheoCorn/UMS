@@ -12,6 +12,7 @@ void SpecificSensorScreen::render(Adafruit_SSD1306 *display,
     try{
         // todo fix nonsense code, crashes when direct because of WString
         String str = sensors->at(rsid)->getExtendedStringForDisplay();
+        Serial.println(str);
         display->println(str);
     } catch (std::out_of_range&) {
         display->println("sensor not available");
