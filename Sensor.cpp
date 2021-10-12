@@ -163,6 +163,8 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
                                                Sensor* sensor,
                                                char const** FeaturesString) {
 
+    Serial.println("tesd");
+
     for (bool b : activeFeaturesVec ) {
         Serial.print(b);
     }
