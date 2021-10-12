@@ -113,7 +113,7 @@ void Sensor::JsonSetter(JsonObject& sConf,
                         std::vector<bool>& activeFeaturesVec,
                         std::vector<unsigned int>& xSettings) {
 
-    JsonArray features = sConf["Features"];
+    JsonArray features = sConf["activeFeatures"];
     JsonArray locXSettings = sConf["XSettings"];
 //    JsonArray ISettings = sConf["ISettings"];
 
