@@ -373,7 +373,7 @@ void ADS1X15::getJson(JsonArray &jArr, uint32_t rsid, uint32_t sid) {
     Sensor::generateTemplatedSensorObject(jArr, rsid, sid, activeFeaturesVec, xSettings);
 }
 
-void ADS1X15::setJson(JsonObject& sConf){
+void ADS1X15::setJson(JsonDocument &sConf){
 
     Sensor::JsonSetter(sConf, activeFeaturesVec, xSettings);
 }
