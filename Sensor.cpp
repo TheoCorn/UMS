@@ -143,9 +143,9 @@ void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &active
     serializeJson(*doc, Serial);
 
     if (doc != nullptr) {
-        JsonObject obj = doc->to<JsonObject>();
-        serializeJson(obj, Serial);
-        JsonSetter(obj, activeFeaturesVec, xSettings);
+        JsonObject* obj = doc->to<JsonObject*>();
+        serializeJson(*obj, Serial);
+        JsonSetter(*obj, activeFeaturesVec, xSettings);
     }else{
         throw std::invalid_argument("invalid file");
     }
