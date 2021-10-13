@@ -9,9 +9,13 @@ void jcf::onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *
 
     for (JsonVariant sConf: arr) {
         try {
-            JsonObject obj = sConf.as<JsonObject>();
-            unsigned int key = obj["rsid"];
-            sensors->at(key)->setJson(obj);
+//            JsonObject obj = sConf.as<JsonObject>();
+//            unsigned int key = obj["rsid"];
+//            sensors->at(key)->setJson(obj);
+
+            JsonDocument doc = sConf.as<JsonDocument>();
+            unsigned int key = doc["rsid"];
+            sensors->at(key)->setJson(doc);
         } catch (...) {
 
             error::Error *errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,

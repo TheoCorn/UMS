@@ -109,7 +109,32 @@ void Sensor::fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t
     obj["sid"] = sid;
 }
 
-void Sensor::JsonSetter(JsonObject& sConf,
+//void Sensor::JsonSetter(JsonObject& sConf,
+//                        std::vector<bool>& activeFeaturesVec,
+//                        std::vector<unsigned int>& xSettings) {
+//
+//    serializeJson(sConf, Serial);
+//
+//    JsonArray features = sConf["activeFeatures"];
+//    JsonArray locXSettings = sConf["XSettings"];
+////    JsonArray ISettings = sConf["ISettings"];
+//
+//    activeFeaturesVec.clear();
+//    xSettings.clear();
+//    serializeJson(features, Serial);
+//    Serial.println(features.size());
+//
+//    for(JsonVariant v : features){
+//        activeFeaturesVec.emplace_back(v.as<bool>());
+//        Serial.println(v.as<bool>());
+//    }
+//
+//    for (JsonVariant v : locXSettings) {
+//        xSettings.emplace_back(v.as<unsigned int>());
+//    }
+//}
+
+void Sensor::JsonSetter(JsonDocument& sConf,
                         std::vector<bool>& activeFeaturesVec,
                         std::vector<unsigned int>& xSettings) {
 
@@ -140,12 +165,9 @@ void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &active
 
     JsonDocument *doc = jp::parseJson(cArrJson);
 
-    serializeJson(*doc, Serial);
 
     if (doc != nullptr) {
-        JsonObject* obj = doc->to<JsonObject*>();
-        serializeJson(*obj, Serial);
-        JsonSetter(*obj, activeFeaturesVec, xSettings);
+        JsonSetter(*doc, activeFeaturesVec, xSettings);
     }else{
         throw std::invalid_argument("invalid file");
     }
@@ -153,6 +175,8 @@ void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &active
     delete[] cArrJson;
 
 }
+
+
 
 void Sensor::templatedRead(JsonArray &jra, std::vector<bool> &activeFeaturesVec,
                            uint32_t rsid, Sensor* sensor) {
