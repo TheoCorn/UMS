@@ -54,6 +54,7 @@ void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Se
 void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint32_t address, std::map<uint32_t, Sensor *> *sensors) {
 
     Sensor *sensor = getSensorPointerForEnumPos(enumPos, address);
+    sensor->setUp();
     sensors->insert(std::pair<uint32_t, Sensor *>(address, sensor));
 }
 
