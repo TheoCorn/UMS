@@ -81,7 +81,7 @@ void MPU9250::getJson(JsonArray &jArr) {
 }
 
 
-void MPU9250::setJson(JsonObject& sConf) {
+void MPU9250::setJson(JsonDocument &sConf) {
 
     JsonArray features = sConf["Features"];
     JsonArray locXSettings = sConf["XSettings"];
