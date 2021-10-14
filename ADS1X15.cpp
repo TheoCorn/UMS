@@ -388,25 +388,23 @@ void ADS1X15::readSensor(JsonArray &jra, uint32_t rsid, Sensor* sensor) {
 
 
 String ADS1X15::getExtendedStringForDisplay(Sensor *sensor) {
-//    return Sensor::templatedExtendedString4Display(activeFeaturesVec, sensor, (const char**) adsFeaturesString);
+    return Sensor::templatedExtendedString4Display(activeFeaturesVec, sensor, (const char**) adsFeaturesString);
 
-    Serial.println(activeFeaturesVec.size());
-
-    String s;
-
-    for (int i = 0; i < 3; i++) {
-        float f = sensor->readFeature(i);
-        char cBuffer[64];
-        int ret = sprintf(&cBuffer[0], "%e", f);
-        s += *adsFeaturesString[i];
-        s += " ";
-        s += activeFeaturesVec[i] ? '1' : '0';
-        s += " ";
-        s += cBuffer;
-        s += "\n";
-    }
-
-    return s;
+//    String s;
+//
+//    for (int i = 0; i < 3; i++) {
+//        float f = sensor->readFeature(i);
+//        char cBuffer[64];
+//        int ret = sprintf(&cBuffer[0], "%e", f);
+//        s += *adsFeaturesString[i];
+//        s += " ";
+//        s += activeFeaturesVec[i] ? '1' : '0';
+//        s += " ";
+//        s += cBuffer;
+//        s += "\n";
+//    }
+//
+//    return s;
 
 }
 

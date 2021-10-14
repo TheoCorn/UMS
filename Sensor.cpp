@@ -138,7 +138,6 @@ void Sensor::JsonSetter(JsonObject &sConf,
                         std::vector<bool>& activeFeaturesVec,
                         std::vector<unsigned int>& xSettings) {
 
-    serializeJson(sConf, Serial);
 
     JsonArray features = sConf["activeFeatures"];
     JsonArray locXSettings = sConf["XSettings"];
@@ -146,12 +145,9 @@ void Sensor::JsonSetter(JsonObject &sConf,
 
     activeFeaturesVec.clear();
     xSettings.clear();
-    serializeJson(features, Serial);
-    Serial.println(features.size());
 
     for(JsonVariant v : features){
         activeFeaturesVec.emplace_back(v.as<bool>());
-        Serial.println(v.as<bool>());
     }
 
     for (JsonVariant v : locXSettings) {
@@ -198,25 +194,16 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
                                                Sensor* sensor,
                                                char const** FeaturesString) {
 
-    Serial.println("tesd");
-
-    for (bool b : activeFeaturesVec ) {
-        Serial.print(b);
-    }
-    Serial.print('\n');
-
     String s;
 
     for (int i = 0; i < activeFeaturesVec.size(); i++) {
         float f = sensor->readFeature(i);
 
-        Serial.println(f);
 
         char cBuffer[64];
         int ret = sprintf(&cBuffer[0], "%e", f);
         s += *FeaturesString[i];
 
-        Serial.println(*FeaturesString[i]);
 
         s += " ";
         s += activeFeaturesVec[i] ? '1' : '0';
@@ -225,7 +212,6 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
         s += "\n";
     }
 
-    Serial.println(s);
 
     return s;
 }

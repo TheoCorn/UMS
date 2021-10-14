@@ -21,8 +21,6 @@ void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start,
 
 bool AllSensorsScreen::onUp() {
 
-    Serial.println("onUp");
-
     if (activeSensorIterator != sensors->begin()) {
         activeSensorIterator--;
         return false;
@@ -37,7 +35,6 @@ void AllSensorsScreen::onDown() {
     end--;
     if (activeSensorIterator != end) activeSensorIterator++;
 
-    Serial.println("onDown");
 }
 
 void AllSensorsScreen::onClick() {

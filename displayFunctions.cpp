@@ -167,7 +167,6 @@ void DisplayFunctions::reStatusDispatch() {
     if (rebWasLow){
         if (iteratingTabs) {
             if (tabIterator != tabs.begin()) tabIterator--;
-            Serial.println("tab--");
         }else{
             iteratingTabs = (*tabIterator)->onUp();
         }
@@ -176,7 +175,6 @@ void DisplayFunctions::reStatusDispatch() {
         if (iteratingTabs) {
             auto endIt = --(tabs.end());
             if (tabIterator != endIt) tabIterator++;
-            Serial.println("tab++");
         }else{
             (*tabIterator)->onDown();
         }

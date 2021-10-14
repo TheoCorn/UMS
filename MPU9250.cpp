@@ -134,7 +134,6 @@ String MPU9250::getExtendedStringForDisplay() {
         s += cBuffer;
         s += "\n";
     }
-    Serial.println(s);
 
     return s;
 

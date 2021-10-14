@@ -191,7 +191,7 @@ public:
 
     void getJson(JsonArray& jArr) override { return ADS1X15::getJson(jArr, rsid(), sid()); }
 
-    void setJson(JsonDocument &sConf) override { ADS1X15::setJson(sConf); }
+    void setJson(JsonObject &sConf) override { ADS1X15::setJson(sConf); }
 
     void setUp() override { ADS1X15::setUp("/sensorData/2.json"); }
 
@@ -223,7 +223,7 @@ public:
 
     void getJson(JsonArray& jArr) override { return ADS1X15::getJson(jArr, rsid(), sid()); }
 
-    void setJson(JsonDocument& sConf) override { ADS1X15::setJson(sConf); }
+    void setJson(JsonObject& sConf) override { ADS1X15::setJson(sConf); }
 
     void setUp() override { ADS1X15::setUp("/sensorData/3.json"); }
 

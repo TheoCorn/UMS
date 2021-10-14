@@ -323,7 +323,6 @@ onREAISR() {
 void IRAM_ATTR
 
 onREBISR() {
-    Serial.println("onClick");
     mDisplay->wasClicked = true;
 }
 
