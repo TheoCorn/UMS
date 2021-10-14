@@ -141,7 +141,7 @@ String MPU9250::getExtendedStringForDisplay() {
 //        s += " ";
 //        s += cBuffer;
 //        s += "\n";
-}
+//}
 
 //return s;
 
@@ -1154,10 +1154,3 @@ void MPU9250::saveConfig() {
 
 }
 
-
-
-
-
-
-
-    

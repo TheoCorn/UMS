@@ -73,6 +73,8 @@ void onREBISR();
 std::map<uint32_t, Sensor *> *sensors;
 std::vector<char> *comBuffer;
 bool reading = false;
+double readingPeriod = 0;
+double lastReading;
 
 unsigned int sysInfo::screenAddress;
 String sysInfo::sn;
@@ -192,8 +194,12 @@ void loop() {
 
     if (reading) {
         auto doc = new DynamicJsonDocument(readJsonCapacity);
-
         auto obj = doc->as<JsonObject>();
+
+        double mdelay = readingPeriod - (millis() - lastReading);
+        if (mdelay > 0) delay(mdelay);
+
+        lastReading = millis();
         obj["time"] = millis() - sTime;
         JsonArray arr = doc->createNestedArray("Sensors");
         for (auto const &sTuple: *sensors) {
@@ -248,11 +254,10 @@ void doProcess4JsonObj(JsonPair *p) {
 
             break;
 
-        
+
         case CLICK_JSON:
             onREBISR();
             break;
-
         case UP_JSON :
             mDisplay->reaWasLow = true;
             mDisplay->rebWasLow = true;
@@ -267,12 +272,16 @@ void doProcess4JsonObj(JsonPair *p) {
 
 }
 
+
 void onReadElementReceive(JsonVariant *v) {
-    if (v->is<int>()) {
-        int locReading = v->as<int>();
+    if (v->is<JsonObject>()) {
+        JsonObject obj = v->as<JsonObject>();
+        int locReading = obj["v"];
         if (locReading == 1) {
             if (reading) return;
             reading = true;
+            double period = obj["p"];
+            readingPeriod = period;
             onStartReading();
         } else {
             if (!reading) return;
@@ -285,6 +294,8 @@ void onReadElementReceive(JsonVariant *v) {
 
 
 void onStartReading() {
+
+    lastReading = millis();
 
     //    detachInterrupt(sleepPin);
     mDisplay->displayWhenReading();
@@ -331,7 +342,7 @@ onREBISR() {
  * Loads sysInfo from /sysInfo.json
  * if used after setup first free SerialCom
  */
-void setDefSysInfo(){
+void setDefSysInfo() {
     char *sysInfoStr = (char *) spiffs::readFile(SPIFFS, "/sysInfo.json");
     StaticJsonDocument<256> sysInfoDoc;
     deserializeJson(sysInfoDoc, sysInfoStr);
