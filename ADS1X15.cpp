@@ -420,6 +420,7 @@ float ADS1X15::readFeature(size_t index) {
             break;
         case 2:
             return computeVolts(readADC_Differential_2_3());
+            break;
         default: throw std::invalid_argument("invalid argument");
     }
 }

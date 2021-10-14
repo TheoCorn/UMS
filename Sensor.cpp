@@ -120,7 +120,7 @@ void Sensor::templatedRead(JsonArray &jra, std::vector<bool> &activeFeaturesVec,
     rData["rsid"] = rsidStr;
     JsonArray values = rData.createNestedArray("values");
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < activeFeaturesVec.size(); i++) {
         if (activeFeaturesVec[i]) values.add(sensor->readFeature(i));
     }
 }
