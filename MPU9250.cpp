@@ -23,12 +23,12 @@ void MPU9250::setUp() {
         JsonArray locXSettings = (*doc)["xSettings"];
 
         activeFeaturesVec.clear();
-        for (JsonVariant v : activeFeatures) {
+        for (JsonVariant v: activeFeatures) {
             activeFeaturesVec.emplace_back(v.as<bool>());
         }
 
         xSettings.clear();
-        for (JsonVariant v : locXSettings) {
+        for (JsonVariant v: locXSettings) {
             unsigned int setting = v.as<unsigned int>();
             xSettings.emplace_back(setting);
         }
@@ -83,36 +83,40 @@ void MPU9250::getJson(JsonArray &jArr) {
 
 void MPU9250::setJson(JsonObject &sConf) {
 
-    JsonArray features = sConf["Features"];
-    JsonArray locXSettings = sConf["XSettings"];
-//    JsonArray ISettings = sConf["ISettings"];
+    Sensor::JsonSetter(sConf, activeFeaturesVec, xSettings);
 
-    activeFeaturesVec.clear();
-    xSettings.clear();
+//    JsonArray features = sConf["Features"];
+//    JsonArray locXSettings = sConf["XSettings"];
+////    JsonArray ISettings = sConf["ISettings"];
+//
+//    activeFeaturesVec.clear();
+//    xSettings.clear();
+//
+//
+//    for (JsonVariant v: features) {
+//        activeFeaturesVec.emplace_back(v.as<bool>());
+//    }
+//
+//    for (JsonVariant v: locXSettings) {
+//        xSettings.emplace_back(v.as<unsigned int>());
+//    }
 
-
-    for(JsonVariant v : features){
-        activeFeaturesVec.emplace_back(v.as<bool>());
-    }
-
-    for (JsonVariant v : locXSettings) {
-        xSettings.emplace_back(v.as<unsigned int>());
-    }
-    
 }
 
 
 void MPU9250::readSensor(JsonArray &jra) {
-    char rsidStr[11];
-    itoa(rsid(), rsidStr, 10);
+    Sensor::templatedRead(jra, activeFeaturesVec, rsid(), dynamic_cast<Sensor*>(this));
 
-    JsonObject rData = jra.createNestedObject();
-    rData["rsid"] = rsidStr;
-    JsonArray values = rData.createNestedArray("values");
-    readSensor();
-    for (int i = 0; i < 10; i++) {
-        if (activeFeaturesVec[i]) values.add(readFeature(i));
-    }
+//    char rsidStr[11];
+//    itoa(rsid(), rsidStr, 10);
+//
+//    JsonObject rData = jra.createNestedObject();
+//    rData["rsid"] = rsidStr;
+//    JsonArray values = rData.createNestedArray("values");
+//    readSensor();
+//    for (int i = 0; i < 10; i++) {
+//        if (activeFeaturesVec[i]) values.add(readFeature(i));
+//    }
 }
 
 String MPU9250::getStringForDisplay() {
@@ -120,22 +124,26 @@ String MPU9250::getStringForDisplay() {
 }
 
 String MPU9250::getExtendedStringForDisplay() {
-    readSensor();
-    String s;
 
-    for (int i = 0; i < 10; i++) {
-        float f = readFeature(i);
-        char cBuffer[64];
-        int ret = sprintf(&cBuffer[0], "%e", f);
-        s += mpuFeaturesString[i];
-        s += " ";
-        s += activeFeaturesVec[i] ? '1' : '0';
-        s += " ";
-        s += cBuffer;
-        s += "\n";
-    }
+    Sensor::templatedExtendedString4Display(activeFeaturesVec,
+                                            dynamic_cast<Sensor *>(this),
+                                            mpuFeaturesString);
+//    readSensor();
+//    String s;
+//
+//    for (int i = 0; i < 10; i++) {
+//        float f = readFeature(i);
+//        char cBuffer[64];
+//        int ret = sprintf(&cBuffer[0], "%e", f);
+//        s += mpuFeaturesString[i];
+//        s += " ";
+//        s += activeFeaturesVec[i] ? '1' : '0';
+//        s += " ";
+//        s += cBuffer;
+//        s += "\n";
+}
 
-    return s;
+//return s;
 
 //    auto str = new char[512];
 //    auto last = str;
