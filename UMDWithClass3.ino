@@ -275,12 +275,15 @@ void doProcess4JsonObj(JsonPair *p) {
 
 void onReadElementReceive(JsonVariant *v) {
     if (v->is<JsonObject>()) {
+        Serial.println("v is Json Object");
         JsonObject obj = v->as<JsonObject>();
         int locReading = obj["v"];
+
         if (locReading == 1) {
             if (reading) return;
             reading = true;
             double period = obj["p"];
+            Serial.println(period);
             readingPeriod = period;
             onStartReading();
         } else {
