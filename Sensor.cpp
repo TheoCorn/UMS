@@ -134,7 +134,7 @@ void Sensor::fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t
 //    }
 //}
 
-void Sensor::JsonSetter(JsonDocument& sConf,
+void Sensor::JsonSetter(JsonObject &sConf,
                         std::vector<bool>& activeFeaturesVec,
                         std::vector<unsigned int>& xSettings) {
 
@@ -167,7 +167,9 @@ void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &active
 
 
     if (doc != nullptr) {
-        JsonSetter(*doc, activeFeaturesVec, xSettings);
+        serializeJson(*doc, Serial);
+        const JsonObjectConst obj = doc->as<JsonObjectConst>();
+        JsonSetter(obj, activeFeaturesVec, xSettings);
     }else{
         throw std::invalid_argument("invalid file");
     }

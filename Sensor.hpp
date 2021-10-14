@@ -99,7 +99,7 @@ public:
      *
      *
      */
-    virtual void setJson(JsonDocument &sConf) = 0;
+    virtual void setJson(JsonObject &sConf) = 0;
 
     /**
      * reads specific feature and return its value
@@ -223,7 +223,7 @@ public:
                                               std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings);
 
 
-    static void JsonSetter(JsonDocument& sConf,
+    static void JsonSetter(JsonObject &sConf,
                            std::vector<bool>& activeFeaturesVec,
                            std::vector<unsigned int>& xSettings);
 

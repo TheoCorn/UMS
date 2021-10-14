@@ -139,7 +139,7 @@ protected:
 
     void getJson(JsonArray& jArr, uint32_t rsid, uint32_t sid);
 
-    void setJson(JsonDocument &sConf);
+    void setJson(JsonObject &sConf);
 
     void setUp(const char *filename);
 
@@ -223,7 +223,7 @@ public:
 
     void getJson(JsonArray& jArr) override { return ADS1X15::getJson(jArr, rsid(), sid()); }
 
-    void setJson(JsonObject& sConf) override { ADS1X15::setJson(sConf); }
+    void setJson(JsonDocument& sConf) override { ADS1X15::setJson(sConf); }
 
     void setUp() override { ADS1X15::setUp("/sensorData/3.json"); }
 
