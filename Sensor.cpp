@@ -109,70 +109,6 @@ void Sensor::fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t
     obj["sid"] = sid;
 }
 
-//void Sensor::JsonSetter(JsonObject& sConf,
-//                        std::vector<bool>& activeFeaturesVec,
-//                        std::vector<unsigned int>& xSettings) {
-//
-//    serializeJson(sConf, Serial);
-//
-//    JsonArray features = sConf["activeFeatures"];
-//    JsonArray locXSettings = sConf["XSettings"];
-////    JsonArray ISettings = sConf["ISettings"];
-//
-//    activeFeaturesVec.clear();
-//    xSettings.clear();
-//    serializeJson(features, Serial);
-//    Serial.println(features.size());
-//
-//    for(JsonVariant v : features){
-//        activeFeaturesVec.emplace_back(v.as<bool>());
-//        Serial.println(v.as<bool>());
-//    }
-//
-//    for (JsonVariant v : locXSettings) {
-//        xSettings.emplace_back(v.as<unsigned int>());
-//    }
-//}
-
-void Sensor::JsonSetter(JsonObject &sConf,
-                        std::vector<bool>& activeFeaturesVec,
-                        std::vector<unsigned int>& xSettings) {
-
-
-    JsonArray features = sConf["activeFeatures"];
-    JsonArray locXSettings = sConf["XSettings"];
-//    JsonArray ISettings = sConf["ISettings"];
-
-    activeFeaturesVec.clear();
-    xSettings.clear();
-
-    for(JsonVariant v : features){
-        activeFeaturesVec.emplace_back(v.as<bool>());
-    }
-
-    for (JsonVariant v : locXSettings) {
-        xSettings.emplace_back(v.as<unsigned int>());
-    }
-}
-
-void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &activeFeaturesVec,
-                                 std::vector<unsigned int> &xSettings) {
-    char *cArrJson = (char *) spiffs::readFile(SPIFFS, filename);
-
-    JsonDocument *doc = jp::parseJson(cArrJson);
-
-
-    if (doc != nullptr) {
-        JsonObject obj = doc->as<JsonObject>();
-        JsonSetter(obj, activeFeaturesVec, xSettings);
-    }else{
-        throw std::invalid_argument("invalid file");
-    }
-
-    delete[] cArrJson;
-
-}
-
 
 
 void Sensor::templatedRead(JsonArray &jra, std::vector<bool> &activeFeaturesVec,
@@ -213,4 +149,145 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
 
 
     return s;
+}
+
+void Sensor::xSettings_JsonSetter(JsonObject &sConf, std::vector<unsigned int> &xSettings) {
+    JsonArray locXSettings = sConf["XSettings"];
+    xSettings.clear();
+    for (JsonVariant v : locXSettings) {
+        xSettings.emplace_back(v.as<unsigned int>());
+    }
+}
+
+void Sensor::iSettings_JsonSetter(JsonObject &sConf, std::vector<bool> &iSettings) {
+    JsonArray locISettings = sConf["ISettings"];
+    iSettings.clear();
+    for (JsonVariant v : locISettings) {
+        iSettings.emplace_back(v.as<bool>());
+    }
+}
+
+void Sensor::features_JsonSetter(JsonObject &sConf, std::vector<bool> &activeFeaturesVec) {
+    JsonArray features = sConf["activeFeatures"];
+    activeFeaturesVec.clear();
+    for(JsonVariant v : features){
+        activeFeaturesVec.emplace_back(v.as<bool>());
+    }
+}
+
+void Sensor::JsonSetter(JsonObject &sConf, std::vector<bool> &activeFeaturesVec) {
+    features_JsonSetter(sConf, activeFeaturesVec);
+
+}
+
+void Sensor::JsonSetter(JsonObject &sConf,
+                        std::vector<bool>& activeFeaturesVec,
+                        std::vector<unsigned int>& xSettings) {
+
+    features_JsonSetter(sConf, activeFeaturesVec);
+    xSettings_JsonSetter(sConf, xSettings);
+
+
+//    JsonArray features = sConf["activeFeatures"];
+//    JsonArray locXSettings = sConf["XSettings"];
+////    JsonArray ISettings = sConf["ISettings"];
+//
+//    activeFeaturesVec.clear();
+//    xSettings.clear();
+//
+//    for(JsonVariant v : features){
+//        activeFeaturesVec.emplace_back(v.as<bool>());
+//    }
+//
+//    for (JsonVariant v : locXSettings) {
+//        xSettings.emplace_back(v.as<unsigned int>());
+//    }
+}
+
+void Sensor::JsonSetter(JsonObject &sConf, std::vector<bool> &activeFeaturesVec,
+                        std::vector<unsigned int> &xSettings,
+                        std::vector<bool> &iSettings) {
+
+    features_JsonSetter(sConf, activeFeaturesVec);
+    xSettings_JsonSetter(sConf, xSettings);
+    iSettings_JsonSetter(sConf, iSettings);
+
+}
+
+void Sensor::JsonSetter(JsonObject &sConf, std::vector<bool> &activeFeaturesVec, std::vector<bool> &iSettings) {
+    features_JsonSetter(sConf, activeFeaturesVec);
+    iSettings_JsonSetter(sConf, activeFeaturesVec);
+}
+
+void Sensor::savedSettingLoader(const char *filename, std::vector<bool> &activeFeaturesVec) {
+
+    char *cArrJson = (char *) spiffs::readFile(SPIFFS, filename);
+
+    JsonDocument *doc = jp::parseJson(cArrJson);
+
+
+    if (doc != nullptr) {
+        JsonObject obj = doc->as<JsonObject>();
+        JsonSetter(obj, activeFeaturesVec);
+    }else{
+        throw std::invalid_argument("invalid file");
+    }
+
+    delete[] cArrJson;
+}
+
+void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &activeFeaturesVec,
+                                 std::vector<unsigned int> &xSettings) {
+
+    char *cArrJson = (char *) spiffs::readFile(SPIFFS, filename);
+
+    JsonDocument *doc = jp::parseJson(cArrJson);
+
+
+    if (doc != nullptr) {
+        JsonObject obj = doc->as<JsonObject>();
+        JsonSetter(obj, activeFeaturesVec, xSettings);
+    }else{
+        throw std::invalid_argument("invalid file");
+    }
+
+    delete[] cArrJson;
+
+}
+
+void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &activeFeaturesVec,
+                                 std::vector<bool> &iSettings) {
+
+    char *cArrJson = (char *) spiffs::readFile(SPIFFS, filename);
+
+    JsonDocument *doc = jp::parseJson(cArrJson);
+
+
+    if (doc != nullptr) {
+        JsonObject obj = doc->as<JsonObject>();
+        JsonSetter(obj, activeFeaturesVec, iSettings);
+    }else{
+        throw std::invalid_argument("invalid file");
+    }
+
+    delete[] cArrJson;
+}
+
+void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &activeFeaturesVec,
+                                 std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings) {
+
+    char *cArrJson = (char *) spiffs::readFile(SPIFFS, filename);
+
+    JsonDocument *doc = jp::parseJson(cArrJson);
+
+
+    if (doc != nullptr) {
+        JsonObject obj = doc->as<JsonObject>();
+        JsonSetter(obj, activeFeaturesVec, xSettings, iSettings);
+    }else{
+        throw std::invalid_argument("invalid file");
+    }
+
+    delete[] cArrJson;
+
 }
