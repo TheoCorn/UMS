@@ -38,7 +38,7 @@ private:
 
     std::vector<ui::Tab*> tabs {
         dynamic_cast<ui::Tab*>(new SensorsTab(sensors)),
-        dynamic_cast<ui::Tab*>(new SettingsTab()),
+        dynamic_cast<ui::Tab*>(new class SettingsTab()),
         dynamic_cast<ui::Tab*>(new SysInfoTab())
         };
 

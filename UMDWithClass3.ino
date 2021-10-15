@@ -1,4 +1,3 @@
-#pragma once
 
 //json
 #include <ArduinoJson.h>
