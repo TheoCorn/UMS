@@ -1,3 +1,5 @@
+#pragma once
+
 //json
 #include <ArduinoJson.h>
 #include "JsonParserFunctions.hpp"
@@ -158,11 +160,11 @@ void setup() {
     attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
 
 
-    //    //sets up wake up from sleep
-    //    esp_sleep_enable_ext0_wakeup(GPIO_NUM_33, 1);
-    //    pinMode(sleepPin, INPUT);
-    //
-    //    attachInterrupt(sleepPin, sleep, FALLING);
+    //sets up wake up from sleep
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_18, 1);
+    pinMode(sleepPin, INPUT);
+
+//    attachInterrupt(sleepPin, sleep, FALLING);
 
 
 }
@@ -200,7 +202,7 @@ void loop() {
         if (mdelay > 0) delay(mdelay);
 
         lastReading = millis();
-        obj["time"] = millis() - sTime;
+        obj["time"] = lastReading - sTime;
         JsonArray arr = doc->createNestedArray("Sensors");
         for (auto const &sTuple: *sensors) {
             sTuple.second->readSensor(arr);
@@ -300,7 +302,7 @@ void onStartReading() {
 
     lastReading = millis();
 
-    //    detachInterrupt(sleepPin);
+//    detachInterrupt(sleepPin);
     mDisplay->displayWhenReading();
     readJsonCapacity = DEFAULT_JDOC_CAPACITY;  //JSON_SINGLE_SENSOR_SIZE * sensors->size();
 

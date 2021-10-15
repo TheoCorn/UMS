@@ -7,10 +7,13 @@
 
 #include "sysInfo.h"
 #include "SerialCom.h"
+#include "UMDWithClass3.ino"
 
 namespace sTabOnSet {
 
     void comChange(unsigned int index);
+
+    void sysChange(unsigned int index);
 }
 
 

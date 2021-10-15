@@ -11,7 +11,7 @@
 #include "Setting.h"
 #include "sTabOnSet.h"
 
-#define SETTINGS_ARRAY_SIZE 1
+#define SETTINGS_ARRAY_SIZE 2
 
 
 
@@ -36,12 +36,18 @@ class SettingsTab : public ui::Tab {
 public:
 
     SettingsTab(){
-        std::function<void(unsigned int)> set = sTabOnSet::comChange;
-        auto setting = new GeneralSetting("prot",
-                                                std::vector<const char *> SERIAL_COMM_NAMES,
-                                                sysInfo::serialComIndex,
-                                                set);
-        settingsArr[0] = setting;
+        std::function<void(unsigned int)> protSet = sTabOnSet::comChange;
+        std::function<void(unsigned int)> sysSet = ;
+
+        settingsArr[0] = new GeneralSetting("prot",
+                                            std::vector<const char *> SERIAL_COMM_NAMES,
+                                            sysInfo::serialComIndex,
+                                            protSet);
+        settingsArr[1] = new GeneralSetting("system",
+                                            std::vector<const char *> { "on", "sleep" },
+                                            sysInfo::serialComIndex,
+                                            )
+
     }
 
     String name() override { return "SETTINGS"; }
