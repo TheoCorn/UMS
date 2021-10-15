@@ -20,11 +20,6 @@
 #include <SPI.h>
 #include <Wire.h>
 
-//for display
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
-#include "displayFunctions.h"
-
 //else
 #include <iostream>
 #include <map>
@@ -37,6 +32,13 @@
 #include "sysInfo.h"
 #include "jsonTypes.h"
 #include "jsonCommandsfunctions.h"
+
+//for display
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include "displayFunctions.h"
+
+
 
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
