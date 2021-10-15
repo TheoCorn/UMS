@@ -7,7 +7,6 @@
 
 #include "sysInfo.h"
 #include "SerialCom.h"
-#include "UMDWithClass3.ino"
 
 namespace sTabOnSet {
 

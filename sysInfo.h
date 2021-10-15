@@ -6,6 +6,7 @@
 #define UMDWITHCLASS3_SYSINFO_H
 
 #include "SerialCom.h"
+#include "displayFunctions.h"
 
 namespace sysInfo {
 
@@ -22,6 +23,8 @@ namespace sysInfo {
     extern unsigned int batteryPercentage;
 
     extern String comName;
+
+    extern DisplayFunctions *mDisplay;
 
     extern bool isCharging;
 }
