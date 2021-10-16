@@ -39,14 +39,14 @@ public:
         std::function<void(unsigned int)> protSet = sTabOnSet::comChange;
         std::function<void(unsigned int)> sysSet = sTabOnSet::sysChange;
 
-        settingsArr[0] = new GeneralSetting("prot",
-                                            std::vector<const char *> SERIAL_COMM_NAMES,
-                                            sysInfo::serialComIndex,
-                                            protSet);
-        settingsArr[1] = new GeneralSetting("system",
-                                            std::vector<const char *> { "on", "sleep" },
-                                            sysInfo::serialComIndex,
-                                            sysSet);
+//        settingsArr[0] = new GeneralSetting("prot",
+//                                            std::vector<const char *> SERIAL_COMM_NAMES,
+//                                            sysInfo::serialComIndex,
+//                                            protSet);
+//        settingsArr[1] = new GeneralSetting("system",
+//                                            std::vector<const char *> { "on", "sleep" },
+//                                            sysInfo::serialComIndex,
+//                                            sysSet);
 
     }
 
