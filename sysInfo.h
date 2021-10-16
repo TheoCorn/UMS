@@ -6,7 +6,7 @@
 #define UMDWITHCLASS3_SYSINFO_H
 
 #include "SerialCom.h"
-#include "displayFunctions.h"
+//#include "displayFunctions.h"
 
 namespace sysInfo {
 

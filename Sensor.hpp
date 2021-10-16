@@ -284,8 +284,7 @@ public:
     static String templatedExtendedString4Display(std::vector<bool>& activeFeaturesVec,
                                                   Sensor* sensor,
                                                   char const** FeaturesString);
-
-    static
+                                                  
 
 private:
 
