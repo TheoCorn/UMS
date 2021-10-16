@@ -89,7 +89,7 @@ size_t sysInfo::serialComIndex;
 bool sysInfo::isCharging;
 
 
-DisplayFunctions *mDisplay;
+DisplayFunctions *sysinfo::mDisplay;
 SensorsIdentifierManager *sensorIdentifier;
 
 size_t readJsonCapacity = DEFAULT_JDOC_CAPACITY;
@@ -152,7 +152,7 @@ void setup() {
     ss::checkI2C(conflicts, sensors, sensorIdentifier);
 
 
-    mDisplay = new DisplayFunctions(sensors);
+    sysinfo::mDisplay = new DisplayFunctions(sensors);
 
     //    sysInfo::serialCom->startConnectionCheck(5000);
 
@@ -215,7 +215,7 @@ void loop() {
     } else {
         auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
         ss::checkI2C(localConflicts, sensors, sensorIdentifier);
-        mDisplay->displayWhenNotReading();
+        sysinfo::mDisplay->displayWhenNotReading();
 
         if (!localConflicts->empty()) {
             sysInfo::serialCom->write(csa::conflictsToString(localConflicts));
@@ -264,11 +264,11 @@ void doProcess4JsonObj(JsonPair *p) {
             onREBISR();
             break;
         case UP_JSON :
-            mDisplay->reaWasLow = true;
-            mDisplay->rebWasLow = true;
+            sysinfo::mDisplay->reaWasLow = true;
+            sysinfo::mDisplay->rebWasLow = true;
             break;
         case DOWN_JSON:
-            mDisplay->reaWasLow = true;
+            sysinfo::mDisplay->reaWasLow = true;
 
         default:
             break;
@@ -304,7 +304,7 @@ void onStartReading() {
     lastReading = millis();
 
 //    detachInterrupt(sleepPin);
-    mDisplay->displayWhenReading();
+    sysinfo::mDisplay->displayWhenReading();
     readJsonCapacity = DEFAULT_JDOC_CAPACITY;  //JSON_SINGLE_SENSOR_SIZE * sensors->size();
 
     delete sensorIdentifier;
@@ -321,7 +321,7 @@ void onStopReading() {
   prepares and deep sleeps the esp32
 */
 void sleep() {
-    mDisplay->sleep();
+    sysinfo::mDisplay->sleep();
     esp_deep_sleep_start();
 }
 
@@ -333,14 +333,14 @@ void readBatteryCharge() {
 void IRAM_ATTR
 
 onREAISR() {
-    mDisplay->rebWasLow = !digitalRead(REB);
-    mDisplay->reaWasLow = true;
+    sysinfo::mDisplay->rebWasLow = !digitalRead(REB);
+    sysinfo::mDisplay->reaWasLow = true;
 }
 
 void IRAM_ATTR
 
 onREBISR() {
-    mDisplay->wasClicked = true;
+    sysinfo::mDisplay->wasClicked = true;
 }
 
 

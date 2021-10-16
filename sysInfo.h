@@ -6,7 +6,7 @@
 #define UMDWITHCLASS3_SYSINFO_H
 
 #include "SerialCom.h"
-//#include "displayFunctions.h"
+#include "displayFunctions.h"
 
 namespace sysInfo {
 
@@ -24,7 +24,7 @@ namespace sysInfo {
 
     extern String comName;
 
-//    extern DisplayFunctions *mDisplay;
+    extern DisplayFunctions *mDisplay;
 
     extern bool isCharging;
 }
