@@ -196,7 +196,7 @@ void loop() {
 
 
     if (reading) {
-        StaticJsonDocument<readJsonCapacity> doc;
+        StaticJsonDocument<DEFAULT_JDOC_CAPACITY> doc;
         auto obj = doc->as<JsonObject>();
 
         double mdelay = readingPeriod - (millis() - lastReading);
