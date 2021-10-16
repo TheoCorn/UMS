@@ -12,8 +12,8 @@ void sTabOnSet::comChange(unsigned int index){
 }
 
 void sTabOnSet::sysChange(unsigned int index){
-    if (index == 1 ){
-        sysInfo::mDisplay->sleep();
-        esp_deep_sleep_start();
-    }
+//    if (index == 1 ){
+//        sysInfo::mDisplay->sleep();
+//        esp_deep_sleep_start();
+//    }
 }
