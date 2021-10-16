@@ -196,14 +196,13 @@ void loop() {
 
 
     if (reading) {
-        StaticJsonDocument<DEFAULT_JDOC_CAPACITY> doc;
-        auto obj = doc->as<JsonObject>();
+        auto doc = new DynamicJsonDocument(readJsonCapacity);
 
         double mdelay = readingPeriod - (millis() - lastReading);
         if (mdelay > 0) delay(mdelay);
 
         lastReading = millis();
-        obj["time"] = lastReading - sTime;
+        doc["time"] = lastReading - sTime;
         JsonArray arr = doc->createNestedArray("Sensors");
         for (auto const &sTuple: *sensors) {
             sTuple.second->readSensor(arr);
