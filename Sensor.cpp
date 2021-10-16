@@ -147,6 +147,7 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
         s += "\n";
     }
 
+    Serial.println(s);
 
     return s;
 }

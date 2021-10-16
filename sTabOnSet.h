@@ -5,7 +5,7 @@
 #ifndef UMDWITHCLASS3_STABONSET_H
 #define UMDWITHCLASS3_STABONSET_H
 
-//#include "sysInfo.h"
+#include "sysInfo.h"
 #include "SerialCom.h"
 
 namespace sTabOnSet {

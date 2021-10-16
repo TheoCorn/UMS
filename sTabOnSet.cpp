@@ -3,6 +3,7 @@
 //
 
 #include "sTabOnSet.h"
+//#include "sysInfo.h"
 
 void sTabOnSet::comChange(unsigned int index){
     delay(1000);
@@ -12,8 +13,8 @@ void sTabOnSet::comChange(unsigned int index){
 }
 
 void sTabOnSet::sysChange(unsigned int index){
-//    if (index == 1 ){
+    if (index == 1 ){
 //        sysInfo::mDisplay->sleep();
-//        esp_deep_sleep_start();
-//    }
+        esp_deep_sleep_start();
+    }
 }
