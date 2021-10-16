@@ -131,6 +131,8 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
 
     String s;
 
+
+
     for (int i = 0; i < activeFeaturesVec.size(); i++) {
         float f = sensor->readFeature(i);
 
