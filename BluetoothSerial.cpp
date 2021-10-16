@@ -25,7 +25,7 @@
 #include "JsonSerializer.h"
 
 #include "Error.h"
-#include "sysInfo.h"
+
 
 
 #if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
