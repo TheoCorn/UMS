@@ -139,7 +139,7 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
 
         char cBuffer[64];
         int ret = sprintf(&cBuffer[0], "%e", f);
-        s += *FeaturesString[i];
+        s += FeaturesString[i];
 
 
         s += " ";

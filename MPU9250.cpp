@@ -124,26 +124,27 @@ String MPU9250::getStringForDisplay() {
 }
 
 String MPU9250::getExtendedStringForDisplay() {
-
-//    Sensor::templatedExtendedString4Display(activeFeaturesVec,
-//                                            dynamic_cast<Sensor *>(this),
-//                                            mpuFeaturesString);
     readSensor();
-    String s;
 
-    for (int i = 0; i < 10; i++) {
-        float f = readFeature(i);
-        char cBuffer[64];
-        int ret = sprintf(&cBuffer[0], "%e", f);
-        s += mpuFeaturesString[i];
-        s += " ";
-        s += activeFeaturesVec[i] ? '1' : '0';
-        s += " ";
-        s += cBuffer;
-        s += "\n";
-}
+    return Sensor::templatedExtendedString4Display(activeFeaturesVec,
+                                            dynamic_cast<Sensor *>(this),
+                                            mpuFeaturesString);
 
-return s;
+//    String s;
+//
+//    for (int i = 0; i < 10; i++) {
+//        float f = readFeature(i);
+//        char cBuffer[64];
+//        int ret = sprintf(&cBuffer[0], "%e", f);
+//        s += mpuFeaturesString[i];
+//        s += " ";
+//        s += activeFeaturesVec[i] ? '1' : '0';
+//        s += " ";
+//        s += cBuffer;
+//        s += "\n";
+//}
+//
+//return s;
 
 //    auto str = new char[512];
 //    auto last = str;
