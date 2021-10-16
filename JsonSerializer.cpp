@@ -35,3 +35,7 @@ js::serializeRet* js::serializeError(error::Error* error){
     return new js::serializeRet(buffer, bufLen);
 
 }
+
+//js::serializeRet* js::serializeObj(JsonObject& obj){
+//
+//}

@@ -24,6 +24,7 @@ namespace js {
 
     js::serializeRet* serializeDoc(JsonDocument * doc);
     js::serializeRet* serializeError(error::Error* error);
+    //js::serializeRet* serializeObj(JsonObject& obj);
 
 }
 

@@ -196,20 +196,19 @@ void loop() {
 
 
     if (reading) {
-        auto doc = new DynamicJsonDocument(readJsonCapacity);
+        auto doc = DynamicJsonDocument(readJsonCapacity);
+        auto obj = doc->to<JsonObject>();
 
         double mdelay = readingPeriod - (millis() - lastReading);
         if (mdelay > 0) delay(mdelay);
 
         lastReading = millis();
-        doc["time"] = lastReading - sTime;
-        JsonArray arr = doc->createNestedArray("Sensors");
+        obj["time"] = lastReading - sTime;
+        JsonArray arr = obj->createNestedArray("Sensors");
         for (auto const &sTuple: *sensors) {
             sTuple.second->readSensor(arr);
         }
-        sysInfo::serialCom->write(doc);
-
-        delete doc;
+        sysInfo::serialCom->write(&obj);
 
     } else {
         auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
