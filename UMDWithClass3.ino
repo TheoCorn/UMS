@@ -89,7 +89,7 @@ size_t sysInfo::serialComIndex;
 bool sysInfo::isCharging;
 
 
-DisplayFunctions *sysinfo::mDisplay;
+//DisplayFunctions *mDisplay;
 SensorsIdentifierManager *sensorIdentifier;
 
 size_t readJsonCapacity = DEFAULT_JDOC_CAPACITY;

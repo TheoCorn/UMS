@@ -24,7 +24,7 @@ namespace sysInfo {
 
     extern String comName;
 
-    extern DisplayFunctions *mDisplay;
+    DisplayFunctions *mDisplay;
 
     extern bool isCharging;
 }
