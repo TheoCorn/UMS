@@ -89,7 +89,7 @@ size_t sysInfo::serialComIndex;
 bool sysInfo::isCharging;
 
 
-//DisplayFunctions *mDisplay;
+DisplayFunctions *mDisplay;
 SensorsIdentifierManager *sensorIdentifier;
 
 size_t readJsonCapacity = DEFAULT_JDOC_CAPACITY;
@@ -152,7 +152,7 @@ void setup() {
     ss::checkI2C(conflicts, sensors, sensorIdentifier);
 
 
-    sysinfo::mDisplay = new DisplayFunctions(sensors);
+    mDisplay = new DisplayFunctions(sensors);
 
     //    sysInfo::serialCom->startConnectionCheck(5000);
 
@@ -196,7 +196,7 @@ void loop() {
 
 
     if (reading) {
-        auto doc = new DynamicJsonDocument(readJsonCapacity);
+        StaticJsonDocument<readJsonCapacity> doc;
         auto obj = doc->as<JsonObject>();
 
         double mdelay = readingPeriod - (millis() - lastReading);
@@ -215,7 +215,7 @@ void loop() {
     } else {
         auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
         ss::checkI2C(localConflicts, sensors, sensorIdentifier);
-        sysinfo::mDisplay->displayWhenNotReading();
+        mDisplay->displayWhenNotReading();
 
         if (!localConflicts->empty()) {
             sysInfo::serialCom->write(csa::conflictsToString(localConflicts));
@@ -264,11 +264,11 @@ void doProcess4JsonObj(JsonPair *p) {
             onREBISR();
             break;
         case UP_JSON :
-            sysinfo::mDisplay->reaWasLow = true;
-            sysinfo::mDisplay->rebWasLow = true;
+            mDisplay->reaWasLow = true;
+            mDisplay->rebWasLow = true;
             break;
         case DOWN_JSON:
-            sysinfo::mDisplay->reaWasLow = true;
+            mDisplay->reaWasLow = true;
 
         default:
             break;
@@ -304,7 +304,7 @@ void onStartReading() {
     lastReading = millis();
 
 //    detachInterrupt(sleepPin);
-    sysinfo::mDisplay->displayWhenReading();
+    mDisplay->displayWhenReading();
     readJsonCapacity = DEFAULT_JDOC_CAPACITY;  //JSON_SINGLE_SENSOR_SIZE * sensors->size();
 
     delete sensorIdentifier;
@@ -321,7 +321,7 @@ void onStopReading() {
   prepares and deep sleeps the esp32
 */
 void sleep() {
-    sysinfo::mDisplay->sleep();
+    mDisplay->sleep();
     esp_deep_sleep_start();
 }
 
@@ -330,17 +330,13 @@ void readBatteryCharge() {
     sysInfo::batteryPercentage = 10;
 }
 
-void IRAM_ATTR
-
-onREAISR() {
-    sysinfo::mDisplay->rebWasLow = !digitalRead(REB);
-    sysinfo::mDisplay->reaWasLow = true;
+void IRAM_ATTR onREAISR() {
+    mDisplay->rebWasLow = !digitalRead(REB);
+    mDisplay->reaWasLow = true;
 }
 
-void IRAM_ATTR
-
-onREBISR() {
-    sysinfo::mDisplay->wasClicked = true;
+void IRAM_ATTR onREBISR() {
+    mDisplayfs->wasClicked = true;
 }
 
 

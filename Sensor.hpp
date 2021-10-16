@@ -285,6 +285,8 @@ public:
                                                   Sensor* sensor,
                                                   char const** FeaturesString);
 
+    static
+
 private:
 
     /**
