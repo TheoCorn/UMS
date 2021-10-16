@@ -334,7 +334,7 @@ void IRAM_ATTR onREAISR() {
 }
 
 void IRAM_ATTR onREBISR() {
-    mDisplayfs->wasClicked = true;
+    mDisplay->wasClicked = true;
 }
 
 
