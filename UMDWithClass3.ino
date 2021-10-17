@@ -33,6 +33,7 @@
 #include "jsonTypes.h"
 #include "jsonCommandsfunctions.h"
 
+
 //for display
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -44,6 +45,8 @@
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 #endif
+
+
 
 #define RE_GPIO_PIN_SEL ((1ULL<< BUTTON_PIN) | (1ULL<< REA) | (1ULL<< REB))
 

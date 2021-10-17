@@ -7,6 +7,8 @@
 
 #include "sysInfo.h"
 #include "SerialCom.h"
+#include "register_macros.h"
+
 
 namespace sTabOnSet {
 
