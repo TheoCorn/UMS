@@ -18,7 +18,7 @@ void sTabOnSet::sysChange(unsigned int index){
 //        sysInfo::mDisplay->sleep();
 
         digitalWrite(SCREEN_EN_PIN, LOW);
-        gpio_hold_en(GPIO_NUM_2);
+        gpio_hold_en(GPIO_NUM_5);
         esp_deep_sleep_start();
     }
 }
