@@ -27,13 +27,16 @@ void sTabOnSet::sysChange(unsigned int index){
 
 //        *(IO_MUX_GPIO_21_REG) << ( 1ULL << 010 10 1 11 00 00 1 00 11 00
 
-        uint32_t gpio_setting = 0b0101011100001001100;
-        set_io_mux_gpio( (uint32_t*) IO_MUX_GPIO_21_REG, gpio_setting);
-        set_io_mux_gpio((uint32_t*) IO_MUX_GPIO_22_REG, gpio_setting);
+//        uint32_t gpio_setting = 0b0101011100001001100;
+//        set_io_mux_gpio( (uint32_t*) IO_MUX_GPIO_21_REG, gpio_setting);
+//        set_io_mux_gpio((uint32_t*) IO_MUX_GPIO_22_REG, gpio_setting);
+//
+//        Serial.println(*(uint32_t*) IO_MUX_GPIO_22_REG);
+//        Serial.println(*(uint32_t*) IO_MUX_GPIO_21_REG);
 
-        Serial.println(*(uint32_t*) IO_MUX_GPIO_22_REG);
-        Serial.println(*(uint32_t*) IO_MUX_GPIO_21_REG);
 
+        gpio_pulldown_en(GPIO_NUM_21);
+        gpio_pulldown_en(GPIO_NUM_22);
 
         gpio_hold_en(GPIO_NUM_5);
         gpio_hold_en(GPIO_NUM_21);
