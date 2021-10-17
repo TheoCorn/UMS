@@ -159,6 +159,7 @@ void DisplayFunctions::sleep() {
     display->clearDisplay();
     delay(5);
     digitalWrite(SCREEN_EN_PIN, LOW);
+
     delay(5);
 }
 

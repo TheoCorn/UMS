@@ -6,7 +6,9 @@
 #define UMDWITHCLASS3_GPIONAMES_H
 
 //#define sleepPin        33
-#define SCREEN_EN_PIN       32
+
+//if changed change in sTabOnSet::sysChange
+#define SCREEN_EN_PIN       5
 #define batteryReadPin  13
 
 #define BUTTON_PIN      19

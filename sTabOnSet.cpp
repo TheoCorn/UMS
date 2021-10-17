@@ -3,6 +3,7 @@
 //
 
 #include "sTabOnSet.h"
+#include "gpioNames.h"
 //#include "sysInfo.h"
 
 void sTabOnSet::comChange(unsigned int index){
@@ -13,8 +14,11 @@ void sTabOnSet::comChange(unsigned int index){
 }
 
 void sTabOnSet::sysChange(unsigned int index){
-    if (index == 1 ){
+    if (index == 1){
 //        sysInfo::mDisplay->sleep();
+
+        digitalWrite(SCREEN_EN_PIN, LOW);
+        gpio_hold_en(GPIO_NUM_2);
         esp_deep_sleep_start();
     }
 }

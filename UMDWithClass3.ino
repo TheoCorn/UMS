@@ -148,8 +148,9 @@ void setup() {
     Wire.begin();
 
     sensorIdentifier = new SensorsIdentifierManager();
-    auto conflicts = new std::vector<csa::ConflictingAddressStruct *>();
-    ss::checkI2C(conflicts, sensors, sensorIdentifier);
+    auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
+    ss::checkI2C(localConflicts, sensors, sensorIdentifier);
+    delete localConflicts;
 
 
     mDisplay = new DisplayFunctions(sensors);
@@ -162,7 +163,7 @@ void setup() {
 
 
     //sets up wake up from sleep
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_18, 1);
+//    esp_sleep_enable_ext0_wakeup(GPIO_NUM_18, 1);
 //    pinMode(sleepPin, INPUT);
 
 //    attachInterrupt(sleepPin, sleep, FALLING);
