@@ -18,8 +18,17 @@ void sTabOnSet::sysChange(unsigned int index){
 //        sysInfo::mDisplay->sleep();
 
         digitalWrite(SCREEN_EN_PIN, LOW);
-        Wire.end();
+        Wire.~TwoWire();
+        pinMode(21, OUTPUT);
+        pinMode(22, OUTPUT);
+
+        digitalWrite(21, LOW);
+        digitalWrite(22, LOW);
+
         gpio_hold_en(GPIO_NUM_5);
+        gpio_hold_en(GPIO_NUM_21);
+        gpio_hold_en(GPIO_NUM_22);
+
         esp_deep_sleep_start();
     }
 }
