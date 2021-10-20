@@ -170,7 +170,7 @@ void setup() {
 
 
     //sets up wake up from sleep
-//    esp_sleep_enable_ext0_wakeup(GPIO_NUM_18, 1);
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_19, 1);
 //    pinMode(sleepPin, INPUT);
 
 //    attachInterrupt(sleepPin, sleep, FALLING);
