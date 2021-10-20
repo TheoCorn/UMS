@@ -164,6 +164,10 @@ void setup() {
     attachInterrupt(REA, onREAISR, FALLING);
     attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
 
+    gpio_hold_en(GPIO_NUM_19);
+    gpio_hold_en(GPIO_NUM_34);
+    gpio_hold_en(GPIO_NUM_35);
+
 
     //sets up wake up from sleep
 //    esp_sleep_enable_ext0_wakeup(GPIO_NUM_18, 1);
