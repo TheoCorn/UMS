@@ -244,7 +244,7 @@ void doProcess4JsonObj(JsonPair *p) {
 
     JsonVariant v = p->value();
 
-    Serial.println(p->key().c_str()[0]);
+//    Serial.println(p->key().c_str()[0]);
 
     switch (p->key().c_str()[0]) {
 
