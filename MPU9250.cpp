@@ -52,32 +52,30 @@ void MPU9250::setXSettings() {
 }
 
 void MPU9250::getJson(JsonArray &jArr) {
+    generateTemplatedSensorObject(jArr, rsid(), sid(), activeFeaturesVec, xSettings);
 
-
-//    generateTemplatedSensorObject(jArr, rsid(), sid(), activeFeaturesVec, xSettings);
-
-
-        JsonObject mpuObj = Sensor::createSensorObject(jArr);
-        mpuObj["name"] = this->name();
-        mpuObj["uuid"] = this->_address;
-
-        JsonObject features = mpuObj.createNestedObject("features");
-
-        JsonObject xSettings = mpuObj.createNestedObject("XSettings");
-
-      for (int i = 0; i < 10; i++) {
-          features[mpuFeaturesString[i]] = mpuFeaturesBool[i];
-      }
-
-    JsonObject accelSettings = xSettings.createNestedObject("accel");
-    for (int i = 0; i < 4; i++) {
-      accelSettings[accelRangeString[i]] = accelRangeBool[i];
-    }
-
-    JsonObject gyroSettings = xSettings.createNestedObject("gyro");
-     for (int i = 0; i < 4; i++) {
-      gyroSettings[gyroRangeString[i]] = gyroRangeBool[i];
-    }
+//
+//        JsonObject mpuObj = Sensor::createSensorObject(jArr);
+//        mpuObj["name"] = this->name();
+//        mpuObj["uuid"] = this->_address;
+//
+//        JsonObject features = mpuObj.createNestedObject("features");
+//
+//        JsonObject xSettings = mpuObj.createNestedObject("XSettings");
+//
+//      for (int i = 0; i < 10; i++) {
+//          features[mpuFeaturesString[i]] = mpuFeaturesBool[i];
+//      }
+//
+//    JsonObject accelSettings = xSettings.createNestedObject("accel");
+//    for (int i = 0; i < 4; i++) {
+//      accelSettings[accelRangeString[i]] = accelRangeBool[i];
+//    }
+//
+//    JsonObject gyroSettings = xSettings.createNestedObject("gyro");
+//     for (int i = 0; i < 4; i++) {
+//      gyroSettings[gyroRangeString[i]] = gyroRangeBool[i];
+//    }
 }
 
 
@@ -105,18 +103,19 @@ void MPU9250::setJson(JsonObject &sConf) {
 
 
 void MPU9250::readSensor(JsonArray &jra) {
-    Sensor::templatedRead(jra, activeFeaturesVec, rsid(), dynamic_cast<Sensor*>(this));
+//    Sensor::templatedRead(jra, activeFeaturesVec, rsid(), dynamic_cast<Sensor*>(this));
 
-//    char rsidStr[11];
-//    itoa(rsid(), rsidStr, 10);
-//
-//    JsonObject rData = jra.createNestedObject();
-//    rData["rsid"] = rsidStr;
-//    JsonArray values = rData.createNestedArray("values");
-//    readSensor();
-//    for (int i = 0; i < 10; i++) {
-//        if (activeFeaturesVec[i]) values.add(readFeature(i));
-//    }
+    //todo fix templated read
+    char rsidStr[11];
+    itoa(rsid(), rsidStr, 10);
+
+    JsonObject rData = jra.createNestedObject();
+    rData["rsid"] = rsidStr;
+    JsonArray values = rData.createNestedArray("values");
+    readSensor();
+    for (int i = 0; i < 10; i++) {
+        if (activeFeaturesVec[i]) values.add(readFeature(i));
+    }
 }
 
 String MPU9250::getStringForDisplay() {
