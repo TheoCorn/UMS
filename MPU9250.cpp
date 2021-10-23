@@ -16,6 +16,7 @@ MPU9250::MPU9250(uint8_t address) : Sensor() {
 void MPU9250::setUp() {
 
     Sensor::savedSettingsLoader("/sensorData/1.json", activeFeaturesVec, xSettings);
+    begin()
 
 //    char *cArrJson = (char *) spiffs::readFile(SPIFFS, "/sensorData/1.json");
 //
@@ -111,19 +112,21 @@ void MPU9250::setJson(JsonObject &sConf) {
 
 
 void MPU9250::readSensor(JsonArray &jra) {
-//    Sensor::templatedRead(jra, activeFeaturesVec, rsid(), dynamic_cast<Sensor*>(this));
-
-    //todo fix templated read
-    char rsidStr[11];
-    itoa(rsid(), rsidStr, 10);
-
-    JsonObject rData = jra.createNestedObject();
-    rData["rsid"] = rsidStr;
-    JsonArray values = rData.createNestedArray("values");
     readSensor();
-    for (int i = 0; i < 10; i++) {
-        if (activeFeaturesVec[i]) values.add(readFeature(i));
-    }
+
+    Sensor::templatedRead(jra, activeFeaturesVec, rsid(), dynamic_cast<Sensor*>(this));
+
+//    //todo fix templated read
+//    char rsidStr[11];
+//    itoa(rsid(), rsidStr, 10);
+//
+//    JsonObject rData = jra.createNestedObject();
+//    rData["rsid"] = rsidStr;
+//    JsonArray values = rData.createNestedArray("values");
+//    readSensor();
+//    for (int i = 0; i < 10; i++) {
+//        if (activeFeaturesVec[i]) values.add(readFeature(i));
+//    }
 }
 
 String MPU9250::getStringForDisplay() {
