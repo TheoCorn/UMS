@@ -15,37 +15,37 @@ MPU9250::MPU9250(uint8_t address) : Sensor() {
 
 void MPU9250::setUp() {
 
-    Sensor::savedSettingsLoader("/sensorData/1.json", )
+    Sensor::savedSettingsLoader("/sensorData/1.json", activeFeaturesVec, xSettings);
 
-    char *cArrJson = (char *) spiffs::readFile(SPIFFS, "/sensorData/1.json");
-
-    JsonDocument *doc = jp::parseJson(cArrJson);
-    if (doc != nullptr) {
-        JsonArray activeFeatures = (*doc)["activeFeatures"];
-        JsonArray locXSettings = (*doc)["xSettings"];
-
-        activeFeaturesVec.clear();
-        for (JsonVariant v: activeFeatures) {
-            activeFeaturesVec.emplace_back(v.as<bool>());
-
-        }
-
-
-
-        activeFeaturesVec.shrink_to_fit();
-
-        xSettings.clear();
-        for (JsonVariant v: locXSettings) {
-            unsigned int setting = v.as<unsigned int>();
-            xSettings.emplace_back(setting);
-        }
-        xSettings.shrink_to_fit();
-
-
-    }
-
-//    delete doc;
-    delete[] cArrJson;
+//    char *cArrJson = (char *) spiffs::readFile(SPIFFS, "/sensorData/1.json");
+//
+//    JsonDocument *doc = jp::parseJson(cArrJson);
+//    if (doc != nullptr) {
+//        JsonArray activeFeatures = (*doc)["activeFeatures"];
+//        JsonArray locXSettings = (*doc)["xSettings"];
+//
+//        activeFeaturesVec.clear();
+//        for (JsonVariant v: activeFeatures) {
+//            activeFeaturesVec.emplace_back(v.as<bool>());
+//
+//        }
+//
+//
+//
+//        activeFeaturesVec.shrink_to_fit();
+//
+//        xSettings.clear();
+//        for (JsonVariant v: locXSettings) {
+//            unsigned int setting = v.as<unsigned int>();
+//            xSettings.emplace_back(setting);
+//        }
+//        xSettings.shrink_to_fit();
+//
+//
+//    }
+//
+//.//    delete doc;
+//    delete[] cArrJson;
 
 //    setXSettings();
 
