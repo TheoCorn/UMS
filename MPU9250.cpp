@@ -52,7 +52,7 @@ void MPU9250::setXSettings() {
 }
 
 void MPU9250::getJson(JsonArray &jArr) {
-    generateTemplatedSensorObject(jArr, rsid(), sid(), activeFeaturesVec, xSettings);
+    Sensor::generateTemplatedSensorObject(jArr, rsid(), sid(), activeFeaturesVec, xSettings);
 
 //
 //        JsonObject mpuObj = Sensor::createSensorObject(jArr);
