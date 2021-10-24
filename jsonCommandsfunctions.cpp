@@ -16,6 +16,9 @@ void jcf::onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *
             JsonObject doc = sConf.as<JsonObject>();
             unsigned int key = doc[JSON_KEYWORD_RSID];
             sensors->at(key)->setJson(doc);
+
+
+
         } catch (...) {
 
             error::Error *errMsg = new error::Error(ERROR__MSG_FAILED_TO_PARSE_JSON_NAME,

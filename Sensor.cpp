@@ -171,10 +171,7 @@ void Sensor::iSettings_JsonSetter(JsonObject &sConf, std::vector<bool> &iSetting
 
 void Sensor::features_JsonSetter(JsonObject &sConf, std::vector<bool> &activeFeaturesVec) {
     JsonArray features = sConf[JSON_KEYWORD_FEATURES];
-    Serial.println("features");
-    for (auto el : activeFeaturesVec){
-        Serial.println(el);
-    }
+
     activeFeaturesVec.clear();
     for(JsonVariant v : features){
         activeFeaturesVec.emplace_back(v.as<bool>());
