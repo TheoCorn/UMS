@@ -14,14 +14,14 @@ void jcf::onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *
 //            sensors->at(key)->setJson(obj);
 
             JsonObject doc = sConf.as<JsonObject>();
-            unsigned int key = doc["rsid"];
+            unsigned int key = doc[JSON_KEYWORD_RSID];
             sensors->at(key)->setJson(doc);
         } catch (...) {
 
             error::Error *errMsg = new error::Error(ERROR__MSG_FAILED_TO_PARSE_JSON_NAME,
                                                     ERROR_MSG__SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
                                                     error::Appearance::SNACK_BAR,
-                                                    error::Importance::REQUIRES_USER_ACTION,
+                                                    error::Importance::IMPORTANT,
                                                     error::BackgroundAppActions::RESEND);
 
             sysInfo::serialCom->write(errMsg);
@@ -34,7 +34,7 @@ void jcf::onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *
 
 void jcf::onGetElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors) {
     DynamicJsonDocument *doc = new DynamicJsonDocument(sensors->size() * 2048);
-    JsonArray arr = doc->createNestedArray("SCof");
+    JsonArray arr = doc->createNestedArray(JSON_KEYWORD_SENSOR_CONFIG);
 
     uint8_t key;
     Sensor *value;
@@ -45,9 +45,9 @@ void jcf::onGetElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *sens
 
     size_t success = sysInfo::serialCom->write(doc);
 
-    if (success) {
-        //        error::Error error()
-    }
+//    if (success < 0) {
+//        auto err = error::Error::Error()
+//    }
 
     delete doc;
 

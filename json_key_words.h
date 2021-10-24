@@ -12,6 +12,7 @@
 #define JSON_KEYWORD_FEATURES "Features"
 #define JSON_KEYWORD_X_SETTINGS "XSettings"
 #define JSON_KEYWORD_I_SETTINGS "ISettings"
+#define JSON_KEYWORD_SENSOR_CONFIG "SConf"
 
 
 

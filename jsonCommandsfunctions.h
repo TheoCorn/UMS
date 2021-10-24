@@ -9,6 +9,8 @@
 #include "JsonParserFunctions.hpp"
 #include "JsonSerializer.h"
 #include "sysInfo.h"
+#include "json_key_words.h"
+#include "Error.h"
 
 
 namespace jcf{
