@@ -187,24 +187,24 @@ void Sensor::JsonSetter(JsonObject &sConf,
                         std::vector<bool>& activeFeaturesVec,
                         std::vector<unsigned int>& xSettings) {
 
-    features_JsonSetter(sConf, activeFeaturesVec);
-    xSettings_JsonSetter(sConf, xSettings);
+//    features_JsonSetter(sConf, activeFeaturesVec);
+//    xSettings_JsonSetter(sConf, xSettings);
 
 
-//    JsonArray features = sConf["activeFeatures"];
-//    JsonArray locXSettings = sConf["XSettings"];
-////    JsonArray ISettings = sConf["ISettings"];
-//
-//    activeFeaturesVec.clear();
-//    xSettings.clear();
-//
-//    for(JsonVariant v : features){
-//        activeFeaturesVec.emplace_back(v.as<bool>());
-//    }
-//
-//    for (JsonVariant v : locXSettings) {
-//        xSettings.emplace_back(v.as<unsigned int>());
-//    }
+    JsonArray features = sConf["activeFeatures"];
+    JsonArray locXSettings = sConf["XSettings"];
+//    JsonArray ISettings = sConf["ISettings"];
+
+    activeFeaturesVec.clear();
+    xSettings.clear();
+
+    for(JsonVariant v : features){
+        activeFeaturesVec.emplace_back(v.as<bool>());
+    }
+
+    for (JsonVariant v : locXSettings) {
+        xSettings.emplace_back(v.as<unsigned int>());
+    }
 }
 
 void Sensor::JsonSetter(JsonObject &sConf, std::vector<bool> &activeFeaturesVec,
