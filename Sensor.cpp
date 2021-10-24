@@ -200,6 +200,7 @@ void Sensor::JsonSetter(JsonObject &sConf,
 
     for(JsonVariant v : features){
         activeFeaturesVec.emplace_back(v.as<bool>());
+        Serial.println(v.as<bool>())
     }
 
     for (JsonVariant v : locXSettings) {
