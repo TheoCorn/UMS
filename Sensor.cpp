@@ -28,12 +28,9 @@ JsonArray Sensor::createISettingsArray(JsonObject &obj) {
 
 void Sensor::generateFeatures(JsonObject &sensorObj, std::vector<bool> &activeFeatures) {
 
-    Serial.println("features");
-
     JsonArray featuresObj = createFeaturesArray(sensorObj);
     for(bool element : activeFeatures){
         featuresObj.add(element);
-        Serial.println(element);
     }
 
 
@@ -190,13 +187,12 @@ void Sensor::JsonSetter(JsonObject &sConf,
                         std::vector<bool>& activeFeaturesVec,
                         std::vector<unsigned int>& xSettings) {
 
-    Serial.println(JsonSetter);
 
 //    features_JsonSetter(sConf, activeFeaturesVec);
 //    xSettings_JsonSetter(sConf, xSettings);
 
 
-    JsonArray features = sConf["activeFeatures"];
+    JsonArray features = sConf["Features"];
     JsonArray locXSettings = sConf["XSettings"];
 //    JsonArray ISettings = sConf["ISettings"];
 
@@ -205,7 +201,7 @@ void Sensor::JsonSetter(JsonObject &sConf,
 
     for(JsonVariant v : features){
         activeFeaturesVec.emplace_back(v.as<bool>());
-        Serial.println(v.as<bool>());
+
     }
 
     for (JsonVariant v : locXSettings) {
