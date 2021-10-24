@@ -390,22 +390,6 @@ void ADS1X15::readSensor(JsonArray &jra, uint32_t rsid, Sensor* sensor) {
 String ADS1X15::getExtendedStringForDisplay(Sensor *sensor) {
     return Sensor::templatedExtendedString4Display(activeFeaturesVec, sensor, (const char**) adsFeaturesString);
 
-//    String s;
-//
-//    for (int i = 0; i < 3; i++) {
-//        float f = sensor->readFeature(i);
-//        char cBuffer[64];
-//        int ret = sprintf(&cBuffer[0], "%e", f);
-//        s += *adsFeaturesString[i];
-//        s += " ";
-//        s += activeFeaturesVec[i] ? '1' : '0';
-//        s += " ";
-//        s += cBuffer;
-//        s += "\n";
-//    }
-//
-//    return s;
-
 }
 
 void ADS1X15::saveConfig() {
@@ -421,6 +405,6 @@ float ADS1X15::readFeature(size_t index) {
         case 2:
             return computeVolts(readADC_Differential_2_3());
             break;
-        default: throw std::invalid_argument("invalid argument");
+        default: throw std::invalid_argument(ERROR_MSG__INVALID_ARGUMENT);
     }
 }

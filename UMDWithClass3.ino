@@ -32,6 +32,8 @@
 #include "sysInfo.h"
 #include "jsonTypes.h"
 #include "jsonCommandsfunctions.h"
+#include "json_key_words.h"
+#include "config_json_keywords.h"
 
 
 //for display
@@ -211,8 +213,8 @@ void loop() {
         if (mdelay > 0) delay(mdelay);
 
         lastReading = millis();
-        obj["time"] = lastReading - sTime;
-        JsonArray arr = obj.createNestedArray("Sensors");
+        obj[JSON_KEYWORD_TIME] = lastReading - sTime;
+        JsonArray arr = obj.createNestedArray(JSON_KEYWORD_SENSORS);
         for (auto const &sTuple: *sensors) {
             sTuple.second->readSensor(arr);
         }
@@ -287,12 +289,12 @@ void doProcess4JsonObj(JsonPair *p) {
 void onReadElementReceive(JsonVariant *v) {
     if (v->is<JsonObject>()) {
         JsonObject obj = v->as<JsonObject>();
-        int locReading = obj["v"];
+        int locReading = obj[JSON_KEYWORD_VALUES];
 
         if (locReading == 1) {
             if (reading) return;
             reading = true;
-            double period = obj["p"];
+            double period = obj[READ_JSON_KEYWORD_PERIOD];
             readingPeriod = period;
             onStartReading();
         } else {
@@ -351,21 +353,21 @@ void IRAM_ATTR onREBISR() {
  * if used after setup first free SerialCom
  */
 void setDefSysInfo() {
-    char *sysInfoStr = (char *) spiffs::readFile(SPIFFS, "/sysInfo.json");
+    char *sysInfoStr = (char *) spiffs::readFile(SPIFFS, CONFIG_JSON_FILE_NAME);
     StaticJsonDocument<256> sysInfoDoc;
     deserializeJson(sysInfoDoc, sysInfoStr);
 
-    sysInfo::screenAddress = sysInfoDoc["screenAddress"].as<unsigned int>();
+    sysInfo::screenAddress = sysInfoDoc[CONFIG_JSON_SCREEN_ADDRESS].as<unsigned int>();
 
 
-    sysInfo::serialComIndex = sysInfoDoc["defCom"].as<unsigned int>();
+    sysInfo::serialComIndex = sysInfoDoc[CONFIG_JSON_DEFAULT_COM].as<unsigned int>();
 
-    sysInfo::comName = sysInfoDoc["comName"].as<String>();
+    sysInfo::comName = sysInfoDoc[CONFIG_JSON_COM_NAME].as<String>();
     sysInfo::serialCom = getSerialCom4EnumPos(sysInfo::serialComIndex);
 
-    sysInfo::sn = sysInfoDoc["SN"].as<String>();
+    sysInfo::sn = sysInfoDoc[CONFIG_JSON_SERIAL_NUMBER].as<String>();
 
-    JsonObject batObj = sysInfoDoc["battery"].as<JsonObject>();
-    sysInfo::batteryInfo.name = batObj["name"].as<String>();
-    sysInfo::batteryInfo.capacity = batObj["capacity"];
+    JsonObject batObj = sysInfoDoc[CONFIG_JSON_BATTERY_OBJECT].as<JsonObject>();
+    sysInfo::batteryInfo.name = batObj[CONFIG_JSON_BATTERY_NAME].as<String>();
+    sysInfo::batteryInfo.capacity = batObj[CONFIG_JSON_BATTERY_CAPACITY];
 }

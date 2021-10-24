@@ -5,8 +5,11 @@
 #ifndef UMDWITHCLASS3_ERROR_H
 #define UMDWITHCLASS3_ERROR_H
 
-#define FAILED_TO_PARSE_JSON_NAME "failed to parse json configuration"
-#define SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE "unable to set sensor config json"
+#define ERROR__MSG_FAILED_TO_PARSE_JSON_NAME "failed to parse json configuration"
+#define ERROR_MSG__SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE "unable to set sensor config json"
+#define ERROR_MSG__INVALID_FILE "invalid file"
+#define ERROR_MSG__INVALID_ARGUMENT "invalid argument"
+#define ERROR_MSG__INVALID_FEATURE "invalid feature index"
 
 
 namespace error {

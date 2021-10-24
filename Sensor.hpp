@@ -11,6 +11,9 @@
 #include <ArduinoJson.h>
 #include "sensorEnum.h"
 #include "JsonParserFunctions.hpp"
+#include "Error.h"
+#include "json_key_words.h"
+
 
 
 

@@ -84,20 +84,7 @@ void MPU9250::setJson(JsonObject &sConf) {
 
 void MPU9250::readSensor(JsonArray &jra) {
     readSensor();
-
     Sensor::templatedRead(jra, activeFeaturesVec, rsid(), dynamic_cast<Sensor*>(this));
-
-//    //todo fix templated read
-//    char rsidStr[11];
-//    itoa(rsid(), rsidStr, 10);
-//
-//    JsonObject rData = jra.createNestedObject();
-//    rData["rsid"] = rsidStr;
-//    JsonArray values = rData.createNestedArray("values");
-//    readSensor();
-//    for (int i = 0; i < 10; i++) {
-//        if (activeFeaturesVec[i]) values.add(readFeature(i));
-//    }
 }
 
 String MPU9250::getStringForDisplay() {
@@ -1127,7 +1114,7 @@ float MPU9250::readFeature(size_t index) {
             break;
 
         default:
-            throw std::invalid_argument("invalid feature");
+            throw std::invalid_argument(ERROR_MSG__INVALID_FEATURE);
     }
 }
 

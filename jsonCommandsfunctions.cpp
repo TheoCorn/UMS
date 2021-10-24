@@ -18,8 +18,8 @@ void jcf::onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *
             sensors->at(key)->setJson(doc);
         } catch (...) {
 
-            error::Error *errMsg = new error::Error(FAILED_TO_PARSE_JSON_NAME,
-                                                    SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
+            error::Error *errMsg = new error::Error(ERROR__MSG_FAILED_TO_PARSE_JSON_NAME,
+                                                    ERROR_MSG__SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE,
                                                     error::Appearance::SNACK_BAR,
                                                     error::Importance::REQUIRES_USER_ACTION,
                                                     error::BackgroundAppActions::RESEND);
