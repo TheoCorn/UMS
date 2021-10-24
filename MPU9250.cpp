@@ -16,7 +16,7 @@ MPU9250::MPU9250(uint8_t address) : Sensor() {
 void MPU9250::setUp() {
 
     Sensor::savedSettingsLoader("/sensorData/1.json", activeFeaturesVec, xSettings);
-    begin()
+    begin();
 
 //    char *cArrJson = (char *) spiffs::readFile(SPIFFS, "/sensorData/1.json");
 //
@@ -1164,4 +1164,3 @@ float MPU9250::readFeature(size_t index) {
 void MPU9250::saveConfig() {
 
 }
-

@@ -218,7 +218,7 @@ public:
 
     String name() override { return "ADS1115"; }
 
-    uint32_t sid() override { return sensorEnum::ADS1015; }
+    uint32_t sid() override { return sensorEnum::ADS1115; }
     uint32_t rsid() override { return m_i2c_dev->address(); }
 
     void getJson(JsonArray& jArr) override { return ADS1X15::getJson(jArr, rsid(), sid()); }
