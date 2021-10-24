@@ -289,7 +289,7 @@ void doProcess4JsonObj(JsonPair *p) {
 void onReadElementReceive(JsonVariant *v) {
     if (v->is<JsonObject>()) {
         JsonObject obj = v->as<JsonObject>();
-        int locReading = obj[JSON_KEYWORD_VALUES];
+        int locReading = obj[READ_JSON_KEYWORD_VALUE];
 
         if (locReading == 1) {
             if (reading) return;
