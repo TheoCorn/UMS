@@ -155,7 +155,6 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
 
 void Sensor::xSettings_JsonSetter(JsonObject &sConf, std::vector<unsigned int> &xSettings) {
     JsonArray locXSettings = sConf[JSON_KEYWORD_X_SETTINGS];
-    JsonArray locXSettings = sConf[JSON_KEYWORD_X_SETTINGS];
     xSettings.clear();
     for (JsonVariant v : locXSettings) {
         xSettings.emplace_back(v.as<unsigned int>());
