@@ -189,7 +189,8 @@ public:
 //    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid, String feature,
 //                                              const unsigned int& xSetting);
 
-    static void generateTemplatedSensorObject(JsonArray& doc, const uint32_t &rsid, const uint32_t &sid, const unsigned int &xSetting, const bool &isActive);
+    static void generateTemplatedSensorObject(JsonArray& doc, const uint32_t &rsid, const uint32_t &sid,
+                                              const unsigned int &xSetting, const bool &isActive);
 
 
     /**
@@ -200,11 +201,11 @@ public:
      * @param doc
      * @param name name of the sensor
      * @param sid i2c address
-     * @param features names of the datasets
      * @param activeFeatures which features will be used when reading the Sensor
      * @param xSettings
      */
-    static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid, std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings);
+    static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid,
+                                              std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings);
 
 
     /**
@@ -220,7 +221,8 @@ public:
      * @param xSettings
      */
     static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid,
-                                              std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings);
+                                              std::vector<bool> &activeFeatures, std::vector<unsigned int> &xSettings,
+                                              std::vector<bool> &iSettings);
 
     /**
      * sets data from json Object to the templated structures
