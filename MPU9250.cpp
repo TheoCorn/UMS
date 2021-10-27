@@ -28,8 +28,8 @@ void MPU9250::setUp() {
 }
 
 void MPU9250::setXSettings() {
-    setAccelRange(static_cast<AccelRange>(xSettings[0]));
-    setGyroRange(static_cast<GyroRange>(xSettings[1]));
+    ConfigAccelRange(static_cast<AccelRange>(xSettings[0]));
+    ConfigGyroRange(static_cast<GyroRange>(xSettings[1]));
 }
 
 void MPU9250::getJson(JsonArray &jArr) {
