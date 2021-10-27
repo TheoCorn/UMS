@@ -30,6 +30,7 @@
 #include "Wire.h"
 #include "SPI.h"
 #include "Sensor.hpp"
+#include "sensorEnum.h"
 
 class MPU9250 : public Sensor {
 public:
@@ -53,11 +54,12 @@ public:
         GYRO_RANGE_1000DPS = 0x10,
         GYRO_RANGE_2000DPS = 0x18
     };
-    MPU9250(TwoWire *bus, uint8_t addr);
+
+    MPU9250(uint8_t addr);
     MPU9250(SPIClass *bus, uint8_t cs);
-    bool Begin();
-    bool EnableDrdyInt();
-    bool DisableDrdyInt();
+    bool begin();
+//    bool EnableDrdyInt();
+//    bool DisableDrdyInt();
     bool ConfigAccelRange(const AccelRange range);
     inline AccelRange accel_range() const {return accel_range_;}
     bool ConfigGyroRange(const GyroRange range);
@@ -66,8 +68,8 @@ public:
     inline uint8_t srd() const {return srd_;}
     bool ConfigDlpf(const DlpfBandwidth dlpf);
     inline DlpfBandwidth dlpf() const {return dlpf_bandwidth_;}
-    void DrdyCallback(uint8_t int_pin, void (*function)());
-    bool Read();
+//    void DrdyCallback(uint8_t int_pin, void (*function)());
+    bool read();
     inline float accel_x_mps2() const {return accel_mps2_[0];}
     inline float accel_y_mps2() const {return accel_mps2_[1];}
     inline float accel_z_mps2() const {return accel_mps2_[2];}
@@ -79,12 +81,19 @@ public:
     inline float mag_z_ut() const {return mag_ut_[2];}
     inline float die_temperature_c() const {return die_temperature_c_;}
 
-    float readFeature(const unsigned int& feature) override;
+    float readFeature(size_t index) override;
+    void setXSettings();
+
+    char const * mpuFeaturesString[10] = { "accX", "accY", "accZ", "gyroX", "gyroY", "gyroZ",
+                                           "magnetometerX", "magnetometerY", "magnetometerZ", "temperature"};
+
+    std::vector<bool> activeFeaturesVec;
+    std::vector<unsigned int> xSettings;
 
     String name() override { return "MPU9250"; }
 
-    uint32_t sid() override;
-    uint32_t rsid() override;
+    uint32_t sid() override {return sensorEnum::MPU9250; }
+    uint32_t rsid() override { return conn_; }
 
     void getJson(JsonArray& jArr) override;
 
