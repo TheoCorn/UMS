@@ -18,12 +18,12 @@ void MPU9250::setUp() {
     Sensor::savedSettingsLoader("/sensorData/1.json", activeFeaturesVec, xSettings);
     setXSettings();
 //    calibrateMag();
-    calibrateAccel();
-    calibrateGyro();
+//    calibrateAccel();
+//    calibrateGyro();
 
 //    setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_184HZ);
     // setting SRD to 19 for a 50 Hz update rate
-    setSrd(19);
+//    setSrd(19);
 }
 
 void MPU9250::setXSettings() {
