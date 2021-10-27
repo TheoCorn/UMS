@@ -17,7 +17,7 @@ void MPU9250::setUp() {
 
     Sensor::savedSettingsLoader("/sensorData/1.json", activeFeaturesVec, xSettings);
     setXSettings();
-    calibrateMag();
+//    calibrateMag();
     calibrateAccel();
     calibrateGyro();
 
