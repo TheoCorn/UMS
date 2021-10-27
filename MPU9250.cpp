@@ -13,6 +13,19 @@ MPU9250::MPU9250(uint8_t address) : Sensor() {
     begin();
 }
 
+MPU9250::MPU9250(TwoWire *bus, uint8_t addr) {
+    iface_ = I2C;
+    i2c_ = bus;
+    conn_ = addr;
+    begin();
+}
+MPU9250::MPU9250(SPIClass *bus, uint8_t cs) {
+    iface_ = SPI;
+    spi_ = bus;
+    conn_ = cs;
+    begin();
+}
+
 void MPU9250::setUp() {
 
     Sensor::savedSettingsLoader("/sensorData/1.json", activeFeaturesVec, xSettings);
@@ -33,52 +46,11 @@ void MPU9250::setXSettings() {
 
 void MPU9250::getJson(JsonArray &jArr) {
     Sensor::generateTemplatedSensorObject(jArr, rsid(), sid(), activeFeaturesVec, xSettings);
-
-//
-//        JsonObject mpuObj = Sensor::createSensorObject(jArr);
-//        mpuObj["name"] = this->name();
-//        mpuObj["uuid"] = this->_address;
-//
-//        JsonObject features = mpuObj.createNestedObject("features");
-//
-//        JsonObject xSettings = mpuObj.createNestedObject("XSettings");
-//
-//      for (int i = 0; i < 10; i++) {
-//          features[mpuFeaturesString[i]] = mpuFeaturesBool[i];
-//      }
-//
-//    JsonObject accelSettings = xSettings.createNestedObject("accel");
-//    for (int i = 0; i < 4; i++) {
-//      accelSettings[accelRangeString[i]] = accelRangeBool[i];
-//    }
-//
-//    JsonObject gyroSettings = xSettings.createNestedObject("gyro");
-//     for (int i = 0; i < 4; i++) {
-//      gyroSettings[gyroRangeString[i]] = gyroRangeBool[i];
-//    }
 }
 
 
 void MPU9250::setJson(JsonObject &sConf) {
-
     Sensor::JsonSetter(sConf, activeFeaturesVec, xSettings);
-
-//    JsonArray features = sConf["Features"];
-//    JsonArray locXSettings = sConf["XSettings"];
-////    JsonArray ISettings = sConf["ISettings"];
-//
-//    activeFeaturesVec.clear();
-//    xSettings.clear();
-//
-//
-//    for (JsonVariant v: features) {
-//        activeFeaturesVec.emplace_back(v.as<bool>());
-//    }
-//
-//    for (JsonVariant v: locXSettings) {
-//        xSettings.emplace_back(v.as<unsigned int>());
-//    }
-
 }
 
 
