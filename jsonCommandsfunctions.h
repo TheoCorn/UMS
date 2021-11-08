@@ -11,6 +11,7 @@
 #include "sysInfo.h"
 #include "json_key_words.h"
 #include "Error.h"
+#include "AddressIdentifier.hpp"
 
 
 namespace jcf{
