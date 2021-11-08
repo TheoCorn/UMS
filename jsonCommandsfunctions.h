@@ -17,6 +17,9 @@ namespace jcf{
     void onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors);
 
     void onGetElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors);
+
+    void onClearConflict(JsonVariant *v, std::map<uint32_t,Sensor *> *sensors,
+                         std::vector<csa::ConflictingAddressStruct *>& conflicts);
 }
 
 

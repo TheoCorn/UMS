@@ -26,6 +26,10 @@
 #define READ_JSON_KEYWORD_VALUE "v"
 #define READ_JSON_KEYWORD_PERIOD "p"
 
+// conflict  json keywords
+#define C_JSON_KEYWORD_CONFLICTS_ARRAY "Conflicts"
+#define C_JSON_KEYWORD_SIDS "SIDs"
+
 
 
 

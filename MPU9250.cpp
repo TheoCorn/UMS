@@ -44,7 +44,7 @@ void MPU9250::setJson(JsonObject &sConf) {
 
 
 void MPU9250::readSensor(JsonArray &jra) {
-    readSensor();
+    read();
     Sensor::templatedRead(jra, activeFeaturesVec, rsid(), dynamic_cast<Sensor*>(this));
 }
 
@@ -591,4 +591,3 @@ bool MPU9250::ReadAk8963Registers(uint8_t reg, uint8_t count, uint8_t *data) {
     delay(1);
     return ReadRegisters(EXT_SENS_DATA_00_, count, data);
 }
-

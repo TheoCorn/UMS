@@ -226,7 +226,7 @@ void loop() {
         mDisplay->displayWhenNotReading();
 
         if (!localConflicts->empty()) {
-            sysInfo::serialCom->write(csa::conflictsToString(localConflicts));
+            sysInfo::serialCom->write(csa::conflictsToJsonDoc(localConflicts));
             conflicts.insert(conflicts.end(), localConflicts->begin(), localConflicts->end());
         }
         delete localConflicts;
@@ -264,7 +264,7 @@ void doProcess4JsonObj(JsonPair *p) {
 
 
         case CLEAR_CONFLICT :
-
+            onClearConflict(&v, sensors, conflicts);
             break;
 
 

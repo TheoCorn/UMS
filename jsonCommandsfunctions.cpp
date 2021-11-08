@@ -55,3 +55,20 @@ void jcf::onGetElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *sens
     delete doc;
 
 }
+
+
+void onClearConflict(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors,
+                     std::vector<csa::ConflictingAddressStruct *>& conflicts){
+    JsonObject cco = v->as<JsonObject>();
+    unsigned int sid = cco[JSON_KEYWORD_SID];
+    uint32_t rsid = cco[JSON_KEYWORD_RSID];
+
+    SensorsIdentifierManager::addSensor(sid, rsid, sensors);
+
+    for(auto it = conflicts.begin(); it != conflicts.end(); it++){
+        if ((*it)->rsid == rsid){
+            it = conflicts.erase(it);
+        }
+    }
+
+}

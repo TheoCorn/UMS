@@ -7,21 +7,24 @@
 
 #define CONFLICT_SIZE 256
 
-JsonDocument* csa::conflictsToString(std::vector<csa::ConflictingAddressStruct*>* conflicts){
+JsonDocument* csa::conflictsToJsonDoc(std::vector<csa::ConflictingAddressStruct*>* conflicts){
     auto doc = new DynamicJsonDocument(conflicts->size() * CONFLICT_SIZE);
-    JsonArray conflictsArr = doc->createNestedArray("C");
+    JsonArray conflictsArr = doc->createNestedArray(C_JSON_KEYWORD_CONFLICTS_ARRAY);
 
-    for(int i = 0; i < conflicts->size(); ++i){
+    for(auto & conflict : *conflicts){
         JsonObject obj =  conflictsArr.createNestedObject();
 
-        obj["a"] = conflicts->at(i)->address;
+        obj[JSON_KEYWORD_RSID] = conflict->rsid;
 
-        JsonArray enumArr = obj.createNestedArray("e");
-        JsonArray nameArr = obj.createNestedArray("n");
+        JsonArray sidsArray = obj.createNestedArray(C_JSON_KEYWORD_SIDS);
+//        JsonArray nameArr = obj.createNestedArray();
 
-        for(unsigned int pos = 0; pos < conflicts->at(i)->EnumPosOfSensors.size(); ++pos){
-            enumArr.add(conflicts->at(i)->EnumPosOfSensors.at(pos));
-            nameArr.add(conflicts->at(i)->nameOfSensors.at(pos));
+//        for(unsigned int pos = 0; pos < conflicts->at(i)->sids.size(); ++pos){
+//            enumArr.add(conflicts->at(i)->sids.at(pos));
+//        }
+
+        for(auto m_sid : conflict->sids){
+            sidsArray.add(m_sid);
         }
 
     }
