@@ -117,9 +117,9 @@ std::vector<csa::ConflictingAddressStruct *> conflicts;
 void setup() {
     SPIFFS.begin(true);
 
-    //todo until battery sensor is added
+
     readBatteryCharge();
-    sysInfo::isCharging = false;
+//    sysInfo::isCharging = false;
 
     //    // todo delete before release debug
     Serial.begin(112500);
@@ -146,7 +146,7 @@ void setup() {
 
     pinMode(SCREEN_EN_PIN, OUTPUT);
     digitalWrite(SCREEN_EN_PIN, HIGH);
-    pinMode(batteryReadPin, INPUT);
+    pinMode(BATTERY_READ_PIN, INPUT);
 
     pinMode(BUTTON_PIN, INPUT);
     pinMode(REA, INPUT);
@@ -344,8 +344,7 @@ void sleep() {
 
 void readBatteryCharge() {
 
-
-    float bat_v = analogRead(batteryReadPin) * MAX_ADC_VOLTAGE / MAX_ADC_RAW * MILI_TO_NORMAL_UNIT;
+    float bat_v = analogRead(BATTERY_READ_PIN) * MAX_ADC_VOLTAGE / MAX_ADC_RAW * MILI_TO_NORMAL_UNIT;
     if (bat_v >= FULL_BATTERY){
         sysInfo::batteryPercentage = 100;
     }else if(bat_v >= MID_CHARGE){
@@ -353,6 +352,8 @@ void readBatteryCharge() {
     }else{
         sysInfo::batteryPercentage = 0;
     }
+
+    sysInfo::isCharging = digitalRead(BATTERY_IS_CHARGING);
 }
 
 void IRAM_ATTR onREAISR() {

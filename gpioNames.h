@@ -9,7 +9,7 @@
 
 //if changed change in sTabOnSet::sysChange
 #define SCREEN_EN_PIN       5
-#define batteryReadPin  13
+#define BATTERY_READ_PIN  13
 #define BATTERY_IS_CHARGING 14
 
 #define BUTTON_PIN      19
