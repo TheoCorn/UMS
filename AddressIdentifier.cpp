@@ -32,19 +32,17 @@ void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Se
     else {
 
         for(auto& conf : *conflicts){
-            if (conf->address == address) return;
+            if (conf->rsid == address) return;
         }
 
         //todo make more efficient
-        auto *con = new csa::ConflictingAddressStruct();
-        con->address = address;
-        con->EnumPosOfSensors = numEnumSensorInVectorArray[address];
-
-        for (unsigned int pos: con->EnumPosOfSensors) {
-            Sensor *s = getSensorPointerForEnumPos(pos, address);
-            con->nameOfSensors.emplace_back(s->name());
-            delete s;
-        }
+        auto *con = new csa::ConflictingAddressStruct(address, numEnumSensorInVectorArray[address]);
+//
+//        for (unsigned int pos: con->sids) {
+//            Sensor *s = getSensorPointerForEnumPos(pos, address);
+//            con->nameOfSensors.emplace_back(s->name());
+//            delete s;
+//        }
         conflicts->emplace_back(con);
     }
 

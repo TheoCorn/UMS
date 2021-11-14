@@ -57,7 +57,7 @@ void jcf::onGetElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *sens
 }
 
 
-void onClearConflict(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors,
+void jcf::onClearConflict(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors,
                      std::vector<csa::ConflictingAddressStruct *>& conflicts){
     JsonObject cco = v->as<JsonObject>();
     unsigned int sid = cco[JSON_KEYWORD_SID];
@@ -72,3 +72,4 @@ void onClearConflict(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors,
     }
 
 }
+

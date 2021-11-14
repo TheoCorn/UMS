@@ -48,6 +48,14 @@
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 #endif
 
+//battery charge macros
+#define MAX_ADC_VOLTAGE 3.3f
+#define MAX_ADC_RAW 4095
+#define FULL_BATTERY 3.75f
+#define MID_CHARGE 3.7f
+#define LOW_CHARGE 3.5f
+#define MILI_TO_NORMAL_UNIT 1000
+
 
 
 #define RE_GPIO_PIN_SEL ((1ULL<< BUTTON_PIN) | (1ULL<< REA) | (1ULL<< REB))
@@ -335,7 +343,16 @@ void sleep() {
 
 //todo: implement battery percentage
 void readBatteryCharge() {
-    sysInfo::batteryPercentage = 10;
+
+
+    float bat_v = analogRead(batteryReadPin) * MAX_ADC_VOLTAGE / MAX_ADC_RAW * MILI_TO_NORMAL_UNIT;
+    if (bat_v >= FULL_BATTERY){
+        sysInfo::batteryPercentage = 100;
+    }else if(bat_v = MID_CHARGE){
+        sysInfo::batteryPercentage = 50;
+    }else{
+        sysInfo::batteryPercentage = 0;
+    }
 }
 
 void IRAM_ATTR onREAISR() {
