@@ -349,18 +349,28 @@ void readBatteryCharge() {
         sysInfo::batteryPercentage = 100;
     }else if(bat_v >= MID_CHARGE){
         sysInfo::batteryPercentage = 50;
+    }else if (bat_v >= LOW_CHARGE) {
+        sysInfo::batteryPercentage = 10;
     }else{
         sysInfo::batteryPercentage = 0;
     }
 
+
     sysInfo::isCharging = digitalRead(BATTERY_IS_CHARGING);
 }
 
+
+#ifndef ESP32
+#error onREAISR function uses esp32 specific code
+#endif
 void IRAM_ATTR onREAISR() {
     mDisplay->rebWasLow = !digitalRead(REB);
     mDisplay->reaWasLow = true;
 }
 
+#ifndef ESP32
+#error onREBISR function uses esp32 specific code
+#endif
 void IRAM_ATTR onREBISR() {
     mDisplay->wasClicked = true;
 }
