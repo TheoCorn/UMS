@@ -118,7 +118,7 @@ void setup() {
     SPIFFS.begin(true);
 
     //todo until battery sensor is added
-    sysInfo::batteryPercentage = 10;
+    readBatteryCharge();
     sysInfo::isCharging = false;
 
     //    // todo delete before release debug
@@ -341,14 +341,14 @@ void sleep() {
     esp_deep_sleep_start();
 }
 
-//todo: implement battery percentage
+
 void readBatteryCharge() {
 
 
     float bat_v = analogRead(batteryReadPin) * MAX_ADC_VOLTAGE / MAX_ADC_RAW * MILI_TO_NORMAL_UNIT;
     if (bat_v >= FULL_BATTERY){
         sysInfo::batteryPercentage = 100;
-    }else if(bat_v = MID_CHARGE){
+    }else if(bat_v >= MID_CHARGE){
         sysInfo::batteryPercentage = 50;
     }else{
         sysInfo::batteryPercentage = 0;
