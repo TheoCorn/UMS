@@ -12,9 +12,9 @@
 #define BATTERY_READ_PIN  13
 #define BATTERY_IS_CHARGING 14
 
-#define BUTTON_PIN      19
-#define REA             34
-#define REB             35
+#define BUTTON_PIN      0 // prototype 19
+#define REA             4 // prototype 34
+#define REB             2 // prototype 35
 
 
 

@@ -49,11 +49,12 @@
 #endif
 
 //battery charge macros
+//voltage divider R1 = 330 kOhm, R2 = 680 kOhm
 #define MAX_ADC_VOLTAGE 3.3f
 #define MAX_ADC_RAW 4095
-#define FULL_BATTERY 3.75f
-#define MID_CHARGE 3.7f
-#define LOW_CHARGE 3.5f
+#define FULL_BATTERY 2.48f   // before voltage divider 3.75f
+#define MID_CHARGE 2.4f  //3.7f
+#define LOW_CHARGE 3.3f //3.5f
 #define MILI_TO_NORMAL_UNIT 1000
 
 
@@ -122,7 +123,7 @@ void setup() {
 //    sysInfo::isCharging = false;
 
     //    // todo delete before release debug
-    Serial.begin(112500);
+//    Serial.begin(112500);
 
 //    conflicts = new std::vector<csa::ConflictingAddressStruct *>();
     sensors = new std::map<uint32_t, Sensor *>;
@@ -174,13 +175,17 @@ void setup() {
     attachInterrupt(REA, onREAISR, FALLING);
     attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
 
-    gpio_hold_en(GPIO_NUM_19);
-    gpio_hold_en(GPIO_NUM_34);
-    gpio_hold_en(GPIO_NUM_35);
+//    gpio_hold_en(GPIO_NUM_19);
+//    gpio_hold_en(GPIO_NUM_34);
+//    gpio_hold_en(GPIO_NUM_35);
 
+    gpio_hold_en(GPIO_NUM_0);
+    gpio_hold_en(GPIO_NUM_4);
+    gpio_hold_en(GPIO_NUM_2);
 
     //sets up wake up from sleep
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_19, 1);
+//    esp_sleep_enable_ext0_wakeup(GPIO_NUM_19, 1);
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_0, 1);
 //    pinMode(sleepPin, INPUT);
 
 //    attachInterrupt(sleepPin, sleep, FALLING);
