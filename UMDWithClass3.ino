@@ -83,6 +83,8 @@ void onREAISR();
 
 void onREBISR();
 
+void setBatReader();
+
 //void reA();
 //void reB();
 
@@ -103,6 +105,17 @@ size_t sysInfo::serialComIndex;
 bool sysInfo::isCharging;
 
 
+class BatInfPointers {
+public:
+    unsigned int* battery_percentage;
+    bool* is_charging;
+
+    BatInfPointers(unsigned int* bat_percentage, bool* is_charging) : battery_percentage(bat_percentage),
+        is_charging(is_charging) { }
+};
+TaskHandle_t check_bat_handle = NULL;
+
+
 DisplayFunctions *mDisplay;
 SensorsIdentifierManager *sensorIdentifier;
 
@@ -119,7 +132,7 @@ void setup() {
     SPIFFS.begin(true);
 
 
-    readBatteryCharge();
+    setBatReader()
 //    sysInfo::isCharging = false;
 
         // todo delete before release debug
@@ -237,7 +250,6 @@ void loop() {
         sysInfo::serialCom->write(&doc);
 
     } else {
-        readBatteryCharge();
         auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
         ss::checkI2C(localConflicts, sensors, sensorIdentifier);
         mDisplay->displayWhenNotReading();
@@ -334,11 +346,13 @@ void onStartReading() {
 
     delete sensorIdentifier;
 
+    vTaskDelete(check_bat_handle);
+
     sTime = millis();
 }
 
 void onStopReading() {
-
+    setBatReader();
     sensorIdentifier = new SensorsIdentifierManager();
 }
 
@@ -351,22 +365,33 @@ void sleep() {
 }
 
 
-void readBatteryCharge() {
+void setBatReader(){
+    auto bip = new BatInfPointers(&sysInfo::batteryPercentage, &sysInfo::isCharging);
 
-    float bat_v = analogRead(BATTERY_READ_PIN) * MAX_ADC_VOLTAGE / MAX_ADC_RAW; //* MILI_TO_NORMAL_UNIT;
-    Serial.println(bat_v);
-    if (bat_v >= FULL_BATTERY){
-        sysInfo::batteryPercentage = 100;
-    }else if(bat_v >= MID_CHARGE){
-        sysInfo::batteryPercentage = 50;
-    }else if (bat_v >= LOW_CHARGE) {
-        sysInfo::batteryPercentage = 10;
-    }else{
-        sysInfo::batteryPercentage = 0;
+    xTaskCreatePinnedToCore(readBatteryCharge, "BatReader", 1024, bip, 2, &check_bat_handle, 0);
+}
+
+void readBatteryCharge(void* m_bip) {
+
+    auto* bip = (BatInfPointers*)m_bip;
+    while(true) {
+        float bat_v = analogRead(BATTERY_READ_PIN) * MAX_ADC_VOLTAGE / MAX_ADC_RAW; //* MILI_TO_NORMAL_UNIT;
+        Serial.println(bat_v);
+        if (bat_v >= FULL_BATTERY) {
+            *(bip->battery_percentage) = 100;
+        } else if (bat_v >= MID_CHARGE) {
+            *(bip->battery_percentage) = 50;
+        } else if (bat_v >= LOW_CHARGE) {
+            *(bip->battery_percentage) = 10;
+        } else {
+            *(bip->battery_percentage) = 0;
+        }
+
+        *(bip->is_charging) = digitalRead(BATTERY_IS_CHARGING);
+
+        vTaskDelay(60000);
     }
 
-
-    sysInfo::isCharging = digitalRead(BATTERY_IS_CHARGING);
 }
 
 
