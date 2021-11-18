@@ -55,7 +55,7 @@
 #define FULL_BATTERY 2.48f   // before voltage divider 3.75f
 #define MID_CHARGE 2.4f  //3.7f
 #define LOW_CHARGE 3.3f //3.5f
-#define MILI_TO_NORMAL_UNIT 1000
+//#define MILI_TO_NORMAL_UNIT 1000
 
 
 
@@ -148,6 +148,9 @@ void setup() {
     pinMode(SCREEN_EN_PIN, OUTPUT);
     digitalWrite(SCREEN_EN_PIN, HIGH);
     pinMode(BATTERY_READ_PIN, INPUT);
+
+    pinMode(BATTERY_IS_CHARGING, INPUT);
+    digitalWrite(BATTERY_IS_CHARGING, LOW);
 
     pinMode(BUTTON_PIN, INPUT);
     pinMode(REA, INPUT);
@@ -350,7 +353,7 @@ void sleep() {
 
 void readBatteryCharge() {
 
-    float bat_v = analogRead(BATTERY_READ_PIN) * MAX_ADC_VOLTAGE / MAX_ADC_RAW * MILI_TO_NORMAL_UNIT;
+    float bat_v = analogRead(BATTERY_READ_PIN) * MAX_ADC_VOLTAGE / MAX_ADC_RAW; //* MILI_TO_NORMAL_UNIT;
     Serial.println(bat_v);
     if (bat_v >= FULL_BATTERY){
         sysInfo::batteryPercentage = 100;
