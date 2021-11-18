@@ -122,8 +122,8 @@ void setup() {
     readBatteryCharge();
 //    sysInfo::isCharging = false;
 
-    //    // todo delete before release debug
-//    Serial.begin(112500);
+        // todo delete before release debug
+    Serial.begin(112500);
 
 //    conflicts = new std::vector<csa::ConflictingAddressStruct *>();
     sensors = new std::map<uint32_t, Sensor *>;
@@ -234,6 +234,7 @@ void loop() {
         sysInfo::serialCom->write(&doc);
 
     } else {
+        readBatteryCharge();
         auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
         ss::checkI2C(localConflicts, sensors, sensorIdentifier);
         mDisplay->displayWhenNotReading();
@@ -350,6 +351,7 @@ void sleep() {
 void readBatteryCharge() {
 
     float bat_v = analogRead(BATTERY_READ_PIN) * MAX_ADC_VOLTAGE / MAX_ADC_RAW * MILI_TO_NORMAL_UNIT;
+    Serial.println(bat_v);
     if (bat_v >= FULL_BATTERY){
         sysInfo::batteryPercentage = 100;
     }else if(bat_v >= MID_CHARGE){
