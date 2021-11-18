@@ -54,7 +54,7 @@
 #define MAX_ADC_RAW 4095
 #define FULL_BATTERY 2.48f   // before voltage divider 3.75f
 #define MID_CHARGE 2.4f  //3.7f
-#define LOW_CHARGE 3.3f //3.5f
+#define LOW_CHARGE 2.3f //3.5f
 //#define MILI_TO_NORMAL_UNIT 1000
 
 
@@ -132,7 +132,7 @@ void setup() {
     SPIFFS.begin(true);
 
 
-    setBatReader()
+    setBatReader();
 //    sysInfo::isCharging = false;
 
         // todo delete before release debug
