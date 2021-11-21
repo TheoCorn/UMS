@@ -287,7 +287,7 @@ void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &active
 void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec,
                            std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings) {
 
-    DynamicJsonDocument doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
+    auto doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
     JsonObject obj = doc.to<JsonObject>();
     generateFeatures(obj, activeFeaturesVec);
     generateXSettings(obj, xSettings);
@@ -304,7 +304,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
 }
 
 void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec) {
-    DynamicJsonDocument doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
+    auto doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
     JsonObject obj = doc.to<JsonObject>();
     generateFeatures(obj, activeFeaturesVec);
 
@@ -319,7 +319,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
 
 void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec,
                            std::vector<unsigned int> &xSettings) {
-    DynamicJsonDocument doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
+    auto doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
     JsonObject obj = doc.to<JsonObject>();
     generateFeatures(obj, activeFeaturesVec);
     generateXSettings(obj, xSettings);
@@ -335,7 +335,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
 }
 
 void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec, std::vector<bool> &iSettings) {
-    DynamicJsonDocument doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
+    auto doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
     JsonObject obj = doc.to<JsonObject>();
     generateFeatures(obj, activeFeaturesVec);
     generateISettings(obj, iSettings);
