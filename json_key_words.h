@@ -5,7 +5,7 @@
 #ifndef UMDWITHCLASS3_JSON_KEY_WORDS_H
 #define UMDWITHCLASS3_JSON_KEY_WORDS_H
 
-#define JSON_KEYWORD_RSID "rsid"
+#define JSON_KEYWORD_RSID "_rsid"
 #define JSON_KEYWORD_SID "sid"
 
 

@@ -29,7 +29,7 @@ int INA3221::getManufID() {
 }
 
 void INA3221::wireReadRegister(uint8_t reg, uint16_t *value) {
-    Wire.beginTransmission(rsid);
+    Wire.beginTransmission(_rsid);
 #if ARDUINO >= 100
     Wire.write(reg);                       // Register
 #else
@@ -39,7 +39,7 @@ void INA3221::wireReadRegister(uint8_t reg, uint16_t *value) {
 
     delay(1); // Max 12-bit conversion time is 586us per sample
 
-    Wire.requestFrom(rsid, (uint8_t)2);
+    Wire.requestFrom(_rsid, (uint8_t)2);
 #if ARDUINO >= 100
     // Shift values to create properly formed integer
     *value = ((Wire.read() << 8) | Wire.read());
@@ -112,7 +112,7 @@ int16_t INA3221::getShuntVoltage_raw(int channel) {
 }
 
 void INA3221::wireWriteRegister(uint8_t reg, uint16_t value) {
-    Wire.beginTransmission(rsid);
+    Wire.beginTransmission(_rsid);
 #if ARDUINO >= 100
     Wire.write(reg);                       // Register
     Wire.write((value >> 8) & 0xFF);       // Upper 8-bits
@@ -143,7 +143,7 @@ String INA3221::getExtendedStringForDisplay() {
 }
 
 void INA3221::readSensor(JsonArray &jra) {
-    Sensor::templatedRead(jra, activeFeaturesVec, rsid, dynamic_cast<Sensor*>(this));
+    Sensor::templatedRead(jra, activeFeaturesVec, _rsid, dynamic_cast<Sensor*>(this));
 }
 
 void INA3221::saveConfig() {
@@ -151,7 +151,7 @@ void INA3221::saveConfig() {
 }
 
 void INA3221::getJson(JsonArray &jArr) {
-    Sensor::generateTemplatedSensorObject(jArr, rsid, sid(), activeFeaturesVec, xSettings);
+    Sensor::generateTemplatedSensorObject(jArr, _rsid, sid(), activeFeaturesVec, xSettings);
 }
 
 void INA3221::setJson(JsonObject &sConf) {

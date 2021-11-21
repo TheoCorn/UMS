@@ -10,7 +10,7 @@ void jcf::onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *
     for (JsonVariant sConf: arr) {
         try {
 //            JsonObject obj = sConf.as<JsonObject>();
-//            unsigned int key = obj["rsid"];
+//            unsigned int key = obj["_rsid"];
 //            sensors->at(key)->setJson(obj);
 
             JsonObject doc = sConf.as<JsonObject>();

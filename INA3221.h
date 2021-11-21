@@ -116,7 +116,7 @@
 
 class INA3221 : public Sensor {
 private:
-    uint32_t rsid;
+    uint32_t _rsid;
 
     char const* inaFeaturesString[9] = {"busV1",
                                         "shuntmV1",
@@ -133,9 +133,9 @@ private:
 
 
 public:
-//    INA3221(uint32_t rsid, TwoWire& wire) : rsid(rsid), wire(wire) {}
+//    INA3221(uint32_t _rsid, TwoWire& wire) : _rsid(_rsid), wire(wire) {}
 
-    INA3221(uint32_t rsid) : rsid(rsid) {}
+    INA3221(uint32_t rsid) : _rsid(rsid) {}
 
     float getBusVoltage_V(int channel);
     float getShuntVoltage_mV(int channel);
@@ -148,7 +148,7 @@ public:
     int16_t getBusVoltage_raw(int channel);
     int16_t getShuntVoltage_raw(int channel);
 
-    uint32_t rsid() override { return rsid; }
+    uint32_t rsid() override { return _rsid; }
     uint32_t sid() override { return sensorEnum::INA3221; }
 
     String name() override;

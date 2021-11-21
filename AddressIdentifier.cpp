@@ -7,10 +7,14 @@
 #include "JsonParserFunctions.hpp"
 #include "spiffs.hpp"
 #include "sensorEnum.h"
-#include "MPU9250.hpp"
+
 #include <ArduinoJson.h>
 #include "UnknownSensor.h"
+
+//sensors
+#include "MPU9250.hpp"
 #include "ADS1X15.h"
+#include "INA3221.h"
 
 #define SENSOR_SID_ARRAY_FILE "/SensorAddresses.json"
 
@@ -61,6 +65,7 @@ Sensor *SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPo
         case sensorEnum::MPU9250: return dynamic_cast<Sensor*>(new class MPU9250(address)); break;
         case sensorEnum::ADS1015: return dynamic_cast<Sensor*>(new class ADS1015(address)); break;
         case sensorEnum::ADS1115: return dynamic_cast<Sensor*>(new class ADS1115(address)); break;
+        case sensorEnum::INA3221: return dynamic_cast<Sensor*>(new class INA3221(address)); break;
 //        case sensorEnum::BMP280: return (sensor*)(new class BMP280); break;
 
         default: return dynamic_cast<Sensor*>(new class UnknownSensor(address)); break;
