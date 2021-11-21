@@ -114,7 +114,7 @@
 
 class INA3221 : public Sensor {
 private:
-    uint32_t _rsid;
+    uint8_t _rsid;
 
     char const* inaFeaturesString[9] = {"busV1",
                                         "shuntmV1",
@@ -135,8 +135,8 @@ private:
 public:
 //    INA3221(uint32_t _rsid, TwoWire& wire) : _rsid(_rsid), wire(wire) {}
 
-    explicit INA3221(uint32_t rsid) : _rsid(rsid) {
-        wire = Wire;
+    explicit INA3221(uint8_t rsid) : _rsid(rsid), wire(Wire) {
+//        wire = Wire;
 }
 
     float getBusVoltage_V(int channel);
