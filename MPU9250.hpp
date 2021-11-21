@@ -1,3 +1,9 @@
+
+/*!
+ * this is a modified version of Bolder Flight Systems Inc mpu9250 library
+ * @authors Brian R Taylor, Theodor Capek
+ */
+
 /*
 * Brian R Taylor
 * brian.taylor@bolderflight.com
@@ -60,9 +66,9 @@ public:
     bool begin();
 //    bool EnableDrdyInt();
 //    bool DisableDrdyInt();
-    bool ConfigAccelRange(const AccelRange range);
+    bool ConfigAccelRange(const unsigned int range);
     inline AccelRange accel_range() const {return accel_range_;}
-    bool ConfigGyroRange(const GyroRange range);
+    bool ConfigGyroRange(const unsigned int range);
     inline GyroRange gyro_range() const {return gyro_range_;}
     bool ConfigSrd(const uint8_t srd);
     inline uint8_t srd() const {return srd_;}

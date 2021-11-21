@@ -28,8 +28,8 @@ void MPU9250::setUp() {
 }
 
 void MPU9250::setXSettings() {
-    ConfigAccelRange(static_cast<AccelRange>(xSettings[0]));
-    ConfigGyroRange(static_cast<GyroRange>(xSettings[1]));
+    ConfigAccelRange(xSettings[0]);
+    ConfigGyroRange(xSettings[1]);
 }
 
 void MPU9250::getJson(JsonArray &jArr) {
@@ -210,22 +210,22 @@ bool MPU9250::begin() {
     if (!ReadAk8963Registers(AK8963_HXL_, sizeof(mag_data), mag_data)) {
         return false;
     }
-    /* Set the accel range to 16G by default */
-    if (!ConfigAccelRange(ACCEL_RANGE_16G)) {
-        return false;
-    }
-    /* Set the gyro range to 2000DPS by default*/
-    if (!ConfigGyroRange(GYRO_RANGE_2000DPS)) {
-        return false;
-    }
-    /* Set the DLPF to 20HZ by default */
-    if (!ConfigDlpf(DLPF_BANDWIDTH_20HZ)) {
-        return false;
-    }
-    /* Set the SRD to 0 by default */
-    if (!ConfigSrd(0)) {
-        return false;
-    }
+//    /* Set the accel range to 16G by default */
+//    if (!ConfigAccelRange(ACCEL_RANGE_16G)) {
+//        return false;
+//    }
+//    /* Set the gyro range to 2000DPS by default*/
+//    if (!ConfigGyroRange(GYRO_RANGE_2000DPS)) {
+//        return false;
+//    }
+//    /* Set the DLPF to 20HZ by default */
+//    if (!ConfigDlpf(DLPF_BANDWIDTH_20HZ)) {
+//        return false;
+//    }
+//    /* Set the SRD to 0 by default */
+//    if (!ConfigSrd(0)) {
+//        return false;
+//    }
     return true;
 }
 //bool MPU9250::EnableDrdyInt() {
@@ -247,29 +247,29 @@ bool MPU9250::begin() {
 //    return true;
 //}
 
-bool MPU9250::ConfigAccelRange(const AccelRange range) {
+bool MPU9250::ConfigAccelRange(const unsigned int range) {
     AccelRange requested_range;
     float requested_scale;
     spi_clock_ = 1000000;
     /* Check input is valid and set requested range and scale */
     switch (range) {
-        case ACCEL_RANGE_2G: {
-            requested_range = range;
+        case 0: {
+            requested_range = ACCEL_RANGE_2G;
             requested_scale = 2.0f / 32767.5f;
             break;
         }
-        case ACCEL_RANGE_4G: {
-            requested_range = range;
+        case 1: {
+            requested_range = ACCEL_RANGE_4G;
             requested_scale = 4.0f / 32767.5f;
             break;
         }
-        case ACCEL_RANGE_8G: {
-            requested_range = range;
+        case 2: {
+            requested_range = ACCEL_RANGE_8G;
             requested_scale = 8.0f / 32767.5f;
             break;
         }
-        case ACCEL_RANGE_16G: {
-            requested_range = range;
+        case 3: {
+            requested_range = ACCEL_RANGE_16G;
             requested_scale = 16.0f / 32767.5f;
             break;
         }
@@ -287,29 +287,29 @@ bool MPU9250::ConfigAccelRange(const AccelRange range) {
     return true;
 }
 
-bool MPU9250::ConfigGyroRange(const GyroRange range) {
+bool MPU9250::ConfigGyroRange(const unsigned int range) {
     GyroRange requested_range;
     float requested_scale;
     spi_clock_ = 1000000;
     /* Check input is valid and set requested range and scale */
     switch (range) {
-        case GYRO_RANGE_250DPS: {
-            requested_range = range;
+        case 0: {
+            requested_range = GYRO_RANGE_250DPS;
             requested_scale = 250.0f / 32767.5f;
             break;
         }
-        case GYRO_RANGE_500DPS: {
-            requested_range = range;
+        case 1: {
+            requested_range = GYRO_RANGE_500DPS;
             requested_scale = 500.0f / 32767.5f;
             break;
         }
-        case GYRO_RANGE_1000DPS: {
-            requested_range = range;
+        case 2: {
+            requested_range = GYRO_RANGE_1000DPS;
             requested_scale = 1000.0f / 32767.5f;
             break;
         }
-        case GYRO_RANGE_2000DPS: {
-            requested_range = range;
+        case 3: {
+            requested_range = GYRO_RANGE_2000DPS;
             requested_scale = 2000.0f / 32767.5f;
             break;
         }

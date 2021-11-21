@@ -12,6 +12,7 @@ enum sensorEnum{
     MPU9250 = 1,
     ADS1015 = 2,
     ADS1115 = 3,
+    INA3221 = 4,
     BMP280
 
 };
