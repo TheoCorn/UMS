@@ -179,7 +179,7 @@ public:
      * @param name sensor name
      * @param sid i2cAddress
      */
-    static void generateTemplatedSensorObject(JsonArray& doc, const uint32_t &rsid, const uint32_t &sid, const bool& isActive);
+    static void generateTemplatedSensorObject(JsonArray& doc, const uint32_t &rsid, const uint32_t &sid, const bool isActive);
 
 //    /**
 //     * creates a templated Sensor json nested object
@@ -195,7 +195,7 @@ public:
 //                                              const unsigned int& xSetting);
 
     static void generateTemplatedSensorObject(JsonArray& doc, const uint32_t &rsid, const uint32_t &sid,
-                                              const unsigned int &xSetting, const bool &isActive);
+                                              const unsigned int xSetting, const bool isActive);
 
 
     /**
@@ -306,6 +306,7 @@ public:
                                                   
 
 private:
+
 
 
 

@@ -1,3 +1,4 @@
+#include <cstring>
 #include "Sensor.hpp"
 #include "Wire.h"
 #include "ArduinoJson.h"
@@ -55,7 +56,7 @@ void Sensor::generateISettings(JsonObject& sensorObj, std::vector<bool> &iSettin
 
 
 void Sensor::generateTemplatedSensorObject(JsonArray&doc, const uint32_t &rsid, const uint32_t &sid,
-                                           const bool& isActive) {
+                                           const bool isActive) {
 
     JsonObject sensorObj = createSensorObject(doc);
     fillBasicInfo(sensorObj, rsid, sid);
@@ -66,7 +67,7 @@ void Sensor::generateTemplatedSensorObject(JsonArray&doc, const uint32_t &rsid, 
 }
 
 void Sensor::generateTemplatedSensorObject(JsonArray&doc, const uint32_t &rsid, const uint32_t &sid,
-                                           const unsigned int &xSetting, const bool &isActive) {
+                                           const unsigned int xSetting, const bool isActive) {
 
     JsonObject sensorObj = createSensorObject(doc);
     fillBasicInfo(sensorObj, rsid, sid);
@@ -283,21 +284,67 @@ void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &active
 
 }
 
-void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec, std::vector<unsigned int> &xSettings,
-                      std::vector<bool> &iSettings) {
+void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec,
+                           std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings) {
 
-    File file = fs.open(filename, FILE_WRITE);
-    if(!file){
-        using namespace error;
-        auto err = new Error(ERROR_MSG__FAILED_TO_SAVE, ERROR_MSG__FAILED_TO_OPEN_FILE);
-        sysInfo::serialCom->write(err);
-        return;
-    }
-    if(file.print()){
-        Serial.println("- file written");
-    } else {
-        Serial.println("- write failed");
-    }
-    file.close();
+    auto doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
+    JsonObject obj = doc.as<JsonObject>();
+    generateFeatures(obj, activeFeaturesVec);
+    generateXSettings(obj, xSettings);
+    generateISettings(obj, iSettings);
 
+    js::serializeRet* sr = js::serializeDoc(doc);
+    spiffs::writeFile(SPIFFS, filename, sr->buff);
+
+    //todo delete
+    Serial.println(sr->buff);
+
+    delete sr;
+
+}
+
+void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec) {
+    auto doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
+    JsonObject obj = doc.as<JsonObject>();
+    generateFeatures(obj, activeFeaturesVec);
+
+    js::serializeRet* sr = js::serializeDoc(doc);
+    spiffs::writeFile(SPIFFS, filename, sr->buff);
+
+    //todo delete
+    Serial.println(sr->buff);
+
+    delete sr;
+}
+
+void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec,
+                           std::vector<unsigned int> &xSettings) {
+    auto doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
+    JsonObject obj = doc.as<JsonObject>();
+    generateFeatures(obj, activeFeaturesVec);
+    generateXSettings(obj, xSettings);
+
+    js::serializeRet* sr = js::serializeDoc(doc);
+    spiffs::writeFile(SPIFFS, filename, sr->buff);
+
+    //todo delete
+    Serial.println(sr->buff);
+
+    delete sr;
+
+}
+
+void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec, std::vector<bool> &iSettings) {
+    auto doc = DynamicJsonDocument(DEFAULT_JDOC_CAPACITY);
+    JsonObject obj = doc.as<JsonObject>();
+    generateFeatures(obj, activeFeaturesVec);
+    generateISettings(obj, iSettings);
+
+    js::serializeRet* sr = js::serializeDoc(doc);
+    spiffs::writeFile(SPIFFS, filename, sr->buff);
+
+    //todo delete
+    Serial.println(sr->buff);
+
+    delete sr;
 }
