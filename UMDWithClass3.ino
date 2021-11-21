@@ -61,7 +61,7 @@
 
 #define RE_GPIO_PIN_SEL ((1ULL<< BUTTON_PIN) | (1ULL<< REA) | (1ULL<< REB))
 
-#define JSON_SINGLE_SENSOR_SIZE 256;
+#define JSON_SINGLE_SENSOR_SIZE 512;
 
 
 #define GPIO_RE_PIN_SEL  ((1ULL<<BUTTON_PIN) | (1ULL<<REB) | (1ULL<<REA))
@@ -342,7 +342,9 @@ void onStartReading() {
 
 //    detachInterrupt(sleepPin);
     mDisplay->displayWhenReading();
-    readJsonCapacity = DEFAULT_JDOC_CAPACITY;  //JSON_SINGLE_SENSOR_SIZE * sensors->size();
+
+    //todo chek if working
+    readJsonCapacity = JSON_SINGLE_SENSOR_SIZE * sensors->size();   //DEFAULT_JDOC_CAPACITY;  //JSON_SINGLE_SENSOR_SIZE * sensors->size();
 
     delete sensorIdentifier;
 

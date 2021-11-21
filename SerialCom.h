@@ -78,7 +78,9 @@ public:
     virtual size_t write(JsonDocument * doc) = 0;
 
     /**
-     * Serializes an Error as Json and sends it
+     * Serializes an Error as Json, sends it and frees the Error from memory
+     *
+     * @param error the error to send
      */
     virtual size_t write(error::Error* error) = 0;
 

@@ -137,7 +137,8 @@ void INA3221::setUp() {
             using namespace error;
             auto err = new Error(ERROR_MSG__INVALID_XSETTING, "", Appearance::ALERT_DIALOG,
                                   Importance::REQUIRES_USER_ACTION, BackgroundAppActions::NONE);
-            sysInfo::serialCom->write(err)
+            sysInfo::serialCom->write(err);
+            //no need to free err because it is done by the SerialCom::write(error::Error* error) method
         }; break;
     }
 }
