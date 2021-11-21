@@ -11,6 +11,7 @@ void SpecificSensorScreen::render(Adafruit_SSD1306 *display,
 
     try{
         // todo fix nonsense code, crashes when direct because of WString
+        // I dont know what I meant by this to do but cant find the bug anymore
         String str = sensors->at(rsid)->getExtendedStringForDisplay();
         display->println(str);
     } catch (std::out_of_range&) {

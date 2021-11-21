@@ -35,10 +35,10 @@ public:
 
     /**
      * unique id of the Sensor object at runtime.
-     * If there are multiple same sensors they will have the same sid but different _rsid
-     * _rsid stands for runtime specific id
+     * If there are multiple same sensors they will have the same sid but different rsid
+     * rsid stands for runtime specific id
      *
-     * @return _rsid
+     * @return rsid
      */
     virtual uint32_t rsid() = 0;
 
@@ -75,7 +75,7 @@ public:
      * the method has to create a nested object in the JsonArray passed to it which name has to be "Sensor" (use Sensor::createSensorObject(JsonArray &doc))
      * (from now known as the sensor object)
      *
-     * the method has to create 2 variables in the sensor object called "_rsid" which is the i2c address or in the feature other runtime address @see Sensor::_rsid
+     * the method has to create 2 variables in the sensor object called "rsid" which is the i2c address or in the feature other runtime address @see Sensor::_rsid
      * and "sid" which is the sensor id. This sid has to have its config file in the app
      * @see Sensor::sid
      *
@@ -189,7 +189,7 @@ public:
 //     * @param feature name of the data set
 //     * @param xSetting single XSetting
 //     */
-//    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& _rsid, const uint32_t& sid, String feature,
+//    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid, String feature,
 //                                              const unsigned int& xSetting);
 
     static void generateTemplatedSensorObject(JsonArray& doc, const uint32_t &rsid, const uint32_t &sid,

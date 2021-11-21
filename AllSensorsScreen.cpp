@@ -8,13 +8,20 @@ void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start,
 
     if (!sensors->empty()){
 
-    display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);
+        //checks if active sensor iterator is a valid iterator
+        try {
+            auto rsid = activeSensorIterator->first;
+        } catch (...) {
+            activeSensorIterator = sensors->begin();
+        }
 
-    std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> it = activeSensorIterator;
+        display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);
 
-    display->println(activeSensorIterator->second->getStringForDisplay());
+        std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> it = activeSensorIterator;
 
-    printSensors(display, it, sensors->end(), end);
+        display->println(activeSensorIterator->second->getStringForDisplay());
+
+        printSensors(display, it, sensors->end(), end);
     }
 
 }
