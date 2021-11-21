@@ -291,8 +291,8 @@ public:
 //    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
 //                                    std::vector<bool>& iSettings);
 
-    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
-                                    std::vector<unsigned int>& xSettings, std::vector<bool>& iSettings);
+//    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
+//                                    std::vector<unsigned int>& xSettings, std::vector<bool>& iSettings);
 
     static void templatedRead(JsonArray &jra, std::vector<bool>& activeFeaturesVec,
                               uint32_t rsid, Sensor* sensor);
