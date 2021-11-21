@@ -11,6 +11,7 @@
 #define ERROR_MSG__INVALID_ARGUMENT "invalid argument"
 #define ERROR_MSG__INVALID_FEATURE "invalid feature index"
 #define ERROR_MSG__INVALID_XSETTING "invalid Xsetting"
+#define ERROR_MSG__FAILED_TO_IDENTIFY_COMMAND "failed to identify command"
 
 
 namespace error {

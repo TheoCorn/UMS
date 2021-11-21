@@ -307,7 +307,12 @@ void doProcess4JsonObj(JsonPair *p) {
         case DOWN_JSON:
             mDisplay->reaWasLow = true;
 
-        default:
+        default: {
+            using namespace error;
+
+            auto err = new Error(ERROR_MSG__FAILED_TO_IDENTIFY_COMMAND, "", Appearance::SNACK_BAR, Importance::MILD, BackgroundAppActions::RESEND);
+            sysInfo::serialCom->write(err);
+        };
             break;
     }
 
@@ -348,6 +353,9 @@ void onStartReading() {
 
     delete sensorIdentifier;
 
+#ifndef ESP32
+#error uses esp32 specific code
+#endif
     vTaskDelete(check_bat_handle);
 
     sTime = millis();
@@ -367,6 +375,9 @@ void sleep() {
 }
 
 
+#ifndef ESP32
+#error uses esp32 specific code
+#endif
 void setBatReader(){
     auto bip = new BatInfPointers(&sysInfo::batteryPercentage, &sysInfo::isCharging);
 
@@ -391,6 +402,9 @@ void readBatteryCharge(void* m_bip) {
 
         *(bip->is_charging) = digitalRead(BATTERY_IS_CHARGING);
 
+#ifndef ESP32
+#error uses esp32 specific code
+#endif
         vTaskDelay(60000);
     }
 
