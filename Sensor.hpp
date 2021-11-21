@@ -13,7 +13,7 @@
 #include "JsonParserFunctions.hpp"
 #include "Error.h"
 #include "json_key_words.h"
-#include "sysInfo.h"
+//#include "sysInfo.h"
 #include "FS.h"
 #include "SPIFFS.h"
 
