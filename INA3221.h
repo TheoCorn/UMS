@@ -135,7 +135,7 @@ private:
 public:
 //    INA3221(uint32_t _rsid, TwoWire& wire) : _rsid(_rsid), wire(wire) {}
 
-    INA3221(uint32_t rsid) : _rsid(rsid) {}
+    explicit INA3221(uint32_t rsid) : _rsid(rsid) {}
 
     float getBusVoltage_V(int channel);
     float getShuntVoltage_mV(int channel);
