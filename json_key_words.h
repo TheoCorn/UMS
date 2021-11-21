@@ -5,30 +5,30 @@
 #ifndef UMDWITHCLASS3_JSON_KEY_WORDS_H
 #define UMDWITHCLASS3_JSON_KEY_WORDS_H
 
-#define JSON_KEYWORD_RSID "rsid"
-#define JSON_KEYWORD_SID "sid"
+constexpr const char* JSON_KEYWORD_RSID = "rsid";
+constexpr const char* JSON_KEYWORD_SID = "sid";
 
 
-#define JSON_KEYWORD_FEATURES "Features"
-#define JSON_KEYWORD_X_SETTINGS "XSettings"
-#define JSON_KEYWORD_I_SETTINGS "ISettings"
-#define JSON_KEYWORD_SENSOR_CONFIG "SConf"
+constexpr const char* JSON_KEYWORD_FEATURES = "Features";
+constexpr const char* JSON_KEYWORD_X_SETTINGS = "XSettings";
+constexpr const char* JSON_KEYWORD_I_SETTINGS = "ISettings";
+constexpr const char* JSON_KEYWORD_SENSOR_CONFIG = "SConf";
 
 
 
 //json keys for reading output
 /// json key in reading output json
-#define JSON_KEYWORD_VALUES "values"
-#define JSON_KEYWORD_TIME "time"
-#define JSON_KEYWORD_SENSORS "Sensors"
+constexpr const char* JSON_KEYWORD_VALUES = "values";
+constexpr const char* JSON_KEYWORD_TIME = "time";
+constexpr const char* JSON_KEYWORD_SENSORS = "Sensors";
 
 //read json keywords
-#define READ_JSON_KEYWORD_VALUE "v"
-#define READ_JSON_KEYWORD_PERIOD "p"
+constexpr const char* READ_JSON_KEYWORD_VALUE = "v";
+constexpr const char* READ_JSON_KEYWORD_PERIOD = "p";
 
 // conflict  json keywords
-#define C_JSON_KEYWORD_CONFLICTS_ARRAY "Conflicts"
-#define C_JSON_KEYWORD_SIDS "SIDs"
+constexpr const char* C_JSON_KEYWORD_CONFLICTS_ARRAY = "Conflicts";
+constexpr const char* C_JSON_KEYWORD_SIDS = "SIDs";
 
 
 
