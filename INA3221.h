@@ -132,6 +132,8 @@ private:
 //    TwoWire& wire;
 
 
+    float _shunt_resistor;
+
 public:
 //    INA3221(uint32_t _rsid, TwoWire& wire) : _rsid(_rsid), wire(wire) {}
 

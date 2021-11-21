@@ -131,6 +131,9 @@ String INA3221::name() {
 void INA3221::setUp() {
     Sensor::savedSettingsLoader("/sensorData/4.json", activeFeaturesVec, xSettings);
     INA3221SetConfig();
+    switch (xSettings[0]) {
+        case 0: _shunt_resistor = 0.1f;
+    }
 }
 
 String INA3221::getStringForDisplay() {
