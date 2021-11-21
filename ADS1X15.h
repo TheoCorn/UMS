@@ -153,6 +153,7 @@ protected:
 
 public:
 
+    ADS1X15(uint8_t i2c_addr, TwoWire *wire):
 
     bool begin(uint8_t i2c_addr = ADS1X15_ADDRESS, TwoWire *wire = &Wire);
     int16_t readADC_SingleEnded(uint8_t channel);

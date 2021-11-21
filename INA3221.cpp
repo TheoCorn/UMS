@@ -29,24 +29,18 @@ int INA3221::getManufID() {
 }
 
 void INA3221::wireReadRegister(uint8_t reg, uint16_t *value) {
-    Wire.beginTransmission(_rsid);
-#if ARDUINO >= 100
-    Wire.write(reg);                       // Register
-#else
-    Wire.send(reg);                        // Register
-#endif
-    Wire.endTransmission();
+    wire.beginTransmission(_rsid);
+
+    wire.write(reg);                       // Register
+
+    wire.endTransmission();
 
     delay(1); // Max 12-bit conversion time is 586us per sample
 
-    Wire.requestFrom(_rsid, (uint8_t)2);
-#if ARDUINO >= 100
+    wire.requestFrom(_rsid, (uint8_t)2);
+
     // Shift values to create properly formed integer
-    *value = ((Wire.read() << 8) | Wire.read());
-#else
-    // Shift values to create properly formed integer
-    *value = ((Wire.receive() << 8) | Wire.receive());
-#endif
+    *value = ((wire.read() << 8) | wire.read());
 }
 
 void INA3221::INA3221SetConfig() {
@@ -112,16 +106,15 @@ int16_t INA3221::getShuntVoltage_raw(int channel) {
 }
 
 void INA3221::wireWriteRegister(uint8_t reg, uint16_t value) {
-    Wire.beginTransmission(_rsid);
-#if ARDUINO >= 100
-    Wire.write(reg);                       // Register
-    Wire.write((value >> 8) & 0xFF);       // Upper 8-bits
-    Wire.write(value & 0xFF);              // Lower 8-bits
-    Wire.send(reg);                        // Register
-    Wire.send(value >> 8);                 // Upper 8-bits
-    Wire.send(value & 0xFF);               // Lower 8-bits
-#endif
-    Wire.endTransmission();
+    wire.beginTransmission(_rsid);
+
+    wire.write(reg);                       // Register
+    wire.write((value >> 8) & 0xFF);       // Upper 8-bits
+    wire.write(value & 0xFF);              // Lower 8-bits
+    wire.send(reg);                        // Register
+    wire.send(value >> 8);                 // Upper 8-bits
+    wire.send(value & 0xFF);               // Lower 8-bits
+
 }
 
 String INA3221::name() {

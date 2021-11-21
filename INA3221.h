@@ -127,7 +127,7 @@ private:
                                         "current3"};
     std::vector<bool> activeFeaturesVec;
     std::vector<unsigned int> xSettings;
-//    TwoWire& wire;
+    TwoWire& wire;
 
 
     float _shunt_resistor;
@@ -135,7 +135,9 @@ private:
 public:
 //    INA3221(uint32_t _rsid, TwoWire& wire) : _rsid(_rsid), wire(wire) {}
 
-    explicit INA3221(uint32_t rsid) : _rsid(rsid) {}
+    explicit INA3221(uint32_t rsid) : _rsid(rsid) {
+        wire = Wire;
+}
 
     float getBusVoltage_V(int channel);
     float getShuntVoltage_mV(int channel);

@@ -374,7 +374,6 @@ void ADS1X15::getJson(JsonArray &jArr, uint32_t rsid, uint32_t sid) {
 }
 
 void ADS1X15::setJson(JsonObject &sConf){
-
     Sensor::JsonSetter(sConf, activeFeaturesVec, xSettings);
 }
 
