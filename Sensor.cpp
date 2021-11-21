@@ -293,7 +293,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
     generateXSettings(obj, xSettings);
     generateISettings(obj, iSettings);
 
-    js::serializeRet* sr = js::serializeDoc(doc);
+    js::serializeRet* sr = js::serializeDoc(&doc);
     spiffs::writeFile(SPIFFS, filename, sr->buff);
 
     //todo delete
@@ -308,7 +308,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
     JsonObject obj = doc.to<JsonObject>();
     generateFeatures(obj, activeFeaturesVec);
 
-    js::serializeRet* sr = js::serializeDoc(doc);
+    js::serializeRet* sr = js::serializeDoc(&doc);
     spiffs::writeFile(SPIFFS, filename, sr->buff);
 
     //todo delete
@@ -324,7 +324,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
     generateFeatures(obj, activeFeaturesVec);
     generateXSettings(obj, xSettings);
 
-    js::serializeRet* sr = js::serializeDoc(doc);
+    js::serializeRet* sr = js::serializeDoc(&doc);
     spiffs::writeFile(SPIFFS, filename, sr->buff);
 
     //todo delete
@@ -340,7 +340,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
     generateFeatures(obj, activeFeaturesVec);
     generateISettings(obj, iSettings);
 
-    js::serializeRet* sr = js::serializeDoc(doc);
+    js::serializeRet* sr = js::serializeDoc(&doc);
     spiffs::writeFile(SPIFFS, filename, sr->buff);
 
     //todo delete
