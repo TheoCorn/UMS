@@ -5,13 +5,15 @@
 #ifndef UMDWITHCLASS3_ERROR_H
 #define UMDWITHCLASS3_ERROR_H
 
-#define ERROR__MSG_FAILED_TO_PARSE_JSON_NAME "failed to parse json configuration"
-#define ERROR_MSG__SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE "unable to set sensor config json"
-#define ERROR_MSG__INVALID_FILE "invalid file"
-#define ERROR_MSG__INVALID_ARGUMENT "invalid argument"
-#define ERROR_MSG__INVALID_FEATURE "invalid feature index"
-#define ERROR_MSG__INVALID_XSETTING "invalid Xsetting"
-#define ERROR_MSG__FAILED_TO_IDENTIFY_COMMAND "failed to identify command"
+constexpr const char* ERROR__MSG_FAILED_TO_PARSE_JSON_NAME = "failed to parse json configuration";
+constexpr const char* ERROR_MSG__SET_SENSOR_CONFIG_JSON_FAILURE_MESSAGE = "unable to set sensor config json";
+constexpr const char* ERROR_MSG__INVALID_FILE = "invalid file";
+constexpr const char* ERROR_MSG__INVALID_ARGUMENT = "invalid argument";
+constexpr const char* ERROR_MSG__INVALID_FEATURE = "invalid feature index";
+constexpr const char*ERROR_MSG__INVALID_XSETTING = "invalid Xsetting";
+constexpr const char*ERROR_MSG__FAILED_TO_IDENTIFY_COMMAND = "failed to identify command";
+constexpr const char* ERROR_MSG__FAILED_TO_OPEN_FILE = "could not open file";
+constexpr const char* ERROR_MSG__FAILED_TO_SAVE = "failed to save";
 
 
 namespace error {
@@ -65,8 +67,8 @@ namespace error {
     class Error {
 
     public:
-        String name;
-        String message;
+        const char* name;
+        const char* message;
         unsigned int appearance;
         unsigned int importance;
         unsigned int backgroundAction;
@@ -79,7 +81,7 @@ namespace error {
          * @param name name of the error
          * @param message details about the error
          */
-        Error(String name, String message) : Error(name, message, error::Appearance::SNACK_BAR, error::Importance::MILD, BackgroundAppActions::NONE) {}
+        Error(const char* name, const char* message) : Error(name, message, error::Appearance::SNACK_BAR, error::Importance::MILD, BackgroundAppActions::NONE) {}
 
         /**
          * error class defines the way errors are send to host app
@@ -90,7 +92,7 @@ namespace error {
          * @param message details about the error
          * @param importance
          */
-        Error(String name, String message, error::Importance importance) : Error(name, message, error::Appearance::SNACK_BAR, importance, BackgroundAppActions::NONE) {}
+        Error(const char* name, const char* message, error::Importance importance) : Error(name, message, error::Appearance::SNACK_BAR, importance, BackgroundAppActions::NONE) {}
 
         /**
          * error class defines the way errors are send to host app
@@ -107,7 +109,7 @@ namespace error {
          *
          * @param importance
          */
-        Error(String name, String message, error::Appearance ui, error::Importance importance, error::BackgroundAppActions backgroundAction) : name(name),
+        Error(const char* name, const char* message, error::Appearance ui, error::Importance importance, error::BackgroundAppActions backgroundAction) : name(name),
                                                                                             message(message),
                                                                                             appearance(static_cast<unsigned int>(ui)),
                                                                                             importance(static_cast<unsigned int>(importance)),

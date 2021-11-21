@@ -283,9 +283,21 @@ void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &active
 
 }
 
-//void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec, std::vector<unsigned int> &xSettings,
-//                      std::vector<bool> &iSettings) {
-//
-//
-//
-//}
+void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec, std::vector<unsigned int> &xSettings,
+                      std::vector<bool> &iSettings) {
+
+    File file = fs.open(filename, FILE_WRITE);
+    if(!file){
+        using namespace error;
+        auto err = new Error(ERROR_MSG__FAILED_TO_SAVE, ERROR_MSG__FAILED_TO_OPEN_FILE);
+        sysInfo::serialCom->write(err);
+        return;
+    }
+    if(file.print()){
+        Serial.println("- file written");
+    } else {
+        Serial.println("- write failed");
+    }
+    file.close();
+
+}

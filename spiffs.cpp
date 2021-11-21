@@ -7,8 +7,6 @@
 #include "SPIFFS.h"
 
 
-using namespace spiffs;
-
 /**
  * @param fs
  * @param path
@@ -40,7 +38,6 @@ unsigned char *spiffs::readFile(fs::FS &fs, const char *path) {
 }
 
 
-using namespace spiffs;
 
 /**
   *
@@ -67,3 +64,22 @@ std::vector<fs::File> spiffs::listDir(fs::FS &fs, char *dirname) {
     return files;
 
 }
+
+
+void spiffs::writeFile(fs::FS &fs, const char *path, const char* value){
+    File file = fs.open(path, FILE_WRITE);
+    if(!file){
+        using namespace error;
+        auto err = new Error(ERROR_MSG__FAILED_TO_SAVE, ERROR_MSG__FAILED_TO_OPEN_FILE);
+        sysInfo::serialCom->write(err);
+        return;
+    }
+
+    if(file.print(value)){
+        using namespace error;
+        auto err = new Error(ERROR_MSG__FAILED_TO_SAVE, ERROR_MSG__FAILED_TO_OPEN_FILE);
+        sysInfo::serialCom->write(err);
+    }
+    file.close();
+}
+

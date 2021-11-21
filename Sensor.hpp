@@ -13,6 +13,9 @@
 #include "JsonParserFunctions.hpp"
 #include "Error.h"
 #include "json_key_words.h"
+#include "sysInfo.h"
+#include "FS.h"
+#include "SPIFFS.h"
 
 
 
@@ -283,16 +286,16 @@ public:
                                     std::vector<unsigned int>& xSettings, std::vector<bool>& iSettings);
 
 
-//    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec);
-//
-//    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
-//                                    std::vector<unsigned int>& xSettings);
-//
-//    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
-//                                    std::vector<bool>& iSettings);
+    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec);
 
-//    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
-//                                    std::vector<unsigned int>& xSettings, std::vector<bool>& iSettings);
+    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
+                                    std::vector<unsigned int>& xSettings);
+
+    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
+                                    std::vector<bool>& iSettings);
+
+    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
+                                    std::vector<unsigned int>& xSettings, std::vector<bool>& iSettings);
 
     static void templatedRead(JsonArray &jra, std::vector<bool>& activeFeaturesVec,
                               uint32_t rsid, Sensor* sensor);
