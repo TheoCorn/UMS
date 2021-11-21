@@ -390,7 +390,7 @@ void readBatteryCharge(void* m_bip) {
     auto* bip = (BatInfPointers*)m_bip;
     while(true) {
         float bat_v = analogRead(BATTERY_READ_PIN) * MAX_ADC_VOLTAGE / MAX_ADC_RAW; //* MILI_TO_NORMAL_UNIT;
-        Serial.println(bat_v);
+//        Serial.println(bat_v);
         if (bat_v >= FULL_BATTERY) {
             *(bip->battery_percentage) = 100;
         } else if (bat_v >= MID_CHARGE) {
