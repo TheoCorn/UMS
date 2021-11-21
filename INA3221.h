@@ -50,7 +50,6 @@
 #define INA3221_CONFIG_ENABLE_CHAN2             (0b010000000000000)  // Enable Channel 2
 #define INA3221_CONFIG_ENABLE_CHAN3             (0b001000000000000)  // Enable Channel 3
 
-#define INA3221_CONFIG_DISABLE_CHAN             (0b0)
 
 #define INA3221_CONFIG_AVG_1                    (0b000000000000)
 #define INA3221_CONFIG_AVG_4                    (0b001000000000)

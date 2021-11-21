@@ -17,7 +17,7 @@ float INA3221::getShuntVoltage_mV(int channel) {
 }
 
 float INA3221::getCurrent_mA(int channel) {
-    float valueDec = getShuntVoltage_mV(channel)/INA3221_shuntresistor;
+    float valueDec = getShuntVoltage_mV(channel)/_shunt_resistor;
 
     return valueDec;
 }
@@ -51,7 +51,7 @@ void INA3221::wireReadRegister(uint8_t reg, uint16_t *value) {
 
 void INA3221::INA3221SetConfig() {
 
-    uint16_t config = 0b0;
+    uint16_t config = INA3221_CONFIG_MODE_CONTINUOUS;
 
     if (activeFeaturesVec[0] || activeFeaturesVec[1] || activeFeaturesVec[2]) config | INA3221_CONFIG_ENABLE_CHAN1;
     if (activeFeaturesVec[3] || activeFeaturesVec[4] || activeFeaturesVec[5]) config | INA3221_CONFIG_ENABLE_CHAN2;

@@ -310,7 +310,8 @@ void doProcess4JsonObj(JsonPair *p) {
         default: {
             using namespace error;
 
-            auto err = new Error(ERROR_MSG__FAILED_TO_IDENTIFY_COMMAND, "", Appearance::SNACK_BAR, Importance::MILD, BackgroundAppActions::RESEND);
+            auto err = new Error(ERROR_MSG__FAILED_TO_IDENTIFY_COMMAND, "", Appearance::SNACK_BAR,
+                                 Importance::MILD, BackgroundAppActions::RESEND);
             sysInfo::serialCom->write(err);
         };
             break;
