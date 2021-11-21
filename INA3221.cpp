@@ -111,9 +111,6 @@ void INA3221::wireWriteRegister(uint8_t reg, uint16_t value) {
     wire.write(reg);                       // Register
     wire.write((value >> 8) & 0xFF);       // Upper 8-bits
     wire.write(value & 0xFF);              // Lower 8-bits
-    wire.send(reg);                        // Register
-    wire.send(value >> 8);                 // Upper 8-bits
-    wire.send(value & 0xFF);               // Lower 8-bits
 
 }
 
@@ -175,4 +172,3 @@ float INA3221::readFeature(size_t index) {
         case 8 : return getCurrent_mA(2);
     }
 }
-
