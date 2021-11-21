@@ -282,3 +282,10 @@ void Sensor::savedSettingsLoader(const char *filename, std::vector<bool> &active
     delete[] cArrJson;
 
 }
+
+//void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeaturesVec, std::vector<unsigned int> &xSettings,
+//                      std::vector<bool> &iSettings) {
+//
+//
+//
+//}

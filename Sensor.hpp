@@ -113,7 +113,6 @@ public:
 
 
 
-//protected:
 
     ///@return nested json object with name "Sensor"
     static JsonObject createSensorObject(JsonArray &doc);
@@ -283,6 +282,18 @@ public:
     static void savedSettingsLoader(char const * filename, std::vector<bool>& activeFeaturesVec,
                                     std::vector<unsigned int>& xSettings, std::vector<bool>& iSettings);
 
+
+//    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec);
+//
+//    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
+//                                    std::vector<unsigned int>& xSettings);
+//
+//    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
+//                                    std::vector<bool>& iSettings);
+
+    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
+                                    std::vector<unsigned int>& xSettings, std::vector<bool>& iSettings);
+
     static void templatedRead(JsonArray &jra, std::vector<bool>& activeFeaturesVec,
                               uint32_t rsid, Sensor* sensor);
 
@@ -292,6 +303,8 @@ public:
                                                   
 
 private:
+
+
 
     /**
      * helper for Sensor::JsonSetter
