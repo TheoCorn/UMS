@@ -7,11 +7,6 @@
 
 
 
-
-
-
-
-
 /**************************************************************************/
 /*!
  * this code is a modified version of DL_Arduino_INA3221 Library witch is
@@ -39,6 +34,10 @@
 #include <Wire.h>
 #include "Sensor.hpp"
 #include "sensorEnum.h"
+#include <vector>
+#include "Error.h"
+#include "sysInfo.h"
+#include "SerialCom.h"
 
 /*=========================================================================
     CONFIG REGISTER (R/W)

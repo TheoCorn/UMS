@@ -17,7 +17,7 @@ js::serializeRet* js::serializeDoc(JsonDocument* doc){
 }
 
 js::serializeRet* js::serializeError(error::Error* error){
-    DynamicJsonDocument *doc = new DynamicJsonDocument(256);
+    DynamicJsonDocument *doc = new DynamicJsonDocument(512);
 
     JsonObject errObj = doc->createNestedObject("error");
     errObj["name"] = error->name;
@@ -25,6 +25,8 @@ js::serializeRet* js::serializeError(error::Error* error){
     errObj["ui"] = error->appearance;
     errObj["importance"] = error->importance;
     errObj["backgroundAction"] = error->backgroundAction;
+
+    delete error;
 
 
     int bufLen =  measureJson(*doc);

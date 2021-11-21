@@ -10,6 +10,7 @@
 #define ERROR_MSG__INVALID_FILE "invalid file"
 #define ERROR_MSG__INVALID_ARGUMENT "invalid argument"
 #define ERROR_MSG__INVALID_FEATURE "invalid feature index"
+#define ERROR_MSG__INVALID_XSETTING "invalid Xsetting"
 
 
 namespace error {

@@ -132,7 +132,13 @@ void INA3221::setUp() {
     Sensor::savedSettingsLoader("/sensorData/4.json", activeFeaturesVec, xSettings);
     INA3221SetConfig();
     switch (xSettings[0]) {
-        case 0: _shunt_resistor = 0.1f;
+        case 0: _shunt_resistor = 0.1f; break;
+        default: {
+            using namespace error;
+            auto err = new Error(ERROR_MSG__INVALID_XSETTING, "", Appearance::ALERT_DIALOG,
+                                  Importance::REQUIRES_USER_ACTION, BackgroundAppActions::NONE);
+            sysInfo::serialCom->write(err)
+        }; break;
     }
 }
 
