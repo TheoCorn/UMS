@@ -306,6 +306,7 @@ void doProcess4JsonObj(JsonPair *p) {
             break;
         case DOWN_JSON:
             mDisplay->reaWasLow = true;
+            break;
 
         default: {
             using namespace error;
