@@ -350,7 +350,7 @@ void ADS1X15::writeRegister(uint8_t reg, uint16_t value) {
     buffer[0] = reg;
     buffer[1] = value >> 8;
     buffer[2] = value & 0xFF;
-    m_i2c_dev->write(buffer, 3);
+    m_i2c_dev->write(buffer, 3, <#initializer#>);
 }
 
 /**************************************************************************/
@@ -364,8 +364,8 @@ void ADS1X15::writeRegister(uint8_t reg, uint16_t value) {
 /**************************************************************************/
 uint16_t ADS1X15::readRegister(uint8_t reg) {
     buffer[0] = reg;
-    m_i2c_dev->write(buffer, 1);
-    m_i2c_dev->read(buffer, 2);
+    m_i2c_dev->write(buffer, 1, <#initializer#>);
+    m_i2c_dev->read(buffer, 2, <#initializer#>);
     return ((buffer[0] << 8) | buffer[1]);
 }
 
@@ -391,8 +391,8 @@ String ADS1X15::getExtendedStringForDisplay(Sensor *sensor) {
 
 }
 
-void ADS1X15::saveConfig() {
-
+void ADS1X15::m_saveConfig(const char* filepath) {
+    Sensor::settingsSaver(filepath, activeFeaturesVec, xSettings);
 }
 
 float ADS1X15::readFeature(size_t index) {

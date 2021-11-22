@@ -348,3 +348,170 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
 
     delete sr;
 }
+
+
+/*!
+ *    @brief  Write a buffer or two to the I2C device. Cannot be more than
+ * maxBufferSize() bytes.
+ *    @param  buffer Pointer to buffer of data to write. This is const to
+ *            ensure the content of this buffer doesn't change.
+ *    @param  len Number of bytes from buffer to write
+ *    @param  prefix_buffer Pointer to optional array of data to write before
+ * buffer. Cannot be more than maxBufferSize() bytes. This is const to
+ *            ensure the content of this buffer doesn't change.
+ *    @param  prefix_len Number of bytes from prefix buffer to write
+ *    @param  stop Whether to send an I2C STOP signal on write
+ *    @return True if write was successful, otherwise false.
+ */
+bool Sensor::write(const uint8_t *buffer, size_t len, bool stop, const uint8_t *prefix_buffer, size_t prefix_len,
+                   TwoWire &_wire) {
+    if ((len + prefix_len) > maxBufferSize()) {
+        // currently not guaranteed to work if more than 32 bytes!
+        // we will need to find out if some platforms have larger
+        // I2C buffer sizes :/
+#ifdef DEBUG_SERIAL
+        DEBUG_SERIAL.println(F("\tI2CDevice could not write such a large buffer"));
+#endif
+        return false;
+    }
+
+    _wire->beginTransmission(_addr);
+
+    // Write the prefix data (usually an address)
+    if ((prefix_len != 0) && (prefix_buffer != NULL)) {
+        if (_wire->write(prefix_buffer, prefix_len, <#initializer#>) != prefix_len) {
+#ifdef DEBUG_SERIAL
+            DEBUG_SERIAL.println(F("\tI2CDevice failed to write"));
+#endif
+            return false;
+        }
+    }
+
+    // Write the data itself
+    if (_wire->write(buffer, len, <#initializer#>) != len) {
+#ifdef DEBUG_SERIAL
+        DEBUG_SERIAL.println(F("\tI2CDevice failed to write"));
+#endif
+        return false;
+    }
+
+#ifdef DEBUG_SERIAL
+
+    DEBUG_SERIAL.print(F("\tI2CWRITE @ 0x"));
+  DEBUG_SERIAL.print(_addr, HEX);
+  DEBUG_SERIAL.print(F(" :: "));
+  if ((prefix_len != 0) && (prefix_buffer != NULL)) {
+    for (uint16_t i = 0; i < prefix_len; i++) {
+      DEBUG_SERIAL.print(F("0x"));
+      DEBUG_SERIAL.print(prefix_buffer[i], HEX);
+      DEBUG_SERIAL.print(F(", "));
+    }
+  }
+  for (uint16_t i = 0; i < len; i++) {
+    DEBUG_SERIAL.print(F("0x"));
+    DEBUG_SERIAL.print(buffer[i], HEX);
+    DEBUG_SERIAL.print(F(", "));
+    if (i % 32 == 31) {
+      DEBUG_SERIAL.println();
+    }
+  }
+
+  if (stop) {
+    DEBUG_SERIAL.print("\tSTOP");
+  }
+#endif
+
+    if (_wire->endTransmission(stop) == 0) {
+#ifdef DEBUG_SERIAL
+        DEBUG_SERIAL.println();
+    // DEBUG_SERIAL.println("Sent!");
+#endif
+        return true;
+    } else {
+#ifdef DEBUG_SERIAL
+        DEBUG_SERIAL.println("\tFailed to send!");
+#endif
+        return false;
+    }
+}
+
+/*!
+ *    @brief  Read from I2C into a buffer from the I2C device.
+ *    Cannot be more than maxBufferSize() bytes.
+ *    @param  buffer Pointer to buffer of data to read into
+ *    @param  len Number of bytes from buffer to read.
+ *    @param  stop Whether to send an I2C STOP signal on read
+ *    @return True if read was successful, otherwise false.
+ */
+bool Sensor::read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
+    size_t pos = 0;
+    while (pos < len) {
+        size_t read_len =
+                ((len - pos) > maxBufferSize()) ? maxBufferSize() : (len - pos);
+        bool read_stop = (pos < (len - read_len)) ? false : stop;
+        if (!_read(buffer + pos, read_len, read_stop, <#initializer#>))
+            return false;
+        pos += read_len;
+    }
+    return true;
+}
+
+bool Sensor::_read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
+#if defined(TinyWireM_h)
+    size_t recv = _wire->requestFrom((uint8_t)_addr, (uint8_t)len);
+#else
+    size_t recv = _wire->requestFrom((uint8_t)_addr, (uint8_t)len, (uint8_t)stop);
+#endif
+
+    if (recv != len) {
+        // Not enough data available to fulfill our obligation!
+#ifdef DEBUG_SERIAL
+        DEBUG_SERIAL.print(F("\tI2CDevice did not receive enough data: "));
+    DEBUG_SERIAL.println(recv);
+#endif
+        return false;
+    }
+
+    for (uint16_t i = 0; i < len; i++) {
+        buffer[i] = _wire->read(nullptr, 0, <#initializer#>);
+    }
+
+#ifdef DEBUG_SERIAL
+    DEBUG_SERIAL.print(F("\tI2CREAD  @ 0x"));
+  DEBUG_SERIAL.print(_addr, HEX);
+  DEBUG_SERIAL.print(F(" :: "));
+  for (uint16_t i = 0; i < len; i++) {
+    DEBUG_SERIAL.print(F("0x"));
+    DEBUG_SERIAL.print(buffer[i], HEX);
+    DEBUG_SERIAL.print(F(", "));
+    if (len % 32 == 31) {
+      DEBUG_SERIAL.println();
+    }
+  }
+  DEBUG_SERIAL.println();
+#endif
+
+    return true;
+}
+
+/*!
+ *    @brief  Write some data, then read some data from I2C into another buffer.
+ *    Cannot be more than maxBufferSize() bytes. The buffers can point to
+ *    same/overlapping locations.
+ *    @param  write_buffer Pointer to buffer of data to write from
+ *    @param  write_len Number of bytes from buffer to write.
+ *    @param  read_buffer Pointer to buffer of data to read into.
+ *    @param  read_len Number of bytes from buffer to read.
+ *    @param  stop Whether to send an I2C STOP signal between the write and read
+ *    @return True if write & read was successful, otherwise false.
+ */
+bool
+Sensor::write_then_read(const uint8_t *write_buffer, size_t write_len, uint8_t *read_buffer, size_t read_len, bool stop,
+                        TwoWire &_wire) {
+    if (!write(write_buffer, write_len, stop, <#initializer#>)) {
+        return false;
+    }
+
+    return read(read_buffer, read_len, <#initializer#>);
+}
+

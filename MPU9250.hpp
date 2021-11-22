@@ -116,6 +116,8 @@ public:
     void saveConfig() override;
 
 private:
+    static constexpr const char* jsonFilePath = "/sensorData/1.json";
+
     enum Interface {
         SPI,
         I2C

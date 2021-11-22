@@ -114,17 +114,19 @@
 
 class INA3221 : public Sensor {
 private:
+    static constexpr const char* jsonFilePath = "/sensorData/4.json";
+
     uint8_t _rsid;
 
-    char const* inaFeaturesString[9] = {"busV1",
-                                        "shuntmV1",
-                                        "current1",
-                                        "busV2",
-                                        "shuntmV2",
-                                        "current2",
-                                        "busV3",
-                                        "shuntmV3",
-                                        "current3"};
+    static constexpr char const* inaFeaturesString[9] = {"busV1",
+                                                         "shuntmV1",
+                                                         "current1",
+                                                         "busV2",
+                                                         "shuntmV2",
+                                                         "current2",
+                                                         "busV3",
+                                                         "shuntmV3",
+                                                         "current3"};
     std::vector<bool> activeFeaturesVec;
     std::vector<unsigned int> xSettings;
     TwoWire& wire;

@@ -66,7 +66,7 @@ Sensor *SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPo
         case sensorEnum::ADS1015: return dynamic_cast<Sensor*>(new class ADS1015(address)); break;
         case sensorEnum::ADS1115: return dynamic_cast<Sensor*>(new class ADS1115(address)); break;
         case sensorEnum::INA3221: return dynamic_cast<Sensor*>(new class INA3221(address)); break;
-//        case sensorEnum::BMP280: return (sensor*)(new class BMP280); break;
+        case sensorEnum::BMP280: return dynamic_cast<Sensor*>(new class BMP280(address)); break;
 
         default: return dynamic_cast<Sensor*>(new class UnknownSensor(address)); break;
     }

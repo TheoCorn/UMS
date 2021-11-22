@@ -149,7 +149,7 @@ protected:
 
     String getExtendedStringForDisplay(Sensor *sensor);
 
-    void saveConfig();
+    void m_saveConfig(const char* filepath);
 
 public:
 
@@ -180,6 +180,7 @@ private:
 };
 
 class ADS1015 : public ADS1X15, public Sensor{
+    static constexpr const char* jsonFilePath = "/sensorData/2.json";
 public:
     explicit ADS1015(uint32_t address);
 
@@ -192,7 +193,7 @@ public:
 
     void setJson(JsonObject &sConf) override { ADS1X15::setJson(sConf); }
 
-    void setUp() override { ADS1X15::setUp("/sensorData/2.json"); }
+    void setUp() override { ADS1X15::setUp(jsonFilePath); }
 
     void readSensor(JsonArray& jra) override { ADS1X15::readSensor(jra, rsid(), dynamic_cast<Sensor*>(this)); }
 
@@ -203,7 +204,9 @@ public:
 //    char const * getExtendedStringForDisplay() override;
     String getExtendedStringForDisplay() override { return ADS1X15::getExtendedStringForDisplay(dynamic_cast<Sensor*>(this)); }
 
-    void saveConfig() override { ADS1X15::saveConfig(); }
+    void saveConfig() override { ADS1X15::m_saveConfig(jsonFilePath); }
+
+
 };
 
 /**************************************************************************/
@@ -212,6 +215,7 @@ public:
 */
 /**************************************************************************/
 class ADS1115 : public ADS1X15, public Sensor {
+    static constexpr const char* jsonFilePath = "/sensorData/3.json";
 public:
     ADS1115(uint32_t address);
 
@@ -235,7 +239,7 @@ public:
 //    char const * getExtendedStringForDisplay() override;
     String getExtendedStringForDisplay() override { return ADS1X15::getExtendedStringForDisplay(dynamic_cast<Sensor*>(this)); }
 
-    void saveConfig() override { ADS1X15::saveConfig(); }
+    void saveConfig() override { ADS1X15::m_saveConfig(jsonFilePath); }
 };
 
 

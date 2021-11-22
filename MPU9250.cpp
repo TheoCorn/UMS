@@ -21,10 +21,8 @@ MPU9250::MPU9250(SPIClass *bus, uint8_t cs) {
 }
 
 void MPU9250::setUp() {
-
-    Sensor::savedSettingsLoader("/sensorData/1.json", activeFeaturesVec, xSettings);
+    Sensor::savedSettingsLoader(jsonFilePath, activeFeaturesVec, xSettings);
     setXSettings();
-
 }
 
 void MPU9250::setXSettings() {
@@ -103,7 +101,7 @@ float MPU9250::readFeature(size_t index) {
 
 
 void MPU9250::saveConfig() {
-
+    Sensor::settingsSaver(jsonFilePath, activeFeaturesVec, xSettings);
 }
 
 bool MPU9250::begin() {
@@ -469,8 +467,8 @@ bool MPU9250::WriteRegister(uint8_t reg, uint8_t data) {
     uint8_t ret_val;
     if (iface_ == I2C) {
         i2c_->beginTransmission(conn_);
-        i2c_->write(reg);
-        i2c_->write(data);
+        i2c_->write(reg, 0, <#initializer#>);
+        i2c_->write(data, 0, <#initializer#>);
         i2c_->endTransmission();
     } else {
         spi_->beginTransaction(SPISettings(spi_clock_, MSBFIRST, SPI_MODE3));
@@ -512,12 +510,12 @@ bool MPU9250::WriteRegister(uint8_t reg, uint8_t data) {
 bool MPU9250::ReadRegisters(uint8_t reg, uint8_t count, uint8_t *data) {
     if (iface_ == I2C) {
         i2c_->beginTransmission(conn_);
-        i2c_->write(reg);
+        i2c_->write(reg, 0, <#initializer#>);
         i2c_->endTransmission(false);
         uint8_t bytes_rx = i2c_->requestFrom(conn_, count);
         if (bytes_rx == count) {
             for (int i = 0; i < count; i++) {
-                data[i] = i2c_->read();
+                data[i] = i2c_->read(nullptr, 0, <#initializer#>);
             }
             return true;
         } else {

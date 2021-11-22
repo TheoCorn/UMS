@@ -8,9 +8,7 @@
 
 #include "gpioNames.h"
 #include "SerialCom.h"
-
 #include "sysInfo.h"
-
 #include "ui.h"
 
 

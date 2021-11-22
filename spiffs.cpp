@@ -24,7 +24,7 @@ unsigned char *spiffs::readFile(fs::FS &fs, const char *path) {
 
     while (fileSize) {
         size_t toRead = (fileSize <= 512) ? fileSize : 512;
-        file.read(arrayPointer, toRead);
+        file.read(arrayPointer, toRead, <#initializer#>);
 
         arrayPointer += toRead;
         fileSize -= toRead;
