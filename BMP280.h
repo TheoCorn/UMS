@@ -183,10 +183,10 @@ private:
     std::vector<unsigned int> xSettings;
     static constexpr const char* features_strings[2] = {"pressure", "temp"};
 
+    void setXSettings();
+
     float readTemperature();
-    float readPressure(void);
-    float readAltitude(float seaLevelhPa = 1013.25);
-    float seaLevelForAltitude(float altitude, float atmospheric);
+    float readPressure();
     float waterBoilingPoint(float pressure);
 
     void setSampling(sensor_mode mode = MODE_NORMAL,

@@ -7,7 +7,8 @@
 
 
 void BMP280::setUp() {
-
+    Sensor::savedSettingLoader(jsonFilePath, activeFeaturesVec, xSettings);
+    setXSettings();
 }
 
 String BMP280::getStringForDisplay() {
@@ -16,11 +17,11 @@ String BMP280::getStringForDisplay() {
 
 String BMP280::getExtendedStringForDisplay() {
     return Sensor::templatedExtendedString4Display(activeFeaturesVec,
-                                                   dynamic_cast<Sensor*>(this), features_strings);
+                                                   dynamic_cast<Sensor*>(this), &features_strings);
 }
 
 void BMP280::readSensor(JsonArray &jra) {
-
+    Sensor::templatedRead(jra, activeFeaturesVec, rsid(), dynamic_cast<Sensor*>(this));
 }
 
 void BMP280::saveConfig() {
@@ -32,13 +33,15 @@ void BMP280::getJson(JsonArray &jArr) {
 }
 
 void BMP280::setJson(JsonObject &sConf) {
-
+    Sensor::JsonSetter(sConf, activeFeaturesVec, xSettings);
+    setXSettings()
 }
 
 float BMP280::readFeature(size_t index) {
-    switch (inddex) {
-        case 0:
-
+    switch (index) {
+        case 0: return readPressure();
+        case 1: return readTemperature();
+        case 2: return waterBoilingPoint(readPressure());
     }
 }
 
@@ -197,40 +200,6 @@ float BMP280::readPressure() {
     return (float)p / 256;
 }
 
-/*!
- * @brief Calculates the approximate altitude using barometric pressure and the
- * supplied sea level hPa as a reference.
- * @param seaLevelhPa
- *        The current hPa at sea level.
- * @return The approximate altitude above sea level in meters.
- */
-float BMP280::readAltitude(float seaLevelhPa) {
-    float altitude;
-
-    float pressure = readPressure(); // in Si units for Pascal
-    pressure /= 100;
-
-    altitude = 44330 * (1.0 - pow(pressure / seaLevelhPa, 0.1903));
-
-    return altitude;
-}
-
-/*!
- * Calculates the pressure at sea level (QFH) from the specified altitude,
- * and atmospheric pressure (QFE).
- * @param  altitude      Altitude in m
- * @param  atmospheric   Atmospheric pressure in hPa
- * @return The approximate pressure in hPa
- */
-float BMP280::seaLevelForAltitude(float altitude, float atmospheric) {
-    // Equation taken from BMP180 datasheet (page 17):
-    // http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf
-
-    // Note that using the equation from wikipedia can give bad results
-    // at high altitude.  See this thread for more information:
-    // http://forums.adafruit.com/viewtopic.php?f=22&t=58064
-    return atmospheric / pow(1.0 - (altitude / 44330.0), 5.255);
-}
 
 /*!
     @brief  calculates the boiling point  of water by a given pressure
@@ -243,4 +212,12 @@ float BMP280::waterBoilingPoint(float pressure) {
     // pressure
     return (234.175 * log(pressure / 6.1078)) /
            (17.08085 - log(pressure / 6.1078));
+}
+
+void BMP280::setXSettings() {
+    setSampling(MODE_NORMAL,
+                static_cast<sensor_sampling>(xSettings[2]),
+                static_cast<sensor_sampling>(xSettings[2]),
+                static_cast<sensor_filter>(xSettings[0]),
+                static_cast<standby_duration>(xSettings[1]));
 }
