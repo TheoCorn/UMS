@@ -379,7 +379,7 @@ bool Sensor::write(const uint8_t *buffer, size_t len, bool stop, const uint8_t *
 
     // Write the prefix data (usually an address)
     if ((prefix_len != 0) && (prefix_buffer != NULL)) {
-        if (_wire->write(prefix_buffer, prefix_len, <#initializer#>) != prefix_len) {
+        if (_wire->write(prefix_buffer, prefix_len) != prefix_len) {
 #ifdef DEBUG_SERIAL
             DEBUG_SERIAL.println(F("\tI2CDevice failed to write"));
 #endif
@@ -388,7 +388,7 @@ bool Sensor::write(const uint8_t *buffer, size_t len, bool stop, const uint8_t *
     }
 
     // Write the data itself
-    if (_wire->write(buffer, len, <#initializer#>) != len) {
+    if (_wire->write(buffer, len) != len) {
 #ifdef DEBUG_SERIAL
         DEBUG_SERIAL.println(F("\tI2CDevice failed to write"));
 #endif
@@ -449,7 +449,7 @@ bool Sensor::read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
         size_t read_len =
                 ((len - pos) > maxBufferSize()) ? maxBufferSize() : (len - pos);
         bool read_stop = (pos < (len - read_len)) ? false : stop;
-        if (!_read(buffer + pos, read_len, read_stop, <#initializer#>))
+        if (!_read(buffer + pos, read_len, read_stop))
             return false;
         pos += read_len;
     }
@@ -473,7 +473,7 @@ bool Sensor::_read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
     }
 
     for (uint16_t i = 0; i < len; i++) {
-        buffer[i] = _wire->read(nullptr, 0, <#initializer#>);
+        buffer[i] = _wire->read(nullptr, 0);
     }
 
 #ifdef DEBUG_SERIAL
@@ -508,10 +508,9 @@ bool Sensor::_read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
 bool
 Sensor::write_then_read(const uint8_t *write_buffer, size_t write_len, uint8_t *read_buffer, size_t read_len, bool stop,
                         TwoWire &_wire) {
-    if (!write(write_buffer, write_len, stop, <#initializer#>)) {
+    if (!write(write_buffer, write_len, stop)) {
         return false;
     }
 
-    return read(read_buffer, read_len, <#initializer#>);
+    return read(read_buffer, read_len);
 }
-

@@ -7,7 +7,7 @@
 
 
 void BMP280::setUp() {
-    Sensor::savedSettingLoader(jsonFilePath, activeFeaturesVec, xSettings);
+    Sensor::savedSettingsLoader(jsonFilePath, activeFeaturesVec, xSettings);
     setXSettings();
 }
 

@@ -31,7 +31,7 @@ int INA3221::getManufID() {
 void INA3221::wireReadRegister(uint8_t reg, uint16_t *value) {
     wire.beginTransmission(_rsid);
 
-    wire.write(reg, 0, <#initializer#>);                       // Register
+    wire.write(reg, 0);                       // Register
 
     wire.endTransmission();
 
@@ -40,7 +40,7 @@ void INA3221::wireReadRegister(uint8_t reg, uint16_t *value) {
     wire.requestFrom(_rsid, (uint8_t)2);
 
     // Shift values to create properly formed integer
-    *value = ((wire.read(nullptr, 0, <#initializer#>) << 8) | wire.read(nullptr, 0, <#initializer#>));
+    *value = ((wire.read(nullptr, 0) << 8) | wire.read(nullptr, 0));
 }
 
 void INA3221::INA3221SetConfig() {
@@ -108,9 +108,9 @@ int16_t INA3221::getShuntVoltage_raw(int channel) {
 void INA3221::wireWriteRegister(uint8_t reg, uint16_t value) {
     wire.beginTransmission(_rsid);
 
-    wire.write(reg, 0, <#initializer#>);                       // Register
-    wire.write((value >> 8) & 0xFF, 0, <#initializer#>);       // Upper 8-bits
-    wire.write(value & 0xFF, 0, <#initializer#>);              // Lower 8-bits
+    wire.write(reg);                       // Register
+    wire.write((value >> 8) & 0xFF);       // Upper 8-bits
+    wire.write(value & 0xFF);              // Lower 8-bits
 
 }
 
