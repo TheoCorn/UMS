@@ -6,6 +6,8 @@
 //#include <stdio.h>
 //#include <string.h>
 
+constexpr char const * MPU9250::mpuFeaturesString[10];
+
 
 MPU9250::MPU9250(uint8_t addr) {
     iface_ = I2C;

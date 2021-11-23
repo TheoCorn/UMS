@@ -4,6 +4,7 @@
 
 #include "BMP280.h"
 
+constexpr const char* BMP280::features_strings[3];
 
 
 void BMP280::setUp() {

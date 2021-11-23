@@ -4,6 +4,8 @@
 
 #include "INA3221.h"
 
+constexpr char const* INA3221::inaFeaturesString[9];
+
 
 float INA3221::getBusVoltage_V(int channel) {
     int16_t value = getBusVoltage_raw(channel);
