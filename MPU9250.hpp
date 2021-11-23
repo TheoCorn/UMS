@@ -90,7 +90,7 @@ public:
     float readFeature(size_t index) override;
     void setXSettings();
 
-    char const * mpuFeaturesString[10] = { "accX", "accY", "accZ", "gyroX", "gyroY", "gyroZ",
+    static constexpr char const * mpuFeaturesString[10] = { "accX", "accY", "accZ", "gyroX", "gyroY", "gyroZ",
                                            "magnetometerX", "magnetometerY", "magnetometerZ", "temperature"};
 
     std::vector<bool> activeFeaturesVec;
