@@ -473,7 +473,7 @@ bool Sensor::_read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
     }
 
     for (uint16_t i = 0; i < len; i++) {
-        buffer[i] = _wire->read(nullptr, 0);
+        buffer[i] = _wire->read(nullptr);
     }
 
 #ifdef DEBUG_SERIAL
