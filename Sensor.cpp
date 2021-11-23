@@ -363,7 +363,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
  *    @param  stop Whether to send an I2C STOP signal on write
  *    @return True if write was successful, otherwise false.
  */
-bool Sensor::write(const uint8_t *buffer, size_t len, TwoWire &_wire, bool stop, const uint8_t *prefix_buffer, size_t prefix_len) {
+bool Sensor::write(const uint8_t _addr, const uint8_t *buffer, size_t len, TwoWire &_wire, bool stop, const uint8_t *prefix_buffer, size_t prefix_len) {
     if ((len + prefix_len) > Sensor::max_i2c_buffer_size) {
         // currently not guaranteed to work if more than 32 bytes!
         // we will need to find out if some platforms have larger
@@ -442,7 +442,7 @@ bool Sensor::write(const uint8_t *buffer, size_t len, TwoWire &_wire, bool stop,
  *    @param  stop Whether to send an I2C STOP signal on read
  *    @return True if read was successful, otherwise false.
  */
-bool Sensor::read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
+bool Sensor::read(const uint8_t _addr, uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
     size_t pos = 0;
     while (pos < len) {
         size_t read_len =
@@ -455,11 +455,11 @@ bool Sensor::read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
     return true;
 }
 
-bool Sensor::_read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
+bool Sensor::_read(const uint8_t _addr, uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
 #if defined(TinyWireM_h)
     size_t recv = _wire.requestFrom((uint8_t)_addr, (uint8_t)len);
 #else
-    size_t recv = _wire.requestFrom((uint8_t)_addr, (uint8_t)len, (uint8_t)stop);
+    size_t recv = _wire.requestFrom(_addr, (uint8_t)len, (uint8_t)stop);
 #endif
 
     if (recv != len) {
@@ -472,7 +472,7 @@ bool Sensor::_read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
     }
 
     for (uint16_t i = 0; i < len; i++) {
-        buffer[i] = _wire.read(nullptr);
+        buffer[i] = _wire.read();
     }
 
 #ifdef DEBUG_SERIAL

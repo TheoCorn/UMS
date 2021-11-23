@@ -97,7 +97,7 @@ void BMP280::write8(uint8_t reg, uint8_t value) {
 uint8_t BMP280::read8(uint8_t reg) {
     uint8_t buffer[1];
         buffer[0] = uint8_t(reg);
-    write_then_read(buffer, 1, buffer, 1, _wire);
+    Sensor::write_then_read(_rsid, buffer, 1, buffer, 1, _wire);
     return buffer[0];
 }
 
@@ -108,7 +108,7 @@ uint16_t BMP280::read16(uint8_t reg) {
     uint8_t buffer[2];
 
         buffer[0] = uint8_t(reg);
-    write_then_read(buffer, 1, buffer, 2, _wire);
+    Sensor::write_then_read(_rsid, buffer, 1, buffer, 2, _wire);
     return uint16_t(buffer[0]) << 8 | uint16_t(buffer[1]);
 }
 
@@ -133,7 +133,7 @@ uint32_t BMP280::read24(uint8_t reg) {
     uint8_t buffer[3];
     
     buffer[0] = uint8_t(reg);
-    Sensor::write_then_read(buffer, 1, buffer, 3, _wire);
+    Sensor::write_then_read(_rsid, buffer, 1, buffer, 3, _wire);
 
     return uint32_t(buffer[0]) << 16 | uint32_t(buffer[1]) << 8 |
            uint32_t(buffer[2]);
