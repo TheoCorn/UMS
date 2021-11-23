@@ -175,13 +175,13 @@ private:
     ctrl_meas _measReg;
 
 
-    const char* jsonFilePath = "/sensorData/5.json";
+    static const char* jsonFilePath = "/sensorData/5.json";
 
     uint8_t _rsid;
     TwoWire& _wire;
     std::vector<bool> activeFeaturesVec;
     std::vector<unsigned int> xSettings;
-    const char* features_strings[3] = {"pressure", "temp", "wbp"};
+    const char* features_strings[3] = {"pressure", "temp    ", "wbp     "};
 
     void setXSettings();
 
