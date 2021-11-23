@@ -85,7 +85,7 @@ void BMP280::write8(uint8_t reg, uint8_t value) {
     buffer[1] = value;
 
         buffer[0] = reg;
-    write(buffer, 2, _wire);
+    Sensor::write(_rsid, buffer, 2, _wire);
 }
 
 /*!

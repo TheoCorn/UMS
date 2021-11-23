@@ -442,13 +442,13 @@ bool Sensor::write(const uint8_t _addr, const uint8_t *buffer, size_t len, TwoWi
  *    @param  stop Whether to send an I2C STOP signal on read
  *    @return True if read was successful, otherwise false.
  */
-bool Sensor::read(const uint8_t _addr, uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
+bool Sensor::read(const uint8_t _addr, uint8_t *buffer, size_t len, TwoWire &_wire, bool stop) {
     size_t pos = 0;
     while (pos < len) {
         size_t read_len =
                 ((len - pos) > Sensor::max_i2c_buffer_size) ? Sensor::max_i2c_buffer_size : (len - pos);
         bool read_stop = (pos < (len - read_len)) ? false : stop;
-        if (!_read(buffer + pos, read_len, read_stop))
+        if (!Sensor::_read(_addr, buffer + pos, read_len, read_stop))
             return false;
         pos += read_len;
     }
@@ -505,11 +505,11 @@ bool Sensor::_read(const uint8_t _addr, uint8_t *buffer, size_t len, bool stop, 
  *    @return True if write & read was successful, otherwise false.
  */
 bool
-Sensor::write_then_read(const uint8_t *write_buffer, size_t write_len, uint8_t *read_buffer, size_t read_len,
+Sensor::write_then_read(const uint8_t _addr, const uint8_t *write_buffer, size_t write_len, uint8_t *read_buffer, size_t read_len,
                         TwoWire &_wire, bool stop) {
-    if (!write(write_buffer, write_len, stop)) {
+    if (!Sensor::write(_addr, write_buffer, write_len, stop)) {
         return false;
     }
 
-    return read(read_buffer, read_len);
+    return Sensor::read(_addr, read_buffer, read_len, _wire);
 }
