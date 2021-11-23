@@ -8,8 +8,7 @@
 
 void BMP280::setUp() {
     Sensor::savedSettingsLoader(jsonFilePath, activeFeaturesVec, xSettings);
-    setSampling();
-//    setXSettings();
+    setXSettings();
 }
 
 String BMP280::getStringForDisplay() {

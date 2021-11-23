@@ -136,7 +136,7 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
 
 
         char cBuffer[64];
-        int ret = sprintf(&cBuffer[0], "%e", f);
+        int ret = sprintf(&cBuffer[0], "%.3f", f);
         s += FeaturesString[i];
 
 
@@ -151,6 +151,33 @@ String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeatures
 
     return s;
 }
+
+//rewrite with char*
+//
+//char* Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeaturesVec,
+//                                              Sensor* sensor,
+//                                              char const** FeaturesString){
+//    char* string = new char[512];
+//    string[0] = '\0';
+//
+//    for (int i = 0; i < activeFeaturesVec.size(); i++) {
+//        float f = sensor->readFeature(i);
+//
+//        char cBuffer[16];
+//        int ret = sprintf(&cBuffer[0], "%.3f", f);
+//
+//        strcat(string, FeaturesString[i]);
+//
+//
+//        strcat(string, " ");
+//        strcat(string, activeFeaturesVec[i] ? "1" : "0");
+//        strcat(string, " ");
+//        strcat(string, cBuffer);
+//        strcat(string, "\n");
+//    }
+//
+//    return string;
+//}
 
 void Sensor::xSettings_JsonSetter(JsonObject &sConf, std::vector<unsigned int> &xSettings) {
     JsonArray locXSettings = sConf[JSON_KEYWORD_X_SETTINGS];
