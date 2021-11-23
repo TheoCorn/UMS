@@ -375,11 +375,11 @@ bool Sensor::write(const uint8_t *buffer, size_t len, bool stop, const uint8_t *
         return false;
     }
 
-    _wire->beginTransmission(_addr);
+    _wire.beginTransmission(_addr);
 
     // Write the prefix data (usually an address)
     if ((prefix_len != 0) && (prefix_buffer != NULL)) {
-        if (_wire->write(prefix_buffer, prefix_len) != prefix_len) {
+        if (_wire.write(prefix_buffer, prefix_len) != prefix_len) {
 #ifdef DEBUG_SERIAL
             DEBUG_SERIAL.println(F("\tI2CDevice failed to write"));
 #endif
@@ -388,7 +388,7 @@ bool Sensor::write(const uint8_t *buffer, size_t len, bool stop, const uint8_t *
     }
 
     // Write the data itself
-    if (_wire->write(buffer, len) != len) {
+    if (_wire.write(buffer, len) != len) {
 #ifdef DEBUG_SERIAL
         DEBUG_SERIAL.println(F("\tI2CDevice failed to write"));
 #endif
@@ -421,7 +421,7 @@ bool Sensor::write(const uint8_t *buffer, size_t len, bool stop, const uint8_t *
   }
 #endif
 
-    if (_wire->endTransmission(stop) == 0) {
+    if (_wire.endTransmission(stop) == 0) {
 #ifdef DEBUG_SERIAL
         DEBUG_SERIAL.println();
     // DEBUG_SERIAL.println("Sent!");
@@ -458,9 +458,9 @@ bool Sensor::read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
 
 bool Sensor::_read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
 #if defined(TinyWireM_h)
-    size_t recv = _wire->requestFrom((uint8_t)_addr, (uint8_t)len);
+    size_t recv = _wire.requestFrom((uint8_t)_addr, (uint8_t)len);
 #else
-    size_t recv = _wire->requestFrom((uint8_t)_addr, (uint8_t)len, (uint8_t)stop);
+    size_t recv = _wire.requestFrom((uint8_t)_addr, (uint8_t)len, (uint8_t)stop);
 #endif
 
     if (recv != len) {
@@ -473,7 +473,7 @@ bool Sensor::_read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
     }
 
     for (uint16_t i = 0; i < len; i++) {
-        buffer[i] = _wire->read(nullptr);
+        buffer[i] = _wire.read(nullptr);
     }
 
 #ifdef DEBUG_SERIAL

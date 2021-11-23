@@ -34,7 +34,7 @@ void BMP280::getJson(JsonArray &jArr) {
 
 void BMP280::setJson(JsonObject &sConf) {
     Sensor::JsonSetter(sConf, activeFeaturesVec, xSettings);
-    setXSettings()
+    setXSettings();
 }
 
 float BMP280::readFeature(size_t index) {
