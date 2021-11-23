@@ -15,6 +15,7 @@
 #include "MPU9250.hpp"
 #include "ADS1X15.h"
 #include "INA3221.h"
+#include "BMP280.h"
 
 #define SENSOR_SID_ARRAY_FILE "/SensorAddresses.json"
 
