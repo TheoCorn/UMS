@@ -178,17 +178,17 @@ float BMP280::readPressure() {
     // Must be done first to get the t_fine variable set up
     readTemperature();
 
+
     int32_t adc_P = read24(BMP280_REGISTER_PRESSUREDATA);
+    Serial.println(adc_P);
     adc_P >>= 4;
 
     var1 = ((int64_t)t_fine) - 128000;
     var2 = var1 * var1 * (int64_t)_bmp280_calib.dig_P6;
     var2 = var2 + ((var1 * (int64_t)_bmp280_calib.dig_P5) << 17);
     var2 = var2 + (((int64_t)_bmp280_calib.dig_P4) << 35);
-    var1 = ((var1 * var1 * (int64_t)_bmp280_calib.dig_P3) >> 8) +
-           ((var1 * (int64_t)_bmp280_calib.dig_P2) << 12);
-    var1 =
-            (((((int64_t)1) << 47) + var1)) * ((int64_t)_bmp280_calib.dig_P1) >> 33;
+    var1 = ((var1 * var1 * (int64_t)_bmp280_calib.dig_P3) >> 8) + ((var1 * (int64_t)_bmp280_calib.dig_P2) << 12);
+    var1 = (((((int64_t)1) << 47) + var1)) * ((int64_t)_bmp280_calib.dig_P1) >> 33;
 
     if (var1 == 0) {
         return 0; // avoid exception caused by division by zero
