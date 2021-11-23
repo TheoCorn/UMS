@@ -302,7 +302,7 @@ public:
 
     static String templatedExtendedString4Display(std::vector<bool>& activeFeaturesVec,
                                                   Sensor* sensor,
-                                                  char const** FeaturesString);
+                                                  const char* const* FeaturesString);
 
     // functions taken from adafruit i2c sensor under MIT Licence (made static)
 
