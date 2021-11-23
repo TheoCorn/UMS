@@ -9,6 +9,7 @@ constexpr const char* BMP280::features_strings[3];
 
 void BMP280::setUp() {
     Sensor::savedSettingsLoader(jsonFilePath, activeFeaturesVec, xSettings);
+    readCoefficients();
     setXSettings();
 }
 
@@ -223,4 +224,23 @@ void BMP280::setXSettings() {
                 static_cast<sensor_sampling>(xSettings[2]),
                 static_cast<sensor_filter>(xSettings[0]),
                 static_cast<standby_duration>(xSettings[1]));
+}
+
+/*!
+ *  @brief  Reads the factory-set coefficients
+ */
+void BMP280::readCoefficients() {
+    _bmp280_calib.dig_T1 = read16_LE(BMP280_REGISTER_DIG_T1);
+    _bmp280_calib.dig_T2 = readS16_LE(BMP280_REGISTER_DIG_T2);
+    _bmp280_calib.dig_T3 = readS16_LE(BMP280_REGISTER_DIG_T3);
+
+    _bmp280_calib.dig_P1 = read16_LE(BMP280_REGISTER_DIG_P1);
+    _bmp280_calib.dig_P2 = readS16_LE(BMP280_REGISTER_DIG_P2);
+    _bmp280_calib.dig_P3 = readS16_LE(BMP280_REGISTER_DIG_P3);
+    _bmp280_calib.dig_P4 = readS16_LE(BMP280_REGISTER_DIG_P4);
+    _bmp280_calib.dig_P5 = readS16_LE(BMP280_REGISTER_DIG_P5);
+    _bmp280_calib.dig_P6 = readS16_LE(BMP280_REGISTER_DIG_P6);
+    _bmp280_calib.dig_P7 = readS16_LE(BMP280_REGISTER_DIG_P7);
+    _bmp280_calib.dig_P8 = readS16_LE(BMP280_REGISTER_DIG_P8);
+    _bmp280_calib.dig_P9 = readS16_LE(BMP280_REGISTER_DIG_P9);
 }
