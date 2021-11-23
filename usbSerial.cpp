@@ -27,16 +27,16 @@ int usbSerial::available() {
 }
 
 void usbSerial::read(char *c) {
-    *c = Serial.read(nullptr, 0);
+    *c = Serial.read();
 }
 
 size_t usbSerial::write(const uint8_t c) {
-    return Serial.write(c, 0);
+    return Serial.write(c);
 }
 
 size_t usbSerial::write(const uint8_t *buffer, size_t size) {
     size_t ret = Serial.write(buffer, size);
-    Serial.write(ETX, 0);
+    Serial.write(ETX);
     return ret;
 
 }
@@ -76,7 +76,7 @@ void usbSerial::connectionCheckTask(void* connInfo) {
     long endTime = millis() + (long)(info->duration);
 
     while(millis() < endTime){
-        Serial.write(static_cast<char>(STX), 0);
+        Serial.write(static_cast<char>(STX));
         vTaskDelay(50);
         if(Serial.available() > 0) {
             *(info->connected) = true;

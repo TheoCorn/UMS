@@ -365,7 +365,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
  */
 bool Sensor::write(const uint8_t *buffer, size_t len, bool stop, const uint8_t *prefix_buffer, size_t prefix_len,
                    TwoWire &_wire) {
-    if ((len + prefix_len) > maxBufferSize()) {
+    if ((len + prefix_len) > Sensor::max_i2c_buffer_size) {
         // currently not guaranteed to work if more than 32 bytes!
         // we will need to find out if some platforms have larger
         // I2C buffer sizes :/
@@ -447,7 +447,7 @@ bool Sensor::read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
     size_t pos = 0;
     while (pos < len) {
         size_t read_len =
-                ((len - pos) > maxBufferSize()) ? maxBufferSize() : (len - pos);
+                ((len - pos) > Sensor::max_i2c_buffer_size) ? Sensor::max_i2c_buffer_size : (len - pos);
         bool read_stop = (pos < (len - read_len)) ? false : stop;
         if (!_read(buffer + pos, read_len, read_stop))
             return false;

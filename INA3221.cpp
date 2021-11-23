@@ -31,7 +31,7 @@ int INA3221::getManufID() {
 void INA3221::wireReadRegister(uint8_t reg, uint16_t *value) {
     wire.beginTransmission(_rsid);
 
-    wire.write(reg, 0);                       // Register
+    wire.write(reg);                       // Register
 
     wire.endTransmission();
 
@@ -40,7 +40,7 @@ void INA3221::wireReadRegister(uint8_t reg, uint16_t *value) {
     wire.requestFrom(_rsid, (uint8_t)2);
 
     // Shift values to create properly formed integer
-    *value = ((wire.read(nullptr, 0) << 8) | wire.read(nullptr, 0));
+    *value = ((wire.read() << 8) | wire.read());
 }
 
 void INA3221::INA3221SetConfig() {

@@ -319,7 +319,7 @@ public:
 
 private:
 
-
+    static constexpr uint32_t max_i2c_buffer_size = 250;
 
 
     /**
