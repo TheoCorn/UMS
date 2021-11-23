@@ -16,6 +16,8 @@ String BMP280::getStringForDisplay() {
 }
 
 String BMP280::getExtendedStringForDisplay() {
+//    Serial.println(activeFeaturesVec.size());
+
     return Sensor::templatedExtendedString4Display(activeFeaturesVec,
                                                    dynamic_cast<Sensor*>(this), features_strings);
 }

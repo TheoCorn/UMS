@@ -181,7 +181,7 @@ private:
     TwoWire& _wire;
     std::vector<bool> activeFeaturesVec;
     std::vector<unsigned int> xSettings;
-    const char* features_strings[2] = {"pressure", "temp"};
+    const char* features_strings[2] = {"pressure", "temp", "wbp"};
 
     void setXSettings();
 
