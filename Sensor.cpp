@@ -363,8 +363,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
  *    @param  stop Whether to send an I2C STOP signal on write
  *    @return True if write was successful, otherwise false.
  */
-bool Sensor::write(const uint8_t *buffer, size_t len, bool stop, const uint8_t *prefix_buffer, size_t prefix_len,
-                   TwoWire &_wire) {
+bool Sensor::write(const uint8_t *buffer, size_t len, TwoWire &_wire, bool stop, const uint8_t *prefix_buffer, size_t prefix_len) {
     if ((len + prefix_len) > Sensor::max_i2c_buffer_size) {
         // currently not guaranteed to work if more than 32 bytes!
         // we will need to find out if some platforms have larger
@@ -506,8 +505,8 @@ bool Sensor::_read(uint8_t *buffer, size_t len, bool stop, TwoWire &_wire) {
  *    @return True if write & read was successful, otherwise false.
  */
 bool
-Sensor::write_then_read(const uint8_t *write_buffer, size_t write_len, uint8_t *read_buffer, size_t read_len, bool stop,
-                        TwoWire &_wire) {
+Sensor::write_then_read(const uint8_t *write_buffer, size_t write_len, uint8_t *read_buffer, size_t read_len,
+                        TwoWire &_wire, bool stop) {
     if (!write(write_buffer, write_len, stop)) {
         return false;
     }
