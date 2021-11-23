@@ -127,7 +127,7 @@ void Sensor::templatedRead(JsonArray &jra, std::vector<bool> &activeFeaturesVec,
 
 String Sensor::templatedExtendedString4Display(std::vector<bool>& activeFeaturesVec,
                                                Sensor* sensor,
-                                               char const** FeaturesString) {
+                                               char const* FeaturesString) {
 
     String s;
 
