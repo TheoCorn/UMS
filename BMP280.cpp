@@ -8,7 +8,8 @@
 
 void BMP280::setUp() {
     Sensor::savedSettingsLoader(jsonFilePath, activeFeaturesVec, xSettings);
-    setXSettings();
+    setSampling();
+//    setXSettings();
 }
 
 String BMP280::getStringForDisplay() {
@@ -157,10 +158,8 @@ float BMP280::readTemperature() {
                                              11;
 
     var2 = (((((adc_T >> 4) - ((int32_t)_bmp280_calib.dig_T1)) *
-              ((adc_T >> 4) - ((int32_t)_bmp280_calib.dig_T1))) >>
-                                                                12) *
-            ((int32_t)_bmp280_calib.dig_T3)) >>
-                                             14;
+              ((adc_T >> 4) - ((int32_t)_bmp280_calib.dig_T1))) >> 12) *
+            ((int32_t)_bmp280_calib.dig_T3)) >> 14;
 
     t_fine = var1 + var2;
 
@@ -168,6 +167,8 @@ float BMP280::readTemperature() {
     return T / 100;
 }
 
+
+//todo fix
 /*!
  * Reads the barometric pressure from the device.
  * @return Barometric pressure in Pa.
