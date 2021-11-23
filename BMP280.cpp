@@ -181,7 +181,7 @@ float BMP280::readPressure() {
 
 
     int32_t adc_P = read24(BMP280_REGISTER_PRESSUREDATA);
-    Serial.println(adc_P);
+//    Serial.println(adc_P);
     adc_P >>= 4;
 
     var1 = ((int64_t)t_fine) - 128000;
