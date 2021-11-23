@@ -118,7 +118,7 @@ private:
 
     uint8_t _rsid;
 
-    static char const* inaFeaturesString[9] = {"busV1",
+    char const* inaFeaturesString[9] = {"busV1",
                                                          "shuntmV1",
                                                          "current1",
                                                          "busV2",
