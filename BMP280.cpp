@@ -19,7 +19,7 @@ String BMP280::getExtendedStringForDisplay() {
 //    Serial.println(activeFeaturesVec.size());
 
     return Sensor::templatedExtendedString4Display(activeFeaturesVec,
-                                                   dynamic_cast<Sensor*>(this), features_strings);
+                                                   dynamic_cast<Sensor*>(this), BMP280::features_strings);
 }
 
 void BMP280::readSensor(JsonArray &jra) {
