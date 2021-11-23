@@ -17,7 +17,7 @@ String BMP280::getStringForDisplay() {
 
 String BMP280::getExtendedStringForDisplay() {
     return Sensor::templatedExtendedString4Display(activeFeaturesVec,
-                                                   dynamic_cast<Sensor*>(this), (const char**)features_strings);
+                                                   dynamic_cast<Sensor*>(this), features_strings);
 }
 
 void BMP280::readSensor(JsonArray &jra) {

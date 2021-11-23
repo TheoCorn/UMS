@@ -139,7 +139,7 @@ String INA3221::getStringForDisplay() {
 
 String INA3221::getExtendedStringForDisplay() {
     return Sensor::templatedExtendedString4Display(activeFeaturesVec, dynamic_cast<Sensor*>(this),
-                                                   (const char**) inaFeaturesString);
+                                                   inaFeaturesString);
 }
 
 void INA3221::readSensor(JsonArray &jra) {

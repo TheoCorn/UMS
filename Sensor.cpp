@@ -507,7 +507,7 @@ bool Sensor::_read(const uint8_t _addr, uint8_t *buffer, size_t len, bool stop, 
 bool
 Sensor::write_then_read(const uint8_t _addr, const uint8_t *write_buffer, size_t write_len, uint8_t *read_buffer, size_t read_len,
                         TwoWire &_wire, bool stop) {
-    if (!Sensor::write(_addr, write_buffer, write_len, stop)) {
+    if (!Sensor::write(_addr, write_buffer, write_len, _wire,  stop)) {
         return false;
     }
 
