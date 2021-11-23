@@ -175,7 +175,7 @@ private:
     ctrl_meas _measReg;
 
 
-    static const char* jsonFilePath = "/sensorData/5.json";
+    static constexpr const char* jsonFilePath = "/sensorData/5.json";
 
     uint8_t _rsid;
     TwoWire& _wire;
