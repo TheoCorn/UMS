@@ -214,8 +214,7 @@ float BMP280::readPressure() {
 float BMP280::waterBoilingPoint(float pressure) {
     // Magnusformular for calculation of the boiling point of water at a given
     // pressure
-    return (234.175 * log(pressure / 6.1078)) /
-           (17.08085 - log(pressure / 6.1078));
+    return (234.175 * log(pressure / 6107.8)) / (17.08085 - log(pressure / 6107.8));
 }
 
 void BMP280::setXSettings() {
