@@ -33,7 +33,7 @@ namespace ui {
 
 //        static std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> sensorIterator;
 
-        virtual ~Tab()  = 0;
+        virtual ~Tab()  = default;
 
         virtual String name() = 0;
 
