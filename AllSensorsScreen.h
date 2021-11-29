@@ -26,11 +26,16 @@ protected:
 
 public:
 
+    ~AllSensorsScreen() {};
+
     AllSensorsScreen(std::map<uint32_t, Sensor *> *sensors,
                      std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> &activeSensorIterator) :
             sensors(sensors), activeSensorIterator(activeSensorIterator) {}
 
+
+
     String name() override { return "SENSORS"; }
+
 
 
     void onClick() override;

@@ -187,7 +187,7 @@ private:
 
     float readTemperature();
     float readPressure();
-    float waterBoilingPoint(float pressure);
+    static float waterBoilingPoint(float pressure);
 
     void readCoefficients();
     void setSampling(sensor_mode mode = MODE_NORMAL,

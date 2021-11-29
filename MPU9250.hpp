@@ -90,11 +90,7 @@ public:
     float readFeature(size_t index) override;
     void setXSettings();
 
-    static constexpr char const * mpuFeaturesString[10] = { "accX", "accY", "accZ", "gyroX", "gyroY", "gyroZ",
-                                           "magnetometerX", "magnetometerY", "magnetometerZ", "temperature"};
 
-    std::vector<bool> activeFeaturesVec;
-    std::vector<unsigned int> xSettings;
 
     String name() override { return "MPU9250"; }
 
@@ -117,6 +113,12 @@ public:
 
 private:
     static constexpr const char* jsonFilePath = "/sensorData/1.json";
+
+    static constexpr char const * mpuFeaturesString[10] = { "accX ", "accY ", "accZ ", "gyroX", "gyroY", "gyroZ",
+                                                            "magnetometerX", "magnetometerY", "magnetometerZ", "temperature"};
+
+    std::vector<bool> activeFeaturesVec;
+    std::vector<unsigned int> xSettings;
 
     enum Interface {
         SPI,

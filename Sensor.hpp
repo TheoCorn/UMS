@@ -100,6 +100,7 @@ public:
      */
     virtual void getJson(JsonArray& jArr) = 0;
 
+
     /**
      * set setting of the sensor
      *
