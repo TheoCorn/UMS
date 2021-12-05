@@ -35,7 +35,7 @@ bool Mqtt_server::begin() {
         const char* password = *doc["psw"];
         const char* key = *doc["key"];
         const char* server = *doc["server"];
-        const char* port = *doc["port"];
+        uint32_t port = *doc["port"];
         const char* username = *doc["un"];
 
 
