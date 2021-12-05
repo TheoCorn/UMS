@@ -48,7 +48,7 @@ public:
     /***
      * @return number of bytes available
      */
-    virtual int available() = 0;
+    virtual std::size_t available() = 0;
 
     /***
      * gets the first byte and stores it
@@ -111,10 +111,11 @@ public:
 };
 
 namespace sce{
-#define SERIAL_COMM_NAMES {"Bluetooth SPP", "USB serial"}
+#define SERIAL_COMM_NAMES {"Bluetooth SPP", "USB serial", "MQTT"}
     enum SerialComs: unsigned int{
         BLUETOOTH_SPP   = 0,
         USB_SERIAL      = 1,
+        MQTT            = 2
     };
 }
 

@@ -42,7 +42,7 @@ class BluetoothSerial:  public SerialCom
 
         bool actualBegin(String localName=String(), bool isMaster=false);
         bool begin() override;
-        int available() override;
+        std::size_t available() override;
         int peek(void);
         int read(void);
         void read(char * c) override;

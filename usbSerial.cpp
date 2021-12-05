@@ -22,7 +22,7 @@ bool usbSerial::begin(){
     return true;
 }
 
-int usbSerial::available() {
+std::size_t usbSerial::available() {
     return Serial.available();
 }
 

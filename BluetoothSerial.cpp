@@ -642,7 +642,7 @@ bool BluetoothSerial::begin(){
 }
 
 
-int BluetoothSerial::available(void)
+std::size_t BluetoothSerial::available(void)
 {
     if (_spp_rx_queue == NULL){
         return 0;

@@ -13,4 +13,11 @@
 //acknowledge
 #define ACK 6
 
+
+namespace av{
+    constexpr uint8_t etx = 3;
+    constexpr uint8_t stx = 2;
+    constexpr uint8_t ack = 6;
+}
+
 #endif //UMDWITHCLASS3_ASCIIMAKROS_H

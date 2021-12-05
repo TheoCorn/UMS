@@ -212,7 +212,7 @@ void setup() {
 void loop() {
 
     char sRead;
-    for (int i = 0; i < sysInfo::serialCom->available(); ++i) {
+    for (std::size_t i = 0; i < sysInfo::serialCom->available(); ++i) {
         sysInfo::serialCom->read(&sRead);
 
         switch (sRead) {
