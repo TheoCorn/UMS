@@ -49,7 +49,7 @@ bool Mqtt_server::begin() {
         throw std::invalid_argument(ERROR_MSG__INVALID_FILE);
     }
 
-    delete doc;
+//    delete doc;
     delete[] cArrJson;
 
     sub_control = new Adafruit_MQTT_Subscribe(&mqtt, cot);
