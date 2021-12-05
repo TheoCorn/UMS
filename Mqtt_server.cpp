@@ -52,11 +52,11 @@ bool Mqtt_server::begin() {
 //    delete doc;
     delete[] cArrJson;
 
-    sub_control = new Adafruit_MQTT_Subscribe(&mqtt, cot);
-    sub_control->setCallback(nullptr);
+    sub_control = new Adafruit_MQTT_Subscribe(mqtt, cot);
+    sub_control->setCallback(control_topic_callback);
     mqtt->subscribe(sub_control)
 
-    output_pub = new Adafruit_MQTT_Publish(&mqtt, cot);
+    output_pub = new Adafruit_MQTT_Publish(mqtt, cot);
 }
 
 std::size_t Mqtt_server::available() {
