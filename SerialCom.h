@@ -68,7 +68,7 @@ public:
      * @param buffer
      * @param size
      */
-    virtual size_t write(const uint8_t *buffer, size_t size) = 0;
+    virtual size_t write(uint8_t *buffer, size_t size) = 0;
 
     /**
      * serializes a JsonDocument and sends it to the serial port

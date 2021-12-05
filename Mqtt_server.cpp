@@ -56,7 +56,7 @@ bool Mqtt_server::begin() {
 
     sub_control = new Adafruit_MQTT_Subscribe(mqtt, cot);
     sub_control->setCallback(control_topic_callback);
-    mqtt->subscribe(sub_control)
+    mqtt->subscribe(sub_control);
 
     output_pub = new Adafruit_MQTT_Publish(mqtt, cot);
 }
@@ -74,7 +74,7 @@ void Mqtt_server::read(char *c) {
 }
 
 size_t Mqtt_server::write(uint8_t c) {
-    output_pub->publish(&c);
+    output_pub->publish(c);
     return 0;
 }
 
