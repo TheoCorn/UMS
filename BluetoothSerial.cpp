@@ -685,7 +685,7 @@ size_t BluetoothSerial::write(uint8_t c)
     return write(&c, 1);
 }
 
-size_t BluetoothSerial::write(const uint8_t *buffer, size_t size)
+size_t BluetoothSerial::write(uint8_t *buffer, size_t size)
 {
     if (!_spp_client){
         return 0;

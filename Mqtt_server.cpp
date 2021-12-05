@@ -78,7 +78,7 @@ size_t Mqtt_server::write(uint8_t c) {
     return 0;
 }
 
-size_t Mqtt_server::write(const uint8_t *buffer, size_t size) {
+size_t Mqtt_server::write(uint8_t *buffer, size_t size) {
     output_pub->publish(buffer, size);
     return 0;
 }
