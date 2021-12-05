@@ -30,19 +30,26 @@ bool Mqtt_server::begin() {
     JsonDocument *doc = jp::parseJson(cArrJson);
 
     if (doc != nullptr) {
-        JsonObject obj = doc->as<JsonObject>();
-        WiFi.begin(obj["ssid"].to<const char*>(), obj["key"].to<const char*>());
-        mqtt = new Adafruit_MQTT_Client(&client, obj["server"].to<const char*>(), obj["port"].to<const char*>(),
-                obj["un"].to<const char*>(), obj["key"].to<const char*>());
+
+        const char* ssid = *doc["ssid"];
+        const char* password = *doc["psw"];
+        const char* key = *doc["key"];
+        const char* server = *doc["server"];
+        const char* port = *doc["port"];
+        const char* username = *doc["un"];
+
+
+        WiFi.begin(ssid, password);
+        mqtt = new Adafruit_MQTT_Client(&client, server, port, username, key);
 
         delay(2000);
-
         MQTT_connect();
 
     }else{
         throw std::invalid_argument(ERROR_MSG__INVALID_FILE);
     }
 
+    delete doc;
     delete[] cArrJson;
 
     sub_control = new Adafruit_MQTT_Subscribe(&mqtt, cot);
