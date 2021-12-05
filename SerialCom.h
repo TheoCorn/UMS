@@ -60,7 +60,7 @@ public:
     /***
      * @param write the byte to write
      */
-    virtual size_t write(const uint8_t c) = 0;
+    virtual size_t write(uint8_t c) = 0;
 
     /**
      * writes a uint8_t array to the serial port

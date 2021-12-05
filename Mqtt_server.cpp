@@ -31,9 +31,10 @@ bool Mqtt_server::begin() {
 
     if (doc != nullptr) {
         JsonObject obj = doc->as<JsonObject>();
-        mqtt = new Adafruit_MQTT_Client(&client, obj["server"], obj["port"], obj["un"], obj["key"]);
+        WiFi.begin(obj["ssid"].to<char*>(), obj["key"].to<char*>());
+        mqtt = new Adafruit_MQTT_Client(&client, obj["server"].to<char*>(), obj["port"].to<char*>(),
+                obj["un"].to<char*>(), obj["key"].to<char*>());
 
-        WiFi.begin(obj["ssid"], obj["key"]);
         delay(2000);
 
         MQTT_connect();
@@ -63,7 +64,7 @@ void Mqtt_server::read(char *c) {
     buffer.pop();
 }
 
-size_t Mqtt_server::write(const uint8_t c) {
+size_t Mqtt_server::write(uint8_t c) {
     output_pub->publish(&c);
     return 0;
 }

@@ -30,7 +30,7 @@ void usbSerial::read(char *c) {
     *c = Serial.read();
 }
 
-size_t usbSerial::write(const uint8_t c) {
+size_t usbSerial::write(uint8_t c) {
     return Serial.write(c);
 }
 

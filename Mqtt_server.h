@@ -14,7 +14,7 @@
 #include "Adafruit_MQTT_Client.h"
 #include <queue>
 #include "sysInfo.h"
-#include <cstring.h>
+#include <string.h>
 #include "asciiMakros.h"
 
 
@@ -54,7 +54,7 @@ public:
 
     void read(char *c) override;
 
-    size_t write(const uint8_t c) override;
+    size_t write(uint8_t c) override;
 
     size_t write(const uint8_t *buffer, size_t size) override;
 
