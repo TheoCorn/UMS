@@ -39,10 +39,10 @@ class Mqtt_server : public SerialCom{
 
     WiFiClientSecure client;
     Adafruit_MQTT_Client* mqtt;
-    std::queue<char> buffer;
+    static std::queue<char> buffer;
 
     void MQTT_connect();
-    void control_topic_callback(char *msg, uint16_t len);
+    static void control_topic_callback(char *msg, uint16_t len);
 
 public:
 

@@ -5,6 +5,8 @@
 #include "Mqtt_server.h"
 #include "spiffs.hpp"
 
+std::queue<char> Mqtt_server::buffer;
+
 Mqtt_server::Mqtt_server() {
     cct = new char[39];
     cot = new char[38];
@@ -134,9 +136,9 @@ void Mqtt_server::MQTT_connect() {
 }
 
 void Mqtt_server::control_topic_callback(char *msg, uint16_t len) {
-    buffer.push(av::stx);
+    Mqtt_server::buffer.push(av::stx);
     for (uint16_t pos = 0; pos < len; len++){
-        buffer.push(*(msg + pos));
+        Mqtt_server::buffer.push(*(msg + pos));
     }
-    buffer.push(av::etx);
+    Mqtt_server::buffer.push(av::etx);
 }
