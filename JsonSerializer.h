@@ -12,7 +12,7 @@
 namespace js {
 
     struct serializeRet{
-        char* buff;
+        const char* buff;
         unsigned int bufLen;
 
         serializeRet(char* buff, unsigned int bufLen) : buff(buff), bufLen(bufLen) {}
