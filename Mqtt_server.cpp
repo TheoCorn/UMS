@@ -31,12 +31,12 @@ bool Mqtt_server::begin() {
 
     if (doc != nullptr) {
 
-        const char* ssid = *doc["ssid"];
-        const char* password = *doc["psw"];
-        const char* key = *doc["key"];
-        const char* server = *doc["server"];
-        uint32_t port = *doc["port"];
-        const char* username = *doc["un"];
+        const char* ssid = (*doc)["ssid"];
+        const char* password = (*doc)["psw"];
+        const char* key = (*doc)["key"];
+        const char* server = (*doc)["server"];
+        uint32_t port = (*doc)["port"];
+        const char* username = (*doc)["un"];
 
 
         WiFi.begin(ssid, password);
