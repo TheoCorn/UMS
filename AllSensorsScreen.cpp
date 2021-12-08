@@ -18,6 +18,8 @@ void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start,
 
             display->println(activeSensorIterator->second->getStringForDisplay());
 
+            Serial.println("after iterator used");
+
             printSensors(display, it, sensors->end(), end);
         } catch (...) {
             activeSensorIterator = sensors->begin();
