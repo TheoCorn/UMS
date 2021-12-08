@@ -55,7 +55,7 @@ public:
      *
      * @param c pointer to char where to store the byte
      */
-    virtual void read(char* c) = 0;
+    virtual void read(const char* c) = 0;
 
     /***
      * @param write the byte to write
@@ -68,7 +68,7 @@ public:
      * @param buffer
      * @param size
      */
-    virtual size_t write(uint8_t *buffer, size_t size) = 0;
+    virtual size_t write(const uint8_t *buffer, size_t size) = 0;
 
     /**
      * serializes a JsonDocument and sends it to the serial port

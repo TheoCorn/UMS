@@ -45,9 +45,9 @@ class BluetoothSerial:  public SerialCom
         std::size_t available() override;
         int peek(void);
         int read(void);
-        void read(char * c) override;
+        void read(const char * c) override;
         size_t write(uint8_t c) override;
-        size_t write(uint8_t *buffer, size_t size) override;
+        size_t write(const uint8_t *buffer, size_t size) override;
         size_t write(JsonDocument * doc) override;
         size_t write(error::Error* error) override;
         char* getString4Display() override;

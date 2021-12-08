@@ -671,7 +671,7 @@ int BluetoothSerial::read(void)
 }
 
 
-void BluetoothSerial::read(char * c){
+void BluetoothSerial::read(const char * c){
     uint8_t val = 0;
     if (_spp_rx_queue && xQueueReceive(_spp_rx_queue, &val, 0)){
         *c = val;
@@ -685,7 +685,7 @@ size_t BluetoothSerial::write(uint8_t c)
     return write(&c, 1);
 }
 
-size_t BluetoothSerial::write(uint8_t *buffer, size_t size)
+size_t BluetoothSerial::write(const uint8_t *buffer, size_t size)
 {
     if (!_spp_client){
         return 0;
@@ -702,7 +702,7 @@ size_t BluetoothSerial::write(JsonDocument * doc){
     js::serializeRet* sr = js::serializeDoc(doc);
 
 
-    size_t ret = this->write(reinterpret_cast<const uint8_t*>(sr->buff), sr->bufLen);
+    size_t ret = this->write((const uint8_t*)(sr->buff), sr->bufLen);
     delete sr;
     return ret;
 
@@ -714,7 +714,7 @@ size_t BluetoothSerial::write(error::Error* error) {
     }
 
     js::serializeRet* sr = js::serializeError(error);
-    size_t ret = write((const uint8_t *)sr->buff, (size_t)sr->bufLen);
+    size_t ret = write((uint8_t *)sr->buff, (size_t)sr->bufLen);
     delete sr;
     return ret;
 }

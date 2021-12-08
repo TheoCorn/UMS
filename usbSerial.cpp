@@ -26,7 +26,7 @@ std::size_t usbSerial::available() {
     return Serial.available();
 }
 
-void usbSerial::read(char *c) {
+void usbSerial::read(const char *c) {
     *c = Serial.read();
 }
 
@@ -34,7 +34,7 @@ size_t usbSerial::write(uint8_t c) {
     return Serial.write(c);
 }
 
-size_t usbSerial::write(uint8_t *buffer, size_t size) {
+size_t usbSerial::write(const uint8_t *buffer, size_t size) {
     size_t ret = Serial.write(buffer, size);
     Serial.write(ETX);
     return ret;

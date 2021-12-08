@@ -15,7 +15,7 @@ namespace js {
         const char* buff;
         unsigned int bufLen;
 
-        serializeRet(char* buff, unsigned int bufLen) : buff(buff), bufLen(bufLen) {}
+        serializeRet(const char* buff, unsigned int bufLen) : buff(buff), bufLen(bufLen) {}
 
         ~serializeRet(){
           delete[] buff;
