@@ -13,7 +13,7 @@ void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start,
             auto rsid = activeSensorIterator->first;
         } catch (...) {
             activeSensorIterator = sensors->begin();
-            Serial.println("active sensor iterator invalid")
+            Serial.println("active sensor iterator invalid");
         }
 
         Serial.println("after try catch");
@@ -21,10 +21,14 @@ void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start,
         display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);
 
         std::_Rb_tree_iterator<std::pair<const uint32_t, Sensor *>> it = activeSensorIterator;
+        Serial.println("after iterator is set");
 
         display->println(activeSensorIterator->second->getStringForDisplay());
 
+        Serial.println("after printing first sensor");
+
         printSensors(display, it, sensors->end(), end);
+        Serial.println("after printing other sensors");
     }
 
 }
