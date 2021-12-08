@@ -13,7 +13,10 @@ void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start,
             auto rsid = activeSensorIterator->first;
         } catch (...) {
             activeSensorIterator = sensors->begin();
+            Serial.println("active sensor iterator invalid")
         }
+
+        Serial.println("after try catch");
 
         display->setTextColor(SSD1306_BLACK, SSD1306_WHITE);
 
