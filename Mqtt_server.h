@@ -52,7 +52,7 @@ public:
 
     std::size_t available() override;
 
-    void read(const char *c) override;
+    void read(char *c) override;
 
     size_t write(uint8_t c) override;
 

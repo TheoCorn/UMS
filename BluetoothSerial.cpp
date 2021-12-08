@@ -671,7 +671,7 @@ int BluetoothSerial::read(void)
 }
 
 
-void BluetoothSerial::read(const char * c){
+void BluetoothSerial::read(char * c){
     uint8_t val = 0;
     if (_spp_rx_queue && xQueueReceive(_spp_rx_queue, &val, 0)){
         *c = val;

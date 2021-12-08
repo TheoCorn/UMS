@@ -68,7 +68,7 @@ std::size_t Mqtt_server::available() {
     return buffer.size();
 }
 
-void Mqtt_server::read(const char *c) {
+void Mqtt_server::read(char *c) {
     *c = buffer.front();
     buffer.pop();
 }

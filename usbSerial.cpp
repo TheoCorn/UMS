@@ -26,7 +26,7 @@ std::size_t usbSerial::available() {
     return Serial.available();
 }
 
-void usbSerial::read(const char *c) {
+void usbSerial::read(char *c) {
     *c = Serial.read();
 }
 

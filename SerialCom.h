@@ -55,7 +55,7 @@ public:
      *
      * @param c pointer to char where to store the byte
      */
-    virtual void read(const char* c) = 0;
+    virtual void read(char* c) = 0;
 
     /***
      * @param write the byte to write
