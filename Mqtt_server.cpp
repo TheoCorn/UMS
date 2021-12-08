@@ -79,21 +79,21 @@ size_t Mqtt_server::write(uint8_t c) {
 }
 
 size_t Mqtt_server::write(const uint8_t *buffer, size_t size) {
-    output_pub->publish(buffer, size);
+    output_pub->publish((char*)(buffer), size);
     return 0;
 }
 
 size_t Mqtt_server::write(JsonDocument *doc) {
     js::serializeRet * sr = js::serializeDoc(doc);
 
-    output_pub->publish(sr->buff, sr->bufLen);
+    output_pub->publish((char*)(sr->buff), sr->bufLen);
     delete sr;
     return 0;
 }
 
 size_t Mqtt_server::write(error::Error *error) {
     js::serializeRet * sr = js::serializeError(error);
-    output_pub->publish(sr->buff, sr->bufLen);
+    output_pub->publish((char*)(sr->buff), sr->bufLen);
     delete sr;
     return 0;
 }
