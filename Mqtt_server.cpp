@@ -42,6 +42,13 @@ bool Mqtt_server::begin() {
 
 
         WiFi.begin(ssid, password);
+
+        while(WiFi.status() != WL_CONNECTED) {
+            delay(300);
+            Serial.println("not connected")
+        }
+
+
         mqtt = new Adafruit_MQTT_Client(&client, server, port, username, key);
 
         delay(2000);
