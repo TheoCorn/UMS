@@ -45,7 +45,7 @@ bool Mqtt_server::begin() {
 
         while(WiFi.status() != WL_CONNECTED) {
             delay(300);
-            Serial.println("not connected")
+            Serial.println("not connected");
         }
 
 
@@ -69,7 +69,7 @@ bool Mqtt_server::begin() {
 }
 
 std::size_t Mqtt_server::available() {
-    MQTT_connect();
+//    MQTT_connect();
     mqtt->processPackets(2000);
     mqtt->ping();
     return buffer.size();
