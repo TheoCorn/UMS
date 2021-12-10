@@ -23,7 +23,7 @@ class Mqtt_server : public SerialCom{
     static constexpr const char* CONTROL_TOPIC = "/control";
     static constexpr const char* OUTPUT_TOPIC = "/output";
     static constexpr const char* ERROR_TOPIC = "/error";
-    static constexpr const char* ROOT_TOPIC_PT1 = "/UMD_";
+    static constexpr const char* ROOT_TOPIC_PT1 = "UMD_";
 
     static constexpr const char* MQTT_CONFIG_FILE_PATH = "/comData/2.json";
 

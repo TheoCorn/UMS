@@ -6,6 +6,8 @@
 
 void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::coordinates &end) {
 
+    //todo fix bug when first sensor is being connected sys restart then works fine
+
     if (!sensors->empty()){
 
         //checks if active sensor iterator is a valid iterator
@@ -18,12 +20,12 @@ void AllSensorsScreen::render(Adafruit_SSD1306 *display, ui::coordinates &start,
 
             display->println(activeSensorIterator->second->getStringForDisplay());
 
-            Serial.println("after iterator used");
+//            Serial.println("after iterator used");
 
             printSensors(display, it, sensors->end(), end);
         } catch (...) {
             activeSensorIterator = sensors->begin();
-            Serial.println("catch");
+//            Serial.println("catch");
         }
 
     }
