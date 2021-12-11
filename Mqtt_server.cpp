@@ -49,7 +49,7 @@ bool Mqtt_server::begin() {
         }
 
         client.setServer(server, port);
-        client.setCallback(callback);
+//        client.setCallback(callback);
 
 //        mqtt = new Adafruit_MQTT_Client(&client, server, port, username, key);
 
@@ -161,7 +161,7 @@ void Mqtt_server::MQTT_connect() {
     std::size_t tries = 0;
     while (!client.connected() && (++tries) < MAXIMUM_CONNECTION_TRIES) {
         // Attempt to connect
-        if (client.connect(sysInfo::sn)) {
+        if (client.connect(sysInfo::sn.c_str())) {
 
             client.subscribe(cct);
         } else {
