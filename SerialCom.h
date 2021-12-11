@@ -59,6 +59,7 @@ public:
 
     /***
      * @param write the byte to write
+     * do not use
      */
     virtual size_t write(uint8_t c) = 0;
 

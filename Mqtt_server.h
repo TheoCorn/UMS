@@ -10,12 +10,15 @@
 #include "ArduinoJson.h"
 #include <WiFi.h>
 #include "WiFiClientSecure.h"
-#include "Adafruit_MQTT.h"
-#include "Adafruit_MQTT_Client.h"
+//#include "Adafruit_MQTT.h"
+//#include "Adafruit_MQTT_Client.h"
+#include "PubSubClient.h"
 #include <queue>
 #include "sysInfo.h"
 #include <string.h>
 #include "asciiMakros.h"
+
+#define MAXIMUM_CONNECTION_TRIES 3
 
 
 class Mqtt_server : public SerialCom{
@@ -34,15 +37,21 @@ class Mqtt_server : public SerialCom{
     /// (current) error topic
     char* cet;
 
-    Adafruit_MQTT_Subscribe* sub_control;
-    Adafruit_MQTT_Publish* output_pub;
+//    Adafruit_MQTT_Subscribe* sub_control;
+//    Adafruit_MQTT_Publish* output_pub;
 
-    WiFiClientSecure client;
-    Adafruit_MQTT_Client* mqtt;
+//    WiFiClientSecure client;
+//    Adafruit_MQTT_Client* mqtt;
+
+    WiFiClient espClient;
+    PubSubClient client(espClient);
+
     static std::queue<char> buffer;
 
     void MQTT_connect();
     static void control_topic_callback(char *msg, uint16_t len);
+
+    void callback(char* topic, byte* msg, unsigned int len);
 
 public:
 

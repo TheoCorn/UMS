@@ -45,11 +45,13 @@ bool Mqtt_server::begin() {
 
         while(WiFi.status() != WL_CONNECTED) {
             delay(300);
-            Serial.println("not connected");
+//            Serial.println("not connected");
         }
 
+        client.setServer(server, port);
+        client.setCallback(callback);
 
-        mqtt = new Adafruit_MQTT_Client(&client, server, port, username, key);
+//        mqtt = new Adafruit_MQTT_Client(&client, server, port, username, key);
 
         delay(2000);
         MQTT_connect();
@@ -61,17 +63,18 @@ bool Mqtt_server::begin() {
 //    delete doc;
     delete[] cArrJson;
 
-    sub_control = new Adafruit_MQTT_Subscribe(mqtt, cot);
-    sub_control->setCallback(control_topic_callback);
-    mqtt->subscribe(sub_control);
-
-    output_pub = new Adafruit_MQTT_Publish(mqtt, cot);
+//    sub_control = new Adafruit_MQTT_Subscribe(mqtt, cot);
+//    sub_control->setCallback(control_topic_callback);
+//    mqtt->subscribe(sub_control);
+//
+//    output_pub = new Adafruit_MQTT_Publish(mqtt, cot);
 }
 
 std::size_t Mqtt_server::available() {
-//    MQTT_connect();
-    mqtt->processPackets(2000);
-    mqtt->ping();
+    MQTT_connect();
+//    mqtt->processPackets(2000);
+//    mqtt->ping();
+
     return buffer.size();
 }
 
@@ -81,26 +84,31 @@ void Mqtt_server::read(char *c) {
 }
 
 size_t Mqtt_server::write(uint8_t c) {
-    output_pub->publish(c);
+//    output_pub->publish(c);
+    client.publish(cot, &c, 1);
     return 0;
 }
 
 size_t Mqtt_server::write(const uint8_t *buffer, size_t size) {
-    output_pub->publish(const_cast<uint8_t*>(buffer), size);
+//    output_pub->publish(const_cast<uint8_t*>(buffer), size);
+    client.publish(cot, (const char*)buffer, size);
     return 0;
 }
 
 size_t Mqtt_server::write(JsonDocument *doc) {
     js::serializeRet * sr = js::serializeDoc(doc);
 
-    output_pub->publish((uint8_t *) sr->buff, sr->bufLen);
+//    output_pub->publish((uint8_t *) sr->buff, sr->bufLen);
+    client.publish(cot, sr->buff, sr->bufLen);
     delete sr;
     return 0;
 }
 
 size_t Mqtt_server::write(error::Error *error) {
     js::serializeRet * sr = js::serializeError(error);
-    output_pub->publish((uint8_t *) sr->buff, sr->bufLen);
+//    output_pub->publish((uint8_t *) sr->buff, sr->bufLen);
+
+    client.publish(cet, sr->buff, sr->bufLen);
     delete sr;
     return 0;
 }
@@ -114,29 +122,54 @@ void Mqtt_server::startConnectionCheck(int duration) {
 }
 
 bool Mqtt_server::hasConnectedDevice() {
-    return WiFi.status() == WL_CONNECTED;
+    return client.connected();
 }
 
 char *Mqtt_server::getString4Display() {
     return nullptr;
 }
 
-void Mqtt_server::MQTT_connect() {
-    int8_t ret;
+void Mqtt_server::callback(char* topic, byte* msg, unsigned int len) {
 
-    // Stop if already connected.
-    if (mqtt->connected()) {
-        return;
+    if (strcmp(topic, cct) == 0) {
+        Mqtt_server::buffer.push(av::stx);
+        for (uint16_t pos = 0; pos < len; len++){
+            Mqtt_server::buffer.push(*(msg + pos));
+        }
+        Mqtt_server::buffer.push(av::etx);
     }
+}
 
-    uint8_t retries = 3;
-    while ((ret = mqtt->connect()) != 0) { // connect will return 0 for connected
-        mqtt->disconnect();
-        delay(5000);  // wait 5 seconds
-        retries--;
-        if (retries == 0) {
-            // basically die and wait for WDT to reset me
-            while (1);
+void Mqtt_server::MQTT_connect() {
+//    int8_t ret;
+//
+//    // Stop if already connected.
+//    if (mqtt->connected()) {
+//        return;
+//    }
+//
+//    uint8_t retries = 3;
+//    while ((ret = mqtt->connect()) != 0) { // connect will return 0 for connected
+//        mqtt->disconnect();
+//        delay(5000);  // wait 5 seconds
+//        retries--;
+//        if (retries == 0) {
+//            // basically die and wait for WDT to reset me
+//            while (1);
+//        }
+//    }
+    std::size_t tries = 0;
+    while (!client.connected() && (++tries) < MAXIMUM_CONNECTION_TRIES) {
+        // Attempt to connect
+        if (client.connect(sysInfo::sn)) {
+
+            client.subscribe(cct);
+        } else {
+            Serial.print("failed, rc=");
+            Serial.print(client.state());
+            Serial.println(" try again in 5 seconds");
+            // Wait 5 seconds before retrying
+            delay(5000);
         }
     }
 
