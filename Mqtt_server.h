@@ -44,7 +44,7 @@ class Mqtt_server : public SerialCom{
 //    Adafruit_MQTT_Client* mqtt;
 
     WiFiClient espClient;
-    PubSubClient client(espClient);
+    PubSubClient client = PubSubClient(espClient);
 
     static std::queue<char> buffer;
 
