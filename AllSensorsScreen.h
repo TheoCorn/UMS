@@ -13,7 +13,12 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-
+/**
+ * @ingroup Tabs
+ * @{
+ * @addtogroup SensorsTab-screens
+ * @{
+ */
 class AllSensorsScreen : public ui::Tab {
 protected:
     std::map<uint32_t, Sensor *> *sensors;
@@ -48,5 +53,7 @@ public:
 
 };
 
+/** @} */
+/** @} */
 
 #endif //UMDWITHCLASS3_ALLSENSORSSCREEN_H

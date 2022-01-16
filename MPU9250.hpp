@@ -1,8 +1,5 @@
 
-/*!
- * this is a modified version of Bolder Flight Systems Inc mpu9250 library
- * @authors Brian R Taylor, Theodor Capek
- */
+
 
 /*
 * Brian R Taylor
@@ -38,6 +35,16 @@
 #include "Sensor.hpp"
 #include "sensorEnum.h"
 
+/**
+ * @addtogroup sensors
+ * @{
+ */
+
+/*!
+ * MPU9250 is a modified version of Bolder Flight Systems Inc mpu9250 library
+ * @authors Brian R Taylor, Theodor Capek
+ * @class MPU9250
+ */
 class MPU9250 : public Sensor {
 public:
     enum DlpfBandwidth : uint8_t {
@@ -192,5 +199,7 @@ private:
     bool WriteAk8963Register(uint8_t reg, uint8_t data);
     bool ReadAk8963Registers(uint8_t reg, uint8_t count, uint8_t *data);
 };
+
+/** @} */
 
 #endif  // INCLUDE_MPU9250_MPU9250_H_

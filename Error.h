@@ -61,8 +61,9 @@ namespace error {
     };
 
     /**
-     * error class defines the way errors are send to host app
+     * Error class defines the way errors are send to host app
      * max size of name + message = 158 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
+     * @class Error
      */
     class Error {
 
@@ -74,7 +75,7 @@ namespace error {
         unsigned int backgroundAction;
 
         /**
-         * error class defines the way errors are send to host app
+         * Error class defines the way errors are send to host app
          * max size of name + message = 158 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
          * sets createAlertDialog to true and importance to MILD (1)
          *
@@ -84,7 +85,7 @@ namespace error {
         Error(const char* name, const char* message) : Error(name, message, error::Appearance::SNACK_BAR, error::Importance::MILD, BackgroundAppActions::NONE) {}
 
         /**
-         * error class defines the way errors are send to host app
+         * Error class defines the way errors are send to host app
          * max size of name + message = 158 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
          * prompts the creation of a snackbar dialog
          *
@@ -95,7 +96,7 @@ namespace error {
         Error(const char* name, const char* message, error::Importance importance) : Error(name, message, error::Appearance::SNACK_BAR, importance, BackgroundAppActions::NONE) {}
 
         /**
-         * error class defines the way errors are send to host app
+         * Error defines the way errors are send to host app
          * max size of name + message = 158 bytes (this wired number comes from the fact that the entire JsonDocument has 256 bytes)
          * sets createAlertDialog to true
          *

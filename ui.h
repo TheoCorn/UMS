@@ -11,6 +11,17 @@
 #include <map>
 #include "Sensor.hpp"
 
+/**
+ * @defgroup UI
+ * @{
+ */
+
+/**
+ * @defgroup top_level
+ * @{
+ *
+ */
+
 
 namespace ui {
 
@@ -27,6 +38,10 @@ namespace ui {
         STATIC
     };
 
+    /**
+     * @defgroup Tabs tabs
+     * @ingroup UI all files related to UI
+     */
     class Tab {
 
     public:
@@ -57,6 +72,12 @@ namespace ui {
 //    class SensorsTab;
 
 
+
 }
+
+/** @} */
+
+/** @} */
+
 
 #endif //UMDWITHCLASS3_UI_H

@@ -401,6 +401,7 @@ bool Sensor::write(const uint8_t _addr, const uint8_t *buffer, size_t len, TwoWi
 
     _wire.beginTransmission(_addr);
 
+
     // Write the prefix data (usually an address)
     if ((prefix_len != 0) && (prefix_buffer != NULL)) {
         if (_wire.write(prefix_buffer, prefix_len) != prefix_len) {
@@ -460,11 +461,13 @@ bool Sensor::write(const uint8_t _addr, const uint8_t *buffer, size_t len, TwoWi
 }
 
 /*!
- *    @brief  Read from I2C into a buffer from the I2C device.
- *    Cannot be more than maxBufferSize() bytes.
- *    @param  buffer Pointer to buffer of data to read into
- *    @param  len Number of bytes from buffer to read.
- *    @param  stop Whether to send an I2C STOP signal on read
+ *    @brief Read from I2C into a buffer from the I2C device.
+ *    Cannot be more than Sensor::max_i2c_buffer_size bytes.
+ *    @param _addr i2c address
+ *    @param buffer Pointer to buffer of data to read into
+ *    @param len Number of bytes from buffer to read.
+ *    @param _wire Wire
+ *    @param stop Whether to send an I2C STOP signal on read
  *    @return True if read was successful, otherwise false.
  */
 bool Sensor::read(const uint8_t _addr, uint8_t *buffer, size_t len, TwoWire &_wire, bool stop) {

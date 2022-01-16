@@ -14,7 +14,10 @@
 #define SETTINGS_ARRAY_SIZE 2
 
 
-
+/**
+ * @ingroup Tabs
+ * @{
+ */
 class SettingsTab : public ui::Tab {
 
 
@@ -27,7 +30,7 @@ class SettingsTab : public ui::Tab {
 
     size_t settArrIndex = 0;
 
-    ///variable that describes whether you are iterating @settingArr or the individual Settings
+    ///variable that describes whether you are iterating settingArr or the individual Settings
     bool isConfigSetting = false;
 
     void printSetting(Adafruit_SSD1306 *display, size_t index, size_t xOffset);
@@ -63,6 +66,6 @@ public:
 };
 
 
-
+/** @} */
 
 #endif //UMDWITHCLASS3_SETTINGSTAB_H

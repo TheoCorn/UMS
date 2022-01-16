@@ -14,11 +14,15 @@
 
 //tweaked by Theodor Capek big thanks to the original author
 
+
+
 #ifndef _BLUETOOTH_SERIAL_H_
 #define _BLUETOOTH_SERIAL_H_
 
 #include "sdkconfig.h"
 #include "asciiMakros.h"
+
+
 
 #if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
 
@@ -33,6 +37,14 @@ typedef std::function<void(const uint8_t *buffer, size_t size)> BluetoothSerialD
 typedef std::function<void(uint32_t num_val)> ConfirmRequestCb;
 typedef std::function<void(boolean success)> AuthCompleteCb;
 
+/**
+ * @ingroup com
+ * @{
+ */
+
+/**
+ * @autors Evandro Luis Copercini, Theodor Čapek
+ */
 class BluetoothSerial:  public SerialCom
 {
     public:
@@ -79,6 +91,10 @@ class BluetoothSerial:  public SerialCom
 
 };
 
+
+
 #endif
 
 #endif
+
+/** @} */

@@ -13,7 +13,12 @@
 #include <Adafruit_SSD1306.h>
 #include "userMessages.h"
 
-
+/**
+ * @ingroup Tabs
+ * @{
+ * @addtogroup SensorsTab-screens
+ * @{
+ */
 class SpecificSensorScreen : public ui::Tab {
 
 //    std::map<uint32_t, Sensor *> *sensors;
@@ -35,5 +40,8 @@ public:
     void onClick() override;
 };
 
+/** @} */
+
+/** @} */
 
 #endif //UMDWITHCLASS3_SPECIFICSENSORSCREEN_H

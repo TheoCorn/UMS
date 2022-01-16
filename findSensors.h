@@ -10,12 +10,21 @@
 #include "ConflictingSensors.hpp"
 #include "AddressIdentifier.hpp"
 
-
+/**
+ * sensor search.
+ * This is where all future checkers will go.
+ * @defgroup sensor_search
+ * @{
+ */
 namespace ss{
+
+    /**
+     * search and connect i2c sensors
+     */
     void checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::map<uint32_t , Sensor*> * sensors, SensorsIdentifierManager * sim);
 }
 
-
+/** @} */
 
 
 #endif //UMDWITHCLASS3_FINDSENSORS_H

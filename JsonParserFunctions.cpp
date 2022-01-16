@@ -18,7 +18,7 @@ void jp::cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)>& actua
    earpieces '\0' to the end of the vector
 
    @param btBuffer * std::vector<char> pointer to buffer of incoming Json
-   @param do function pointer to the function with will do stuff with the elements
+   @param actualDo function pointer to the function with will do stuff with the elements
 
    @exception DeserializationError
 */
@@ -35,8 +35,8 @@ void jp::parseJsonWithCycleThru (std::vector<char> * btBuffer, std::function<voi
  * if the second function pointer is not needed pass nullptr
  *
  * @param buffer the serialised Json
- * @param void(*cycleFun)(JsonDocument*, void(JsonPair*))
- * @param void(*actualDo)(JsonPair*)
+ * @param cycleFun std::function<void(JsonDocument*, std::function<void(JsonPair*)>&)>&
+ * @param actualDo std::function<void(JsonPair*)>& actualDo
  */
 void jp::parseJson(
         const char * buffer,
@@ -51,7 +51,7 @@ void jp::parseJson(
 /**
  * parses json and return JsonDocument* the user of the function must manage the lifecycle of the JsonDocument*
  *
- * @param const char* buffer the Serialized Json
+ * @param buffer const char* buffer the Serialized Json
  * @return JsonDocument* can be null pointer if the the deserialization failed
  */
 JsonDocument * jp::parseJson(const char * buffer){

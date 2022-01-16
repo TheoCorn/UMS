@@ -17,9 +17,17 @@
 #include "FS.h"
 #include "SPIFFS.h"
 
+/**
+ *  @defgroup sensors sensors
+ *  all actual implemented sensors
+ */
 
-
-
+/**
+ * Abstract representation of a sensor extended by every actual sensor.
+ *
+ * @author Theodor Čapek
+ * @class Sensor
+ */
 class Sensor {
 public:
     Sensor() = default;
@@ -31,8 +39,9 @@ public:
 
     /**
      * unique identification of the Sensor type
-     *
      * this is the same as the sensors id defined in sensorsEnum and SensorAddresses.json
+     *
+     * @return sid
      */
     virtual uint32_t sid() = 0;
 
@@ -96,7 +105,7 @@ public:
      *
      * "XSettings":[0, 0, 1, 4]
      *
-     * @param JsonArray&
+     * @param jArr JsonArray&
      */
     virtual void getJson(JsonArray& jArr) = 0;
 
@@ -136,7 +145,7 @@ public:
      * fills in SID and RSID of sensor to a Templated Sensor Object
      *
      * @param obj
-     * @param name
+     * @param rsid
      * @param sid
      */
     static void fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t& sid);
@@ -145,7 +154,6 @@ public:
      * generates a Features Json object
      *
      * @param sensorObj
-     * @param features
      * @param activeFeatures
      */
     static void generateFeatures(JsonObject &sensorObj, std::vector<bool> &activeFeatures);
@@ -177,8 +185,9 @@ public:
      * so it will contain the name, sid, single feature (name of feature is the name parameter) that is automatically enabled no XSettings
      *
      * @param doc
-     * @param name sensor name
+     * @param rsid sensor name
      * @param sid i2cAddress
+     * @param isActive
      */
     static void generateTemplatedSensorObject(JsonArray& doc, const uint32_t &rsid, const uint32_t &sid, const bool isActive);
 
@@ -205,7 +214,7 @@ public:
      * so it will contain the name, sid, multiple features and XSettings
      *
      * @param doc
-     * @param name name of the sensor
+     * @param rsid name of the sensor
      * @param sid i2c address
      * @param activeFeatures which features will be used when reading the Sensor
      * @param xSettings

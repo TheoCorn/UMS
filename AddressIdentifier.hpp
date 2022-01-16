@@ -13,10 +13,6 @@
 
 /**
  * this class identifies Sensors based on the i2c address it creates
- *
- *
- * @param
- * @return
  */
 class SensorsIdentifierManager {
   public:

@@ -31,7 +31,9 @@ public:
 
 };
 
-
+/**
+ * @defgroup com communication
+ */
 class SerialCom {
 public:
 
@@ -54,11 +56,14 @@ public:
      * gets the first byte and stores it
      *
      * @param c pointer to char where to store the byte
+     * @internal
+     * do not use
      */
     virtual void read(char* c) = 0;
 
     /***
-     * @param write the byte to write
+     * @param c the byte to write
+     * @internal
      * do not use
      */
     virtual size_t write(uint8_t c) = 0;
@@ -121,6 +126,7 @@ namespace sce{
 }
 
 SerialCom* getSerialCom4EnumPos(unsigned int enumPos);
+
 
 
 #endif //UMDWITHCLASS3_SERIALCOM_H

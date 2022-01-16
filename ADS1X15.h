@@ -179,6 +179,15 @@ private:
 
 };
 
+/**
+ * @addtogroup sensors
+ * @{
+ */
+
+/**
+ * implementation of the ADS1015 analog digital convertor
+ * @class ADS1015
+ */
 class ADS1015 : public ADS1X15, public Sensor{
     static constexpr const char* jsonFilePath = "/sensorData/2.json";
 public:
@@ -209,11 +218,10 @@ public:
 
 };
 
-/**************************************************************************/
-/*!
-    @brief  Sensor driver for the Adafruit ADS1115 ADC breakout.
-*/
-/**************************************************************************/
+/**
+ * implementation of the ADS1115 analog digital convertor
+ * @class ADS1115
+ */
 class ADS1115 : public ADS1X15, public Sensor {
     static constexpr const char* jsonFilePath = "/sensorData/3.json";
 public:
@@ -241,6 +249,8 @@ public:
 
     void saveConfig() override { ADS1X15::m_saveConfig(jsonFilePath); }
 };
+
+/** @} */
 
 
 #endif //UMDWITHCLASS3_ADS1X15_H

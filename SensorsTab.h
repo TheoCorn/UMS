@@ -19,7 +19,10 @@ enum class SensorsTabSubScreen{
     SPECIFIC_SENSOR_SCREEN
 };
 
-
+/**
+ * @ingroup Tabs
+ * @{
+ */
 class SensorsTab : public ui::Tab {
 private:
 
@@ -58,10 +61,6 @@ public:
 };
 
 
-
-
-
-
-
+/** @} */
 
 #endif //UMDWITHCLASS3_SENSORSTAB_H

@@ -111,6 +111,10 @@
 
 #define SHUNT_RESISTOR_VALUE  (0.1)   // default shunt resistor value of 0.1 Ohm
 
+/**
+ * @addtogroup sensors
+ * @{
+ */
 
 class INA3221 : public Sensor {
 private:
@@ -174,6 +178,8 @@ public:
     float readFeature(size_t index) override;
 
 };
+
+/** @} */
 
 
 #endif //UMDWITHCLASS3_INA3221_H

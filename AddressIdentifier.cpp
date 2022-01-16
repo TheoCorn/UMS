@@ -21,10 +21,11 @@
 
 
 /**
-adds the the correct sensor type to the specified vector
-
-@param address the address of the i2c device
-@param vector std::vector<Sensor> pointer with the sensor will be added to
+ * adds the the correct sensor type to the specified vector
+ *
+ * @param address the address of the i2c device
+ * @param sensors
+ *
 */
 void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Sensor *> *sensors,
                                          std::vector<csa::ConflictingAddressStruct *> *conflicts) {

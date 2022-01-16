@@ -14,7 +14,10 @@
 #include "Error.h"
 #include "asciiMakros.h"
 
-
+/**
+ * @ingroup com
+ * @{
+ */
 class usbSerial: public SerialCom {
 
 public:
@@ -51,5 +54,6 @@ protected:
     static void readTask(void* connected);
 };
 
+/** @} */
 
 #endif //UMDWITHCLASS3_USBSERIAL_H

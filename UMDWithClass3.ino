@@ -1,4 +1,7 @@
 
+//different gpios for breadboard version
+#define ON_BREADBOARD_WEMOS_LOLIN31
+
 //json
 #include <ArduinoJson.h>
 #include "JsonParserFunctions.hpp"
@@ -40,7 +43,6 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include "displayFunctions.h"
-
 
 
 

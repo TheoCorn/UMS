@@ -13,7 +13,10 @@
 //acknowledge
 #define ACK 6
 
-
+/**
+ * ascii values
+ *
+ */
 namespace av{
     constexpr uint8_t etx = 3;
     constexpr uint8_t stx = 2;

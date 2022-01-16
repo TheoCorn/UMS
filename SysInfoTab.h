@@ -8,7 +8,10 @@
 #include "ui.h"
 #include "sysInfo.h"
 
-
+/**
+ * @ingroup Tabs
+ * @{
+ */
 class SysInfoTab : public ui::Tab{
     String name() override { return "SysInfo"; };
 
@@ -16,5 +19,6 @@ class SysInfoTab : public ui::Tab{
 
 };
 
+/** @} */
 
 #endif //UMDWITHCLASS3_SYSINFOTAB_H
