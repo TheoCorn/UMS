@@ -1,0 +1,7 @@
+<map id="BMP280::ctrl_meas::get" name="BMP280::ctrl_meas::get">
+<area shape="rect" id="node1" title=" " alt="" coords="583,31,745,57"/>
+<area shape="rect" id="node2" href="$d1/daf/class_b_m_p280.html#a2f0758eef94099ebe91388508a1a4eff" title=" " alt="" coords="383,31,535,57"/>
+<area shape="rect" id="node3" href="$d1/daf/class_b_m_p280.html#afd47ded337ea68e4b4d3f9561b2a9baf" title=" " alt="" coords="180,31,335,57"/>
+<area shape="rect" id="node4" href="$d1/daf/class_b_m_p280.html#a08eb8fc005e0ec24bae25eb4026c1be0" title=" " alt="" coords="5,5,132,32"/>
+<area shape="rect" id="node5" href="$d1/daf/class_b_m_p280.html#a77bb226d5a9f5e52e6e60624a2ff76f2" title="default set up for setup from user use setJson()" alt="" coords="11,56,126,83"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="ADS1X15::readSensor" name="ADS1X15::readSensor">
+<area shape="rect" id="node1" title=" " alt="" coords="204,31,357,57"/>
+<area shape="rect" id="node2" href="$d4/daa/class_a_d_s1015.html#aa7694fe109486ee3e902b1cbc65323a9" title="used when reading write JsonArray to the Json document" alt="" coords="5,5,156,32"/>
+<area shape="rect" id="node3" href="$d0/dc3/class_a_d_s1115.html#a51e42f9ca2d12476ff2967ed1f749eae" title="used when reading write JsonArray to the Json document" alt="" coords="5,56,156,83"/>
+</map>

@@ -1,0 +1,16 @@
+<map id="spiffs::readFile" name="spiffs::readFile">
+<area shape="rect" id="node1" title=" " alt="" coords="640,123,748,149"/>
+<area shape="rect" id="node2" href="$d8/dd7/class_mqtt__server.html#a0cb7b2987a82b2d423ee6dfeddaf79b9" title=" " alt="" coords="430,5,561,32"/>
+<area shape="rect" id="node3" href="$d5/d03/class_sensors_identifier_manager.html#a4e61acf5769d4c08c65810c929293750" title=" " alt="" coords="410,57,581,98"/>
+<area shape="rect" id="node5" href="$d7/daf/class_sensor.html#a302da8f90f17b73bc2bdea7132698c98" title=" " alt="" coords="402,123,589,149"/>
+<area shape="rect" id="node6" href="$d7/daf/class_sensor.html#a12217f7b15366738b70ee154123e1d37" title=" " alt="" coords="399,173,592,200"/>
+<area shape="rect" id="node13" href="$d3/d54/_u_m_d_with_class3_8ino.html#a988c27667b43ff91342cf754af8ea2fe" title=" " alt="" coords="443,249,548,276"/>
+<area shape="rect" id="node4" href="$d5/d03/class_sensors_identifier_manager.html#aca0e6773e5f48a6d42d908a13c059746" title=" " alt="" coords="172,31,351,73"/>
+<area shape="rect" id="node7" href="$d1/daf/class_b_m_p280.html#a77bb226d5a9f5e52e6e60624a2ff76f2" title="default set up for setup from user use setJson()" alt="" coords="204,97,319,124"/>
+<area shape="rect" id="node8" href="$d3/d59/class_i_n_a3221.html#aab06e03315c4d3ef7644e3f05612ea41" title="default set up for setup from user use setJson()" alt="" coords="204,148,319,175"/>
+<area shape="rect" id="node9" href="$df/dd9/class_m_p_u9250.html#a1295b399fa3363ac96565a5e805ac7c3" title="default set up for setup from user use setJson()" alt="" coords="201,199,322,225"/>
+<area shape="rect" id="node10" href="$d2/d11/class_a_d_s1_x15.html#a15cdf207d38185b428ce01646d1c876c" title=" " alt="" coords="201,249,322,276"/>
+<area shape="rect" id="node11" href="$d4/daa/class_a_d_s1015.html#af44f2c12951d48c6e49ed0a18e840e3c" title="default set up for setup from user use setJson()" alt="" coords="5,224,124,251"/>
+<area shape="rect" id="node12" href="$d0/dc3/class_a_d_s1115.html#a775926cfd0160af46250130d4db69076" title="default set up for setup from user use setJson()" alt="" coords="5,275,124,301"/>
+<area shape="rect" id="node14" href="$d3/d54/_u_m_d_with_class3_8ino.html#a4fc01d736fe50cf5b977f755b675f11d" title=" " alt="" coords="234,300,289,327"/>
+</map>

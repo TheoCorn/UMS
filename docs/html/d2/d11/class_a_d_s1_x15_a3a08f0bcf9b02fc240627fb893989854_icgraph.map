@@ -1,0 +1,6 @@
+<map id="ADS1X15::readADC_SingleEnded" name="ADS1X15::readADC_SingleEnded">
+<area shape="rect" id="node1" title="Gets a single&#45;ended ADC reading from the specified channel." alt="" coords="412,31,631,57"/>
+<area shape="rect" id="node2" href="$d2/d11/class_a_d_s1_x15.html#a065283ede2ddd8446b0324662bfd6ef4" title=" " alt="" coords="208,31,364,57"/>
+<area shape="rect" id="node3" href="$d4/daa/class_a_d_s1015.html#a1ce7d76639835426df2f3130a3530865" title=" " alt="" coords="5,5,160,32"/>
+<area shape="rect" id="node4" href="$d0/dc3/class_a_d_s1115.html#a036657951fa1bad14231213a3a26c536" title=" " alt="" coords="5,56,160,83"/>
+</map>

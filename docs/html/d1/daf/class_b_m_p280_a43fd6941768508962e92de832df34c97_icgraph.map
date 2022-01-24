@@ -1,0 +1,6 @@
+<map id="BMP280::read16_LE" name="BMP280::read16_LE">
+<area shape="rect" id="node1" title=" " alt="" coords="589,5,732,32"/>
+<area shape="rect" id="node2" href="$d1/daf/class_b_m_p280.html#abd72c5b672a500d27f8420a36e118e86" title="Reads the factory&#45;set coefficients." alt="" coords="168,5,343,32"/>
+<area shape="rect" id="node4" href="$d1/daf/class_b_m_p280.html#a23aa8868ab76030eebc39b52e8c72168" title=" " alt="" coords="391,31,541,57"/>
+<area shape="rect" id="node3" href="$d1/daf/class_b_m_p280.html#a77bb226d5a9f5e52e6e60624a2ff76f2" title="default set up for setup from user use setJson()" alt="" coords="5,5,120,32"/>
+</map>

@@ -162,8 +162,10 @@ void DisplayFunctions::sleep() {
 }
 
 void DisplayFunctions::reStatusDispatch() {
+    Serial.println("REA_LOW");
     reaWasLow = false;
     if (rebWasLow){
+        Serial.println("REB_LOW");
         if (iteratingTabs) {
             if (tabIterator != tabs.begin()) tabIterator--;
         }else{
@@ -171,6 +173,7 @@ void DisplayFunctions::reStatusDispatch() {
         }
         rebWasLow = false;
     }else{
+        Serial.println("REB_HIGH");
         if (iteratingTabs) {
             auto endIt = --(tabs.end());
             if (tabIterator != endIt) tabIterator++;

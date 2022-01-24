@@ -1,0 +1,5 @@
+<map id="ADS1X15::getExtendedStringForDisplay" name="ADS1X15::getExtendedStringForDisplay">
+<area shape="rect" id="node1" title=" " alt="" coords="245,39,440,80"/>
+<area shape="rect" id="node2" href="$d4/daa/class_a_d_s1015.html#a3857791919f9ae2f76530f933b9cdb72" title="used when getting dataFromSensor to display, so more data can be displayed" alt="" coords="5,5,197,47"/>
+<area shape="rect" id="node3" href="$d0/dc3/class_a_d_s1115.html#ab4fce62e401ce6a8b4cfa47ed00175f2" title="used when getting dataFromSensor to display, so more data can be displayed" alt="" coords="5,71,197,112"/>
+</map>

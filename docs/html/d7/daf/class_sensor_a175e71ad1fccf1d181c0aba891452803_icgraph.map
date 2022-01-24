@@ -1,0 +1,9 @@
+<map id="Sensor::templatedExtendedString4Display" name="Sensor::templatedExtendedString4Display">
+<area shape="rect" id="node1" title=" " alt="" coords="488,104,671,145"/>
+<area shape="rect" id="node2" href="$d1/daf/class_b_m_p280.html#a7c43d6c115280becc8ab21c630348d06" title="used when getting dataFromSensor to display, so more data can be displayed" alt="" coords="249,5,436,47"/>
+<area shape="rect" id="node3" href="$d3/d59/class_i_n_a3221.html#ad2774d646c315a7fc5e4568253ffac94" title="used when getting dataFromSensor to display, so more data can be displayed" alt="" coords="249,71,436,112"/>
+<area shape="rect" id="node4" href="$df/dd9/class_m_p_u9250.html#a00f0d89c395145b525d7fd81246f1bad" title="used when getting dataFromSensor to display, so more data can be displayed" alt="" coords="245,136,440,177"/>
+<area shape="rect" id="node5" href="$d2/d11/class_a_d_s1_x15.html#a0e60793bfb447a395a578575d0cd7477" title=" " alt="" coords="245,201,440,243"/>
+<area shape="rect" id="node6" href="$d4/daa/class_a_d_s1015.html#a3857791919f9ae2f76530f933b9cdb72" title="used when getting dataFromSensor to display, so more data can be displayed" alt="" coords="5,168,197,209"/>
+<area shape="rect" id="node7" href="$d0/dc3/class_a_d_s1115.html#ab4fce62e401ce6a8b4cfa47ed00175f2" title="used when getting dataFromSensor to display, so more data can be displayed" alt="" coords="5,233,197,275"/>
+</map>

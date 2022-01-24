@@ -1,0 +1,4 @@
+<map id="ADS1115::name" name="ADS1115::name">
+<area shape="rect" id="node1" title="get the name of the Sensor" alt="" coords="252,5,369,32"/>
+<area shape="rect" id="node2" href="$d0/dc3/class_a_d_s1115.html#a43542bd27a0a28faa2586f094954fa0b" title="used when getting dataFromSensor to display" alt="" coords="5,5,204,32"/>
+</map>

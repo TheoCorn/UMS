@@ -1,0 +1,5 @@
+<map id="ADS1X15::begin" name="ADS1X15::begin">
+<area shape="rect" id="node1" title="Sets up the HW (reads coefficients values, etc.)" alt="" coords="193,31,312,57"/>
+<area shape="rect" id="node2" href="$d4/daa/class_a_d_s1015.html#ae6e6892fabf9c9d281cb7dbec85a3bb1" title=" " alt="" coords="5,5,145,32"/>
+<area shape="rect" id="node3" href="$d0/dc3/class_a_d_s1115.html#ad199080f8be0f8cbdd254e44f886ce35" title=" " alt="" coords="5,56,145,83"/>
+</map>

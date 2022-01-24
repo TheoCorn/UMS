@@ -1,0 +1,11 @@
+<map id="ADS1X15::readRegister" name="ADS1X15::readRegister">
+<area shape="rect" id="node1" title="Read 16&#45;bits from the specified destination register." alt="" coords="949,56,1109,83"/>
+<area shape="rect" id="node2" href="$d2/d11/class_a_d_s1_x15.html#ab25372c9eb598363a78b5cb8d1fdd4b3" title="Returns true if conversion is complete, false otherwise." alt="" coords="696,27,901,53"/>
+<area shape="rect" id="node9" href="$d2/d11/class_a_d_s1_x15.html#ac0c5648297c22682f8a53cf2746945c9" title="In order to clear the comparator, we need to read the conversion results. This function reads the las..." alt="" coords="701,78,896,119"/>
+<area shape="rect" id="node3" href="$d2/d11/class_a_d_s1_x15.html#acceb415165f14f090288061372e4096d" title="Reads the conversion results, measuring the voltage difference between the P (AIN0) and N (AIN1) inpu..." alt="" coords="412,5,648,32"/>
+<area shape="rect" id="node4" href="$d2/d11/class_a_d_s1_x15.html#adb4cd7fd8e4810d3f0716d6f457a6144" title="Reads the conversion results, measuring the voltage difference between the P (AIN2) and N (AIN3) inpu..." alt="" coords="412,107,648,133"/>
+<area shape="rect" id="node8" href="$d2/d11/class_a_d_s1_x15.html#a3a08f0bcf9b02fc240627fb893989854" title="Gets a single&#45;ended ADC reading from the specified channel." alt="" coords="421,56,639,83"/>
+<area shape="rect" id="node5" href="$d2/d11/class_a_d_s1_x15.html#a065283ede2ddd8446b0324662bfd6ef4" title=" " alt="" coords="208,81,364,108"/>
+<area shape="rect" id="node6" href="$d4/daa/class_a_d_s1015.html#a1ce7d76639835426df2f3130a3530865" title=" " alt="" coords="5,56,160,83"/>
+<area shape="rect" id="node7" href="$d0/dc3/class_a_d_s1115.html#a036657951fa1bad14231213a3a26c536" title=" " alt="" coords="5,107,160,133"/>
+</map>

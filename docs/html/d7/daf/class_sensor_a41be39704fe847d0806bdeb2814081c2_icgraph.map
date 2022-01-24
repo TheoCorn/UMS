@@ -1,0 +1,9 @@
+<map id="Sensor::templatedRead" name="Sensor::templatedRead">
+<area shape="rect" id="node1" title=" " alt="" coords="405,81,564,108"/>
+<area shape="rect" id="node2" href="$d1/daf/class_b_m_p280.html#ae43301cf857ed0b2b12805669b90121c" title="used when reading write JsonArray to the Json document" alt="" coords="207,5,354,32"/>
+<area shape="rect" id="node3" href="$d3/d59/class_i_n_a3221.html#a26540b88abc3c7d5ac1e4ebe40a43359" title="used when reading write JsonArray to the Json document" alt="" coords="207,56,354,83"/>
+<area shape="rect" id="node4" href="$df/dd9/class_m_p_u9250.html#a0a468f844ffd1462a504088779124758" title="used when reading write JsonArray to the Json document" alt="" coords="204,107,357,133"/>
+<area shape="rect" id="node5" href="$d2/d11/class_a_d_s1_x15.html#ab7864cd9f4e0390bd87b37f49aeabb4e" title=" " alt="" coords="204,157,357,184"/>
+<area shape="rect" id="node6" href="$d4/daa/class_a_d_s1015.html#aa7694fe109486ee3e902b1cbc65323a9" title="used when reading write JsonArray to the Json document" alt="" coords="5,132,156,159"/>
+<area shape="rect" id="node7" href="$d0/dc3/class_a_d_s1115.html#a51e42f9ca2d12476ff2967ed1f749eae" title="used when reading write JsonArray to the Json document" alt="" coords="5,183,156,209"/>
+</map>

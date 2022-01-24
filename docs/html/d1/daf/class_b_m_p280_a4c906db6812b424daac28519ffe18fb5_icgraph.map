@@ -1,0 +1,4 @@
+<map id="BMP280::name" name="BMP280::name">
+<area shape="rect" id="node1" title="get the name of the Sensor" alt="" coords="248,5,360,32"/>
+<area shape="rect" id="node2" href="$d1/daf/class_b_m_p280.html#add35a53e31fadfeda30c6090e68b71a4" title="used when getting dataFromSensor to display" alt="" coords="5,5,200,32"/>
+</map>

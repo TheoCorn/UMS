@@ -1,0 +1,4 @@
+<map id="BMP280::waterBoilingPoint" name="BMP280::waterBoilingPoint">
+<area shape="rect" id="node1" title="calculates the boiling point of water by a given pressure" alt="" coords="203,5,383,32"/>
+<area shape="rect" id="node2" href="$d1/daf/class_b_m_p280.html#a6b62f807fcca3cb8010df9523f80cfde" title=" " alt="" coords="5,5,155,32"/>
+</map>

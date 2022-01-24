@@ -1,0 +1,8 @@
+<map id="BMP280::read16" name="BMP280::read16">
+<area shape="rect" id="node1" title="Reads a 16 bit value over I2C/SPI." alt="" coords="780,31,899,57"/>
+<area shape="rect" id="node2" href="$d1/daf/class_b_m_p280.html#a43fd6941768508962e92de832df34c97" title=" " alt="" coords="589,5,732,32"/>
+<area shape="rect" id="node6" href="$d1/daf/class_b_m_p280.html#a5dfa07314b81ca96d5c7350b46fac00e" title="Reads a signed 16 bit value over I2C/SPI." alt="" coords="597,56,725,83"/>
+<area shape="rect" id="node3" href="$d1/daf/class_b_m_p280.html#abd72c5b672a500d27f8420a36e118e86" title="Reads the factory&#45;set coefficients." alt="" coords="168,5,343,32"/>
+<area shape="rect" id="node5" href="$d1/daf/class_b_m_p280.html#a23aa8868ab76030eebc39b52e8c72168" title=" " alt="" coords="391,31,541,57"/>
+<area shape="rect" id="node4" href="$d1/daf/class_b_m_p280.html#a77bb226d5a9f5e52e6e60624a2ff76f2" title="default set up for setup from user use setJson()" alt="" coords="5,5,120,32"/>
+</map>

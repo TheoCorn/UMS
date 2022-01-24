@@ -61,13 +61,16 @@
 
 
 
-#define RE_GPIO_PIN_SEL ((1ULL<< BUTTON_PIN) | (1ULL<< REA) | (1ULL<< REB))
+//#define REB_GPIO_PIN_SEL (1ULL<< REB)
+//#define RE_GPIO_INTR_SEL ((1ULL<< BUTTON_PIN) | (1ULL<< REA))
+#define RE_GPIOS ((1ULL<< BUTTON_PIN) | (1ULL<< REA) | (1ULL<< REB))
 
 #define JSON_SINGLE_SENSOR_SIZE 512;
 
+#define RE_TIMEOUT 700
 
 #define GPIO_RE_PIN_SEL  ((1ULL<<BUTTON_PIN) | (1ULL<<REB) | (1ULL<<REA))
-#define GPIO_OUTPUT_PIN_SEL ((1ULL<<))
+//#define GPIO_OUTPUT_PIN_SEL ((1ULL<<))
 
 void setDefSysInfo();
 
@@ -106,6 +109,9 @@ SerialCom *sysInfo::serialCom;
 size_t sysInfo::serialComIndex;
 bool sysInfo::isCharging;
 
+long re_last_turn = 0;
+long lastClick = 0;
+
 
 class BatInfPointers {
 public:
@@ -131,33 +137,31 @@ std::vector<csa::ConflictingAddressStruct *> conflicts;
 
 
 void setup() {
+
     SPIFFS.begin(true);
-
-
     setBatReader();
 //    sysInfo::isCharging = false;
 
         // todo delete before release debug
     Serial.begin(112500);
 
+
 //    conflicts = new std::vector<csa::ConflictingAddressStruct *>();
     sensors = new std::map<uint32_t, Sensor *>;
     comBuffer = new std::vector<char>;
 
 
-    //    gpio_config_t io_conf;
-    ////disable interrupt
-    //    io_conf.intr_type = static_cast<gpio_int_type_t>(GPIO_PIN_INTR_DISABLE);
-    ////set as output mode
-    //    io_conf.mode = GPIO_MODE_INPUT;
-    ////bit mask of the pins that you want to set,e.g.GPIO18/19
-    //    io_conf.pin_bit_mask = GPIO_RE_PIN_SEL;
-    ////disable pull-down mode
-    //    io_conf.pull_down_en = static_cast<gpio_pulldown_t>(0);
-    ////enable pull-up mode
-    //    io_conf.pull_up_en = static_cast<gpio_pullup_t>(1);
-    ////configure GPIO with the given settings
-    //    gpio_config(&io_conf);
+    gpio_config_t io_conf = {};
+    io_conf.intr_type = GPIO_INTR_DISABLE;
+    io_conf.mode = GPIO_MODE_INPUT;
+    io_conf.pin_bit_mask = RE_GPIOS;
+    io_conf.pull_down_en = (gpio_pulldown_t) 0;
+    io_conf.pull_up_en = (gpio_pullup_t) 1;
+    gpio_config(&io_conf);
+
+    attachInterrupt(REA, onREAISR, FALLING);
+    attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
+
 
 
     pinMode(SCREEN_EN_PIN, OUTPUT);
@@ -167,13 +171,6 @@ void setup() {
     pinMode(BATTERY_IS_CHARGING, INPUT);
     digitalWrite(BATTERY_IS_CHARGING, LOW);
 
-    pinMode(BUTTON_PIN, INPUT);
-    pinMode(REA, INPUT);
-    pinMode(REB, INPUT);
-
-    digitalWrite(BUTTON_PIN, HIGH);
-    digitalWrite(REA, HIGH);
-    digitalWrite(REB, HIGH);
 
     setDefSysInfo();
 
@@ -189,17 +186,6 @@ void setup() {
 
     //    sysInfo::serialCom->startConnectionCheck(5000);
 
-
-    attachInterrupt(REA, onREAISR, FALLING);
-    attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
-
-//    gpio_hold_en(GPIO_NUM_19);
-//    gpio_hold_en(GPIO_NUM_34);
-//    gpio_hold_en(GPIO_NUM_35);
-
-    gpio_hold_en(GPIO_NUM_0);
-    gpio_hold_en(GPIO_NUM_4);
-    gpio_hold_en(GPIO_NUM_2);
 
     //sets up wake up from sleep
 //    esp_sleep_enable_ext0_wakeup(GPIO_NUM_19, 1);
@@ -418,15 +404,27 @@ void setBatReader(){
 #error onREAISR function uses esp32 specific code
 #endif
 void IRAM_ATTR onREAISR() {
-    mDisplay->rebWasLow = !digitalRead(REB);
-    mDisplay->reaWasLow = true;
+
+    long now = millis();
+    if(now - re_last_turn> RE_TIMEOUT){
+        re_last_turn = now;
+        mDisplay->rebWasLow = !digitalRead(REB);
+        mDisplay->reaWasLow = true;
+    }
+
 }
 
 #ifndef ESP32
 #error onREBISR function uses esp32 specific code
 #endif
 void IRAM_ATTR onREBISR() {
-    mDisplay->wasClicked = true;
+
+    long now = millis();
+    Serial.println(now - lastClick);
+    if(now - lastClick > RE_TIMEOUT){
+        lastClick = now;
+        mDisplay->wasClicked = true;
+    }
 }
 
 

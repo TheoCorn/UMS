@@ -1,0 +1,5 @@
+<map id="MPU9250::read" name="MPU9250::read">
+<area shape="rect" id="node1" title=" " alt="" coords="248,42,360,69"/>
+<area shape="rect" id="node2" href="$df/dd9/class_m_p_u9250.html#a00f0d89c395145b525d7fd81246f1bad" title="used when getting dataFromSensor to display, so more data can be displayed" alt="" coords="5,5,200,47"/>
+<area shape="rect" id="node3" href="$df/dd9/class_m_p_u9250.html#a0a468f844ffd1462a504088779124758" title="used when reading write JsonArray to the Json document" alt="" coords="26,71,179,98"/>
+</map>

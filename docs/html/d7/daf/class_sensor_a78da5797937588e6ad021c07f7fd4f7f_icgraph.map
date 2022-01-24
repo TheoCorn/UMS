@@ -1,0 +1,19 @@
+<map id="Sensor::write" name="Sensor::write">
+<area shape="rect" id="node1" title="Write a buffer or two to the I2C device. Cannot be more than maxBufferSize() bytes." alt="" coords="1233,157,1332,184"/>
+<area shape="rect" id="node2" href="$d1/daf/class_b_m_p280.html#aa4a1ed7ea52c7f44d53f27adadff8cfb" title="Writes an 8 bit value over I2C/SPI." alt="" coords="1047,120,1161,147"/>
+<area shape="rect" id="node7" href="$d7/daf/class_sensor.html#ac9098220c58428367c8fe991d44a30a6" title="Write some data, then read some data from I2C into another buffer. Cannot be more than maxBufferSize(..." alt="" coords="1023,183,1185,209"/>
+<area shape="rect" id="node3" href="$d1/daf/class_b_m_p280.html#a2f0758eef94099ebe91388508a1a4eff" title=" " alt="" coords="823,81,975,108"/>
+<area shape="rect" id="node4" href="$d1/daf/class_b_m_p280.html#afd47ded337ea68e4b4d3f9561b2a9baf" title=" " alt="" coords="608,56,763,83"/>
+<area shape="rect" id="node5" href="$d1/daf/class_b_m_p280.html#a08eb8fc005e0ec24bae25eb4026c1be0" title=" " alt="" coords="406,5,533,32"/>
+<area shape="rect" id="node6" href="$d1/daf/class_b_m_p280.html#a77bb226d5a9f5e52e6e60624a2ff76f2" title="default set up for setup from user use setJson()" alt="" coords="5,81,120,108"/>
+<area shape="rect" id="node8" href="$d1/daf/class_b_m_p280.html#a21d080611d0045c0a7200ab70163a25e" title="Reads a 16 bit value over I2C/SPI." alt="" coords="839,157,958,184"/>
+<area shape="rect" id="node13" href="$d1/daf/class_b_m_p280.html#a40d38db8e217ffab973f0f6f9b6af9fc" title="Reads a 24 bit value over I2C/SPI." alt="" coords="839,208,958,235"/>
+<area shape="rect" id="node17" href="$d1/daf/class_b_m_p280.html#a6baf87336c5522f6660503b8bf4c796d" title="Reads an 8 bit value over I2C/SPI." alt="" coords="843,259,955,285"/>
+<area shape="rect" id="node9" href="$d1/daf/class_b_m_p280.html#a43fd6941768508962e92de832df34c97" title=" " alt="" coords="614,107,757,133"/>
+<area shape="rect" id="node12" href="$d1/daf/class_b_m_p280.html#a5dfa07314b81ca96d5c7350b46fac00e" title="Reads a signed 16 bit value over I2C/SPI." alt="" coords="621,157,749,184"/>
+<area shape="rect" id="node10" href="$d1/daf/class_b_m_p280.html#abd72c5b672a500d27f8420a36e118e86" title="Reads the factory&#45;set coefficients." alt="" coords="168,107,343,133"/>
+<area shape="rect" id="node11" href="$d1/daf/class_b_m_p280.html#a23aa8868ab76030eebc39b52e8c72168" title=" " alt="" coords="394,157,545,184"/>
+<area shape="rect" id="node14" href="$d1/daf/class_b_m_p280.html#adaf3f56d9af72b1683a01e8566c5ace0" title=" " alt="" coords="391,208,548,235"/>
+<area shape="rect" id="node16" href="$d1/daf/class_b_m_p280.html#a0d957c8516151d3e6d9e1c1f6eb87c70" title=" " alt="" coords="596,259,775,285"/>
+<area shape="rect" id="node15" href="$d1/daf/class_b_m_p280.html#a6b62f807fcca3cb8010df9523f80cfde" title=" " alt="" coords="181,233,330,260"/>
+</map>
