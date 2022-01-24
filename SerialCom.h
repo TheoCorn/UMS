@@ -38,7 +38,7 @@ class SerialCom {
 public:
 
     SerialCom() = default;
-    ~SerialCom() = default;
+    virtual ~SerialCom() = default;
 
     /***
      * setups the serial port

@@ -10,6 +10,7 @@ void sTabOnSet::comChange(unsigned int index){
     delay(1000);
     delete sysInfo::serialCom;
 
+    auto scom = getSerialCom4EnumPos(index);
     sysInfo::serialCom = getSerialCom4EnumPos(index);
 }
 
