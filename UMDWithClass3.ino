@@ -171,9 +171,9 @@ void setup() {
     pinMode(REA, INPUT);
     pinMode(REB, INPUT);
 
-    digitalWrite(BUTTON_PIN, true);
-    digitalWrite(REA, true);
-    digitalWrite(REB, true);
+    digitalWrite(BUTTON_PIN, HIGH);
+    digitalWrite(REA, HIGH);
+    digitalWrite(REB, HIGH);
 
     setDefSysInfo();
 
@@ -378,16 +378,6 @@ void sleep() {
     esp_deep_sleep_start();
 }
 
-
-#ifndef ESP32
-#error uses esp32 specific code
-#endif
-void setBatReader(){
-    auto bip = new BatInfPointers(&sysInfo::batteryPercentage, &sysInfo::isCharging);
-
-    xTaskCreatePinnedToCore(readBatteryCharge, "BatReader", 1024, bip, 2, &check_bat_handle, 0);
-}
-
 void readBatteryCharge(void* m_bip) {
 
     auto* bip = (BatInfPointers*)m_bip;
@@ -412,6 +402,15 @@ void readBatteryCharge(void* m_bip) {
         vTaskDelay(60000);
     }
 
+}
+
+#ifndef ESP32
+#error uses esp32 specific code
+#endif
+void setBatReader(){
+    auto bip = new BatInfPointers(&sysInfo::batteryPercentage, &sysInfo::isCharging);
+
+    xTaskCreatePinnedToCore(readBatteryCharge, "BatReader", 1024, bip, 2, &check_bat_handle, 0);
 }
 
 
