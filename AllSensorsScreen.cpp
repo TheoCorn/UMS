@@ -44,9 +44,10 @@ bool AllSensorsScreen::onUp() {
 }
 
 void AllSensorsScreen::onDown() {
-    auto end = sensors->end();
-    end--;
-    if (activeSensorIterator != end) activeSensorIterator++;
+    if (sensors->empty()) return;
+        auto end = sensors->end();
+        end--;
+        if (activeSensorIterator != end) activeSensorIterator++;
 
 }
 

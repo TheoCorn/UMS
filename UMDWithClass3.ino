@@ -67,7 +67,7 @@
 
 #define JSON_SINGLE_SENSOR_SIZE 512;
 
-#define RE_TIMEOUT 700
+#define RE_TIMEOUT 300
 
 #define GPIO_RE_PIN_SEL  ((1ULL<<BUTTON_PIN) | (1ULL<<REB) | (1ULL<<REA))
 //#define GPIO_OUTPUT_PIN_SEL ((1ULL<<))
@@ -420,7 +420,7 @@ void IRAM_ATTR onREAISR() {
 void IRAM_ATTR onREBISR() {
 
     long now = millis();
-    Serial.println(now - lastClick);
+//    Serial.println(now - lastClick);
     if(now - lastClick > RE_TIMEOUT){
         lastClick = now;
         mDisplay->wasClicked = true;
