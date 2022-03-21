@@ -35,6 +35,7 @@ size_t usbSerial::write(uint8_t c) {
 }
 
 size_t usbSerial::write(const uint8_t *buffer, size_t size) {
+//    Serial.write(STX);
     size_t ret = Serial.write(buffer, size);
     Serial.write(ETX);
     return ret;

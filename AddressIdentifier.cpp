@@ -16,6 +16,7 @@
 #include "ADS1X15.h"
 #include "INA3221.h"
 #include "BMP280.h"
+#include "BuildInGPIO.h"
 
 #define SENSOR_SID_ARRAY_FILE "/SensorAddresses.json"
 
@@ -52,7 +53,6 @@ void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Se
         conflicts->emplace_back(con);
     }
 
-
 }
 
 void SensorsIdentifierManager::addSensor(unsigned int enumPos, uint32_t address, std::map<uint32_t, Sensor *> *sensors) {
@@ -69,6 +69,8 @@ Sensor *SensorsIdentifierManager::getSensorPointerForEnumPos(unsigned int enumPo
         case sensorEnum::ADS1115: return dynamic_cast<Sensor*>(new class ADS1115(address)); break;
         case sensorEnum::INA3221: return dynamic_cast<Sensor*>(new class INA3221(address)); break;
         case sensorEnum::BMP280: return dynamic_cast<Sensor*>(new class BMP280(address)); break;
+
+//        case sensorEnum::BUILDIN_GPIO: return dynamic_cast<Sensor*>(new class BuildInGPIO(address)); break;
 
         default: return dynamic_cast<Sensor*>(new class UnknownSensor(address)); break;
     }

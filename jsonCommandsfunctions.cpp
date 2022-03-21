@@ -68,8 +68,26 @@ void jcf::onClearConflict(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors,
     for(auto it = conflicts.begin(); it != conflicts.end(); it++){
         if ((*it)->rsid == rsid){
             it = conflicts.erase(it);
+            return;
         }
     }
 
 }
 
+
+void jcf::onManualSensorAdd(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors){
+    // todo implement rsidProvider a class that manages rsids
+    static uint32_t next_rsid = 128;
+
+    JsonObject msa = v->as<JsonObject>();
+    uint32_t sid = msa[JSON_KEYWORD_SID];
+
+    SensorsIdentifierManager::addSensor(sid, next_rsid, sensors);
+
+    next_rsid++;
+}
+
+
+//void jcf::onGetSysInfo(){
+//    sysInfo::serialCom->write(sysInfo::getSysInfo());
+//}

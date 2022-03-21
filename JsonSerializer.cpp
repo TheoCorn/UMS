@@ -19,7 +19,7 @@ js::serializeRet* js::serializeDoc(JsonDocument* doc){
 js::serializeRet* js::serializeError(error::Error* error){
     DynamicJsonDocument *doc = new DynamicJsonDocument(512);
 
-    JsonObject errObj = doc->createNestedObject("error");
+    JsonObject errObj = doc->createNestedObject(E_JSON_KEYWORD_ERROR);
     errObj["name"] = error->name;
     errObj["message"] = error->message;
     errObj["ui"] = error->appearance;

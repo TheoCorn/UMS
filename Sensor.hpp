@@ -107,7 +107,7 @@ public:
      *
      * @param jArr JsonArray&
      */
-    virtual void getJson(JsonArray& jArr) = 0;
+    virtual void getJson(JsonArray &jArr) = 0;
 
 
     /**
@@ -125,20 +125,17 @@ public:
     virtual float readFeature(size_t index) { return 0.0f; };
 
 
-
-
     ///@return nested json object with name "Sensor"
     static JsonObject createSensorObject(JsonArray &doc);
 
     ///@return nested json object with name "Features"
-    static JsonArray createFeaturesArray(JsonObject& obj);
+    static JsonArray createFeaturesArray(JsonObject &obj);
 
     ///@return nested json object with name "XSettings"
-    static JsonArray createXSettingsArray(JsonObject& obj);
+    static JsonArray createXSettingsArray(JsonObject &obj);
 
     ///@return nested json object with name "ISettings"
-    static JsonArray createISettingsArray(JsonObject& obj);
-
+    static JsonArray createISettingsArray(JsonObject &obj);
 
 
     /**
@@ -148,7 +145,7 @@ public:
      * @param rsid
      * @param sid
      */
-    static void fillBasicInfo(JsonObject& obj, const uint32_t& rsid, const uint32_t& sid);
+    static void fillBasicInfo(JsonObject &obj, const uint32_t &rsid, const uint32_t &sid);
 
     /**
      * generates a Features Json object
@@ -167,7 +164,7 @@ public:
      * @param sensorObj
      * @param xSettings
      */
-    static void generateXSettings(JsonObject& sensorObj, std::vector<unsigned int> &xSettings);
+    static void generateXSettings(JsonObject &sensorObj, std::vector<unsigned int> &xSettings);
 
     /**
      * generates ISettings Json object
@@ -178,7 +175,7 @@ public:
      * @param sensorObj
      * @param iSettings
      */
-    static void generateISettings(JsonObject& sensorObj, std::vector<bool> &iSettings);
+    static void generateISettings(JsonObject &sensorObj, std::vector<bool> &iSettings);
 
     /**
      * creates the simplest templated Sensor json nested object
@@ -189,7 +186,8 @@ public:
      * @param sid i2cAddress
      * @param isActive
      */
-    static void generateTemplatedSensorObject(JsonArray& doc, const uint32_t &rsid, const uint32_t &sid, const bool isActive);
+    static void
+    generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid, const bool isActive);
 
 //    /**
 //     * creates a templated Sensor json nested object
@@ -204,14 +202,38 @@ public:
 //    static void generateTemplatedSensorObject(JsonDocument *doc, const uint32_t& rsid, const uint32_t& sid, String feature,
 //                                              const unsigned int& xSetting);
 
-    static void generateTemplatedSensorObject(JsonArray& doc, const uint32_t &rsid, const uint32_t &sid,
+
+    /**
+     * creates a templated sensor object
+     * it will contain rsid, sid, a feature and a XSetting,
+     *
+     * @param doc
+     * @param rsid
+     * @param sid
+     * @param xSetting
+     * @param isActive
+     */
+    static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid,
                                               const unsigned int xSetting, const bool isActive);
+
+
+    /**
+     * creates a templated sensor object
+     * it will contain the sid, rsid and multiple features
+     *
+     * @param doc
+     * @param rsid
+     * @param sid
+     * @param activeFeatures
+     */
+    static void generateTemplatedSensorObject(JsonArray &doc, const uint32_t &rsid, const uint32_t &sid,
+                                              std::vector<bool> &activeFeatures);
 
 
     /**
      *
      * creates a templated Sensor json nested object
-     * so it will contain the name, sid, multiple features and XSettings
+     * so it will contain the sid, multiple features and XSettings
      *
      * @param doc
      * @param rsid name of the sensor
@@ -226,7 +248,7 @@ public:
     /**
      *
      * creates a templated Sensor json nested object
-     * so it will contain the name, sid, multiple features, XSettings and ISettings
+     * so it will contain the sid, multiple features, XSettings and ISettings
      * @param doc
      * @param name
      * @param sid
@@ -246,7 +268,7 @@ public:
      * @param activeFeaturesVec
      */
     static void JsonSetter(JsonObject &sConf,
-                           std::vector<bool>& activeFeaturesVec);
+                           std::vector<bool> &activeFeaturesVec);
 
     /**
      * sets data from json Object to the templated structures
@@ -256,8 +278,8 @@ public:
      * @param xSettings
      */
     static void JsonSetter(JsonObject &sConf,
-                           std::vector<bool>& activeFeaturesVec,
-                           std::vector<unsigned int>& xSettings);
+                           std::vector<bool> &activeFeaturesVec,
+                           std::vector<unsigned int> &xSettings);
 
     /**
      * sets data from json Object to the templated structures
@@ -267,7 +289,7 @@ public:
      * @param iSettings
      */
     static void JsonSetter(JsonObject &sConf,
-                           std::vector<bool>& activeFeaturesVec,
+                           std::vector<bool> &activeFeaturesVec,
                            std::vector<bool> &iSettings);
 
     /**
@@ -279,55 +301,132 @@ public:
      * @param iSettings
      */
     static void JsonSetter(JsonObject &sConf,
-                           std::vector<bool>& activeFeaturesVec,
-                           std::vector<unsigned int>& xSettings,
+                           std::vector<bool> &activeFeaturesVec,
+                           std::vector<unsigned int> &xSettings,
                            std::vector<bool> &iSettings);
 
 
-    static void savedSettingLoader(char const * filename, std::vector<bool>& activeFeaturesVec);
-
-    static void savedSettingsLoader(char const * filename, std::vector<bool>& activeFeaturesVec,
-                                    std::vector<unsigned int>& xSettings);
-
-    static void savedSettingsLoader(char const * filename, std::vector<bool>& activeFeaturesVec,
-                                    std::vector<bool>& iSettings);
-
-    static void savedSettingsLoader(char const * filename, std::vector<bool>& activeFeaturesVec,
-                                    std::vector<unsigned int>& xSettings, std::vector<bool>& iSettings);
+    /**
+     * loads sensor settings from file
+     *
+     * @param filename the json config file
+     * @param activeFeaturesVec features vector
+     */
+    static void savedSettingLoader(char const *filename, std::vector<bool> &activeFeaturesVec);
 
 
-    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec);
+    /**
+     * loads sensor settings from file
+     *
+     * @param filename the json config file
+     * @param activeFeaturesVec features vector
+     * @param xSettings XSettings vector
+     */
+    static void savedSettingsLoader(char const *filename, std::vector<bool> &activeFeaturesVec,
+                                    std::vector<unsigned int> &xSettings);
 
-    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
-                                    std::vector<unsigned int>& xSettings);
+    /**
+     * loads sensor settings from file
+     *
+     * @param filename the json config file
+     * @param activeFeaturesVec features vector
+     * @param iSettings IFeatures vector
+     */
+    static void savedSettingsLoader(char const *filename, std::vector<bool> &activeFeaturesVec,
+                                    std::vector<bool> &iSettings);
 
-    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
-                                    std::vector<bool>& iSettings);
+    /**
+     * loads sensor settings from file
+     *
+     * @param filename the json config file
+     * @param activeFeaturesVec features vector
+     * @param xSettings XSettings vector
+     * @param iSettings IFeatures vector
+     */
+    static void savedSettingsLoader(char const *filename, std::vector<bool> &activeFeaturesVec,
+                                    std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings);
 
-    static void settingsSaver(char const * filename, std::vector<bool>& activeFeaturesVec,
-                                    std::vector<unsigned int>& xSettings, std::vector<bool>& iSettings);
 
-    static void templatedRead(JsonArray &jra, std::vector<bool>& activeFeaturesVec,
-                              uint32_t rsid, Sensor* sensor);
+    /**
+     * saves sensor config to the specified file
+     *
+     * @param filename
+     * @param activeFeaturesVec
+     */
+    static void settingsSaver(char const *filename, std::vector<bool> &activeFeaturesVec);
 
-    static String templatedExtendedString4Display(std::vector<bool>& activeFeaturesVec,
-                                                  Sensor* sensor,
-                                                  const char* const* FeaturesString);
+    /**
+     * saves sensor config to the specified file
+     *
+     * @param filename
+     * @param activeFeaturesVec
+     * @param xSettings
+     */
+    static void settingsSaver(char const *filename, std::vector<bool> &activeFeaturesVec,
+                              std::vector<unsigned int> &xSettings);
+
+    /**
+     * saves sensor config to the specified file
+     *
+     * @param filename
+     * @param activeFeaturesVec
+     * @param iSettings
+     */
+    static void settingsSaver(char const *filename, std::vector<bool> &activeFeaturesVec,
+                              std::vector<bool> &iSettings);
+
+    /**
+     * saves sensor config to the specified file
+     *
+     * @param filename
+     * @param activeFeaturesVec
+     * @param xSettings
+     * @param iSettings
+     */
+    static void settingsSaver(char const *filename, std::vector<bool> &activeFeaturesVec,
+                              std::vector<unsigned int> &xSettings, std::vector<bool> &iSettings);
+
+    /**
+     * saves sensor config to the specified file
+     *
+     * @param jra
+     * @param activeFeaturesVec
+     * @param rsid
+     * @param sensor
+     */
+    static void templatedRead(JsonArray &jra, std::vector<bool> &activeFeaturesVec,
+                              uint32_t rsid, Sensor *sensor);
+
+
+    /**
+     * this is a static method and is the standard way to create the extended string for the display
+     * @param activeFeaturesVec
+     * @param sensor
+     * @param FeaturesString
+     * @return
+     */
+    static String templatedExtendedString4Display(std::vector<bool> &activeFeaturesVec,
+                                                  Sensor *sensor,
+                                                  const char *const *FeaturesString);
 
     // functions taken from adafruit i2c sensor under MIT Licence (made static)
 
     static bool read(const uint8_t _addr, uint8_t *buffer, size_t len, TwoWire &_wire = Wire, bool stop = true);
-    static bool write(const uint8_t _addr, const uint8_t *buffer, size_t len, TwoWire &_wire = Wire, bool stop = true, const uint8_t *prefix_buffer = NULL,
-               size_t prefix_len = 0);
-    static bool write_then_read(const uint8_t _addr, const uint8_t *write_buffer, size_t write_len, uint8_t *read_buffer, size_t read_len,
-                                TwoWire &_wire = Wire, bool stop = false);
 
+    static bool write(const uint8_t _addr, const uint8_t *buffer, size_t len, TwoWire &_wire = Wire, bool stop = true,
+                      const uint8_t *prefix_buffer = NULL,
+                      size_t prefix_len = 0);
 
-                                                  
+    static bool
+    write_then_read(const uint8_t _addr, const uint8_t *write_buffer, size_t write_len, uint8_t *read_buffer,
+                    size_t read_len,
+                    TwoWire &_wire = Wire, bool stop = false);
+
 
 private:
 
     static constexpr uint32_t max_i2c_buffer_size = 250;
+
     static bool _read(const uint8_t _addr, uint8_t *buffer, size_t len, bool stop, TwoWire &_wire = Wire);
 
     /**
@@ -337,7 +436,7 @@ private:
      * @param activeFeaturesVec
      */
     static void features_JsonSetter(JsonObject &sConf,
-                                    std::vector<bool>& activeFeaturesVec);
+                                    std::vector<bool> &activeFeaturesVec);
 
     /**
      * helper for Sensor::JsonSetter
@@ -346,7 +445,8 @@ private:
      * @param xSettings
      */
     static void xSettings_JsonSetter(JsonObject &sConf,
-                                     std::vector<unsigned int>& xSettings);
+                                     std::vector<unsigned int> &xSettings);
+
     /**
      * helper for Sensor::JsonSetter
      *

@@ -6,6 +6,7 @@
 #define UMDWITHCLASS3_SYSINFO_H
 
 #include "SerialCom.h"
+#include "ArduinoJson.h"
 //#include "displayFunctions.h"
 
 namespace sysInfo {
@@ -16,6 +17,7 @@ namespace sysInfo {
     };
 
     extern unsigned int screenAddress;
+    extern bool hasScreen;
     extern String sn;
     extern BatteryInfo batteryInfo;
     extern SerialCom* serialCom;
@@ -27,6 +29,17 @@ namespace sysInfo {
 //    DisplayFunctions *mDisplay;
 
     extern bool isCharging;
+
+//    JsonDocument* getSysInfo(){
+//        auto *doc = new DynamicJsonDocument(2048);
+//        auto sio = doc->createNestedObject("SysInfo");
+//        sio["sn"] = sn;
+//        sio["batteryPercentage"] = batteryPercentage;
+//        sio["isCharging"] = isCharging;
+//        sio["screenAddress"] = screenAddress;
+//
+//        return doc;
+//    }
 }
 
 #endif //UMDWITHCLASS3_SYSINFO_H

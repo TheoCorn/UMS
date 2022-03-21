@@ -28,8 +28,8 @@
 //
 ///if changed change in sTabOnSet::sysChange
 #define SCREEN_EN_PIN       5
-#define BATTERY_READ_PIN  13
-#define BATTERY_IS_CHARGING 14
+#define BATTERY_READ_PIN  33
+#define BATTERY_IS_CHARGING 16
 
 #define BUTTON_PIN      0
 
@@ -38,10 +38,27 @@
 
 ///rotary encoder pin B
 #define REB             2
+
 //
 //#endif
 
+namespace ioPins {
+/**
+ * GPIO1 is connected to 3v3 port as Signal
+ * it can be used as a ADC, DAC or standard digital
+ * (most often used as a ADC)
+ * not yet implemented
+ */
+    constexpr uint32_t v3Pin = 26;
 
+/**
+* itis connected to 5v port as Signal
+* it can be used as a ADC, DAC or standard digital
+* (most often used as a ADC)
+* not yet implemented
+ */
+    constexpr uint32_t v5Pin = 25;
+}
 
 
 #endif //UMDWITHCLASS3_GPIONAMES_H

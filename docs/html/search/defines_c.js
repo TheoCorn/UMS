@@ -15,7 +15,8 @@ var searchData=
   ['rate_5fads1115_5f64sps_12',['RATE_ADS1115_64SPS',['../d0/d76/_a_d_s1_x15_8h.html#abe3fde99c3e12d419647ca87d4e3d09d',1,'ADS1X15.h']]],
   ['rate_5fads1115_5f860sps_13',['RATE_ADS1115_860SPS',['../d0/d76/_a_d_s1_x15_8h.html#afb94073e4b65ae3fd163240c4930c2ee',1,'ADS1X15.h']]],
   ['rate_5fads1115_5f8sps_14',['RATE_ADS1115_8SPS',['../d0/d76/_a_d_s1_x15_8h.html#ab6f372e80cf39e156a0ed31100dcb33b',1,'ADS1X15.h']]],
-  ['re_5fgpio_5fpin_5fsel_15',['RE_GPIO_PIN_SEL',['../d3/d54/_u_m_d_with_class3_8ino.html#a89b639a2457df5afc2192c23aefca739',1,'UMDWithClass3.ino']]],
-  ['rea_16',['REA',['../d4/d3c/gpio_names_8h.html#ac707f5b71bfd4d2e152c0ebfdc36904f',1,'gpioNames.h']]],
-  ['reb_17',['REB',['../d4/d3c/gpio_names_8h.html#a6a2748a4644baf1fe6ce1c4e79c38552',1,'gpioNames.h']]]
+  ['re_5fgpios_15',['RE_GPIOS',['../d3/d54/_u_m_d_with_class3_8ino.html#a3093b101749a8c8ae80b72db849ad35e',1,'UMDWithClass3.ino']]],
+  ['re_5ftimeout_16',['RE_TIMEOUT',['../d3/d54/_u_m_d_with_class3_8ino.html#acc75f9ad47760e918bfb7751d2769322',1,'UMDWithClass3.ino']]],
+  ['rea_17',['REA',['../d4/d3c/gpio_names_8h.html#ac707f5b71bfd4d2e152c0ebfdc36904f',1,'gpioNames.h']]],
+  ['reb_18',['REB',['../d4/d3c/gpio_names_8h.html#a6a2748a4644baf1fe6ce1c4e79c38552',1,'gpioNames.h']]]
 ];

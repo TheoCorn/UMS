@@ -8,6 +8,7 @@
 #define CONFIG_JSON_FILE_NAME "/sysInfo.json"
 
 #define CONFIG_JSON_SCREEN_ADDRESS "screenAddress"
+#define CONFIG_JSON_HAS_SCREEN "hasScreen"
 #define CONFIG_JSON_DEFAULT_COM "defCom"
 #define CONFIG_JSON_COM_NAME "comName"
 #define CONFIG_JSON_SERIAL_NUMBER "SN"

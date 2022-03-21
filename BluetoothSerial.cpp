@@ -27,7 +27,8 @@
 #include "Error.h"
 #include "sysInfo.h"
 
-
+//#define CONFIG_BT_ENABLED
+//#define CONFIG_BLUEDROID_ENABLED
 
 #if defined(CONFIG_BT_ENABLED) && defined(CONFIG_BLUEDROID_ENABLED)
 
@@ -618,9 +619,8 @@ static bool waitForConnect(int timeout) {
  *
  * */
 
-BluetoothSerial::BluetoothSerial() : SerialCom()
-{
-    begin();
+BluetoothSerial::BluetoothSerial() : SerialCom() {
+    actualBegin(sysInfo::comName);
 }
 
 BluetoothSerial::~BluetoothSerial(void)
@@ -680,17 +680,28 @@ void BluetoothSerial::read(char * c){
     }
 }
 
-size_t BluetoothSerial::write(uint8_t c)
-{
+size_t BluetoothSerial::write(uint8_t c) {
     return write(&c, 1);
 }
 
-size_t BluetoothSerial::write(const uint8_t *buffer, size_t size)
-{
+size_t BluetoothSerial::write(const uint8_t *buffer, size_t size) {
+    static uint8_t etx = ETX;
+
     if (!_spp_client){
         return 0;
     }
-    return ((_spp_queue_packet((uint8_t *)buffer, size) == ESP_OK) && (_spp_queue_packet((uint8_t *)ETX, 1) == ESP_OK)) ? size : 0;
+
+//    char* dca = new char[size + 2];
+//    memcpy(dca + 1, buffer, size);
+//    dca[size + 1] = '\0';
+//    dca[0] = STX;
+//    Serial.write((char*)buffer, size);
+//    Serial.println("");
+//    return ((_spp_queue_packet((uint8_t *)buffer, size) == ESP_OK) && (_spp_queue_packet((uint8_t *)ETX, 1) == ESP_OK)) ? size : 0;
+
+    esp_err_t error0 = _spp_queue_packet((uint8_t *)buffer, size);
+    esp_err_t error1 = _spp_queue_packet(&etx, 1);
+    return (error0 == ESP_OK && error1 == ESP_OK) ? size : 0;
 }
 
 size_t BluetoothSerial::write(JsonDocument * doc){

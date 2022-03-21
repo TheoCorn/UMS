@@ -1,6 +1,5 @@
 <map id="SerialCom" name="SerialCom">
-<area shape="rect" id="node1" title=" " alt="" coords="184,5,355,259"/>
-<area shape="rect" id="node2" href="$d7/de8/class_bluetooth_serial.html" title=" " alt="" coords="5,409,144,633"/>
-<area shape="rect" id="node3" href="$d8/dd7/class_mqtt__server.html" title=" " alt="" coords="169,307,370,736"/>
-<area shape="rect" id="node4" href="$db/d1c/classusb_serial.html" title=" " alt="" coords="395,373,565,670"/>
+<area shape="rect" id="node1" title=" " alt="" coords="63,5,145,32"/>
+<area shape="rect" id="node2" href="$d8/dd7/class_mqtt__server.html" title=" " alt="" coords="5,80,96,107"/>
+<area shape="rect" id="node3" href="$db/d1c/classusb_serial.html" title=" " alt="" coords="121,80,197,107"/>
 </map>

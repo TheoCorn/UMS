@@ -7,6 +7,7 @@
 
 #include <ArduinoJson.h>
 #include "Error.h"
+#include "json_key_words.h"
 
 
 namespace js {
@@ -25,6 +26,7 @@ namespace js {
     js::serializeRet* serializeDoc(JsonDocument * doc);
     js::serializeRet* serializeError(error::Error* error);
     //js::serializeRet* serializeObj(JsonObject& obj);
+
 
 }
 

@@ -13,7 +13,7 @@
 /**
  * sensor search.
  * This is where all future checkers will go.
- * @defgroup sensor_search
+ * @defgroup sensor_search sensor_search
  * @{
  */
 namespace ss{

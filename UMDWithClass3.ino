@@ -90,6 +90,8 @@ void onREBISR();
 
 void setBatReader();
 
+void readBatteryCharge(void* m_bip);
+
 //void reA();
 //void reB();
 
@@ -101,13 +103,14 @@ double readingPeriod = 0;
 double lastReading;
 
 unsigned int sysInfo::screenAddress;
+bool sysInfo::hasScreen;
 String sysInfo::sn;
 sysInfo::BatteryInfo sysInfo::batteryInfo;
 unsigned int sysInfo::batteryPercentage;
 String sysInfo::comName;
 SerialCom *sysInfo::serialCom;
 size_t sysInfo::serialComIndex;
-bool sysInfo::isCharging;
+bool sysInfo::isCharging = false;
 
 long re_last_turn = 0;
 long lastClick = 0;
@@ -139,7 +142,6 @@ std::vector<csa::ConflictingAddressStruct *> conflicts;
 void setup() {
 
     SPIFFS.begin(true);
-    setBatReader();
 //    sysInfo::isCharging = false;
 
         // todo delete before release debug
@@ -150,7 +152,9 @@ void setup() {
     sensors = new std::map<uint32_t, Sensor *>;
     comBuffer = new std::vector<char>;
 
-
+#ifndef ESP32
+#error ESP32 specific code
+#endif
     gpio_config_t io_conf = {};
     io_conf.intr_type = GPIO_INTR_DISABLE;
     io_conf.mode = GPIO_MODE_INPUT;
@@ -159,20 +163,24 @@ void setup() {
     io_conf.pull_up_en = (gpio_pullup_t) 1;
     gpio_config(&io_conf);
 
-    attachInterrupt(REA, onREAISR, FALLING);
-    attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
-
-
 
     pinMode(SCREEN_EN_PIN, OUTPUT);
     digitalWrite(SCREEN_EN_PIN, HIGH);
     pinMode(BATTERY_READ_PIN, INPUT);
+    digitalWrite(BATTERY_READ_PIN, LOW);
 
     pinMode(BATTERY_IS_CHARGING, INPUT);
     digitalWrite(BATTERY_IS_CHARGING, LOW);
 
 
     setDefSysInfo();
+
+//    setBatReader();
+
+    if (sysInfo::hasScreen) {
+        attachInterrupt(REA, onREAISR, FALLING);
+        attachInterrupt(BUTTON_PIN, onREBISR, FALLING);
+    }
 
     Wire.begin();
 
@@ -181,8 +189,7 @@ void setup() {
     ss::checkI2C(localConflicts, sensors, sensorIdentifier);
     delete localConflicts;
 
-
-    mDisplay = new DisplayFunctions(sensors);
+    if(sysInfo::hasScreen) mDisplay = new DisplayFunctions(sensors);
 
     //    sysInfo::serialCom->startConnectionCheck(5000);
 
@@ -193,6 +200,8 @@ void setup() {
 //    pinMode(sleepPin, INPUT);
 
 //    attachInterrupt(sleepPin, sleep, FALLING);
+
+//  Serial.println("I live!");
 
 
 }
@@ -238,9 +247,13 @@ void loop() {
         sysInfo::serialCom->write(&doc);
 
     } else {
+
+        auto bip = new BatInfPointers(&sysInfo::batteryPercentage, &sysInfo::isCharging);
+        readBatteryCharge(bip);
+
         auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
         ss::checkI2C(localConflicts, sensors, sensorIdentifier);
-        mDisplay->displayWhenNotReading();
+        if (sysInfo::hasScreen) mDisplay->displayWhenNotReading();
 
         if (!localConflicts->empty()) {
             sysInfo::serialCom->write(csa::conflictsToJsonDoc(localConflicts));
@@ -284,16 +297,24 @@ void doProcess4JsonObj(JsonPair *p) {
             onClearConflict(&v, sensors, conflicts);
             break;
 
+        case MANUAL_SENSOR_ADD:
+            onManualSensorAdd(&v, sensors);
+            break;
+
+//        case GET_SYS_INFO:
+//            onGetSysInfo();
+
 
         case CLICK_JSON:
-            onREBISR();
+            if (sysInfo::hasScreen) onREBISR();
             break;
         case UP_JSON :
+            if (!sysInfo::hasScreen) break;
             mDisplay->reaWasLow = true;
             mDisplay->rebWasLow = true;
             break;
         case DOWN_JSON:
-            mDisplay->reaWasLow = true;
+            if (sysInfo::hasScreen) mDisplay->reaWasLow = true;
             break;
 
         default: {
@@ -336,9 +357,8 @@ void onStartReading() {
     lastReading = millis();
 
 //    detachInterrupt(sleepPin);
-    mDisplay->displayWhenReading();
-
-    //todo chek if working
+    if (sysInfo::hasScreen) mDisplay->displayWhenReading();
+        //todo chek if working
     readJsonCapacity = DEFAULT_JDOC_CAPACITY;  //JSON_SINGLE_SENSOR_SIZE * sensors->size();
 
     delete sensorIdentifier;
@@ -360,7 +380,7 @@ void onStopReading() {
   prepares and deep sleeps the esp32
 */
 void sleep() {
-    mDisplay->sleep();
+    if (sysInfo::hasScreen) mDisplay->sleep();
     esp_deep_sleep_start();
 }
 
@@ -382,10 +402,15 @@ void readBatteryCharge(void* m_bip) {
 
         *(bip->is_charging) = digitalRead(BATTERY_IS_CHARGING);
 
+//        char cchar;
+//        if(*(bip->is_charging)) {cchar = '1'; } else {cchar = '0'; }
+//        sysInfo::serialCom->write(cchar);
+
 #ifndef ESP32
 #error uses esp32 specific code
 #endif
-        vTaskDelay(60000);
+//        vTaskDelay(60000);
+        vTaskDelay(5000);
     }
 
 }
@@ -438,6 +463,10 @@ void setDefSysInfo() {
     deserializeJson(sysInfoDoc, sysInfoStr);
 
     sysInfo::screenAddress = sysInfoDoc[CONFIG_JSON_SCREEN_ADDRESS].as<unsigned int>();
+    sysInfo::hasScreen = sysInfoDoc[CONFIG_JSON_HAS_SCREEN].as<bool>();
+
+//    Serial.print("has screen: ");
+//    Serial.println(sysInfo::hasScreen);
 
 
     sysInfo::serialComIndex = sysInfoDoc[CONFIG_JSON_DEFAULT_COM].as<unsigned int>();

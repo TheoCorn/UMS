@@ -17,6 +17,8 @@ namespace jsonTypes {
 
         SET_READING_JSON         = 'r',
 
+        GET_SYS_INFO             = 'i',
+
         CLICK_JSON               = 'c',
         UP_JSON                  = 'u',
         DOWN_JSON                = 'd'

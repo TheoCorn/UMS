@@ -31,6 +31,9 @@ constexpr const char* READ_JSON_KEYWORD_PERIOD = "p";
 constexpr const char* C_JSON_KEYWORD_CONFLICTS_ARRAY = "Conflicts";
 constexpr const char* C_JSON_KEYWORD_SIDS = "SIDs";
 
+// error json keywords
+constexpr const char* E_JSON_KEYWORD_ERROR = "Error";
+
 
 
 #endif //UMDWITHCLASS3_JSON_KEY_WORDS_H
