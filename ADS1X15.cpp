@@ -44,32 +44,6 @@ bool ADS1X15::begin(uint8_t i2c_addr, TwoWire *wire) {
 /**************************************************************************/
 void ADS1X15::setGain(adsGain_t gain) { m_gain = gain; }
 
-/**************************************************************************/
-/*!
-    @brief  Gets a gain and input voltage range
-
-    @return the gain setting
-*/
-/**************************************************************************/
-adsGain_t ADS1X15::getGain() { return m_gain; }
-
-/**************************************************************************/
-/*!
-    @brief  Sets the data rate
-
-    @param rate the data rate to use
-*/
-/**************************************************************************/
-void ADS1X15::setDataRate(uint16_t rate) { m_dataRate = rate; }
-
-/**************************************************************************/
-/*!
-    @brief  Gets the current data rate
-
-    @return the data rate
-*/
-/**************************************************************************/
-uint16_t ADS1X15::getDataRate() { return m_dataRate; }
 
 /**************************************************************************/
 /*!
@@ -405,5 +379,79 @@ float ADS1X15::readFeature(size_t index) {
             return computeVolts(readADC_Differential_2_3());
             break;
         default: throw std::invalid_argument(ERROR_MSG__INVALID_ARGUMENT);
+    }
+}
+
+
+void ADS1X15::setGain(){
+    // gain
+    switch (xSettings[0]){
+        case 0: setGain(GAIN_TWOTHIRDS); break;
+        case 1: setGain(GAIN_ONE); break;
+        case 2: setGain(GAIN_TWO); break;
+        case 3: setGain(GAIN_FOUR); break;
+        case 4: setGain(GAIN_EIGHT); break;
+        case 5: setGain(GAIN_SIXTEEN); break;
+    }
+
+}
+
+
+void ADS1015::setConfig() {
+    ADS1X15::setGain();
+// data rate
+    switch (xSettings[1]) {
+        case 0:
+            m_dataRate = RATE_ADS1015_128SPS;
+            break;
+        case 1:
+            m_dataRate = RATE_ADS1015_250SPS;
+            break;
+        case 2:
+            m_dataRate = RATE_ADS1015_490SPS;
+            break;
+        case 3:
+            m_dataRate = RATE_ADS1015_920SPS;
+            break;
+        case 4:
+            m_dataRate = RATE_ADS1015_1600SPS;
+            break;
+        case 5:
+            m_dataRate = RATE_ADS1015_2400SPS;
+            break;
+        case 6:
+            m_dataRate = RATE_ADS1015_3300SPS;
+            break;
+    }
+}
+
+void ADS1115::setConfig() {
+    ADS1X15::setGain();
+    // data rate
+    switch (xSettings[1]) {
+        case 0:
+            m_dataRate = RATE_ADS1115_8SPS;
+            break;
+        case 1:
+            m_dataRate = RATE_ADS1115_16SPS;
+            break;
+        case 2:
+            m_dataRate = RATE_ADS1115_32SPS;
+            break;
+        case 3:
+            m_dataRate = RATE_ADS1115_64SPS;
+            break;
+        case 4:
+            m_dataRate = RATE_ADS1115_128SPS;
+            break;
+        case 5:
+            m_dataRate = RATE_ADS1115_250SPS;
+            break;
+        case 6:
+            m_dataRate = RATE_ADS1115_475SPS;
+            break;
+        case 7:
+            m_dataRate = RATE_ADS1115_860SPS;
+            break;
     }
 }

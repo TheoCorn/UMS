@@ -4,7 +4,7 @@
 
 #include "jsonCommandsfunctions.h"
 
-void jcf::onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors) {
+void jcf::onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> &sensors) {
     JsonArray arr = v->as<JsonArray>();
 
     for (JsonVariant sConf: arr) {
@@ -15,7 +15,7 @@ void jcf::onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *
 
             JsonObject doc = sConf.as<JsonObject>();
             unsigned int key = doc[JSON_KEYWORD_RSID];
-            sensors->at(key)->setJson(doc);
+            sensors.at(key)->setJson(doc);
 
 
 
@@ -35,13 +35,13 @@ void jcf::onSensorsElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *
 }
 
 
-void jcf::onGetElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors) {
-    DynamicJsonDocument *doc = new DynamicJsonDocument(sensors->size() * 2048);
+void jcf::onGetElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> &sensors) {
+    DynamicJsonDocument *doc = new DynamicJsonDocument(sensors.size() * 2048);
     JsonArray arr = doc->createNestedArray(JSON_KEYWORD_SENSOR_CONFIG);
 
     uint8_t key;
     Sensor *value;
-    for (auto &mPair: *sensors) {
+    for (auto &mPair: sensors) {
         std::tie(key, value) = mPair;
         value->getJson(arr);
     }
@@ -57,13 +57,13 @@ void jcf::onGetElementReceive(JsonVariant *v, std::map<uint32_t, Sensor *> *sens
 }
 
 
-void jcf::onClearConflict(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors,
+void jcf::onClearConflict(JsonVariant *v, std::map<uint32_t, Sensor *> &sensors,
                      std::vector<csa::ConflictingAddressStruct *>& conflicts){
     JsonObject cco = v->as<JsonObject>();
     unsigned int sid = cco[JSON_KEYWORD_SID];
     uint32_t rsid = cco[JSON_KEYWORD_RSID];
 
-    SensorsIdentifierManager::addSensor(sid, rsid, sensors);
+    SensorsIdentifierManager::addSensor(sid, rsid, &sensors);
 
     for(auto it = conflicts.begin(); it != conflicts.end(); it++){
         if ((*it)->rsid == rsid){
@@ -75,14 +75,14 @@ void jcf::onClearConflict(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors,
 }
 
 
-void jcf::onManualSensorAdd(JsonVariant *v, std::map<uint32_t, Sensor *> *sensors){
+void jcf::onManualSensorAdd(JsonVariant *v, std::map<uint32_t, Sensor *> &sensors){
     // todo implement rsidProvider a class that manages rsids
     static uint32_t next_rsid = 128;
 
     JsonObject msa = v->as<JsonObject>();
     uint32_t sid = msa[JSON_KEYWORD_SID];
 
-    SensorsIdentifierManager::addSensor(sid, next_rsid, sensors);
+    SensorsIdentifierManager::addSensor(sid, next_rsid, &sensors);
 
     next_rsid++;
 }

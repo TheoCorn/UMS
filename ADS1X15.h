@@ -151,7 +151,6 @@ protected:
 
     void m_saveConfig(const char* filepath);
 
-public:
 
     bool begin(uint8_t i2c_addr = ADS1X15_ADDRESS, TwoWire *wire = &Wire);
     int16_t readADC_SingleEnded(uint8_t channel);
@@ -160,22 +159,19 @@ public:
     void startComparator_SingleEnded(uint8_t channel, int16_t threshold);
     int16_t getLastConversionResults();
     float computeVolts(int16_t counts);
-    void setGain(adsGain_t gain);
-    adsGain_t getGain();
-    void setDataRate(uint16_t rate);
-    uint16_t getDataRate();
+    void setGain();
 
-private:
-    char const* adsFeaturesString[3] = {"SEV0", "SEV1", "DIFV"};
     std::vector<bool> activeFeaturesVec;
     std::vector<unsigned int> xSettings;
 
-
-
+private:
+    char const* adsFeaturesString[3] = {"SEV0", "SEV1", "DIFV"};
     bool conversionComplete();
     void writeRegister(uint8_t reg, uint16_t value);
     uint16_t readRegister(uint8_t reg);
     uint8_t buffer[3];
+
+    void setGain(adsGain_t gain);
 
 };
 
@@ -190,6 +186,8 @@ private:
  */
 class ADS1015 : public ADS1X15, public Sensor{
     static constexpr const char* jsonFilePath = "/sensorData/2.json";
+protected:
+    void setConfig();
 public:
     explicit ADS1015(uint32_t address);
 
@@ -200,9 +198,9 @@ public:
 
     void getJson(JsonArray& jArr) override { return ADS1X15::getJson(jArr, rsid(), sid()); }
 
-    void setJson(JsonObject &sConf) override { ADS1X15::setJson(sConf); }
+    void setJson(JsonObject &sConf) override { ADS1X15::setJson(sConf); setConfig(); }
 
-    void setUp() override { ADS1X15::setUp(jsonFilePath); }
+    void setUp() override { ADS1X15::setUp(jsonFilePath); setConfig(); }
 
     void readSensor(JsonArray& jra) override { ADS1X15::readSensor(jra, rsid(), dynamic_cast<Sensor*>(this)); }
 
@@ -215,7 +213,6 @@ public:
 
     void saveConfig() override { ADS1X15::m_saveConfig(jsonFilePath); }
 
-
 };
 
 /**
@@ -224,6 +221,8 @@ public:
  */
 class ADS1115 : public ADS1X15, public Sensor {
     static constexpr const char* jsonFilePath = "/sensorData/3.json";
+protected:
+    void setConfig();
 public:
     ADS1115(uint32_t address);
 
@@ -234,9 +233,9 @@ public:
 
     void getJson(JsonArray& jArr) override { return ADS1X15::getJson(jArr, rsid(), sid()); }
 
-    void setJson(JsonObject& sConf) override { ADS1X15::setJson(sConf); }
+    void setJson(JsonObject& sConf) override { ADS1X15::setJson(sConf); setConfig(); }
 
-    void setUp() override { ADS1X15::setUp("/sensorData/3.json"); }
+    void setUp() override { ADS1X15::setUp("/sensorData/3.json"); setConfig(); }
 
     void readSensor(JsonArray& jra) override { ADS1X15::readSensor(jra, rsid(), dynamic_cast<Sensor*>(this)); }
 

@@ -15,7 +15,7 @@ void jp::cycleThruObj (JsonDocument * doc, std::function<void(JsonPair*)>& actua
 
 /**
    deserializes json and starts the process of unpacking the Json
-   earpieces '\0' to the end of the vector
+   expects '\0' to the end of the vector
 
    @param btBuffer * std::vector<char> pointer to buffer of incoming Json
    @param actualDo function pointer to the function with will do stuff with the elements

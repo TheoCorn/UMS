@@ -138,13 +138,6 @@ private:
 
     float _shunt_resistor;
 
-public:
-//    INA3221(uint32_t _rsid, TwoWire& wire) : _rsid(_rsid), wire(wire) {}
-
-    explicit INA3221(uint8_t rsid) : _rsid(rsid), wire(Wire) {
-//        wire = Wire;
-}
-
     float getBusVoltage_V(int channel);
     float getShuntVoltage_mV(int channel);
     float getCurrent_mA(int channel);
@@ -155,6 +148,16 @@ public:
     void INA3221SetConfig();
     int16_t getBusVoltage_raw(int channel);
     int16_t getShuntVoltage_raw(int channel);
+
+
+public:
+//    INA3221(uint32_t _rsid, TwoWire& wire) : _rsid(_rsid), wire(wire) {}
+
+    explicit INA3221(uint8_t rsid) : _rsid(rsid), wire(Wire) {
+//        wire = Wire;
+}
+
+
 
     uint32_t rsid() override { return _rsid; }
     uint32_t sid() override { return sensorEnum::INA3221; }

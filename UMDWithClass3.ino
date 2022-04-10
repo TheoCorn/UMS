@@ -96,7 +96,7 @@ void readBatteryCharge(void* m_bip);
 //void reB();
 
 
-std::map<uint32_t, Sensor *> *sensors;
+std::map<uint32_t, Sensor *> sensors;
 std::vector<char> *comBuffer;
 bool reading = false;
 double readingPeriod = 0;
@@ -149,7 +149,7 @@ void setup() {
 
 
 //    conflicts = new std::vector<csa::ConflictingAddressStruct *>();
-    sensors = new std::map<uint32_t, Sensor *>;
+//    sensors = new std::map<uint32_t, Sensor *>;
     comBuffer = new std::vector<char>;
 
 #ifndef ESP32
@@ -185,18 +185,18 @@ void setup() {
     Wire.begin();
 
     sensorIdentifier = new SensorsIdentifierManager();
-    auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
-    ss::checkI2C(localConflicts, sensors, sensorIdentifier);
-    delete localConflicts;
+//    auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
+    ss::checkI2C(conflicts, sensors, sensorIdentifier);
+//    delete localConflicts;
 
-    if(sysInfo::hasScreen) mDisplay = new DisplayFunctions(sensors);
+    if(sysInfo::hasScreen) mDisplay = new DisplayFunctions(&sensors);
 
     //    sysInfo::serialCom->startConnectionCheck(5000);
 
 
     //sets up wake up from sleep
 //    esp_sleep_enable_ext0_wakeup(GPIO_NUM_19, 1);
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_0, 1);
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_0, 0);
 //    pinMode(sleepPin, INPUT);
 
 //    attachInterrupt(sleepPin, sleep, FALLING);
@@ -208,9 +208,11 @@ void setup() {
 
 void loop() {
 
+
     char sRead;
     for (std::size_t i = 0; i < sysInfo::serialCom->available(); ++i) {
         sysInfo::serialCom->read(&sRead);
+
 
         switch (sRead) {
             case ETX: {
@@ -228,12 +230,14 @@ void loop() {
                 comBuffer->emplace_back(sRead);
                 break;
         }
+        
     }
 
-
+  
     if (reading) {
         auto doc = DynamicJsonDocument(readJsonCapacity);
         auto obj = doc.to<JsonObject>();
+          Serial.println("Hello r");
 
         double mdelay = readingPeriod - (millis() - lastReading);
         if (mdelay > 0) delay(mdelay);
@@ -241,25 +245,29 @@ void loop() {
         lastReading = millis();
         obj[JSON_KEYWORD_TIME] = lastReading - sTime;
         JsonArray arr = obj.createNestedArray(JSON_KEYWORD_SENSORS);
-        for (auto const &sTuple: *sensors) {
+        for (auto const &sTuple: sensors) {
             sTuple.second->readSensor(arr);
         }
         sysInfo::serialCom->write(&doc);
 
     } else {
-
+        // TODO fix battery checking
         auto bip = new BatInfPointers(&sysInfo::batteryPercentage, &sysInfo::isCharging);
         readBatteryCharge(bip);
 
-        auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
-        ss::checkI2C(localConflicts, sensors, sensorIdentifier);
+//        auto localConflicts = new std::vector<csa::ConflictingAddressStruct *>();
+        ss::checkI2C(conflicts, sensors, sensorIdentifier);
         if (sysInfo::hasScreen) mDisplay->displayWhenNotReading();
 
-        if (!localConflicts->empty()) {
-            sysInfo::serialCom->write(csa::conflictsToJsonDoc(localConflicts));
-            conflicts.insert(conflicts.end(), localConflicts->begin(), localConflicts->end());
+        if (!conflicts.empty()){
+            sysInfo::serialCom->write(csa::conflictsToJsonDoc(&conflicts));
         }
-        delete localConflicts;
+//        if (!localConflicts->empty()) {
+//            sysInfo::serialCom->write(csa::conflictsToJsonDoc(localConflicts));
+//            conflicts.insert(conflicts.end(), localConflicts->begin(), localConflicts->end());
+//        }
+//        delete localConflicts;
+
     }
 
 
@@ -406,11 +414,11 @@ void readBatteryCharge(void* m_bip) {
 //        if(*(bip->is_charging)) {cchar = '1'; } else {cchar = '0'; }
 //        sysInfo::serialCom->write(cchar);
 
-#ifndef ESP32
-#error uses esp32 specific code
-#endif
+//#ifndef ESP32
+//#error uses esp32 specific code
+//#endif
 //        vTaskDelay(60000);
-        vTaskDelay(5000);
+//        vTaskDelay(5000);
     }
 
 }
@@ -429,7 +437,7 @@ void setBatReader(){
 #error onREAISR function uses esp32 specific code
 #endif
 void IRAM_ATTR onREAISR() {
-
+   
     long now = millis();
     if(now - re_last_turn> RE_TIMEOUT){
         re_last_turn = now;

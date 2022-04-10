@@ -21,7 +21,7 @@ namespace ss{
     /**
      * search and connect i2c sensors
      */
-    void checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::map<uint32_t , Sensor*> * sensors, SensorsIdentifierManager * sim);
+    void checkI2C(std::vector<csa::ConflictingAddressStruct*> &conflict, std::map<uint32_t , Sensor*> &sensors, SensorsIdentifierManager * sim);
 }
 
 /** @} */

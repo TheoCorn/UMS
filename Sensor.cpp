@@ -333,8 +333,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
     js::serializeRet* sr = js::serializeDoc(&doc);
     spiffs::writeFile(SPIFFS, filename, sr->buff);
 
-    //todo delete
-    Serial.println(sr->buff);
+//    Serial.println(sr->buff);
 
     delete sr;
 
@@ -348,8 +347,8 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
     js::serializeRet* sr = js::serializeDoc(&doc);
     spiffs::writeFile(SPIFFS, filename, sr->buff);
 
-    //todo delete
-    Serial.println(sr->buff);
+
+//    Serial.println(sr->buff);
 
     delete sr;
 }
@@ -364,8 +363,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
     js::serializeRet* sr = js::serializeDoc(&doc);
     spiffs::writeFile(SPIFFS, filename, sr->buff);
 
-    //todo delete
-    Serial.println(sr->buff);
+//    Serial.println(sr->buff);
 
     delete sr;
 
@@ -380,8 +378,7 @@ void Sensor::settingsSaver(const char *filename, std::vector<bool> &activeFeatur
     js::serializeRet* sr = js::serializeDoc(&doc);
     spiffs::writeFile(SPIFFS, filename, sr->buff);
 
-    //todo delete
-    Serial.println(sr->buff);
+//    Serial.println(sr->buff);
 
     delete sr;
 }

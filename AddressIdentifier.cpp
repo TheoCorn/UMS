@@ -9,6 +9,7 @@
 #include "sensorEnum.h"
 
 #include <ArduinoJson.h>
+#include <stdexcept>
 #include "UnknownSensor.h"
 
 //sensors
@@ -29,7 +30,7 @@
  *
 */
 void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Sensor *> *sensors,
-                                         std::vector<csa::ConflictingAddressStruct *> *conflicts) {
+                                         std::vector<csa::ConflictingAddressStruct *> &conflicts) {
 
     if (numEnumSensorInVectorArray[address].size() == 1) {
         addSensor(numEnumSensorInVectorArray[address][0], address, sensors);
@@ -38,8 +39,8 @@ void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Se
     }
     else {
 
-        for(auto& conf : *conflicts){
-            if (conf->rsid == address) return;
+        for(auto& conf : conflicts) {
+            if (conf->rsid == address && sensors->count(conf->rsid) > 0) return;
         }
 
         //todo make more efficient
@@ -50,7 +51,8 @@ void SensorsIdentifierManager::addSensor(uint32_t address, std::map<uint32_t, Se
 //            con->nameOfSensors.emplace_back(s->name());
 //            delete s;
 //        }
-        conflicts->emplace_back(con);
+
+        conflicts.emplace_back(con);
     }
 
 }

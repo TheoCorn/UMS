@@ -13,14 +13,16 @@ void SysInfoTab::render(Adafruit_SSD1306 *display, ui::coordinates &start, ui::c
     display->println(sysInfo::sn);
 
     display->print("name: ");
-    display->print(sysInfo::comName);
+    display->println(sysInfo::comName);
+
+
+    display->print("DA: ");
+    display->print(sysInfo::screenAddress);
 
     const int y = display->getCursorY();
     display->setCursor((end.x - start.x) /2 + start.x, y);
-    display->print("DA: ");
-    display->println(sysInfo::screenAddress);
 
-    display->print("bat name: ");
+    display->print("bn: ");
     display->println(sysInfo::batteryInfo.name);
 
     display->print("bat capacity: ");

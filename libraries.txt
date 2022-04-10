@@ -1,0 +1,4 @@
+ArduinoJson 6.19.4 - MIT licence
+Adafruit_GFX_Library 1.10.10 - BSD licence
+Adafruit SSD1306 2.4.6 - BSD licence
+Adafruit MQTT Library - 2.4.2 - MIT licence

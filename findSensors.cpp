@@ -12,7 +12,7 @@
 
 
 //looks for all i2c devices
-void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::map<uint32_t , Sensor*> * sensors, SensorsIdentifierManager * sim) {
+void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> &conflict, std::map<uint32_t , Sensor*> &sensors, SensorsIdentifierManager * sim) {
     //addresses used by previously allocated sensors
     std::vector<uint32_t> usedAddreses;
     //addresses used by previously allocated sensors that are still present
@@ -29,7 +29,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
     //make conn devices unavailable
     uint32_t key;
     Sensor* value;
-    for(auto& mPair: *sensors){
+    for(auto& mPair: sensors){
         std::tie(key, value) = mPair;
         usedAddreses.emplace_back(value->rsid());
         addreses[value->rsid()] = false;
@@ -44,7 +44,7 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
 //            Serial.print("sensor at ");
 //            Serial.println(address);
             if (addreses[address]) {
-                sim->addSensor(address, sensors, conflict);
+                sim->addSensor(address, &sensors, conflict);
             } else if (address != sysInfo::screenAddress) {
 //                collUnAddresses.emplace_back(address);
                 auto pos = std::find(usedAddreses.begin(), usedAddreses.end(), address);
@@ -69,8 +69,8 @@ void ss::checkI2C(std::vector<csa::ConflictingAddressStruct*> * conflict, std::m
 //        }
 //    }
     for(uint32_t address : usedAddreses){
-        auto pos = sensors->find(address);
-        sensors->erase(pos);
+        auto pos = sensors.find(address);
+        sensors.erase(pos);
     }
 
 }
