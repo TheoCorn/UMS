@@ -35,7 +35,7 @@ There are so many ways to do UI and there is no reason to change the ui dynamica
 so it is simpler to rewrite the hole UI. 
 
 # Implementing a sensor
-###Step 1 
+### Step 1 
 Crete a new c++ class that extends Sensor publicly. 
 We are going to be using the templated way of implementing a sensor i.e. using methods from the [Sensor](#Sensor) class. 
 Add necessary variables and methods.
