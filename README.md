@@ -107,7 +107,7 @@ if your sensor can have adress x, y, z add SID to the x, y, z element of the arr
 > Use the UMD CLI tool to add SID to SensorAddress.json.
 > `python3 UMDscript.py` type  `-h` for help and read the developer commands
 
-#UMDc
+# UMDc
 UMDcli is a command line tool to communicate with UMDe via USB.
 It uses Python3 and uses dependencies specified in requirements.txt.
 To download the requirements run
